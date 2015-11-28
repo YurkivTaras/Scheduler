@@ -1241,12 +1241,17 @@ containing a value of this type.
         public static final int abc_text_size_title_material_toolbar=0x7f070004;
         public static final int activity_horizontal_margin=0x7f07000b;
         public static final int activity_vertical_margin=0x7f07002a;
+        public static final int addBtnPadding=0x7f07002b;
+        public static final int addBtnTxtSize=0x7f07002c;
+        public static final int addScheduleTxt_layout_width=0x7f07002d;
         public static final int dialog_fixed_height_major=0x7f070007;
         public static final int dialog_fixed_height_minor=0x7f070008;
         public static final int dialog_fixed_width_major=0x7f070009;
         public static final int dialog_fixed_width_minor=0x7f07000a;
-        public static final int disabled_alpha_material_dark=0x7f07002b;
-        public static final int disabled_alpha_material_light=0x7f07002c;
+        public static final int disabled_alpha_material_dark=0x7f07002e;
+        public static final int disabled_alpha_material_light=0x7f07002f;
+        public static final int listCommentTxtSize=0x7f070030;
+        public static final int listTitleTxtSize=0x7f070031;
     }
     public static final class drawable {
         public static final int abc_ab_share_pack_holo_dark=0x7f020000;

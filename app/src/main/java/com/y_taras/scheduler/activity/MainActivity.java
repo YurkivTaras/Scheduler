@@ -32,7 +32,7 @@ public class MainActivity extends ActionBarActivity {
 
     private void initUI(Bundle savedInstanceState) {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        //toolbar.setTitle("toolbar");sd
+        //toolbar.setTitle("toolbar");
         setSupportActionBar(toolbar);
 
         Button addButton = (Button) findViewById(R.id.addTask);
@@ -45,10 +45,10 @@ public class MainActivity extends ActionBarActivity {
 
         if (savedInstanceState == null) {
             mTasks = new ArrayList<Task>();
-            for (int i = 0; i < 20; i++)
-                mTasks.add(new Task("Title" + i, "Comment" + i));
+            /*for (int i = 0; i < 20; i++)
+                mTasks.add(new Task("Title" + i, "Comment" + i));*/
         } else if (savedInstanceState.containsKey(Task))
-            mTasks = (ArrayList) savedInstanceState.getSerializable(Task);
+            mTasks = (ArrayList<Task>) savedInstanceState.getSerializable(Task);
 
         ListView listView = (ListView) findViewById(R.id.listView);
         listAdapter = new AdapterForTaskList(this, mTasks);

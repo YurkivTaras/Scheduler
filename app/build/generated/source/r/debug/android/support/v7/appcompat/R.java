@@ -296,8 +296,8 @@ public final class R {
 		public static final int dialog_fixed_height_minor = 0x7f070008;
 		public static final int dialog_fixed_width_major = 0x7f070009;
 		public static final int dialog_fixed_width_minor = 0x7f07000a;
-		public static final int disabled_alpha_material_dark = 0x7f07002b;
-		public static final int disabled_alpha_material_light = 0x7f07002c;
+		public static final int disabled_alpha_material_dark = 0x7f07002e;
+		public static final int disabled_alpha_material_light = 0x7f07002f;
 	}
 	public static final class drawable {
 		public static final int abc_ab_share_pack_holo_dark = 0x7f020000;

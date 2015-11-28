@@ -8,13 +8,15 @@
         android:id="@+id/txtListTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="16sp"
+        android:padding="10dp"
+        android:textSize="@dimen/listTitleTxtSize"
         android:textStyle="bold" />
 
     <TextView
         android:id="@+id/txtListComment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="13sp"
+        android:padding="10dp"
+        android:textSize="@dimen/listCommentTxtSize"
         android:textStyle="bold|italic" />
 </LinearLayout>

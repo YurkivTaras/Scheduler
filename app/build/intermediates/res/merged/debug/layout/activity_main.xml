@@ -17,9 +17,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:padding="20dp"
+        android:padding="@dimen/addBtnPadding"
         android:text="@string/addTask"
-        android:textSize="18sp" />
+        android:textSize="@dimen/addBtnTxtSize" />
 
     <ListView
         android:id="@+id/listView"

@@ -11,7 +11,7 @@
 
         <TextView
             android:id="@+id/textViewName"
-            android:layout_width="100dp"
+            android:layout_width="@dimen/addScheduleTxt_layout_width"
             android:layout_height="wrap_content"
             android:text="@string/nameEditText"
             android:textAppearance="?android:attr/textAppearanceMedium"
@@ -30,7 +30,7 @@
 
         <TextView
             android:id="@+id/txtViewComment"
-            android:layout_width="100dp"
+            android:layout_width="@dimen/addScheduleTxt_layout_width"
             android:layout_height="wrap_content"
             android:text="@string/commentEditText"
             android:textAppearance="?android:attr/textAppearanceMedium"
@@ -39,13 +39,14 @@
         <EditText
             android:id="@+id/editTextComment"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:inputType="text" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
+        android:layout_gravity="center_vertical|right"
         android:orientation="horizontal">
 
         <Button

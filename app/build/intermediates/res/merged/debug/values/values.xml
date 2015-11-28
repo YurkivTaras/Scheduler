@@ -122,12 +122,17 @@
     <dimen name="abc_text_size_title_material_toolbar">20dp</dimen>
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="addBtnPadding">20dp</dimen>
+    <dimen name="addBtnTxtSize">18sp</dimen>
+    <dimen name="addScheduleTxt_layout_width">100dp</dimen>
     <item name="dialog_fixed_height_major" type="dimen">80%</item>
     <item name="dialog_fixed_height_minor" type="dimen">100%</item>
     <item name="dialog_fixed_width_major" type="dimen">320dp</item>
     <item name="dialog_fixed_width_minor" type="dimen">320dp</item>
     <item format="float" name="disabled_alpha_material_dark" type="dimen">0.30</item>
     <item format="float" name="disabled_alpha_material_light" type="dimen">0.26</item>
+    <dimen name="listCommentTxtSize">13sp</dimen>
+    <dimen name="listTitleTxtSize">16sp</dimen>
     <item name="action_bar_activity_content" type="id"/>
     <item name="action_bar_spinner" type="id"/>
     <item name="action_menu_divider" type="id"/>
