@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Scheduler</string>
+    <string name="action_settings">Settings</string>
+    <string name="saveButton">Зберегти</string>
+    <string name="exitButton">Вихід</string>
+    <string name="nameEditText">Назва:</string>
+    <string name="addTask">Додати завдання</string>
+    <string name="commentEditText">Коментар:</string>
+</resources>
