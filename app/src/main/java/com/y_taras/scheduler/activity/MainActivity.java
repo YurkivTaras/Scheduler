@@ -32,7 +32,7 @@ public class MainActivity extends ActionBarActivity {
 
     private void initUI(Bundle savedInstanceState) {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        //toolbar.setTitle("toolbar");
+        //toolbar.setTitle("toolbar");sd
         setSupportActionBar(toolbar);
 
         Button addButton = (Button) findViewById(R.id.addTask);
