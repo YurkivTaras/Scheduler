@@ -59,6 +59,7 @@
     <color name="secondary_text_disabled_material_light">#24000000</color>
     <color name="switch_thumb_normal_material_dark">#ffbdbdbd</color>
     <color name="switch_thumb_normal_material_light">#fff1f1f1</color>
+    <color name="task_title">#000000</color>
     <color name="toolBar">#ff6d7fe2</color>
     <declare-styleable name="ActionBar"><attr name="navigationMode"><enum name="normal" value="0"/><enum name="listMode" value="1"/><enum name="tabMode" value="2"/></attr><attr name="displayOptions"><flag name="none" value="0"/><flag name="useLogo" value="0x1"/><flag name="showHome" value="0x2"/><flag name="homeAsUp" value="0x4"/><flag name="showTitle" value="0x8"/><flag name="showCustom" value="0x10"/><flag name="disableHome" value="0x20"/></attr><attr name="title"/><attr format="string" name="subtitle"/><attr format="reference" name="titleTextStyle"/><attr format="reference" name="subtitleTextStyle"/><attr format="reference" name="icon"/><attr format="reference" name="logo"/><attr format="reference" name="divider"/><attr format="reference" name="background"/><attr format="reference|color" name="backgroundStacked"/><attr format="reference|color" name="backgroundSplit"/><attr format="reference" name="customNavigationLayout"/><attr name="height"/><attr format="reference" name="homeLayout"/><attr format="reference" name="progressBarStyle"/><attr format="reference" name="indeterminateProgressStyle"/><attr format="dimension" name="progressBarPadding"/><attr name="homeAsUpIndicator"/><attr format="dimension" name="itemPadding"/><attr format="boolean" name="hideOnContentScroll"/><attr format="dimension" name="contentInsetStart"/><attr format="dimension" name="contentInsetEnd"/><attr format="dimension" name="contentInsetLeft"/><attr format="dimension" name="contentInsetRight"/><attr format="dimension" name="elevation"/><attr format="reference" name="popupTheme"/></declare-styleable>
     <declare-styleable name="ActionBarLayout"><attr name="android:layout_gravity"/></declare-styleable>
@@ -122,17 +123,22 @@
     <dimen name="abc_text_size_title_material_toolbar">20dp</dimen>
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
-    <dimen name="addBtnPadding">20dp</dimen>
-    <dimen name="addBtnTxtSize">18sp</dimen>
+    <dimen name="addBtn_padding">20dp</dimen>
+    <dimen name="addBtn_txtSize">18sp</dimen>
     <dimen name="addScheduleTxt_layout_width">100dp</dimen>
+    <dimen name="addSchedule_button_width">100dp</dimen>
+    <dimen name="comment_of_task_left_padding">10dp</dimen>
     <item name="dialog_fixed_height_major" type="dimen">80%</item>
     <item name="dialog_fixed_height_minor" type="dimen">100%</item>
     <item name="dialog_fixed_width_major" type="dimen">320dp</item>
     <item name="dialog_fixed_width_minor" type="dimen">320dp</item>
     <item format="float" name="disabled_alpha_material_dark" type="dimen">0.30</item>
     <item format="float" name="disabled_alpha_material_light" type="dimen">0.26</item>
-    <dimen name="listCommentTxtSize">13sp</dimen>
-    <dimen name="listTitleTxtSize">16sp</dimen>
+    <dimen name="emptyListTitle">25sp</dimen>
+    <dimen name="listComment_txtSize">16sp</dimen>
+    <dimen name="listDate_txtSize">16sp</dimen>
+    <dimen name="listTitle_txtSize">20sp</dimen>
+    <dimen name="title_of_task_left_padding">30dp</dimen>
     <item name="action_bar_activity_content" type="id"/>
     <item name="action_bar_spinner" type="id"/>
     <item name="action_menu_divider" type="id"/>
@@ -163,6 +169,7 @@
     <string name="addTask">Додати завдання</string>
     <string name="app_name">Scheduler</string>
     <string name="commentEditText">Коментар:</string>
+    <string name="emptyList">Список завдань пустий</string>
     <string name="exitButton">Вихід</string>
     <string name="nameEditText">Назва:</string>
     <string name="saveButton">Зберегти</string>

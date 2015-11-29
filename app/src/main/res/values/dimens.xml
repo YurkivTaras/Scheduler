@@ -3,10 +3,15 @@
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
-    <dimen name="addBtnPadding">20dp</dimen>
+    <dimen name="addBtn_padding">20dp</dimen>
     <dimen name="addScheduleTxt_layout_width">100dp</dimen>
-    <dimen name="addBtnTxtSize">18sp</dimen>
-    <dimen name="listTitleTxtSize">16sp</dimen>
-    <dimen name="listCommentTxtSize">13sp</dimen>
+    <dimen name="title_of_task_left_padding">30dp</dimen>
+    <dimen name="comment_of_task_left_padding">10dp</dimen>
+    <dimen name="addSchedule_button_width">100dp</dimen>
+    <dimen name="addBtn_txtSize">18sp</dimen>
+    <dimen name="listTitle_txtSize">20sp</dimen>
+    <dimen name="listComment_txtSize">16sp</dimen>
+    <dimen name="listDate_txtSize">16sp</dimen>
+    <dimen name="emptyListTitle">25sp</dimen>
 
 </resources>

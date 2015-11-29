@@ -195,19 +195,19 @@ public final class R {
 		public static final int abc_config_showMenuShortcutsWhenKeyboardPresent = 0x7f060005;
 	}
 	public static final class color {
-		public static final int abc_background_cache_hint_selector_material_dark = 0x7f0a0032;
-		public static final int abc_background_cache_hint_selector_material_light = 0x7f0a0033;
+		public static final int abc_background_cache_hint_selector_material_dark = 0x7f0a0033;
+		public static final int abc_background_cache_hint_selector_material_light = 0x7f0a0034;
 		public static final int abc_input_method_navigation_guard = 0x7f0a0000;
-		public static final int abc_primary_text_disable_only_material_dark = 0x7f0a0034;
-		public static final int abc_primary_text_disable_only_material_light = 0x7f0a0035;
-		public static final int abc_primary_text_material_dark = 0x7f0a0036;
-		public static final int abc_primary_text_material_light = 0x7f0a0037;
-		public static final int abc_search_url_text = 0x7f0a0038;
+		public static final int abc_primary_text_disable_only_material_dark = 0x7f0a0035;
+		public static final int abc_primary_text_disable_only_material_light = 0x7f0a0036;
+		public static final int abc_primary_text_material_dark = 0x7f0a0037;
+		public static final int abc_primary_text_material_light = 0x7f0a0038;
+		public static final int abc_search_url_text = 0x7f0a0039;
 		public static final int abc_search_url_text_normal = 0x7f0a0001;
 		public static final int abc_search_url_text_pressed = 0x7f0a0002;
 		public static final int abc_search_url_text_selected = 0x7f0a0003;
-		public static final int abc_secondary_text_material_dark = 0x7f0a0039;
-		public static final int abc_secondary_text_material_light = 0x7f0a003a;
+		public static final int abc_secondary_text_material_dark = 0x7f0a003a;
+		public static final int abc_secondary_text_material_light = 0x7f0a003b;
 		public static final int accent_material_dark = 0x7f0a0004;
 		public static final int accent_material_light = 0x7f0a0005;
 		public static final int background_floating_material_dark = 0x7f0a0006;
@@ -296,8 +296,8 @@ public final class R {
 		public static final int dialog_fixed_height_minor = 0x7f070008;
 		public static final int dialog_fixed_width_major = 0x7f070009;
 		public static final int dialog_fixed_width_minor = 0x7f07000a;
-		public static final int disabled_alpha_material_dark = 0x7f07002e;
-		public static final int disabled_alpha_material_light = 0x7f07002f;
+		public static final int disabled_alpha_material_dark = 0x7f070030;
+		public static final int disabled_alpha_material_light = 0x7f070031;
 	}
 	public static final class drawable {
 		public static final int abc_ab_share_pack_holo_dark = 0x7f020000;

@@ -8,15 +8,25 @@
         android:id="@+id/txtListTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:textSize="@dimen/listTitleTxtSize"
+        android:paddingLeft="@dimen/title_of_task_left_padding"
+        android:textColor="@color/task_title"
+        android:textSize="@dimen/listTitle_txtSize"
         android:textStyle="bold" />
 
     <TextView
         android:id="@+id/txtListComment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:textSize="@dimen/listCommentTxtSize"
-        android:textStyle="bold|italic" />
+        android:paddingLeft="@dimen/comment_of_task_left_padding"
+        android:textSize="@dimen/listComment_txtSize"
+        android:textStyle="italic" />
+
+    <TextView
+        android:id="@+id/txtListDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:textSize="@dimen/listDate_txtSize"
+        android:textStyle="bold" />
+
 </LinearLayout>

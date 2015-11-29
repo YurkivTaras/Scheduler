@@ -8,4 +8,5 @@
     <string name="nameEditText">Назва:</string>
     <string name="addTask">Додати завдання</string>
     <string name="commentEditText">Коментар:</string>
+    <string name="emptyList">Список завдань пустий</string>
 </resources>
