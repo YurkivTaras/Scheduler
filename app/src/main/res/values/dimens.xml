@@ -14,4 +14,5 @@
     <dimen name="listDate_txtSize">16sp</dimen>
     <dimen name="emptyListTitle">25sp</dimen>
 
+    <dimen name="right_margin_save_exit_btn">10dp</dimen>
 </resources>

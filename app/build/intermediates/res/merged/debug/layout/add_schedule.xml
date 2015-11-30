@@ -54,12 +54,16 @@
             android:id="@+id/saveButton"
             android:layout_width="@dimen/addSchedule_button_width"
             android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/right_margin_save_exit_btn"
+            android:background="@drawable/save_exit_btn"
             android:text="@string/saveButton" />
 
         <Button
             android:id="@+id/exitButton"
             android:layout_width="@dimen/addSchedule_button_width"
             android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/right_margin_save_exit_btn"
+            android:background="@drawable/save_exit_btn"
             android:text="@string/exitButton" />
     </LinearLayout>
 

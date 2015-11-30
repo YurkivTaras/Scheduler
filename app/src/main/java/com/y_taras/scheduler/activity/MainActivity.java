@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -53,6 +55,8 @@ public class MainActivity extends ActionBarActivity {
 
         final ListView listView = (ListView) findViewById(R.id.listView);
         listView.setEmptyView(findViewById(R.id.emptyList));
+        listView.getHeight();
+        
         listAdapter = new AdapterForTaskList(this, mTasks);
         listView.setAdapter(listAdapter);
 
@@ -112,5 +116,27 @@ public class MainActivity extends ActionBarActivity {
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putParcelableArrayList(ArrayOfTasks, mTasks);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        int id = item.getItemId();
+
+        if (id == R.id.action_generate) {
+            item.setVisible(false);
+            for (int i = 0; i < 30; i++)
+                mTasks.add(new Task("Title" + (i + 1), "Comment" + (i + 1)));
+            listAdapter.notifyDataSetChanged();
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }
