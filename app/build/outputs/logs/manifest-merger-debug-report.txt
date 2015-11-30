@@ -1,6 +1,6 @@
 -- Merging decision tree log ---
 manifest
-ADDED from D:\Android\AndroidStudioWorkspace\Scheduler\app\src\main\AndroidManifest.xml:2:1-30:12
+ADDED from D:\Android\AndroidStudioWorkspace\Scheduler\app\src\main\AndroidManifest.xml:2:1-31:12
 	package
 		ADDED from D:\Android\AndroidStudioWorkspace\Scheduler\app\src\main\AndroidManifest.xml:3:5-36
 		INJECTED from D:\Android\AndroidStudioWorkspace\Scheduler\app\src\main\AndroidManifest.xml
@@ -29,7 +29,7 @@ MERGED from [com.android.support:support-v4:22.2.1] D:\Android\AndroidStudioWork
 		INJECTED from D:\Android\AndroidStudioWorkspace\Scheduler\app\src\main\AndroidManifest.xml
 		INJECTED from D:\Android\AndroidStudioWorkspace\Scheduler\app\src\main\AndroidManifest.xml
 application
-ADDED from D:\Android\AndroidStudioWorkspace\Scheduler\app\src\main\AndroidManifest.xml:11:5-28:19
+ADDED from D:\Android\AndroidStudioWorkspace\Scheduler\app\src\main\AndroidManifest.xml:11:5-29:19
 MERGED from [com.android.support:appcompat-v7:21.0.3] D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\21.0.3\AndroidManifest.xml:16:5-19
 MERGED from [com.android.support:support-v4:22.2.1] D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.2.1\AndroidManifest.xml:22:5-20
 MERGED from [com.android.support:support-v4:22.2.1] D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.2.1\AndroidManifest.xml:22:5-20
@@ -58,8 +58,10 @@ ADDED from D:\Android\AndroidStudioWorkspace\Scheduler\app\src\main\AndroidManif
 	android:name
 		ADDED from D:\Android\AndroidStudioWorkspace\Scheduler\app\src\main\AndroidManifest.xml:21:27-74
 activity#com.y_taras.scheduler.activity.AddScheduleActivity
-ADDED from D:\Android\AndroidStudioWorkspace\Scheduler\app\src\main\AndroidManifest.xml:24:9-27:20
+ADDED from D:\Android\AndroidStudioWorkspace\Scheduler\app\src\main\AndroidManifest.xml:24:9-28:20
 	android:label
-		ADDED from D:\Android\AndroidStudioWorkspace\Scheduler\app\src\main\AndroidManifest.xml:26:13-45
+		ADDED from D:\Android\AndroidStudioWorkspace\Scheduler\app\src\main\AndroidManifest.xml:27:13-45
+	android:theme
+		ADDED from D:\Android\AndroidStudioWorkspace\Scheduler\app\src\main\AndroidManifest.xml:26:13-48
 	android:name
 		ADDED from D:\Android\AndroidStudioWorkspace\Scheduler\app\src\main\AndroidManifest.xml:25:13-78

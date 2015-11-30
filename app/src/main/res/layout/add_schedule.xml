@@ -20,7 +20,8 @@
         <EditText
             android:id="@+id/editTxtTitle"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName" />
     </LinearLayout>
 
     <LinearLayout
@@ -40,7 +41,7 @@
             android:id="@+id/editTextComment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="text" />
+            android:inputType="textShortMessage" />
     </LinearLayout>
 
     <LinearLayout

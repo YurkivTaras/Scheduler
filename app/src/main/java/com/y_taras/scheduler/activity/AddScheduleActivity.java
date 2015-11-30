@@ -49,7 +49,7 @@ public class AddScheduleActivity extends Activity {
                 finish();
             }
         });
-        
+
         exitButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 finish();

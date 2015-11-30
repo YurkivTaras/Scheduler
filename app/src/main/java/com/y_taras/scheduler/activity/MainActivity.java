@@ -49,7 +49,7 @@ public class MainActivity extends ActionBarActivity {
         if (savedInstanceState == null)
             mTasks = new ArrayList<Task>();
         else if (savedInstanceState.containsKey(ArrayOfTasks))
-            mTasks = (ArrayList<Task>) savedInstanceState.getSerializable(ArrayOfTasks);
+            mTasks = savedInstanceState.getParcelableArrayList(ArrayOfTasks);
 
         final ListView listView = (ListView) findViewById(R.id.listView);
         listView.setEmptyView(findViewById(R.id.emptyList));
@@ -111,6 +111,6 @@ public class MainActivity extends ActionBarActivity {
 
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putSerializable(ArrayOfTasks, mTasks);
+        outState.putParcelableArrayList(ArrayOfTasks, mTasks);
     }
 }
