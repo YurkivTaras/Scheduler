@@ -2,7 +2,6 @@ package adapter;
 
 
 import android.content.Context;
-import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,40 +19,59 @@ public class AdapterForTaskList extends BaseAdapter {
     private final SimpleDateFormat mDateFormat;
     private final LayoutInflater mLayoutInflater;
     private final ArrayList<Task> mTasks;
-    private final Context mContext;
+    private final int notStartedTaskColor;
+    private final int startedTaskColor;
+    private final int completedTaskColor;
+
 
     public AdapterForTaskList(Context ctx, ArrayList<Task> tasks) {
-        mContext = ctx;
         mLayoutInflater = LayoutInflater.from(ctx);
         mTasks = tasks;
+
         mDateFormat = new SimpleDateFormat("dd.MM.yyyy HH:mm");
+        notStartedTaskColor = ctx.getResources().getColor(R.color.not_started_task);
+        startedTaskColor = ctx.getResources().getColor(R.color.started_task);
+        completedTaskColor = ctx.getResources().getColor(R.color.completed_task);
+    }
+
+    static class ViewHolder {
+        TextView taskTitle;
+        TextView taskComment;
+        TextView taskDate;
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        if (convertView == null)
-            convertView = mLayoutInflater.inflate(R.layout.list_task_item, parent, false);
-        Task task = mTasks.get(position);
-        convertView.setBackgroundColor(Color.CYAN);
-        TextView taskName = (TextView) convertView.findViewById(R.id.txtListTitle);
-        taskName.setText(task.getTitle());
-        TextView taskComment = (TextView) convertView.findViewById(R.id.txtListComment);
-        taskComment.setText(task.getComment());
+        ViewHolder viewHolder;
 
-        TextView taskDate = (TextView) convertView.findViewById(R.id.txtListDate);
+        if (convertView == null) {
+            convertView = mLayoutInflater.inflate(R.layout.list_task_item, parent, false);
+            viewHolder = new ViewHolder();
+            viewHolder.taskTitle = (TextView) convertView.findViewById(R.id.txtListTitle);
+            viewHolder.taskComment = (TextView) convertView.findViewById(R.id.txtListComment);
+            viewHolder.taskDate = (TextView) convertView.findViewById(R.id.txtListDate);
+            convertView.setTag(viewHolder);
+        } else
+            viewHolder = (ViewHolder) convertView.getTag();
+
+        Task task = mTasks.get(position);
+
+        viewHolder.taskTitle.setText(task.getTitle());
+        viewHolder.taskComment.setText(task.getComment());
+
         String taskDateS = "";
         if (task.getDateEnd() != null) {
-            convertView.setBackgroundColor(mContext.getResources().getColor(R.color.completed_task));
+            convertView.setBackgroundColor(completedTaskColor);
             taskDateS = mDateFormat.format(task.getDateStart()) + " - " +
                     mDateFormat.format(task.getDateEnd()) +
                     " " + String.format("%02d", task.getSpentHours()) + ":" +
-                    String.format("%02d", task.getSpentMinute());
+                    String.format("%02d", task.getSpentMinutes());
         } else if (task.getDateStart() != null) {
-            convertView.setBackgroundColor(mContext.getResources().getColor(R.color.started_task));
+            convertView.setBackgroundColor(startedTaskColor);
             taskDateS = mDateFormat.format(task.getDateStart());
         } else
-            convertView.setBackgroundColor(mContext.getResources().getColor(R.color.not_started_task));
-        taskDate.setText(taskDateS);
+            convertView.setBackgroundColor(notStartedTaskColor);
+        viewHolder.taskDate.setText(taskDateS);
         return convertView;
     }
 

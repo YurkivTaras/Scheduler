@@ -20,19 +20,33 @@ import java.util.Date;
 import adapter.AdapterForTaskList;
 import other.StringConstForIntent;
 import other.Task;
+import utils.TasksLoader;
 
 public class MainActivity extends ActionBarActivity {
     private static final String ArrayOfTasks = "tasks";
     private static final int RequestCodeAddTask = 1;
     private static final int RequestCodeEditTask = 2;
     private ArrayList<Task> mTasks;
-    private AdapterForTaskList listAdapter;
+    private AdapterForTaskList mListAdapter;
+
+    private TasksLoader tasksReader;
+    private TasksLoader tasksSaver;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initUI(savedInstanceState);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
     }
 
     private void initUI(Bundle savedInstanceState) {
@@ -55,10 +69,15 @@ public class MainActivity extends ActionBarActivity {
 
         final ListView listView = (ListView) findViewById(R.id.listView);
         listView.setEmptyView(findViewById(R.id.emptyList));
-        listView.getHeight();
-        
-        listAdapter = new AdapterForTaskList(this, mTasks);
-        listView.setAdapter(listAdapter);
+
+        mListAdapter = new AdapterForTaskList(this, mTasks);
+        listView.setAdapter(mListAdapter);
+
+        tasksReader = TasksLoader.createReader(mTasks, this, mListAdapter);
+        tasksSaver = TasksLoader.createSaver(mTasks, this);
+        //спроба загрузити таски збережені в SharedPreference
+        if (savedInstanceState == null)
+            tasksReader.execute();
 
         //обробка одиничного кліку по елементу із списку завдань
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -68,11 +87,15 @@ public class MainActivity extends ActionBarActivity {
                 Task clickTask = mTasks.get(position);
                 if (clickTask.getDateStart() == null) {
                     clickTask.setDateStart(new Date());
-                    listAdapter.notifyDataSetChanged();
+                    mListAdapter.notifyDataSetChanged();
+                    //Збереження змін в списку завдань
+                    tasksSaver.execute();
                 } else if (clickTask.getDateEnd() == null) {
                     clickTask.setDateEnd(new Date());
                     clickTask.calcTimeSpent();
-                    listAdapter.notifyDataSetChanged();
+                    mListAdapter.notifyDataSetChanged();
+                    //Збереження змін в списку завдань
+                    tasksSaver.execute();
                 }
             }
         });
@@ -109,7 +132,9 @@ public class MainActivity extends ActionBarActivity {
                     editTask.setComment(comment);
                     break;
             }
-            listAdapter.notifyDataSetChanged();
+            mListAdapter.notifyDataSetChanged();
+            //Збереження змін в списку завдань
+            tasksSaver.execute();
         }
     }
 
@@ -126,17 +151,15 @@ public class MainActivity extends ActionBarActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-
         int id = item.getItemId();
-
+        //генерація 30 тасків
         if (id == R.id.action_generate) {
-            item.setVisible(false);
             for (int i = 0; i < 30; i++)
                 mTasks.add(new Task("Title" + (i + 1), "Comment" + (i + 1)));
-            listAdapter.notifyDataSetChanged();
+            tasksSaver.execute();
+            mListAdapter.notifyDataSetChanged();
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 }

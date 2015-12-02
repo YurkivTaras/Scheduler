@@ -1,6 +1,5 @@
 package other;
 
-
 import android.os.Parcel;
 import android.os.Parcelable;
 
@@ -10,6 +9,7 @@ public class Task implements Parcelable {
     private String mTitle;
     private String mComment;
     private Date mDateStart;
+
     private Date mDateEnd;
     private int mSpentHours;
     private int mSpentMinute;
@@ -19,15 +19,32 @@ public class Task implements Parcelable {
         mComment = comment;
     }
 
+    public Task(String title, String comment, Date dateStart, Date dateEnd, int spentHours, int spentMinute) {
+        mTitle = title;
+        mComment = comment;
+        mDateStart = dateStart;
+        mDateEnd = dateEnd;
+        mSpentHours = spentHours;
+        mSpentMinute = spentMinute;
+    }
+
     public Task(Parcel source) {
         mTitle = source.readString();
         mComment = source.readString();
         mSpentHours = source.readInt();
         mSpentMinute = source.readInt();
-        mDateStart = (Date) source.readSerializable();
-        mDateEnd = (Date) source.readSerializable();
+
+        //відновлення Date об`єктів з використанням конструктора з long параметром
+        long dataStart = source.readLong();
+        long dataEnd = source.readLong();
+        if (dataStart != -1) {
+            mDateStart = new Date(dataStart);
+            if (dataEnd != -1)
+                mDateEnd = new Date(dataEnd);
+        }
     }
 
+    //обрахунок кількості годин і хвилин потрачених на виконання завдання
     public void calcTimeSpent() {
         long spentTime = mDateEnd.getTime() - mDateStart.getTime();
         mSpentHours = (int) (spentTime / (1000 * 60 * 60));
@@ -70,7 +87,7 @@ public class Task implements Parcelable {
         return mSpentHours;
     }
 
-    public int getSpentMinute() {
+    public int getSpentMinutes() {
         return mSpentMinute;
     }
 
@@ -85,12 +102,13 @@ public class Task implements Parcelable {
         dest.writeString(mComment);
         dest.writeInt(mSpentHours);
         dest.writeInt(mSpentMinute);
-        dest.writeSerializable(mDateStart);
-        dest.writeSerializable(mDateEnd);
+
+        //запис в parcel long представлення об`єкту Date
+        dest.writeLong(mDateStart != null ? mDateStart.getTime() : -1);
+        dest.writeLong(mDateEnd != null ? mDateEnd.getTime() : -1);
     }
 
     public static final Parcelable.Creator<Task> CREATOR = new Parcelable.Creator<Task>() {
-
         @Override
         public Task createFromParcel(Parcel source) {
             return new Task(source);
