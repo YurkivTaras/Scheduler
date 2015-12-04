@@ -3,6 +3,7 @@ package other;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.util.Comparator;
 import java.util.Date;
 
 public class Task implements Parcelable {
@@ -50,6 +51,38 @@ public class Task implements Parcelable {
         mSpentHours = (int) (spentTime / (1000 * 60 * 60));
         mSpentMinute = (int) (spentTime - mSpentHours * 1000 * 60 * 60) / 60000;
     }
+
+    public static Comparator<Task> NameUPComparator = new Comparator<Task>() {
+        public int compare(Task t1, Task t2) {
+            String title1 = t1.getTitle();
+            String title2 = t2.getTitle();
+            String comment1 = t1.getComment();
+            String comment2 = t2.getComment();
+            if (title1.compareTo(title2) == 0)
+                return comment1.compareTo(comment2);
+            else
+                return title1.compareTo(title2);
+        }
+    };
+    public static Comparator<Task> NameDownComparator = new Comparator<Task>() {
+        public int compare(Task t1, Task t2) {
+            return NameUPComparator.compare(t2, t1);
+        }
+    };
+    public static Comparator<Task> DateUPComparator = new Comparator<Task>() {
+        public int compare(Task t1, Task t2) {
+            Date dateStart1 = t1.getDateStart();
+            Date dateStart2 = t2.getDateStart();
+            Long time1 = dateStart1 != null ? dateStart1.getTime() : 0;
+            Long time2 = dateStart2 != null ? dateStart2.getTime() : 0;
+            return time1.compareTo(time2);
+        }
+    };
+    public static Comparator<Task> DateDownComparator = new Comparator<Task>() {
+        public int compare(Task t1, Task t2) {
+            return DateUPComparator.compare(t2, t1);
+        }
+    };
 
     public void setTitle(String title) {
         mTitle = title;

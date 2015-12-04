@@ -20,6 +20,44 @@
                         "endOffset": 115
                     }
                 }
+            },
+            {
+                "to": {
+                    "startLine": 3,
+                    "startColumn": 4,
+                    "startOffset": 119,
+                    "endColumn": 52,
+                    "endOffset": 167
+                },
+                "from": {
+                    "file": "D:\\Android\\AndroidStudioWorkspace\\Scheduler\\app\\build\\intermediates\\exploded-aar\\com.github.yukuku\\ambilwarna\\2.0.1\\res\\values-xlarge-land\\values-xlarge-land.xml",
+                    "position": {
+                        "startLine": 4,
+                        "startColumn": 4,
+                        "startOffset": 173,
+                        "endColumn": 52,
+                        "endOffset": 221
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 4,
+                    "startColumn": 4,
+                    "startOffset": 172,
+                    "endColumn": 51,
+                    "endOffset": 219
+                },
+                "from": {
+                    "file": "D:\\Android\\AndroidStudioWorkspace\\Scheduler\\app\\build\\intermediates\\exploded-aar\\com.github.yukuku\\ambilwarna\\2.0.1\\res\\values-xlarge-land\\values-xlarge-land.xml",
+                    "position": {
+                        "startLine": 5,
+                        "startColumn": 4,
+                        "startOffset": 226,
+                        "endColumn": 51,
+                        "endOffset": 273
+                    }
+                }
             }
         ]
     }

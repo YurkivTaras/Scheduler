@@ -25,45 +25,505 @@
     <option name="TOOL_WINDOW_REGEXP_FILTER" value="false" />
   </component>
   <component name="BookmarkManager">
-    <bookmark url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" line="21" />
-    <bookmark url="file://$PROJECT_DIR$/app/src/main/java/com/y_taras/scheduler/activity/MainActivity.java" line="131" />
+    <bookmark url="file://$PROJECT_DIR$/app/src/main/java/com/y_taras/scheduler/activity/MainActivity.java" line="220" />
     <bookmark url="file://$PROJECT_DIR$/app/src/main/res/layout/list_task_item.xml" line="29" />
+    <bookmark url="file://$PROJECT_DIR$/app/src/main/java/com/y_taras/scheduler/activity/MainActivity.java" line="295" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ca0a7bcd-fd9a-4a96-b40f-b44e824a5025" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/utils/TasksLoader.java" />
-      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\src\main\java\utils\TasksSaver.java" afterPath="" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/unnamed.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/adapter/CustomSpinnerAdapter.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/y_taras/scheduler/activity/SettingsActivity.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_settings.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/ambilwarna_2_0_1.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/gson_2_2_4.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/menu/menu_add_shedule.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/menu/menu_settings.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/spinner_row.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/spinner_selector.xml" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\blame\res\debug\multi\drawable-hdpi-v4.json" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\blame\res\debug\multi\drawable-mdpi-v4.json" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\blame\res\debug\multi\layout.json" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\blame\res\debug\multi\menu.json" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\blame\res\debug\multi\values-h720dp-v13.json" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\blame\res\debug\multi\values-hdpi-v4.json" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\blame\res\debug\multi\values-v12.json" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\blame\res\debug\multi\values-v18.json" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\blame\res\debug\single\color-v11.json" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\classes\debug\com\y_taras\scheduler\activity\AddScheduleActivity$1.class" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\classes\debug\com\y_taras\scheduler\activity\AddScheduleActivity$2.class" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\classes\debug\other\StringConstForIntent.class" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\classes\debug\utils\TasksSaver$BackgroundThread.class" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\classes\debug\utils\TasksSaver.class" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\AndroidManifest.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\R.txt" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\aapt\AndroidManifest.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\annotations.zip" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\jars\classes.jar" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\anim\abc_fade_in.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\anim\abc_fade_out.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\anim\abc_grow_fade_in_from_bottom.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\anim\abc_popup_enter.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\anim\abc_popup_exit.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\anim\abc_shrink_fade_out_from_bottom.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\anim\abc_slide_in_bottom.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\anim\abc_slide_in_top.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\anim\abc_slide_out_bottom.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\anim\abc_slide_out_top.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\color-v11\abc_background_cache_hint_selector_material_dark.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\color-v11\abc_background_cache_hint_selector_material_light.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\color\abc_background_cache_hint_selector_material_dark.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\color\abc_background_cache_hint_selector_material_light.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\color\abc_primary_text_disable_only_material_dark.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\color\abc_primary_text_disable_only_material_light.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\color\abc_primary_text_material_dark.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\color\abc_primary_text_material_light.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\color\abc_search_url_text.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\color\abc_secondary_text_material_dark.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\color\abc_secondary_text_material_light.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\color\switch_thumb_material_dark.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\color\switch_thumb_material_light.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-hdpi\abc_ab_share_pack_mtrl_alpha.9.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-hdpi\abc_btn_check_to_on_mtrl_000.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-hdpi\abc_btn_check_to_on_mtrl_015.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-hdpi\abc_btn_radio_to_on_mtrl_000.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-hdpi\abc_btn_radio_to_on_mtrl_015.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-hdpi\abc_btn_rating_star_off_mtrl_alpha.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-hdpi\abc_btn_rating_star_on_mtrl_alpha.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-hdpi\abc_btn_switch_to_on_mtrl_00001.9.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-hdpi\abc_btn_switch_to_on_mtrl_00012.9.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-hdpi\abc_cab_background_top_mtrl_alpha.9.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-hdpi\abc_ic_ab_back_mtrl_am_alpha.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-hdpi\abc_ic_clear_mtrl_alpha.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-hdpi\abc_ic_commit_search_api_mtrl_alpha.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-hdpi\abc_ic_go_search_api_mtrl_alpha.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-hdpi\abc_ic_menu_copy_mtrl_am_alpha.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-hdpi\abc_ic_menu_cut_mtrl_alpha.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-hdpi\abc_ic_menu_moreoverflow_mtrl_alpha.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-hdpi\abc_ic_menu_paste_mtrl_am_alpha.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-hdpi\abc_ic_menu_selectall_mtrl_alpha.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-hdpi\abc_ic_menu_share_mtrl_alpha.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-hdpi\abc_ic_search_api_mtrl_alpha.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-hdpi\abc_ic_voice_search_api_mtrl_alpha.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-hdpi\abc_list_divider_mtrl_alpha.9.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-hdpi\abc_list_focused_holo.9.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-hdpi\abc_list_longpressed_holo.9.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-hdpi\abc_list_pressed_holo_dark.9.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-hdpi\abc_list_pressed_holo_light.9.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-hdpi\abc_list_selector_disabled_holo_dark.9.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-hdpi\abc_list_selector_disabled_holo_light.9.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-hdpi\abc_menu_hardkey_panel_mtrl_mult.9.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-hdpi\abc_popup_background_mtrl_mult.9.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-hdpi\abc_spinner_mtrl_am_alpha.9.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-hdpi\abc_switch_track_mtrl_alpha.9.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-hdpi\abc_tab_indicator_mtrl_alpha.9.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-hdpi\abc_text_cursor_mtrl_alpha.9.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-hdpi\abc_textfield_activated_mtrl_alpha.9.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-hdpi\abc_textfield_default_mtrl_alpha.9.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-hdpi\abc_textfield_search_activated_mtrl_alpha.9.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-hdpi\abc_textfield_search_default_mtrl_alpha.9.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-ldrtl-hdpi\abc_ic_ab_back_mtrl_am_alpha.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-ldrtl-hdpi\abc_ic_menu_copy_mtrl_am_alpha.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-ldrtl-hdpi\abc_ic_menu_cut_mtrl_alpha.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-ldrtl-hdpi\abc_spinner_mtrl_am_alpha.9.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-ldrtl-mdpi\abc_ic_ab_back_mtrl_am_alpha.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-ldrtl-mdpi\abc_ic_menu_copy_mtrl_am_alpha.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-ldrtl-mdpi\abc_ic_menu_cut_mtrl_alpha.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-ldrtl-mdpi\abc_spinner_mtrl_am_alpha.9.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-ldrtl-xhdpi\abc_ic_ab_back_mtrl_am_alpha.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-ldrtl-xhdpi\abc_ic_menu_copy_mtrl_am_alpha.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-ldrtl-xhdpi\abc_ic_menu_cut_mtrl_alpha.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-ldrtl-xhdpi\abc_spinner_mtrl_am_alpha.9.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-ldrtl-xxhdpi\abc_ic_ab_back_mtrl_am_alpha.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-ldrtl-xxhdpi\abc_ic_menu_copy_mtrl_am_alpha.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-ldrtl-xxhdpi\abc_ic_menu_cut_mtrl_alpha.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-ldrtl-xxhdpi\abc_spinner_mtrl_am_alpha.9.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-ldrtl-xxxhdpi\abc_ic_ab_back_mtrl_am_alpha.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-ldrtl-xxxhdpi\abc_ic_menu_copy_mtrl_am_alpha.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-ldrtl-xxxhdpi\abc_ic_menu_cut_mtrl_alpha.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-ldrtl-xxxhdpi\abc_spinner_mtrl_am_alpha.9.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-mdpi\abc_ab_share_pack_mtrl_alpha.9.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-mdpi\abc_btn_check_to_on_mtrl_000.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-mdpi\abc_btn_check_to_on_mtrl_015.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-mdpi\abc_btn_radio_to_on_mtrl_000.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-mdpi\abc_btn_radio_to_on_mtrl_015.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-mdpi\abc_btn_rating_star_off_mtrl_alpha.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-mdpi\abc_btn_rating_star_on_mtrl_alpha.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-mdpi\abc_btn_switch_to_on_mtrl_00001.9.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-mdpi\abc_btn_switch_to_on_mtrl_00012.9.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-mdpi\abc_cab_background_top_mtrl_alpha.9.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-mdpi\abc_ic_ab_back_mtrl_am_alpha.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-mdpi\abc_ic_clear_mtrl_alpha.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-mdpi\abc_ic_commit_search_api_mtrl_alpha.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-mdpi\abc_ic_go_search_api_mtrl_alpha.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-mdpi\abc_ic_menu_copy_mtrl_am_alpha.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-mdpi\abc_ic_menu_cut_mtrl_alpha.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-mdpi\abc_ic_menu_moreoverflow_mtrl_alpha.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-mdpi\abc_ic_menu_paste_mtrl_am_alpha.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-mdpi\abc_ic_menu_selectall_mtrl_alpha.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-mdpi\abc_ic_menu_share_mtrl_alpha.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-mdpi\abc_ic_search_api_mtrl_alpha.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-mdpi\abc_ic_voice_search_api_mtrl_alpha.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-mdpi\abc_list_divider_mtrl_alpha.9.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-mdpi\abc_list_focused_holo.9.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-mdpi\abc_list_longpressed_holo.9.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-mdpi\abc_list_pressed_holo_dark.9.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-mdpi\abc_list_pressed_holo_light.9.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-mdpi\abc_list_selector_disabled_holo_dark.9.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-mdpi\abc_list_selector_disabled_holo_light.9.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-mdpi\abc_menu_hardkey_panel_mtrl_mult.9.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-mdpi\abc_popup_background_mtrl_mult.9.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-mdpi\abc_spinner_mtrl_am_alpha.9.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-mdpi\abc_switch_track_mtrl_alpha.9.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-mdpi\abc_tab_indicator_mtrl_alpha.9.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-mdpi\abc_text_cursor_mtrl_alpha.9.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-mdpi\abc_textfield_activated_mtrl_alpha.9.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-mdpi\abc_textfield_default_mtrl_alpha.9.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-mdpi\abc_textfield_search_activated_mtrl_alpha.9.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-mdpi\abc_textfield_search_default_mtrl_alpha.9.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-xhdpi\abc_ab_share_pack_mtrl_alpha.9.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-xhdpi\abc_btn_check_to_on_mtrl_000.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-xhdpi\abc_btn_check_to_on_mtrl_015.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-xhdpi\abc_btn_radio_to_on_mtrl_000.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-xhdpi\abc_btn_radio_to_on_mtrl_015.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-xhdpi\abc_btn_rating_star_off_mtrl_alpha.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-xhdpi\abc_btn_rating_star_on_mtrl_alpha.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-xhdpi\abc_btn_switch_to_on_mtrl_00001.9.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-xhdpi\abc_btn_switch_to_on_mtrl_00012.9.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-xhdpi\abc_cab_background_top_mtrl_alpha.9.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-xhdpi\abc_ic_ab_back_mtrl_am_alpha.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-xhdpi\abc_ic_clear_mtrl_alpha.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-xhdpi\abc_ic_commit_search_api_mtrl_alpha.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-xhdpi\abc_ic_go_search_api_mtrl_alpha.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-xhdpi\abc_ic_menu_copy_mtrl_am_alpha.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-xhdpi\abc_ic_menu_cut_mtrl_alpha.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-xhdpi\abc_ic_menu_moreoverflow_mtrl_alpha.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-xhdpi\abc_ic_menu_paste_mtrl_am_alpha.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-xhdpi\abc_ic_menu_selectall_mtrl_alpha.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-xhdpi\abc_ic_menu_share_mtrl_alpha.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-xhdpi\abc_ic_search_api_mtrl_alpha.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-xhdpi\abc_ic_voice_search_api_mtrl_alpha.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-xhdpi\abc_list_divider_mtrl_alpha.9.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-xhdpi\abc_list_focused_holo.9.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-xhdpi\abc_list_longpressed_holo.9.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-xhdpi\abc_list_pressed_holo_dark.9.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-xhdpi\abc_list_pressed_holo_light.9.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-xhdpi\abc_list_selector_disabled_holo_dark.9.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-xhdpi\abc_list_selector_disabled_holo_light.9.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-xhdpi\abc_menu_hardkey_panel_mtrl_mult.9.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-xhdpi\abc_popup_background_mtrl_mult.9.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-xhdpi\abc_spinner_mtrl_am_alpha.9.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-xhdpi\abc_switch_track_mtrl_alpha.9.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-xhdpi\abc_tab_indicator_mtrl_alpha.9.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-xhdpi\abc_text_cursor_mtrl_alpha.9.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-xhdpi\abc_textfield_activated_mtrl_alpha.9.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-xhdpi\abc_textfield_default_mtrl_alpha.9.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-xhdpi\abc_textfield_search_activated_mtrl_alpha.9.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-xhdpi\abc_textfield_search_default_mtrl_alpha.9.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-xxhdpi\abc_ab_share_pack_mtrl_alpha.9.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-xxhdpi\abc_btn_check_to_on_mtrl_000.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-xxhdpi\abc_btn_check_to_on_mtrl_015.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-xxhdpi\abc_btn_radio_to_on_mtrl_000.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-xxhdpi\abc_btn_radio_to_on_mtrl_015.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-xxhdpi\abc_btn_rating_star_off_mtrl_alpha.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-xxhdpi\abc_btn_rating_star_on_mtrl_alpha.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-xxhdpi\abc_btn_switch_to_on_mtrl_00001.9.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-xxhdpi\abc_btn_switch_to_on_mtrl_00012.9.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-xxhdpi\abc_cab_background_top_mtrl_alpha.9.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-xxhdpi\abc_ic_ab_back_mtrl_am_alpha.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-xxhdpi\abc_ic_clear_mtrl_alpha.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-xxhdpi\abc_ic_commit_search_api_mtrl_alpha.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-xxhdpi\abc_ic_go_search_api_mtrl_alpha.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-xxhdpi\abc_ic_menu_copy_mtrl_am_alpha.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-xxhdpi\abc_ic_menu_cut_mtrl_alpha.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-xxhdpi\abc_ic_menu_moreoverflow_mtrl_alpha.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-xxhdpi\abc_ic_menu_paste_mtrl_am_alpha.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-xxhdpi\abc_ic_menu_selectall_mtrl_alpha.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-xxhdpi\abc_ic_menu_share_mtrl_alpha.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-xxhdpi\abc_ic_search_api_mtrl_alpha.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-xxhdpi\abc_ic_voice_search_api_mtrl_alpha.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-xxhdpi\abc_list_divider_mtrl_alpha.9.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-xxhdpi\abc_list_focused_holo.9.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-xxhdpi\abc_list_longpressed_holo.9.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-xxhdpi\abc_list_pressed_holo_dark.9.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-xxhdpi\abc_list_pressed_holo_light.9.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-xxhdpi\abc_list_selector_disabled_holo_dark.9.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-xxhdpi\abc_list_selector_disabled_holo_light.9.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-xxhdpi\abc_menu_hardkey_panel_mtrl_mult.9.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-xxhdpi\abc_popup_background_mtrl_mult.9.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-xxhdpi\abc_spinner_mtrl_am_alpha.9.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-xxhdpi\abc_switch_track_mtrl_alpha.9.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-xxhdpi\abc_tab_indicator_mtrl_alpha.9.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-xxhdpi\abc_text_cursor_mtrl_alpha.9.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-xxhdpi\abc_textfield_activated_mtrl_alpha.9.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-xxhdpi\abc_textfield_default_mtrl_alpha.9.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-xxhdpi\abc_textfield_search_activated_mtrl_alpha.9.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-xxhdpi\abc_textfield_search_default_mtrl_alpha.9.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-xxxhdpi\abc_btn_check_to_on_mtrl_000.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-xxxhdpi\abc_btn_check_to_on_mtrl_015.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-xxxhdpi\abc_btn_radio_to_on_mtrl_000.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-xxxhdpi\abc_btn_radio_to_on_mtrl_015.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-xxxhdpi\abc_btn_switch_to_on_mtrl_00001.9.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-xxxhdpi\abc_btn_switch_to_on_mtrl_00012.9.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-xxxhdpi\abc_ic_ab_back_mtrl_am_alpha.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-xxxhdpi\abc_ic_clear_mtrl_alpha.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-xxxhdpi\abc_ic_menu_copy_mtrl_am_alpha.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-xxxhdpi\abc_ic_menu_cut_mtrl_alpha.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-xxxhdpi\abc_ic_menu_moreoverflow_mtrl_alpha.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-xxxhdpi\abc_ic_menu_paste_mtrl_am_alpha.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-xxxhdpi\abc_ic_menu_selectall_mtrl_alpha.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-xxxhdpi\abc_ic_menu_share_mtrl_alpha.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-xxxhdpi\abc_ic_search_api_mtrl_alpha.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-xxxhdpi\abc_ic_voice_search_api_mtrl_alpha.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-xxxhdpi\abc_spinner_mtrl_am_alpha.9.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-xxxhdpi\abc_switch_track_mtrl_alpha.9.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable-xxxhdpi\abc_tab_indicator_mtrl_alpha.9.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable\abc_btn_borderless_material.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable\abc_btn_check_material.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable\abc_btn_default_mtrl_shape.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable\abc_btn_radio_material.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable\abc_cab_background_internal_bg.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable\abc_cab_background_top_material.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable\abc_dialog_material_background_dark.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable\abc_dialog_material_background_light.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable\abc_edit_text_material.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable\abc_item_background_holo_dark.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable\abc_item_background_holo_light.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable\abc_list_selector_background_transition_holo_dark.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable\abc_list_selector_background_transition_holo_light.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable\abc_list_selector_holo_dark.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable\abc_list_selector_holo_light.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable\abc_ratingbar_full_material.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable\abc_spinner_textfield_background_material.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable\abc_switch_thumb_material.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable\abc_tab_indicator_material.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\drawable\abc_textfield_search_material.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\layout\abc_action_bar_title_item.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\layout\abc_action_bar_up_container.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\layout\abc_action_bar_view_list_nav_layout.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\layout\abc_action_menu_item_layout.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\layout\abc_action_menu_layout.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\layout\abc_action_mode_bar.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\layout\abc_action_mode_close_item_material.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\layout\abc_activity_chooser_view.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\layout\abc_activity_chooser_view_list_item.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\layout\abc_alert_dialog_material.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\layout\abc_dialog_title_material.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\layout\abc_expanded_menu_layout.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\layout\abc_list_menu_item_checkbox.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\layout\abc_list_menu_item_icon.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\layout\abc_list_menu_item_layout.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\layout\abc_list_menu_item_radio.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\layout\abc_popup_menu_item_layout.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\layout\abc_screen_content_include.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\layout\abc_screen_simple.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\layout\abc_screen_simple_overlay_action_mode.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\layout\abc_screen_toolbar.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\layout\abc_search_dropdown_item_icons_2line.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\layout\abc_search_view.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\layout\abc_select_dialog_material.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\layout\abc_simple_dropdown_hint.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\layout\notification_media_action.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\layout\notification_media_cancel_action.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\layout\notification_template_big_media.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\layout\notification_template_big_media_narrow.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\layout\notification_template_lines.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\layout\notification_template_media.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\layout\notification_template_part_chronometer.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\layout\notification_template_part_time.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\layout\select_dialog_item_material.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\layout\select_dialog_multichoice_material.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\layout\select_dialog_singlechoice_material.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\layout\support_simple_spinner_dropdown_item.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\values-af\values-af.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\values-am\values-am.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\values-ar\values-ar.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\values-bg\values-bg.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\values-bn-rBD\values-bn-rBD.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\values-ca\values-ca.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\values-cs\values-cs.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\values-da\values-da.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\values-de\values-de.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\values-el\values-el.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\values-en-rGB\values-en-rGB.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\values-en-rIN\values-en-rIN.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\values-es-rUS\values-es-rUS.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\values-es\values-es.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\values-et-rEE\values-et-rEE.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\values-eu-rES\values-eu-rES.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\values-fa\values-fa.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\values-fi\values-fi.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\values-fr-rCA\values-fr-rCA.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\values-fr\values-fr.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\values-gl-rES\values-gl-rES.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\values-h720dp\values-h720dp.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\values-hdpi\values-hdpi.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\values-hi\values-hi.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\values-hr\values-hr.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\values-hu\values-hu.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\values-hy-rAM\values-hy-rAM.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\values-in\values-in.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\values-is-rIS\values-is-rIS.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\values-it\values-it.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\values-iw\values-iw.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\values-ja\values-ja.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\values-ka-rGE\values-ka-rGE.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\values-kk-rKZ\values-kk-rKZ.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\values-km-rKH\values-km-rKH.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\values-kn-rIN\values-kn-rIN.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\values-ko\values-ko.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\values-ky-rKG\values-ky-rKG.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\values-land\values-land.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\values-large\values-large.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\values-lo-rLA\values-lo-rLA.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\values-lt\values-lt.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\values-lv\values-lv.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\values-mk-rMK\values-mk-rMK.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\values-ml-rIN\values-ml-rIN.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\values-mn-rMN\values-mn-rMN.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\values-mr-rIN\values-mr-rIN.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\values-ms-rMY\values-ms-rMY.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\values-my-rMM\values-my-rMM.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\values-nb\values-nb.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\values-ne-rNP\values-ne-rNP.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\values-nl\values-nl.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\values-pl\values-pl.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\values-port\values-port.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\values-pt-rPT\values-pt-rPT.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\values-pt\values-pt.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\values-ro\values-ro.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\values-ru\values-ru.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\values-si-rLK\values-si-rLK.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\values-sk\values-sk.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\values-sl\values-sl.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\values-sr\values-sr.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\values-sv\values-sv.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\values-sw600dp\values-sw600dp.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\values-sw\values-sw.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\values-ta-rIN\values-ta-rIN.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\values-te-rIN\values-te-rIN.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\values-th\values-th.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\values-tl\values-tl.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\values-tr\values-tr.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\values-uk\values-uk.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\values-ur-rPK\values-ur-rPK.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\values-uz-rUZ\values-uz-rUZ.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\values-v11\values-v11.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\values-v12\values-v12.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\values-v14\values-v14.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\values-v17\values-v17.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\values-v18\values-v18.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\values-v21\values-v21.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\values-vi\values-vi.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\values-w360dp\values-w360dp.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\values-w480dp\values-w480dp.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\values-w500dp\values-w500dp.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\values-w600dp\values-w600dp.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\values-w720dp\values-w720dp.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\values-xlarge-land\values-xlarge-land.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\values-xlarge\values-xlarge.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\values-zh-rCN\values-zh-rCN.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\values-zh-rHK\values-zh-rHK.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\values-zh-rTW\values-zh-rTW.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\values-zu\values-zu.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\res\values\values.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\res\merged\debug\drawable-ldpi-v4\ic_add_circle_black_24dp.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\res\merged\debug\drawable-ldpi-v4\ic_launcher.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\res\merged\debug\drawable\save_exit_btn.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\res\merged\debug\layout\add_schedule.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\res\merged\debug\menu\main.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\src\main\res\drawable-ldpi\ic_add_circle_black_24dp.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\src\main\res\drawable-ldpi\ic_launcher.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\src\main\res\drawable\save_exit_btn.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\src\main\res\menu\main.xml" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/adapter/AdapterForTaskList$ViewHolder.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/adapter/AdapterForTaskList$ViewHolder.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/adapter/AdapterForTaskList.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/adapter/AdapterForTaskList.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/y_taras/scheduler/activity/AddScheduleActivity.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/y_taras/scheduler/activity/AddScheduleActivity.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/y_taras/scheduler/activity/MainActivity$1.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/y_taras/scheduler/activity/MainActivity$1.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/y_taras/scheduler/activity/MainActivity$2.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/y_taras/scheduler/activity/MainActivity$2.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/y_taras/scheduler/activity/MainActivity$3.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/y_taras/scheduler/activity/MainActivity$3.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/y_taras/scheduler/activity/MainActivity.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/y_taras/scheduler/activity/MainActivity.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/other/StringConstForIntent.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/other/StringConstForIntent.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/v7/appcompat/R$attr.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/v7/appcompat/R$attr.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/scheduler/R$attr.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/scheduler/R$attr.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/scheduler/R$bool.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/scheduler/R$bool.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/v7/appcompat/R$color.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/v7/appcompat/R$color.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/scheduler/R$color.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/scheduler/R$color.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/v7/appcompat/R$dimen.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/v7/appcompat/R$dimen.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/scheduler/R$dimen.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/scheduler/R$dimen.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/scheduler/R$drawable.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/scheduler/R$drawable.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/v7/appcompat/R$id.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/v7/appcompat/R$id.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/scheduler/R$id.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/scheduler/R$id.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/scheduler/R$integer.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/scheduler/R$integer.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/v7/appcompat/R$layout.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/v7/appcompat/R$layout.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/scheduler/R$layout.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/scheduler/R$layout.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/scheduler/R$menu.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/scheduler/R$menu.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/scheduler/R$string.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/scheduler/R$string.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/scheduler/R$style.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/scheduler/R$style.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/v7/appcompat/R$styleable.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/android/support/v7/appcompat/R$styleable.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/scheduler/R$styleable.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/scheduler/R$styleable.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/scheduler/R.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/example/scheduler/R.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/other/Task$1.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/other/Task$1.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/other/Task.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/other/Task.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/utils/TasksSaver.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/utils/TasksSaver.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/outputs/apk/app-debug-unaligned.apk" afterPath="$PROJECT_DIR$/app/build/outputs/apk/app-debug-unaligned.apk" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/outputs/apk/app-debug.apk" afterPath="$PROJECT_DIR$/app/build/outputs/apk/app-debug.apk" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.8/taskArtifacts/cache.properties.lock" afterPath="$PROJECT_DIR$/.gradle/2.8/taskArtifacts/cache.properties.lock" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dex/debug/folders/1000/1f/main/classes.dex" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dex/debug/folders/1000/1f/main/classes.dex" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/pre-dexed/debug/com.android.support-appcompat-v7-21.0.3_e87ca7ea6bc79237583a55dabb07a267ee5bc2e5.jar" afterPath="$PROJECT_DIR$/app/build/intermediates/pre-dexed/debug/com.android.support-appcompat-v7-21.0.3_e87ca7ea6bc79237583a55dabb07a267ee5bc2e5.jar" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/pre-dexed/debug/com.android.support-support-v4-22.2.1_32f81fc665845da5b55d0bb7148e9bfc1f4a975f.jar" afterPath="$PROJECT_DIR$/app/build/intermediates/pre-dexed/debug/com.android.support-support-v4-22.2.1_32f81fc665845da5b55d0bb7148e9bfc1f4a975f.jar" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/pre-dexed/debug/debug_4f7ed22a0be2b6892cf8e163416b8a3af154a91d.jar" afterPath="$PROJECT_DIR$/app/build/intermediates/pre-dexed/debug/debug_4f7ed22a0be2b6892cf8e163416b8a3af154a91d.jar" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.8/taskArtifacts/fileHashes.bin" afterPath="$PROJECT_DIR$/.gradle/2.8/taskArtifacts/fileHashes.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.8/taskArtifacts/fileSnapshots.bin" afterPath="$PROJECT_DIR$/.gradle/2.8/taskArtifacts/fileSnapshots.bin" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/pre-dexed/debug/internal_impl-22.2.1_874cd157dccd1e785908fe70e3c1451e57985fc3.jar" afterPath="$PROJECT_DIR$/app/build/intermediates/pre-dexed/debug/internal_impl-22.2.1_874cd157dccd1e785908fe70e3c1451e57985fc3.jar" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.8/taskArtifacts/outputFileStates.bin" afterPath="$PROJECT_DIR$/.gradle/2.8/taskArtifacts/outputFileStates.bin" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/resources-debug-androidTest.ap_" afterPath="$PROJECT_DIR$/app/build/intermediates/res/resources-debug-androidTest.ap_" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/resources-debug.ap_" afterPath="$PROJECT_DIR$/app/build/intermediates/res/resources-debug.ap_" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/pre-dexed/debug/support-annotations-22.2.1_db1bb2a3f1608a31c38a2d1f5698fe71cc45038a.jar" afterPath="$PROJECT_DIR$/app/build/intermediates/pre-dexed/debug/support-annotations-22.2.1_db1bb2a3f1608a31c38a2d1f5698fe71cc45038a.jar" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.8/taskArtifacts/taskArtifacts.bin" afterPath="$PROJECT_DIR$/.gradle/2.8/taskArtifacts/taskArtifacts.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/adapter/AdapterForTaskList.java" afterPath="$PROJECT_DIR$/app/src/main/java/adapter/AdapterForTaskList.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/y_taras/scheduler/activity/AddScheduleActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/y_taras/scheduler/activity/AddScheduleActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/manifests/full/debug/AndroidManifest.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/manifests/full/debug/AndroidManifest.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/y_taras/scheduler/activity/MainActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/y_taras/scheduler/activity/MainActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/other/StringConstForIntent.java" afterPath="$PROJECT_DIR$/app/src/main/java/other/StringConstForIntent.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/generated/source/r/debug/android/support/v7/appcompat/R.java" afterPath="$PROJECT_DIR$/app/build/generated/source/r/debug/android/support/v7/appcompat/R.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/generated/source/r/debug/com/example/scheduler/R.java" afterPath="$PROJECT_DIR$/app/build/generated/source/r/debug/com/example/scheduler/R.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/symbols/debug/R.txt" afterPath="$PROJECT_DIR$/app/build/intermediates/symbols/debug/R.txt" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/other/Task.java" afterPath="$PROJECT_DIR$/app/src/main/java/other/Task.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/utils/TasksLoader.java" afterPath="$PROJECT_DIR$/app/src/main/java/utils/TasksLoader.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/layout/activity_main.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/layout/activity_main.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/blame/res/debug/single/anim.json" afterPath="$PROJECT_DIR$/app/build/intermediates/blame/res/debug/single/anim.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/app.iml" afterPath="$PROJECT_DIR$/app/app.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build.gradle" afterPath="$PROJECT_DIR$/app/build.gradle" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/intermediates/dex-cache/cache.xml" afterPath="$PROJECT_DIR$/build/intermediates/dex-cache/cache.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/blame/res/debug/single/color.json" afterPath="$PROJECT_DIR$/app/build/intermediates/blame/res/debug/single/color.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/values/color.xml" afterPath="$PROJECT_DIR$/app/src/main/res/values/color.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/values/dimens.xml" afterPath="$PROJECT_DIR$/app/src/main/res/values/dimens.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/blame/res/debug/single/drawable-hdpi-v4.json" afterPath="$PROJECT_DIR$/app/build/intermediates/blame/res/debug/single/drawable-hdpi-v4.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/blame/res/debug/single/drawable-ldpi-v4.json" afterPath="$PROJECT_DIR$/app/build/intermediates/blame/res/debug/single/drawable-ldpi-v4.json" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/blame/res/debug/single/drawable-mdpi-v4.json" afterPath="$PROJECT_DIR$/app/build/intermediates/blame/res/debug/single/drawable-mdpi-v4.json" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/blame/res/debug/single/drawable-xhdpi-v4.json" afterPath="$PROJECT_DIR$/app/build/intermediates/blame/res/debug/single/drawable-xhdpi-v4.json" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/blame/res/debug/single/drawable-xxhdpi-v4.json" afterPath="$PROJECT_DIR$/app/build/intermediates/blame/res/debug/single/drawable-xxhdpi-v4.json" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/blame/res/debug/single/drawable-xxxhdpi-v4.json" afterPath="$PROJECT_DIR$/app/build/intermediates/blame/res/debug/single/drawable-xxxhdpi-v4.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/blame/res/debug/single/drawable.json" afterPath="$PROJECT_DIR$/app/build/intermediates/blame/res/debug/single/drawable.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/blame/res/debug/single/layout.json" afterPath="$PROJECT_DIR$/app/build/intermediates/blame/res/debug/single/layout.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/outputs/logs/manifest-merger-debug-report.txt" afterPath="$PROJECT_DIR$/app/build/outputs/logs/manifest-merger-debug-report.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/blame/res/debug/single/menu.json" afterPath="$PROJECT_DIR$/app/build/intermediates/blame/res/debug/single/menu.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/menu/menu_main.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/menu/menu_main.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/menu/menu_main.xml" afterPath="$PROJECT_DIR$/app/src/main/res/menu/menu_main.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/incremental/mergeDebugAssets/merger.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental/mergeDebugAssets/merger.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/incremental/mergeDebugResources/merger.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental/mergeDebugResources/merger.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/values/styles.xml" afterPath="$PROJECT_DIR$/app/src/main/res/values/styles.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/blame/res/debug/multi/values-land.json" afterPath="$PROJECT_DIR$/app/build/intermediates/blame/res/debug/multi/values-land.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/values-land/values-land.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/values-land/values-land.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/blame/res/debug/multi/values-xlarge-land-v4.json" afterPath="$PROJECT_DIR$/app/build/intermediates/blame/res/debug/multi/values-xlarge-land-v4.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/values-xlarge-land-v4/values-xlarge-land-v4.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/values-xlarge-land-v4/values-xlarge-land-v4.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/blame/res/debug/multi/values.json" afterPath="$PROJECT_DIR$/app/build/intermediates/blame/res/debug/multi/values.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/values/values.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/values/values.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MOVED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\src\main\java\other\StringConstForIntent.java" afterPath="$PROJECT_DIR$/app/src/main/java/other/StringKeys.java" />
+      <change type="MOVED" beforePath="D:\Android\AndroidStudioWorkspace\Scheduler\app\src\main\res\layout\add_schedule.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_add_schedule.xml" />
     </list>
     <ignored path="Scheduler.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -115,27 +575,48 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
+      <file leaf-file-name="activity_main.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-13.793103">
+              <caret line="36" column="24" selection-start-line="36" selection-start-column="24" selection-end-line="36" selection-end-column="24" />
+              <folding>
+                <element signature="e#1186#1205#0" expanded="true" />
+                <element signature="e#1235#1258#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+          <provider editor-type-id="android-designer">
+            <state />
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="MainActivity.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/y_taras/scheduler/activity/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-1.5177957">
-              <caret line="32" column="34" selection-start-line="32" selection-start-column="34" selection-end-line="32" selection-end-column="34" />
+            <state vertical-scroll-proportion="-3.4500575">
+              <caret line="129" column="33" selection-start-line="129" selection-start-column="33" selection-end-line="129" selection-end-column="33" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#1218#1219#0" expanded="true" />
-                <element signature="e#1249#1250#0" expanded="true" />
-                <element signature="e#1296#1297#0" expanded="true" />
-                <element signature="e#1328#1329#0" expanded="true" />
+                <element signature="e#2377#2402#0" expanded="true" />
+                <element signature="e#5413#6319#0" expanded="true" />
+                <element signature="e#6318#6319#0" expanded="true" />
+                <element signature="e#6424#7143#0" expanded="true" />
+                <element signature="e#7142#7143#0" expanded="true" />
+                <element signature="e#13523#13553#0" expanded="true" />
+                <element signature="e#13628#13640#0" expanded="true" />
+                <element signature="e#14031#14042#0" expanded="true" />
+                <element signature="e#14684#14718#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TasksLoader.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/utils/TasksLoader.java">
+      <file leaf-file-name="CustomSpinnerAdapter.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/adapter/CustomSpinnerAdapter.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="43" column="5" selection-start-line="43" selection-start-column="5" selection-end-line="43" selection-end-column="5" />
+              <caret line="15" column="29" selection-start-line="15" selection-start-column="29" selection-end-line="15" selection-end-column="29" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -143,14 +624,22 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Task.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/other/Task.java">
+      <file leaf-file-name="strings.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-11.333333">
+              <caret line="18" column="47" selection-start-line="18" selection-start-column="47" selection-end-line="18" selection-end-column="47" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="build.gradle" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/build.gradle">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="30" column="3" selection-start-line="30" selection-start-column="3" selection-end-line="30" selection-end-column="3" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+              <caret line="21" column="55" selection-start-line="21" selection-start-column="4" selection-end-line="21" selection-end-column="57" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -162,8 +651,8 @@
       <list>
         <option value="layoutResourceFile" />
         <option value="valueResourceFile" />
-        <option value="layoutResourceFile_vertical" />
         <option value="Class" />
+        <option value="layoutResourceFile_vertical" />
         <option value="resourceFile" />
       </list>
     </option>
@@ -621,6 +1110,11 @@
                 <option name="description" value="Prepare com.android.support:support-v4:22.2.1" />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value="prepareComAndroidSupportSupportV42221Library" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Prepare com.github.yukuku:ambilwarna:2.0.1" />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="prepareComGithubYukukuAmbilwarna201Library" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
@@ -1175,6 +1669,11 @@
                 <option name="name" value="prepareComAndroidSupportSupportV42221Library" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
+                <option name="description" value="Prepare com.github.yukuku:ambilwarna:2.0.1" />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/app" />
+                <option name="name" value="prepareComGithubYukukuAmbilwarna201Library" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/app" />
                 <option name="name" value="prepareDebugAndroidTestDependencies" />
               </ExternalTaskPojo>
@@ -1358,7 +1857,7 @@
     <option name="modificationStamps">
       <map>
         <entry key="$PROJECT_DIR$" value="4345623647392" />
-        <entry key="D:\Android\AndroidStudioWorkspace\Scheduler" value="4345996876017" />
+        <entry key="D:\Android\AndroidStudioWorkspace\Scheduler" value="4346338054713" />
       </map>
     </option>
     <option name="projectBuildClasspath">
@@ -1574,6 +2073,8 @@
                             <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/commons-codec/commons-codec/1.4/commons-codec-1.4.jar" />
                             <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/intellij/annotations/12.0/annotations-12.0-sources.jar" />
                             <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/intellij/annotations/12.0/annotations-12.0.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.yukuku/ambilwarna/2.0.1/4981382b8ad3b2c695ba9e017dfdad9cec647dc6/ambilwarna-2.0.1.aar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.code.gson/gson/2.2.4/a60a5e993c98c864010053cb901b7eab25306568/gson-2.2.4.jar" />
                             <option value="$PROJECT_DIR$/../../sdk/extras/android/m2repository/com/android/support/appcompat-v7/21.0.3/appcompat-v7-21.0.3.aar" />
                             <option value="$PROJECT_DIR$/../../sdk/extras/android/m2repository/com/android/support/support-v4/22.2.1/support-v4-22.2.1.aar" />
                             <option value="$PROJECT_DIR$/../../sdk/extras/android/m2repository/com/android/support/support-annotations/22.2.1/support-annotations-22.2.1.jar" />
@@ -1718,7 +2219,6 @@
         <option value="$PROJECT_DIR$/app/src/main/res/layout/listFragment.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/y_taras/scheduler/fragments/MainList.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/values/styles.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/add_schedel.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/other/MyAdapter.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/list_item.xml" />
@@ -1727,23 +2227,42 @@
         <option value="$PROJECT_DIR$/app/src/main/java/other/StingConstForIntent.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/other/ConstForIntent.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/list_task_item.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/y_taras/scheduler/activity/AddScheduleActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/drawable-mdpi/save_exit_btn.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/values/dimens.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/add_schedule.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/values/color.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/utils/TaskStorage.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/menu/toolbar_menu.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/menu/menu_main.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/utils/TasksSaver.java" />
+        <option value="$PROJECT_DIR$/app/build/generated/source/r/debug/com/example/scheduler/R.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/settings.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_add_schedule.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/values/dimens.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/menu/menu_settings.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/other/StringConstForIntent.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/other/StringConstFor.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/other/StringConst.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/y_taras/scheduler/activity/AddScheduleActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/adapter/AdapterForTaskList.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/utils/TasksLoader.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/y_taras/scheduler/activity/SettingsActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/drawable/action_sort.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/menu/sorts.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/menu/menu_main.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/other/Task.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/drawable/selectable_background_stylingactionbar.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/drawable/pressed_background_stylingactionbar.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/values/styles.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/menu/spinner_row.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/spinner_row.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/values/color.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/drawable/spinner_selector2.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/drawable/spinner_selector.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/other/StringKeys.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_settings.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" />
         <option value="$PROJECT_DIR$/app/build.gradle" />
-        <option value="$PROJECT_DIR$/app/src/main/java/other/StringConstForIntent.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/other/Task.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/utils/TasksSaver.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/utils/TasksLoader.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/adapter/CustomSpinnerAdapter.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/y_taras/scheduler/activity/MainActivity.java" />
       </list>
     </option>
@@ -1895,6 +2414,24 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="gradle" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="wrapper" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Scheduler" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Scheduler" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="app" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -1999,131 +2536,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="res" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="menu" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Scheduler" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Scheduler" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="res" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="layout" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Scheduler" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Scheduler" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="res" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="drawable-hdpi" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Scheduler" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Scheduler" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
               <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="utils" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Scheduler" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Scheduler" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="other" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -2154,36 +2567,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="activity" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Scheduler" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Scheduler" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="adapter" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -2421,7 +2804,7 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.5038932" sideWeight="0.5245203" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32995737" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.50278085" sideWeight="0.47547975" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.36262515" sideWeight="0.47547975" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.23454158" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32925472" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32925472" sideWeight="0.48720682" order="2" side_tool="false" content_ui="tabs" />
@@ -2430,7 +2813,7 @@
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.46607342" sideWeight="0.5191898" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.22547974" sideWeight="0.4941957" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.23827292" sideWeight="0.4941957" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32925472" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -2454,17 +2837,17 @@
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.22547974" sideWeight="0.5058043" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.06451613" sideWeight="0.52025586" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.5038932" sideWeight="0.5245203" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32995737" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.06451613" sideWeight="0.47974414" order="16" side_tool="false" content_ui="tabs" />
+      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.36040044" sideWeight="0.47547975" order="16" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Android Model" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32995737" sideWeight="0.5" order="6" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39933258" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39933258" sideWeight="0.4978678" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32925472" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.28698555" sideWeight="0.46055436" order="10" side_tool="false" content_ui="tabs" />
@@ -2502,119 +2885,22 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="14" />
+      <option name="time" value="21" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/other/StringConstForIntent.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="9" column="67" selection-start-line="9" selection-start-column="67" selection-end-line="9" selection-end-column="67" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="10" column="22" selection-start-line="10" selection-start-column="22" selection-end-line="10" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/build.gradle">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="22" column="4" selection-start-line="22" selection-start-column="4" selection-end-line="22" selection-end-column="4" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/other/Task.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="10" column="28" selection-start-line="10" selection-start-column="28" selection-end-line="10" selection-end-column="28" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/menu/menu_main.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="4" column="40" selection-start-line="4" selection-start-column="25" selection-end-line="4" selection-end-column="40" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/y_taras/scheduler/activity/AddScheduleActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="44" column="16" selection-start-line="44" selection-start-column="16" selection-end-line="44" selection-end-column="16" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/other/StringConstForIntent.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="3" column="35" selection-start-line="3" selection-start-column="35" selection-end-line="3" selection-end-column="35" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/other/Task.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="9" column="28" selection-start-line="9" selection-start-column="28" selection-end-line="9" selection-end-column="28" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/y_taras/scheduler/activity/MainActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1218#1219#0" expanded="true" />
-            <element signature="e#1249#1250#0" expanded="true" />
-            <element signature="e#1296#1297#0" expanded="true" />
-            <element signature="e#1328#1329#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/other/Task.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="8" column="0" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/adapter/AdapterForTaskList.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="31" column="14" selection-start-line="31" selection-start-column="14" selection-end-line="31" selection-end-column="14" />
           <folding>
-            <element signature="e#2872#2873#0" expanded="true" />
-            <element signature="e#2908#2909#0" expanded="true" />
-            <element signature="e#2965#2966#0" expanded="true" />
-            <element signature="e#3008#3009#0" expanded="true" />
-            <element signature="e#3065#3066#0" expanded="true" />
-            <element signature="e#3096#3097#0" expanded="true" />
+            <element signature="e#3194#3195#0" expanded="false" />
+            <element signature="e#3230#3231#0" expanded="false" />
+            <element signature="e#3287#3288#0" expanded="false" />
+            <element signature="e#3330#3331#0" expanded="false" />
+            <element signature="e#3387#3388#0" expanded="false" />
+            <element signature="e#3418#3419#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -2623,13 +2909,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="20" column="31" selection-start-line="20" selection-start-column="31" selection-end-line="20" selection-end-column="31" />
-          <folding>
-            <element signature="e#400#435#0" expanded="true" />
-            <element signature="e#507#533#0" expanded="true" />
-            <element signature="e#743#780#0" expanded="true" />
-            <element signature="e#806#834#0" expanded="true" />
-            <element signature="e#1091#1116#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
       <provider editor-type-id="android-designer">
@@ -2673,21 +2953,20 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/add_schedule.xml">
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_add_schedule.xml">
       <provider editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="48" column="36" selection-start-line="48" selection-start-column="36" selection-end-line="48" selection-end-column="36" />
           <folding>
-            <element signature="e#474#510#0" expanded="true" />
-            <element signature="e#629#651#0" expanded="true" />
-            <element signature="e#1203#1239#0" expanded="true" />
-            <element signature="e#1358#1383#0" expanded="true" />
-            <element signature="e#1989#2022#0" expanded="true" />
-            <element signature="e#2111#2146#0" expanded="true" />
-            <element signature="e#2229#2249#0" expanded="true" />
-            <element signature="e#2344#2377#0" expanded="true" />
-            <element signature="e#2466#2501#0" expanded="true" />
-            <element signature="e#2584#2604#0" expanded="true" />
+            <element signature="e#711#747#0" expanded="true" />
+            <element signature="e#866#888#0" expanded="true" />
+            <element signature="e#711#747#0" expanded="true" />
+            <element signature="e#866#888#0" expanded="true" />
+            <element signature="e#1440#1476#0" expanded="true" />
+            <element signature="e#1561#1569#0" expanded="true" />
+            <element signature="e#1656#1692#0" expanded="true" />
+            <element signature="e#1794#1808#0" expanded="true" />
+            <element signature="e#1888#1906#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -2701,10 +2980,15 @@
           <caret line="27" column="41" selection-start-line="27" selection-start-column="41" selection-end-line="27" selection-end-column="41" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1218#1219#0" expanded="true" />
-            <element signature="e#1249#1250#0" expanded="true" />
-            <element signature="e#1296#1297#0" expanded="true" />
-            <element signature="e#1328#1329#0" expanded="true" />
+            <element signature="e#2377#2402#0" expanded="true" />
+            <element signature="e#5413#6319#0" expanded="true" />
+            <element signature="e#6318#6319#0" expanded="true" />
+            <element signature="e#6424#7143#0" expanded="true" />
+            <element signature="e#7142#7143#0" expanded="true" />
+            <element signature="e#13523#13553#0" expanded="true" />
+            <element signature="e#13628#13640#0" expanded="true" />
+            <element signature="e#14031#14042#0" expanded="true" />
+            <element signature="e#14684#14718#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -2734,10 +3018,15 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1218#1219#0" expanded="true" />
-            <element signature="e#1249#1250#0" expanded="true" />
-            <element signature="e#1296#1297#0" expanded="true" />
-            <element signature="e#1328#1329#0" expanded="true" />
+            <element signature="e#2377#2402#0" expanded="true" />
+            <element signature="e#5413#6319#0" expanded="true" />
+            <element signature="e#6318#6319#0" expanded="true" />
+            <element signature="e#6424#7143#0" expanded="true" />
+            <element signature="e#7142#7143#0" expanded="true" />
+            <element signature="e#13523#13553#0" expanded="true" />
+            <element signature="e#13628#13640#0" expanded="true" />
+            <element signature="e#14031#14042#0" expanded="true" />
+            <element signature="e#14684#14718#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -2767,10 +3056,15 @@
           <caret line="8" column="30" selection-start-line="8" selection-start-column="30" selection-end-line="8" selection-end-column="30" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1218#1219#0" expanded="true" />
-            <element signature="e#1249#1250#0" expanded="true" />
-            <element signature="e#1296#1297#0" expanded="true" />
-            <element signature="e#1328#1329#0" expanded="true" />
+            <element signature="e#2377#2402#0" expanded="true" />
+            <element signature="e#5413#6319#0" expanded="true" />
+            <element signature="e#6318#6319#0" expanded="true" />
+            <element signature="e#6424#7143#0" expanded="true" />
+            <element signature="e#7142#7143#0" expanded="true" />
+            <element signature="e#13523#13553#0" expanded="true" />
+            <element signature="e#13628#13640#0" expanded="true" />
+            <element signature="e#14031#14042#0" expanded="true" />
+            <element signature="e#14684#14718#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -2797,13 +3091,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/build.gradle">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.13866232">
-          <caret line="5" column="18" selection-start-line="5" selection-start-column="18" selection-end-line="5" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../../sdk/sources/android-22/android/app/Activity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.33295062">
@@ -2824,90 +3111,9 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../../sdk/sources/android-22/android/view/View.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33333334">
-          <caret line="20053" column="13" selection-start-line="20053" selection-start-column="13" selection-end-line="20053" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="android-dummy://D:\Android\AndroidStudioWorkspace\Scheduler//Theme Editor">
       <provider selected="true" editor-type-id="themeEditor">
         <state theme-name="AppBaseTheme" module-name="app" proportion="0.5" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/list_task_item.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.1751152">
-          <caret line="30" column="0" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
-          <folding>
-            <element signature="e#400#435#0" expanded="true" />
-            <element signature="e#507#533#0" expanded="true" />
-            <element signature="e#743#780#0" expanded="true" />
-            <element signature="e#806#834#0" expanded="true" />
-            <element signature="e#1091#1116#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/styles.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-1.8888888">
-          <caret line="3" column="17" selection-start-line="3" selection-start-column="17" selection-end-line="3" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="14" column="7" selection-start-line="14" selection-start-column="7" selection-end-line="14" selection-end-column="41" />
-          <folding>
-            <element signature="e#415#433#0" expanded="true" />
-            <element signature="e#1005#1023#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/save_exit_btn.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.12546125">
-          <caret line="6" column="11" selection-start-line="6" selection-start-column="11" selection-end-line="6" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/add_schedule.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5880102">
-          <caret line="56" column="10" selection-start-line="56" selection-start-column="10" selection-end-line="56" selection-end-column="10" />
-          <folding>
-            <element signature="e#474#510#0" expanded="true" />
-            <element signature="e#629#651#0" expanded="true" />
-            <element signature="e#1203#1239#0" expanded="true" />
-            <element signature="e#1358#1383#0" expanded="true" />
-            <element signature="e#1989#2022#0" expanded="true" />
-            <element signature="e#2111#2146#0" expanded="true" />
-            <element signature="e#2229#2249#0" expanded="true" />
-            <element signature="e#2344#2377#0" expanded="true" />
-            <element signature="e#2466#2501#0" expanded="true" />
-            <element signature="e#2584#2604#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/dimens.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33456334">
-          <caret line="16" column="43" selection-start-line="16" selection-start-column="17" selection-end-line="16" selection-end-column="43" />
-          <folding />
-        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/../../sdk/platforms/android-22/data/res/values/strings.xml">
@@ -2917,75 +3123,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/color.xml">
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/list_task_item.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="12" column="12" selection-start-line="12" selection-start-column="12" selection-end-line="12" selection-end-column="12" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/y_taras/scheduler/activity/AddScheduleActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.12177122">
-          <caret line="16" column="30" selection-start-line="16" selection-start-column="30" selection-end-line="16" selection-end-column="30" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.19465649">
-          <caret line="9" column="45" selection-start-line="9" selection-start-column="45" selection-end-line="9" selection-end-column="45" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/adapter/AdapterForTaskList.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.10824108">
-          <caret line="27" column="8" selection-start-line="27" selection-start-column="8" selection-end-line="27" selection-end-column="8" />
-          <folding>
-            <element signature="e#2872#2873#0" expanded="true" />
-            <element signature="e#2908#2909#0" expanded="true" />
-            <element signature="e#2965#2966#0" expanded="true" />
-            <element signature="e#3008#3009#0" expanded="true" />
-            <element signature="e#3065#3066#0" expanded="true" />
-            <element signature="e#3096#3097#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/build.gradle">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="22" column="4" selection-start-line="22" selection-start-column="4" selection-end-line="22" selection-end-column="4" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/menu/menu_main.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="4" column="40" selection-start-line="4" selection-start-column="25" selection-end-line="4" selection-end-column="40" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/other/StringConstForIntent.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.18819188">
-          <caret line="9" column="67" selection-start-line="9" selection-start-column="67" selection-end-line="9" selection-end-column="67" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.21683674">
-          <caret line="10" column="22" selection-start-line="10" selection-start-column="22" selection-end-line="10" selection-end-column="22" />
+        <state vertical-scroll-proportion="0.60570073">
+          <caret line="30" column="0" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -2993,36 +3134,265 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/other/Task.java">
+    <entry file="jar://$PROJECT_DIR$/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/jars/classes.jar!/android/support/v7/app/ActionBarActivity.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.28199053">
+          <caret line="44" column="16" selection-start-line="44" selection-start-column="16" selection-end-line="44" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../sdk/sources/android-22/android/widget/Toast.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33212996">
+          <caret line="83" column="28" selection-start-line="83" selection-start-column="28" selection-end-line="83" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/build.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.1534296">
+          <caret line="5" column="18" selection-start-line="5" selection-start-column="18" selection-end-line="5" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_add_schedule.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.22666667">
+          <caret line="7" column="34" selection-start-line="7" selection-start-column="34" selection-end-line="7" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/dimens.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="30" column="3" selection-start-line="30" selection-start-column="3" selection-end-line="30" selection-end-column="3" />
+          <caret line="10" column="47" selection-start-line="10" selection-start-column="47" selection-end-line="10" selection-end-column="47" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../sdk/sources/android-22/android/view/View.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33203125">
+          <caret line="4441" column="0" selection-start-line="4441" selection-start-column="0" selection-end-line="4441" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/menu/menu_add_shedule.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.19517796">
+          <caret line="10" column="37" selection-start-line="10" selection-start-column="37" selection-end-line="10" selection-end-column="37" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/y_taras/scheduler/activity/AddScheduleActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.17566016">
+          <caret line="19" column="22" selection-start-line="19" selection-start-column="22" selection-end-line="19" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/adapter/AdapterForTaskList.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="1.2686567">
+          <caret line="77" column="0" selection-start-line="77" selection-start-column="0" selection-end-line="77" selection-end-column="0" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="e#2978#2979#0" expanded="true" />
+            <element signature="e#3030#3031#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/utils/TasksLoader.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="43" column="5" selection-start-line="43" selection-start-column="5" selection-end-line="43" selection-end-column="5" />
+        <state vertical-scroll-proportion="-0.44431686">
+          <caret line="22" column="25" selection-start-line="22" selection-start-column="25" selection-end-line="22" selection-end-column="25" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/y_taras/scheduler/activity/MainActivity.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-1.5177957">
-          <caret line="32" column="34" selection-start-line="32" selection-start-column="34" selection-end-line="32" selection-end-column="34" />
+        <state vertical-scroll-proportion="0.8733945">
+          <caret line="28" column="44" selection-start-line="28" selection-start-column="44" selection-end-line="28" selection-end-column="44" />
+          <folding>
+            <element signature="e#1095#1113#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/menu/menu_settings.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.18715596">
+          <caret line="6" column="8" selection-start-line="6" selection-start-column="8" selection-end-line="6" selection-end-column="8" />
+          <folding>
+            <element signature="e#294#315#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/styles.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.1969112">
+          <caret line="6" column="12" selection-start-line="6" selection-start-column="12" selection-end-line="6" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/other/Task.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="1.2495413">
+          <caret line="66" column="19" selection-start-line="66" selection-start-column="18" selection-end-line="66" selection-end-column="19" />
+          <folding>
+            <element signature="e#1659#2092#0" expanded="true" />
+            <element signature="e#2091#2092#0" expanded="true" />
+            <element signature="e#2150#2290#0" expanded="true" />
+            <element signature="e#2289#2290#0" expanded="true" />
+            <element signature="e#2346#2718#0" expanded="true" />
+            <element signature="e#2717#2718#0" expanded="true" />
+            <element signature="e#2776#2916#0" expanded="true" />
+            <element signature="e#2915#2916#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/color.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.40550458">
+          <caret line="13" column="0" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/menu/menu_main.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.039035592">
+          <caret line="2" column="55" selection-start-line="2" selection-start-column="55" selection-end-line="2" selection-end-column="55" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/spinner_selector.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.039035592">
+          <caret line="2" column="59" selection-start-line="2" selection-start-column="59" selection-end-line="2" selection-end-column="59" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/unnamed.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/y_taras/scheduler/activity/SettingsActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="115" column="66" selection-start-line="115" selection-start-column="66" selection-end-line="115" selection-end-column="66" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1218#1219#0" expanded="true" />
-            <element signature="e#1249#1250#0" expanded="true" />
-            <element signature="e#1296#1297#0" expanded="true" />
-            <element signature="e#1328#1329#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/spinner_row.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.14133017">
+          <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/other/StringKeys.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.3708381">
+          <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_settings.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.40697673">
+          <caret line="41" column="0" selection-start-line="41" selection-start-column="0" selection-end-line="41" selection-end-column="0" />
+          <folding>
+            <element signature="e#1606#1645#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/build.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="21" column="55" selection-start-line="21" selection-start-column="4" selection-end-line="21" selection-end-column="57" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-11.333333">
+          <caret line="18" column="47" selection-start-line="18" selection-start-column="47" selection-end-line="18" selection-end-column="47" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/adapter/CustomSpinnerAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="15" column="29" selection-start-line="15" selection-start-column="29" selection-end-line="15" selection-end-column="29" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-13.793103">
+          <caret line="36" column="24" selection-start-line="36" selection-start-column="24" selection-end-line="36" selection-end-column="24" />
+          <folding>
+            <element signature="e#1186#1205#0" expanded="true" />
+            <element signature="e#1235#1258#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/y_taras/scheduler/activity/MainActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-3.4500575">
+          <caret line="129" column="33" selection-start-line="129" selection-start-column="33" selection-end-line="129" selection-end-column="33" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#2377#2402#0" expanded="true" />
+            <element signature="e#5413#6319#0" expanded="true" />
+            <element signature="e#6318#6319#0" expanded="true" />
+            <element signature="e#6424#7143#0" expanded="true" />
+            <element signature="e#7142#7143#0" expanded="true" />
+            <element signature="e#13523#13553#0" expanded="true" />
+            <element signature="e#13628#13640#0" expanded="true" />
+            <element signature="e#14031#14042#0" expanded="true" />
+            <element signature="e#14684#14718#0" expanded="true" />
           </folding>
         </state>
       </provider>

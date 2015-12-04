@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="toolBar">#ff6d7fe2</color>
+    <color name="colorPrimary">#ff6d7fe2</color>
+    <color name="colorPrimaryDark">#1A237E</color>
     <color name="task_title">#000000</color>
 
     <color name="widget_button_pressed">#283593</color>
@@ -10,4 +11,5 @@
     <color name="started_task">#FFEE58</color>
     <color name="completed_task">#FF7043</color>
     <color name="not_started_task">#AED581</color>
+
 </resources>

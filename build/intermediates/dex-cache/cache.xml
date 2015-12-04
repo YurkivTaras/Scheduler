@@ -1,3 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<items version="2" />
+<items version="2" >
 
+    <item
+        jar="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.2.1\jars\libs\internal_impl-22.2.1.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="c471eaaba13ff64f6e0383d1c30a9cdc9a97efeb">
+        <dex dex="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\pre-dexed\debug\internal_impl-22.2.1_874cd157dccd1e785908fe70e3c1451e57985fc3.jar" />
+    </item>
+    <item
+        jar="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\21.0.3\jars\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="81d42bf983a8741f4888a6e333e454e4a5e0eeb7">
+        <dex dex="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\pre-dexed\debug\com.android.support-appcompat-v7-21.0.3_e87ca7ea6bc79237583a55dabb07a267ee5bc2e5.jar" />
+    </item>
+    <item
+        jar="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.2.1\jars\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="f8efd0096475e0daf054267b61544e10dc776503">
+        <dex dex="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\pre-dexed\debug\com.android.support-support-v4-22.2.1_32f81fc665845da5b55d0bb7148e9bfc1f4a975f.jar" />
+    </item>
+    <item
+        jar="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.github.yukuku\ambilwarna\2.0.1\jars\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="7ed87c7f833e46dacace668e63cb8c4b67cb3172">
+        <dex dex="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\pre-dexed\debug\com.github.yukuku-ambilwarna-2.0.1_6521bb28f53d29b9d4e224d96d1ab506ef65f222.jar" />
+    </item>
+    <item
+        jar="D:\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\22.2.1\support-annotations-22.2.1.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="61a0ff5c29295ec56d7e0bd3d25d95dbf71b4b2b">
+        <dex dex="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\pre-dexed\debug\support-annotations-22.2.1_db1bb2a3f1608a31c38a2d1f5698fe71cc45038a.jar" />
+    </item>
+    <item
+        jar="C:\Users\Taras\.gradle\caches\modules-2\files-2.1\com.google.code.gson\gson\2.2.4\a60a5e993c98c864010053cb901b7eab25306568\gson-2.2.4.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="a60a5e993c98c864010053cb901b7eab25306568">
+        <dex dex="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\pre-dexed\debug\gson-2.2.4_5c8cd81e54181a3012f8a1cb02b6bbbe7689e0b8.jar" />
+    </item>
+
+</items>

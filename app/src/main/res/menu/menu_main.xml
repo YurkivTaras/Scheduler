@@ -1,9 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:yourapp="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/action_exit"
+        android:orderInCategory="600"
+        android:title="@string/exit"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_settings"
+        android:icon="@drawable/ic_settings_black_24dp"
+        android:orderInCategory="500"
+        android:title="@string/action_settings"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/action_clear"
+        android:icon="@drawable/ic_delete_black_24dp"
+        android:orderInCategory="400"
+        android:title="@string/action_clear"
+        app:showAsAction="ifRoom" />
     <item
         android:id="@+id/action_generate"
+        android:orderInCategory="300"
+        android:title="@string/action_generate"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_add_task"
         android:icon="@drawable/ic_add_circle_black_24dp"
-        android:title="@string/generateTask"
-        yourapp:showAsAction="always|collapseActionView" />
+        android:orderInCategory="200"
+        android:title="@string/addScheduleToolbarTitleAddTask"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/action_sort"
+        android:icon="@drawable/ic_swap_vert_black"
+        android:orderInCategory="100"
+        android:title="@string/action_sort"
+        app:showAsAction="always" />
+
 </menu>

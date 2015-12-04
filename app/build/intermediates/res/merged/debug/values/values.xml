@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string-array name="spinner_items">
+        <item>A-Z</item>
+        <item>Z-A</item>
+        <item>Date up</item>
+        <item>Date down</item>
+    </string-array>
     <attr format="reference" name="drawerArrowStyle"/>
     <attr format="dimension" name="height"/>
     <attr format="boolean" name="isLightTheme"/>
@@ -28,6 +34,8 @@
     <color name="bright_foreground_material_light">@android:color/black</color>
     <color name="button_material_dark">#ff5a595b</color>
     <color name="button_material_light">#ffd6d7d7</color>
+    <color name="colorPrimary">#ff6d7fe2</color>
+    <color name="colorPrimaryDark">#1A237E</color>
     <color name="completed_task">#FF7043</color>
     <color name="dim_foreground_disabled_material_dark">#80bebebe</color>
     <color name="dim_foreground_disabled_material_light">#80323232</color>
@@ -63,7 +71,6 @@
     <color name="switch_thumb_normal_material_dark">#ffbdbdbd</color>
     <color name="switch_thumb_normal_material_light">#fff1f1f1</color>
     <color name="task_title">#000000</color>
-    <color name="toolBar">#ff6d7fe2</color>
     <color name="widget_button_focus">#82B1FF</color>
     <color name="widget_button_normal">#2196F3</color>
     <color name="widget_button_pressed">#283593</color>
@@ -73,6 +80,7 @@
     <declare-styleable name="ActionMenuView"/>
     <declare-styleable name="ActionMode"><attr name="titleTextStyle"/><attr name="subtitleTextStyle"/><attr name="background"/><attr name="backgroundSplit"/><attr name="height"/><attr format="reference" name="closeItemLayout"/></declare-styleable>
     <declare-styleable name="ActivityChooserView"><attr format="string" name="initialActivityCount"/><attr format="reference" name="expandActivityOverflowButtonDrawable"/></declare-styleable>
+    <declare-styleable name="AmbilWarnaPreference"><attr format="boolean" name="supportsAlpha"/></declare-styleable>
     <declare-styleable name="CompatTextView"><attr format="reference|boolean" name="textAllCaps"/></declare-styleable>
     <declare-styleable name="DrawerArrowToggle"><attr format="color" name="color"/><attr format="boolean" name="spinBars"/><attr format="dimension" name="drawableSize"/><attr format="dimension" name="gapBetweenBars"/><attr format="dimension" name="topBottomBarArrowSize"/><attr format="dimension" name="middleBarArrowSize"/><attr format="dimension" name="barSize"/><attr format="dimension" name="thickness"/></declare-styleable>
     <declare-styleable name="LinearLayoutCompat"><attr name="android:orientation"/><attr name="android:gravity"/><attr name="android:baselineAligned"/><attr name="android:baselineAlignedChildIndex"/><attr name="android:weightSum"/><attr format="boolean" name="measureWithLargestChild"/><attr name="divider"/><attr name="showDividers"><flag name="none" value="0"/><flag name="beginning" value="1"/><flag name="middle" value="2"/><flag name="end" value="4"/></attr><attr format="dimension" name="dividerPadding"/></declare-styleable>
@@ -129,10 +137,11 @@
     <dimen name="abc_text_size_title_material_toolbar">20dp</dimen>
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
-    <dimen name="addBtn_padding">20dp</dimen>
-    <dimen name="addBtn_txtSize">18sp</dimen>
     <dimen name="addScheduleTxt_layout_width">100dp</dimen>
-    <dimen name="addSchedule_button_width">100dp</dimen>
+    <dimen name="ambilwarna_hsvHeight">240dp</dimen>
+    <dimen name="ambilwarna_hsvWidth">240dp</dimen>
+    <dimen name="ambilwarna_hueWidth">30dp</dimen>
+    <dimen name="ambilwarna_spacer">8dp</dimen>
     <dimen name="comment_of_task_left_padding">10dp</dimen>
     <item name="dialog_fixed_height_major" type="dimen">80%</item>
     <item name="dialog_fixed_height_minor" type="dimen">100%</item>
@@ -144,7 +153,10 @@
     <dimen name="listComment_txtSize">16sp</dimen>
     <dimen name="listDate_txtSize">16sp</dimen>
     <dimen name="listTitle_txtSize">20sp</dimen>
-    <dimen name="right_margin_save_exit_btn">10dp</dimen>
+    <dimen name="settingsActivityBtnMargin">5dp</dimen>
+    <dimen name="settingsActivityTxtLeftPadding">10dp</dimen>
+    <dimen name="settingsActivityTxtSize">20sp</dimen>
+    <dimen name="settingsActivityTxtWidth">200dp</dimen>
     <dimen name="title_of_task_left_padding">30dp</dimen>
     <item name="action_bar_activity_content" type="id"/>
     <item name="action_bar_spinner" type="id"/>
@@ -172,17 +184,37 @@
     <string name="abc_shareactionprovider_share_with">Share with</string>
     <string name="abc_shareactionprovider_share_with_application">Share with %s</string>
     <string name="abc_toolbar_collapse_description">Collapse</string>
-    <string name="action_settings">Settings</string>
-    <string name="addTask">Додати завдання</string>
+    <string name="action_clear">Очистити</string>
+    <string name="action_generate">Згенерувати завдання</string>
+    <string name="action_settings">Налаштування</string>
+    <string name="action_sort">Сортувати</string>
+    <string name="addScheduleToolbarTitleAddTask">Додати завдання</string>
+    <string name="addScheduleToolbarTitleEditTask">Редагувати завдання</string>
     <string name="app_name">Scheduler</string>
+    <string name="backgroundForNotCompletedTask">Фон завершеного завдання</string>
+    <string name="backgroundForNotStartedTask">Фон не розпочатого завдання</string>
+    <string name="backgroundForStartedTask">Фон розпочатого завдання</string>
+    <string name="clearAlertDialogTitle">Чи Ви дійсно бажаєте знищити всі завдання?</string>
     <string name="commentEditText">Коментар:</string>
     <string name="emptyList">Список завдань пустий</string>
+    <string name="exit">Вийти</string>
     <string name="exitButton">Вихід</string>
     <string name="generateTask">Згенерувати завдання</string>
+    <string name="mainToolbarTitle">Поточні завдання</string>
     <string name="nameEditText">Назва:</string>
+    <string name="no">НІ</string>
+    <string name="resetColors">Відновити стандартні кольори</string>
     <string name="saveButton">Зберегти</string>
+    <string name="settingsToolbarTitle">Налаштування</string>
+    <string name="sort_a_z">A-Z</string>
+    <string name="sort_date_down">Date down</string>
+    <string name="sort_date_up">Date up</string>
+    <string name="sort_z_a">Z-A</string>
+    <string name="toastMessageIfBackPressed">Натисніть ще раз аби вийти з додатку</string>
+    <string name="yes">ТАК</string>
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
     </style>
     <style name="Base.TextAppearance.AppCompat" parent="android:TextAppearance">
         <item name="android:textColor">?android:textColorPrimary</item>

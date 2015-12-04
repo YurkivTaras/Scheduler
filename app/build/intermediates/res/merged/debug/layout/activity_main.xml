@@ -1,36 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.Android.com/apk/res-auto"
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar"
+        android:id="@+id/toolbarForMainActivity"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/toolBar"
-        app:contentInsetEnd="0dp"
-        app:contentInsetStart="0dp" />
+        android:background="@color/colorPrimary">
 
-    <Button
-        android:id="@+id/addTask"
+        <Spinner
+            android:id="@+id/spinner_nav"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="end|right"
+            android:visibility="invisible" />
+    </android.support.v7.widget.Toolbar>
+
+
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:fab="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:padding="@dimen/addBtn_padding"
-        android:text="@string/addTask"
-        android:textSize="@dimen/addBtn_txtSize" />
-    <TextView
-        android:id="@+id/emptyList"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:text="@string/emptyList"
-        android:textSize="@dimen/emptyListTitle" />
-    <ListView
-        android:id="@+id/listView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@id/addTask"
-        android:layout_below="@+id/toolbar" />
-</RelativeLayout>
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/emptyList"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="@string/emptyList"
+            android:textSize="@dimen/emptyListTitle" />
+
+        <ListView
+            android:id="@+id/listView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+
+    </FrameLayout>
+
+</LinearLayout>
+
+<!--
+<com.melnykov.fab.FloatingActionButton
+android:id="@+id/fab"
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:layout_gravity="bottom|right"
+android:layout_margin="16dp"
+android:src="@drawable/ic_action_content_new"
+fab:fab_colorNormal="@color/primary"
+fab:fab_colorPressed="@color/primary_pressed"
+fab:fab_colorRipple="@color/ripple" />-->
