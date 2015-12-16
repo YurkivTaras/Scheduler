@@ -4,9 +4,9 @@
     <string name="app_name">Scheduler</string>
     <string name="saveButton">Зберегти</string>
     <string name="exitButton">Вихід</string>
-    <string name="nameEditText">Назва:</string>
+    <string name="nameEditText">Назва</string>
     <string name="generateTask">Згенерувати завдання</string>
-    <string name="commentEditText">Коментар:</string>
+    <string name="commentEditText">Коментар</string>
     <string name="emptyList">Список завдань пустий</string>
     <string name="mainToolbarTitle">Поточні завдання</string>
     <string name="addScheduleToolbarTitleAddTask">Додати завдання</string>
@@ -31,6 +31,14 @@
     <string name="backgroundForStartedTask">Фон розпочатого завдання</string>
     <string name="backgroundForNotCompletedTask">Фон завершеного завдання</string>
     <string name="resetColors">Відновити стандартні кольори</string>
+    <string name="errTitle2">Назва завдання повинна містити не менше 5 символів</string>
+    <string name="edit">Edit</string>
+    <string name="reset_task">Reset task</string>
+    <string name="restore_complete">Restore complete task</string>
+    <string name="finish">Finish</string>
+    <string name="start">Start</string>
+    <string name="max_time_for_task">Максимальний час виконання завдання</string>
+    <string name="error_edit_txt_for_maxRuntime">Будь ласка, вкажіть максимальний час виконання</string>
 
     <string-array name="spinner_items">
         <item>A-Z</item>

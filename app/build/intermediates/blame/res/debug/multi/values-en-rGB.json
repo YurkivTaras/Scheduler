@@ -11,13 +11,13 @@
                     "endOffset": 154
                 },
                 "from": {
-                    "file": "D:\\Android\\AndroidStudioWorkspace\\Scheduler\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-en-rGB\\values.xml",
+                    "file": "D:\\Android\\AndroidStudioWorkspace\\Scheduler\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\22.2.0\\res\\values-en-rGB\\values-en-rGB.xml",
                     "position": {
-                        "startLine": 3,
+                        "startLine": 4,
                         "startColumn": 4,
-                        "startOffset": 56,
+                        "startOffset": 295,
                         "endColumn": 103,
-                        "endOffset": 155
+                        "endOffset": 394
                     }
                 }
             },
@@ -26,17 +26,17 @@
                     "startLine": 3,
                     "startColumn": 4,
                     "startOffset": 159,
-                    "endColumn": 107,
-                    "endOffset": 262
+                    "endColumn": 99,
+                    "endOffset": 254
                 },
                 "from": {
-                    "file": "D:\\Android\\AndroidStudioWorkspace\\Scheduler\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-en-rGB\\values.xml",
+                    "file": "D:\\Android\\AndroidStudioWorkspace\\Scheduler\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\22.2.0\\res\\values-en-rGB\\values-en-rGB.xml",
                     "position": {
-                        "startLine": 4,
+                        "startLine": 5,
                         "startColumn": 4,
-                        "startOffset": 160,
-                        "endColumn": 107,
-                        "endOffset": 263
+                        "startOffset": 399,
+                        "endColumn": 99,
+                        "endOffset": 494
                     }
                 }
             },
@@ -44,18 +44,18 @@
                 "to": {
                     "startLine": 4,
                     "startColumn": 4,
-                    "startOffset": 267,
-                    "endColumn": 122,
-                    "endOffset": 385
+                    "startOffset": 259,
+                    "endColumn": 107,
+                    "endOffset": 362
                 },
                 "from": {
-                    "file": "D:\\Android\\AndroidStudioWorkspace\\Scheduler\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-en-rGB\\values.xml",
+                    "file": "D:\\Android\\AndroidStudioWorkspace\\Scheduler\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\22.2.0\\res\\values-en-rGB\\values-en-rGB.xml",
                     "position": {
-                        "startLine": 5,
+                        "startLine": 6,
                         "startColumn": 4,
-                        "startOffset": 268,
-                        "endColumn": 122,
-                        "endOffset": 386
+                        "startOffset": 499,
+                        "endColumn": 107,
+                        "endOffset": 602
                     }
                 }
             },
@@ -63,18 +63,18 @@
                 "to": {
                     "startLine": 5,
                     "startColumn": 4,
-                    "startOffset": 390,
-                    "endColumn": 99,
-                    "endOffset": 485
+                    "startOffset": 367,
+                    "endColumn": 87,
+                    "endOffset": 450
                 },
                 "from": {
-                    "file": "D:\\Android\\AndroidStudioWorkspace\\Scheduler\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-en-rGB\\values.xml",
+                    "file": "D:\\Android\\AndroidStudioWorkspace\\Scheduler\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\22.2.0\\res\\values-en-rGB\\values-en-rGB.xml",
                     "position": {
-                        "startLine": 6,
+                        "startLine": 7,
                         "startColumn": 4,
-                        "startOffset": 391,
-                        "endColumn": 99,
-                        "endOffset": 486
+                        "startOffset": 607,
+                        "endColumn": 87,
+                        "endOffset": 690
                     }
                 }
             },
@@ -82,18 +82,18 @@
                 "to": {
                     "startLine": 6,
                     "startColumn": 4,
-                    "startOffset": 490,
-                    "endColumn": 107,
-                    "endOffset": 593
+                    "startOffset": 455,
+                    "endColumn": 99,
+                    "endOffset": 550
                 },
                 "from": {
-                    "file": "D:\\Android\\AndroidStudioWorkspace\\Scheduler\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-en-rGB\\values.xml",
+                    "file": "D:\\Android\\AndroidStudioWorkspace\\Scheduler\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\22.2.0\\res\\values-en-rGB\\values-en-rGB.xml",
                     "position": {
-                        "startLine": 7,
+                        "startLine": 8,
                         "startColumn": 4,
-                        "startOffset": 491,
-                        "endColumn": 107,
-                        "endOffset": 594
+                        "startOffset": 695,
+                        "endColumn": 99,
+                        "endOffset": 790
                     }
                 }
             },
@@ -101,18 +101,18 @@
                 "to": {
                     "startLine": 7,
                     "startColumn": 4,
-                    "startOffset": 598,
-                    "endColumn": 83,
-                    "endOffset": 677
+                    "startOffset": 555,
+                    "endColumn": 114,
+                    "endOffset": 665
                 },
                 "from": {
-                    "file": "D:\\Android\\AndroidStudioWorkspace\\Scheduler\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-en-rGB\\values.xml",
+                    "file": "D:\\Android\\AndroidStudioWorkspace\\Scheduler\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\22.2.0\\res\\values-en-rGB\\values-en-rGB.xml",
                     "position": {
-                        "startLine": 8,
+                        "startLine": 9,
                         "startColumn": 4,
-                        "startOffset": 599,
-                        "endColumn": 83,
-                        "endOffset": 678
+                        "startOffset": 795,
+                        "endColumn": 114,
+                        "endOffset": 905
                     }
                 }
             },
@@ -120,18 +120,18 @@
                 "to": {
                     "startLine": 8,
                     "startColumn": 4,
-                    "startOffset": 682,
-                    "endColumn": 99,
-                    "endOffset": 777
+                    "startOffset": 670,
+                    "endColumn": 102,
+                    "endOffset": 768
                 },
                 "from": {
-                    "file": "D:\\Android\\AndroidStudioWorkspace\\Scheduler\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-en-rGB\\values.xml",
+                    "file": "D:\\Android\\AndroidStudioWorkspace\\Scheduler\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\22.2.0\\res\\values-en-rGB\\values-en-rGB.xml",
                     "position": {
-                        "startLine": 9,
+                        "startLine": 10,
                         "startColumn": 4,
-                        "startOffset": 683,
-                        "endColumn": 99,
-                        "endOffset": 778
+                        "startOffset": 910,
+                        "endColumn": 102,
+                        "endOffset": 1008
                     }
                 }
             },
@@ -139,18 +139,18 @@
                 "to": {
                     "startLine": 9,
                     "startColumn": 4,
-                    "startOffset": 782,
-                    "endColumn": 114,
-                    "endOffset": 892
+                    "startOffset": 773,
+                    "endColumn": 103,
+                    "endOffset": 872
                 },
                 "from": {
-                    "file": "D:\\Android\\AndroidStudioWorkspace\\Scheduler\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-en-rGB\\values.xml",
+                    "file": "D:\\Android\\AndroidStudioWorkspace\\Scheduler\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\22.2.0\\res\\values-en-rGB\\values-en-rGB.xml",
                     "position": {
-                        "startLine": 10,
+                        "startLine": 11,
                         "startColumn": 4,
-                        "startOffset": 783,
-                        "endColumn": 114,
-                        "endOffset": 893
+                        "startOffset": 1013,
+                        "endColumn": 103,
+                        "endOffset": 1112
                     }
                 }
             },
@@ -158,18 +158,18 @@
                 "to": {
                     "startLine": 10,
                     "startColumn": 4,
-                    "startOffset": 897,
-                    "endColumn": 102,
-                    "endOffset": 995
+                    "startOffset": 877,
+                    "endColumn": 98,
+                    "endOffset": 971
                 },
                 "from": {
-                    "file": "D:\\Android\\AndroidStudioWorkspace\\Scheduler\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-en-rGB\\values.xml",
+                    "file": "D:\\Android\\AndroidStudioWorkspace\\Scheduler\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\22.2.0\\res\\values-en-rGB\\values-en-rGB.xml",
                     "position": {
-                        "startLine": 11,
+                        "startLine": 12,
                         "startColumn": 4,
-                        "startOffset": 898,
-                        "endColumn": 102,
-                        "endOffset": 996
+                        "startOffset": 1117,
+                        "endColumn": 98,
+                        "endOffset": 1211
                     }
                 }
             },
@@ -177,18 +177,18 @@
                 "to": {
                     "startLine": 11,
                     "startColumn": 4,
-                    "startOffset": 1000,
-                    "endColumn": 103,
-                    "endOffset": 1099
+                    "startOffset": 976,
+                    "endColumn": 104,
+                    "endOffset": 1076
                 },
                 "from": {
-                    "file": "D:\\Android\\AndroidStudioWorkspace\\Scheduler\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-en-rGB\\values.xml",
+                    "file": "D:\\Android\\AndroidStudioWorkspace\\Scheduler\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\22.2.0\\res\\values-en-rGB\\values-en-rGB.xml",
                     "position": {
-                        "startLine": 12,
+                        "startLine": 13,
                         "startColumn": 4,
-                        "startOffset": 1001,
-                        "endColumn": 103,
-                        "endOffset": 1100
+                        "startOffset": 1216,
+                        "endColumn": 104,
+                        "endOffset": 1316
                     }
                 }
             },
@@ -196,18 +196,18 @@
                 "to": {
                     "startLine": 12,
                     "startColumn": 4,
-                    "startOffset": 1104,
-                    "endColumn": 98,
-                    "endOffset": 1198
+                    "startOffset": 1081,
+                    "endColumn": 102,
+                    "endOffset": 1179
                 },
                 "from": {
-                    "file": "D:\\Android\\AndroidStudioWorkspace\\Scheduler\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-en-rGB\\values.xml",
+                    "file": "D:\\Android\\AndroidStudioWorkspace\\Scheduler\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\22.2.0\\res\\values-en-rGB\\values-en-rGB.xml",
                     "position": {
-                        "startLine": 13,
+                        "startLine": 14,
                         "startColumn": 4,
-                        "startOffset": 1105,
-                        "endColumn": 98,
-                        "endOffset": 1199
+                        "startOffset": 1321,
+                        "endColumn": 102,
+                        "endOffset": 1419
                     }
                 }
             },
@@ -215,18 +215,18 @@
                 "to": {
                     "startLine": 13,
                     "startColumn": 4,
-                    "startOffset": 1203,
-                    "endColumn": 104,
-                    "endOffset": 1303
+                    "startOffset": 1184,
+                    "endColumn": 103,
+                    "endOffset": 1283
                 },
                 "from": {
-                    "file": "D:\\Android\\AndroidStudioWorkspace\\Scheduler\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-en-rGB\\values.xml",
+                    "file": "D:\\Android\\AndroidStudioWorkspace\\Scheduler\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\22.2.0\\res\\values-en-rGB\\values-en-rGB.xml",
                     "position": {
-                        "startLine": 14,
+                        "startLine": 15,
                         "startColumn": 4,
-                        "startOffset": 1204,
-                        "endColumn": 104,
-                        "endOffset": 1304
+                        "startOffset": 1424,
+                        "endColumn": 103,
+                        "endOffset": 1523
                     }
                 }
             },
@@ -234,56 +234,18 @@
                 "to": {
                     "startLine": 14,
                     "startColumn": 4,
-                    "startOffset": 1308,
-                    "endColumn": 102,
-                    "endOffset": 1406
+                    "startOffset": 1288,
+                    "endColumn": 118,
+                    "endOffset": 1402
                 },
                 "from": {
-                    "file": "D:\\Android\\AndroidStudioWorkspace\\Scheduler\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-en-rGB\\values.xml",
-                    "position": {
-                        "startLine": 15,
-                        "startColumn": 4,
-                        "startOffset": 1309,
-                        "endColumn": 102,
-                        "endOffset": 1407
-                    }
-                }
-            },
-            {
-                "to": {
-                    "startLine": 15,
-                    "startColumn": 4,
-                    "startOffset": 1411,
-                    "endColumn": 103,
-                    "endOffset": 1510
-                },
-                "from": {
-                    "file": "D:\\Android\\AndroidStudioWorkspace\\Scheduler\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-en-rGB\\values.xml",
+                    "file": "D:\\Android\\AndroidStudioWorkspace\\Scheduler\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\22.2.0\\res\\values-en-rGB\\values-en-rGB.xml",
                     "position": {
                         "startLine": 16,
                         "startColumn": 4,
-                        "startOffset": 1412,
-                        "endColumn": 103,
-                        "endOffset": 1511
-                    }
-                }
-            },
-            {
-                "to": {
-                    "startLine": 16,
-                    "startColumn": 4,
-                    "startOffset": 1515,
-                    "endColumn": 118,
-                    "endOffset": 1629
-                },
-                "from": {
-                    "file": "D:\\Android\\AndroidStudioWorkspace\\Scheduler\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-en-rGB\\values.xml",
-                    "position": {
-                        "startLine": 17,
-                        "startColumn": 4,
-                        "startOffset": 1516,
+                        "startOffset": 1528,
                         "endColumn": 118,
-                        "endOffset": 1630
+                        "endOffset": 1642
                     }
                 }
             }

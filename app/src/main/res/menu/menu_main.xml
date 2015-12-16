@@ -23,12 +23,7 @@
         android:orderInCategory="300"
         android:title="@string/action_generate"
         app:showAsAction="never" />
-    <item
-        android:id="@+id/action_add_task"
-        android:icon="@drawable/ic_add_circle_black_24dp"
-        android:orderInCategory="200"
-        android:title="@string/addScheduleToolbarTitleAddTask"
-        app:showAsAction="ifRoom" />
+
     <item
         android:id="@+id/action_sort"
         android:icon="@drawable/ic_swap_vert_black"

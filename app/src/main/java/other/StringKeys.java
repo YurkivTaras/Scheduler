@@ -16,5 +16,7 @@ public class StringKeys {
     public static final String COMPARATOR_DATE_UP = "comparatorDateUp";
     public static final String COMPARATOR_DATE_DOWN = "comparatorDateDown";
     public static final String SPINNER_POS = "spinnerPos";
-
+    public static final String MAX_RUNTIME_FOR_TASK = "maxRuntimeForTask";
+    public static final String ARRAY_OF_TASKS = "ArrayOfTasks";
+    public static final String JSON_PREFERENCES_FOR_TASKS = "listOfTasks";
 }

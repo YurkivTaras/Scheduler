@@ -10,23 +10,15 @@ public class Task implements Parcelable {
     private String mTitle;
     private String mComment;
     private Date mDateStart;
-
     private Date mDateEnd;
+    private Date mDateStop;
+
     private int mSpentHours;
     private int mSpentMinute;
 
     public Task(String title, String comment) {
         mTitle = title;
         mComment = comment;
-    }
-
-    public Task(String title, String comment, Date dateStart, Date dateEnd, int spentHours, int spentMinute) {
-        mTitle = title;
-        mComment = comment;
-        mDateStart = dateStart;
-        mDateEnd = dateEnd;
-        mSpentHours = spentHours;
-        mSpentMinute = spentMinute;
     }
 
     public Task(Parcel source) {
@@ -38,10 +30,13 @@ public class Task implements Parcelable {
         //відновлення Date об`єктів з використанням конструктора з long параметром
         long dataStart = source.readLong();
         long dataEnd = source.readLong();
+        long dataStop = source.readLong();
         if (dataStart != -1) {
             mDateStart = new Date(dataStart);
             if (dataEnd != -1)
                 mDateEnd = new Date(dataEnd);
+            if (dataStop != -1)
+                mDateStop = new Date(dataStop);
         }
     }
 
@@ -116,6 +111,15 @@ public class Task implements Parcelable {
         mDateEnd = dateEnd;
     }
 
+    public Date getDateStop() {
+        return mDateStop;
+    }
+
+    public void setDateStop(Date dateStop) {
+        mDateStop = dateStop;
+    }
+
+
     public int getSpentHours() {
         return mSpentHours;
     }
@@ -139,7 +143,9 @@ public class Task implements Parcelable {
         //запис в parcel long представлення об`єкту Date
         dest.writeLong(mDateStart != null ? mDateStart.getTime() : -1);
         dest.writeLong(mDateEnd != null ? mDateEnd.getTime() : -1);
+        dest.writeLong(mDateStop != null ? mDateStop.getTime() : -1);
     }
+
 
     public static final Parcelable.Creator<Task> CREATOR = new Parcelable.Creator<Task>() {
         @Override

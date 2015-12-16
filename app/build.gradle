@@ -19,9 +19,17 @@ android {
 }
 
 dependencies {
-    /*compile 'com.melnykov:floatingactionbutton:1.3.0'*/
+    //матеріал діалог(alertDialog) на старих версіях
+    compile 'me.drakeet.materialdialog:library:1.2.8'
+    compile "com.daimajia.swipelayout:library:1.2.0@aar"
+    //плаваюча кнопка
+    compile 'com.melnykov:floatingactionbutton:1.3.0'
+    compile 'com.android.support:design:22.2.0'
+    compile 'com.android.support:recyclerview-v7:23.1.1'
+    //color picker
     compile 'com.github.yukuku:ambilwarna:2.0.1'
+    //GSON
     compile 'com.google.code.gson:gson:2.2.4'
-    compile 'com.android.support:appcompat-v7:21.0.+'
+    compile 'com.android.support:appcompat-v7:22.0.+'
     compile 'com.android.support:support-v4:22.2.1'
 }

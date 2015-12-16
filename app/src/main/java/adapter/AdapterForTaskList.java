@@ -46,7 +46,7 @@ public class AdapterForTaskList extends BaseAdapter {
         ViewHolder viewHolder;
 
         if (convertView == null) {
-            convertView = mLayoutInflater.inflate(R.layout.list_task_item, parent, false);
+            convertView = mLayoutInflater.inflate(R.layout.row_list_task, parent, false);
             viewHolder = new ViewHolder();
             viewHolder.taskTitle = (TextView) convertView.findViewById(R.id.txtListTitle);
             viewHolder.taskComment = (TextView) convertView.findViewById(R.id.txtListComment);

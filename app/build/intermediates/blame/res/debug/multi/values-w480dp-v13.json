@@ -11,13 +11,13 @@
                     "endOffset": 112
                 },
                 "from": {
-                    "file": "D:\\Android\\AndroidStudioWorkspace\\Scheduler\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-w480dp\\values.xml",
+                    "file": "D:\\Android\\AndroidStudioWorkspace\\Scheduler\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\22.2.0\\res\\values-w480dp\\values-w480dp.xml",
                     "position": {
-                        "startLine": 3,
+                        "startLine": 4,
                         "startColumn": 4,
-                        "startOffset": 56,
+                        "startOffset": 293,
                         "endColumn": 61,
-                        "endOffset": 113
+                        "endOffset": 350
                     }
                 }
             },
@@ -30,13 +30,13 @@
                     "endOffset": 184
                 },
                 "from": {
-                    "file": "D:\\Android\\AndroidStudioWorkspace\\Scheduler\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-w480dp\\values.xml",
+                    "file": "D:\\Android\\AndroidStudioWorkspace\\Scheduler\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\22.2.0\\res\\values-w480dp\\values-w480dp.xml",
                     "position": {
-                        "startLine": 4,
+                        "startLine": 7,
                         "startColumn": 4,
-                        "startOffset": 118,
+                        "startOffset": 594,
                         "endColumn": 71,
-                        "endOffset": 185
+                        "endOffset": 661
                     }
                 }
             }

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/gradient_main_activity"
     android:orientation="vertical">
 
     <android.support.v7.widget.Toolbar
@@ -25,32 +25,23 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/emptyList"
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="center"
-            android:text="@string/emptyList"
-            android:textSize="@dimen/emptyListTitle" />
+            android:scrollbars="vertical" />
 
-        <ListView
-            android:id="@+id/listView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+        <com.melnykov.fab.FloatingActionButton
+            android:id="@+id/fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|right"
+            android:layout_marginBottom="@dimen/marginBottomForFloatBtn"
+            android:layout_marginRight="@dimen/marginRightForFloatBtn"
 
-
+            android:src="@drawable/float_btn_add"
+            fab:fab_colorNormal="@color/fab_colorNormal"
+            fab:fab_colorPressed="@color/fab_colorPressed"
+            fab:fab_colorRipple="@color/fab_colorRipple" />
     </FrameLayout>
-
 </LinearLayout>
-
-<!--
-<com.melnykov.fab.FloatingActionButton
-android:id="@+id/fab"
-android:layout_width="wrap_content"
-android:layout_height="wrap_content"
-android:layout_gravity="bottom|right"
-android:layout_margin="16dp"
-android:src="@drawable/ic_action_content_new"
-fab:fab_colorNormal="@color/primary"
-fab:fab_colorPressed="@color/primary_pressed"
-fab:fab_colorRipple="@color/ripple" />-->

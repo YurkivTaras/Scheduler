@@ -11,13 +11,13 @@
                     "endOffset": 169
                 },
                 "from": {
-                    "file": "D:\\Android\\AndroidStudioWorkspace\\Scheduler\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-ml-rIN\\values.xml",
+                    "file": "D:\\Android\\AndroidStudioWorkspace\\Scheduler\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\22.2.0\\res\\values-ml-rIN\\values-ml-rIN.xml",
                     "position": {
-                        "startLine": 3,
+                        "startLine": 4,
                         "startColumn": 4,
-                        "startOffset": 56,
+                        "startOffset": 295,
                         "endColumn": 118,
-                        "endOffset": 170
+                        "endOffset": 409
                     }
                 }
             },
@@ -26,17 +26,17 @@
                     "startLine": 3,
                     "startColumn": 4,
                     "startOffset": 174,
-                    "endColumn": 107,
-                    "endOffset": 277
+                    "endColumn": 117,
+                    "endOffset": 287
                 },
                 "from": {
-                    "file": "D:\\Android\\AndroidStudioWorkspace\\Scheduler\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-ml-rIN\\values.xml",
+                    "file": "D:\\Android\\AndroidStudioWorkspace\\Scheduler\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\22.2.0\\res\\values-ml-rIN\\values-ml-rIN.xml",
                     "position": {
-                        "startLine": 4,
+                        "startLine": 5,
                         "startColumn": 4,
-                        "startOffset": 175,
-                        "endColumn": 107,
-                        "endOffset": 278
+                        "startOffset": 414,
+                        "endColumn": 117,
+                        "endOffset": 527
                     }
                 }
             },
@@ -44,18 +44,18 @@
                 "to": {
                     "startLine": 4,
                     "startColumn": 4,
-                    "startOffset": 282,
-                    "endColumn": 122,
-                    "endOffset": 400
+                    "startOffset": 292,
+                    "endColumn": 115,
+                    "endOffset": 403
                 },
                 "from": {
-                    "file": "D:\\Android\\AndroidStudioWorkspace\\Scheduler\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-ml-rIN\\values.xml",
+                    "file": "D:\\Android\\AndroidStudioWorkspace\\Scheduler\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\22.2.0\\res\\values-ml-rIN\\values-ml-rIN.xml",
                     "position": {
-                        "startLine": 5,
+                        "startLine": 6,
                         "startColumn": 4,
-                        "startOffset": 283,
-                        "endColumn": 122,
-                        "endOffset": 401
+                        "startOffset": 532,
+                        "endColumn": 115,
+                        "endOffset": 643
                     }
                 }
             },
@@ -63,18 +63,18 @@
                 "to": {
                     "startLine": 5,
                     "startColumn": 4,
-                    "startOffset": 405,
-                    "endColumn": 117,
-                    "endOffset": 518
+                    "startOffset": 408,
+                    "endColumn": 92,
+                    "endOffset": 496
                 },
                 "from": {
-                    "file": "D:\\Android\\AndroidStudioWorkspace\\Scheduler\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-ml-rIN\\values.xml",
+                    "file": "D:\\Android\\AndroidStudioWorkspace\\Scheduler\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\22.2.0\\res\\values-ml-rIN\\values-ml-rIN.xml",
                     "position": {
-                        "startLine": 6,
+                        "startLine": 7,
                         "startColumn": 4,
-                        "startOffset": 406,
-                        "endColumn": 117,
-                        "endOffset": 519
+                        "startOffset": 648,
+                        "endColumn": 92,
+                        "endOffset": 736
                     }
                 }
             },
@@ -82,18 +82,18 @@
                 "to": {
                     "startLine": 6,
                     "startColumn": 4,
-                    "startOffset": 523,
-                    "endColumn": 115,
-                    "endOffset": 634
+                    "startOffset": 501,
+                    "endColumn": 104,
+                    "endOffset": 601
                 },
                 "from": {
-                    "file": "D:\\Android\\AndroidStudioWorkspace\\Scheduler\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-ml-rIN\\values.xml",
+                    "file": "D:\\Android\\AndroidStudioWorkspace\\Scheduler\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\22.2.0\\res\\values-ml-rIN\\values-ml-rIN.xml",
                     "position": {
-                        "startLine": 7,
+                        "startLine": 8,
                         "startColumn": 4,
-                        "startOffset": 524,
-                        "endColumn": 115,
-                        "endOffset": 635
+                        "startOffset": 741,
+                        "endColumn": 104,
+                        "endOffset": 841
                     }
                 }
             },
@@ -101,18 +101,18 @@
                 "to": {
                     "startLine": 7,
                     "startColumn": 4,
-                    "startOffset": 639,
-                    "endColumn": 92,
-                    "endOffset": 727
+                    "startOffset": 606,
+                    "endColumn": 131,
+                    "endOffset": 733
                 },
                 "from": {
-                    "file": "D:\\Android\\AndroidStudioWorkspace\\Scheduler\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-ml-rIN\\values.xml",
+                    "file": "D:\\Android\\AndroidStudioWorkspace\\Scheduler\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\22.2.0\\res\\values-ml-rIN\\values-ml-rIN.xml",
                     "position": {
-                        "startLine": 8,
+                        "startLine": 9,
                         "startColumn": 4,
-                        "startOffset": 640,
-                        "endColumn": 92,
-                        "endOffset": 728
+                        "startOffset": 846,
+                        "endColumn": 131,
+                        "endOffset": 973
                     }
                 }
             },
@@ -120,18 +120,18 @@
                 "to": {
                     "startLine": 8,
                     "startColumn": 4,
-                    "startOffset": 732,
-                    "endColumn": 104,
-                    "endOffset": 832
+                    "startOffset": 738,
+                    "endColumn": 110,
+                    "endOffset": 844
                 },
                 "from": {
-                    "file": "D:\\Android\\AndroidStudioWorkspace\\Scheduler\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-ml-rIN\\values.xml",
+                    "file": "D:\\Android\\AndroidStudioWorkspace\\Scheduler\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\22.2.0\\res\\values-ml-rIN\\values-ml-rIN.xml",
                     "position": {
-                        "startLine": 9,
+                        "startLine": 10,
                         "startColumn": 4,
-                        "startOffset": 733,
-                        "endColumn": 104,
-                        "endOffset": 833
+                        "startOffset": 978,
+                        "endColumn": 110,
+                        "endOffset": 1084
                     }
                 }
             },
@@ -139,18 +139,18 @@
                 "to": {
                     "startLine": 9,
                     "startColumn": 4,
-                    "startOffset": 837,
-                    "endColumn": 131,
-                    "endOffset": 964
+                    "startOffset": 849,
+                    "endColumn": 105,
+                    "endOffset": 950
                 },
                 "from": {
-                    "file": "D:\\Android\\AndroidStudioWorkspace\\Scheduler\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-ml-rIN\\values.xml",
+                    "file": "D:\\Android\\AndroidStudioWorkspace\\Scheduler\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\22.2.0\\res\\values-ml-rIN\\values-ml-rIN.xml",
                     "position": {
-                        "startLine": 10,
+                        "startLine": 11,
                         "startColumn": 4,
-                        "startOffset": 838,
-                        "endColumn": 131,
-                        "endOffset": 965
+                        "startOffset": 1089,
+                        "endColumn": 105,
+                        "endOffset": 1190
                     }
                 }
             },
@@ -158,18 +158,18 @@
                 "to": {
                     "startLine": 10,
                     "startColumn": 4,
-                    "startOffset": 969,
-                    "endColumn": 110,
-                    "endOffset": 1075
+                    "startOffset": 955,
+                    "endColumn": 97,
+                    "endOffset": 1048
                 },
                 "from": {
-                    "file": "D:\\Android\\AndroidStudioWorkspace\\Scheduler\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-ml-rIN\\values.xml",
+                    "file": "D:\\Android\\AndroidStudioWorkspace\\Scheduler\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\22.2.0\\res\\values-ml-rIN\\values-ml-rIN.xml",
                     "position": {
-                        "startLine": 11,
+                        "startLine": 12,
                         "startColumn": 4,
-                        "startOffset": 970,
-                        "endColumn": 110,
-                        "endOffset": 1076
+                        "startOffset": 1195,
+                        "endColumn": 97,
+                        "endOffset": 1288
                     }
                 }
             },
@@ -177,18 +177,18 @@
                 "to": {
                     "startLine": 11,
                     "startColumn": 4,
-                    "startOffset": 1080,
-                    "endColumn": 105,
-                    "endOffset": 1181
+                    "startOffset": 1053,
+                    "endColumn": 113,
+                    "endOffset": 1162
                 },
                 "from": {
-                    "file": "D:\\Android\\AndroidStudioWorkspace\\Scheduler\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-ml-rIN\\values.xml",
+                    "file": "D:\\Android\\AndroidStudioWorkspace\\Scheduler\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\22.2.0\\res\\values-ml-rIN\\values-ml-rIN.xml",
                     "position": {
-                        "startLine": 12,
+                        "startLine": 13,
                         "startColumn": 4,
-                        "startOffset": 1081,
-                        "endColumn": 105,
-                        "endOffset": 1182
+                        "startOffset": 1293,
+                        "endColumn": 113,
+                        "endOffset": 1402
                     }
                 }
             },
@@ -196,18 +196,18 @@
                 "to": {
                     "startLine": 12,
                     "startColumn": 4,
-                    "startOffset": 1186,
-                    "endColumn": 97,
-                    "endOffset": 1279
+                    "startOffset": 1167,
+                    "endColumn": 103,
+                    "endOffset": 1266
                 },
                 "from": {
-                    "file": "D:\\Android\\AndroidStudioWorkspace\\Scheduler\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-ml-rIN\\values.xml",
+                    "file": "D:\\Android\\AndroidStudioWorkspace\\Scheduler\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\22.2.0\\res\\values-ml-rIN\\values-ml-rIN.xml",
                     "position": {
-                        "startLine": 13,
+                        "startLine": 14,
                         "startColumn": 4,
-                        "startOffset": 1187,
-                        "endColumn": 97,
-                        "endOffset": 1280
+                        "startOffset": 1407,
+                        "endColumn": 103,
+                        "endOffset": 1506
                     }
                 }
             },
@@ -215,18 +215,18 @@
                 "to": {
                     "startLine": 13,
                     "startColumn": 4,
-                    "startOffset": 1284,
-                    "endColumn": 113,
-                    "endOffset": 1393
+                    "startOffset": 1271,
+                    "endColumn": 110,
+                    "endOffset": 1377
                 },
                 "from": {
-                    "file": "D:\\Android\\AndroidStudioWorkspace\\Scheduler\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-ml-rIN\\values.xml",
+                    "file": "D:\\Android\\AndroidStudioWorkspace\\Scheduler\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\22.2.0\\res\\values-ml-rIN\\values-ml-rIN.xml",
                     "position": {
-                        "startLine": 14,
+                        "startLine": 15,
                         "startColumn": 4,
-                        "startOffset": 1285,
-                        "endColumn": 113,
-                        "endOffset": 1394
+                        "startOffset": 1511,
+                        "endColumn": 110,
+                        "endOffset": 1617
                     }
                 }
             },
@@ -234,56 +234,18 @@
                 "to": {
                     "startLine": 14,
                     "startColumn": 4,
-                    "startOffset": 1398,
-                    "endColumn": 103,
-                    "endOffset": 1497
+                    "startOffset": 1382,
+                    "endColumn": 127,
+                    "endOffset": 1505
                 },
                 "from": {
-                    "file": "D:\\Android\\AndroidStudioWorkspace\\Scheduler\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-ml-rIN\\values.xml",
-                    "position": {
-                        "startLine": 15,
-                        "startColumn": 4,
-                        "startOffset": 1399,
-                        "endColumn": 103,
-                        "endOffset": 1498
-                    }
-                }
-            },
-            {
-                "to": {
-                    "startLine": 15,
-                    "startColumn": 4,
-                    "startOffset": 1502,
-                    "endColumn": 110,
-                    "endOffset": 1608
-                },
-                "from": {
-                    "file": "D:\\Android\\AndroidStudioWorkspace\\Scheduler\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-ml-rIN\\values.xml",
+                    "file": "D:\\Android\\AndroidStudioWorkspace\\Scheduler\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\22.2.0\\res\\values-ml-rIN\\values-ml-rIN.xml",
                     "position": {
                         "startLine": 16,
                         "startColumn": 4,
-                        "startOffset": 1503,
-                        "endColumn": 110,
-                        "endOffset": 1609
-                    }
-                }
-            },
-            {
-                "to": {
-                    "startLine": 16,
-                    "startColumn": 4,
-                    "startOffset": 1613,
-                    "endColumn": 127,
-                    "endOffset": 1736
-                },
-                "from": {
-                    "file": "D:\\Android\\AndroidStudioWorkspace\\Scheduler\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\21.0.3\\res\\values-ml-rIN\\values.xml",
-                    "position": {
-                        "startLine": 17,
-                        "startColumn": 4,
-                        "startOffset": 1614,
+                        "startOffset": 1622,
                         "endColumn": 127,
-                        "endOffset": 1737
+                        "endOffset": 1745
                     }
                 }
             }
