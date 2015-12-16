@@ -69,6 +69,7 @@ public class AlarmManagerBroadcastReceiver extends BroadcastReceiver {
                 Log.d(LOG_ON_RECEIVE, (
                         "rizn [" + i + "]= " + (maxRuntime * 60000 - (currentDate.getTime() - task.getDateStart().getTime()))));
                 task.setDateEnd(currentDate);
+                task.calcTimeSpent();
                 ifWasChanged = true;
                 showNotification(context, task);
             } else if (task.getDateStop() != null && task.getDateStart() != null && task.getDateEnd() == null &&
@@ -76,6 +77,7 @@ public class AlarmManagerBroadcastReceiver extends BroadcastReceiver {
                 Log.d(LOG_ON_RECEIVE, (
                         "dataStop[" + i + "]= " + (maxRuntime * 60000 - (currentDate.getTime() - task.getDateStop().getTime()))));
                 task.setDateEnd(currentDate);
+                task.calcTimeSpent();
                 ifWasChanged = true;
                 showNotification(context, task);
             }
