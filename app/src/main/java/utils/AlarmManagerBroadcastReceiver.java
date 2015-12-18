@@ -101,12 +101,6 @@ public class AlarmManagerBroadcastReceiver extends BroadcastReceiver {
     public void setTimer(Context context, int maxRuntime, ArrayList<Task> tasks) {
         AlarmManager am = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
         Intent intent = new Intent(context, AlarmManagerBroadcastReceiver.class);
-        Bundle bundle = new Bundle();
-        bundle.putParcelableArrayList(StringKeys.ARRAY_OF_TASKS, tasks);
-        intent.putExtras(bundle);
-        intent.putExtra(StringKeys.MAX_RUNTIME_FOR_TASK, maxRuntime);
-
-        PendingIntent pi = PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
         long currentDate = new Date().getTime();
         long minStartDate = currentDate;
@@ -132,8 +126,19 @@ public class AlarmManagerBroadcastReceiver extends BroadcastReceiver {
         Log.d(LOG_ON_SET_TIMER, "maxRuntime= " + maxRuntime);
         Log.d(LOG_ON_SET_TIMER, "minStartDate= " + minStartDate);
         Log.d(LOG_ON_SET_TIMER, "currentDate= " + currentDate);
-        if (ifHaveNotCompletedTask)
+        if (ifHaveNotCompletedTask) {
+            Bundle bundle = new Bundle();
+            bundle.putParcelableArrayList(StringKeys.ARRAY_OF_TASKS, tasks);
+            intent.putExtras(bundle);
+            intent.putExtra(StringKeys.MAX_RUNTIME_FOR_TASK, maxRuntime);
+
+            PendingIntent pi = PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
             am.set(AlarmManager.RTC, (maxRuntime * 60000 + minStartDate) + 1, pi);
+        } else {
+            Log.d(LOG_ON_SET_TIMER, "=======cancelTimer=====");
+            PendingIntent pi = PendingIntent.getBroadcast(context, 0, intent, 0);
+            am.cancel(pi);
+        }
     }
 
     private void showNotification(Context context, Task task) {

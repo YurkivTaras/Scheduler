@@ -57,6 +57,5 @@ public class SplashActivity extends Activity {
 
     @Override
     public void onBackPressed() {
-
     }
 }

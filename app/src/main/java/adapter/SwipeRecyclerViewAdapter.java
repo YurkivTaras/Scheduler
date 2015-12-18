@@ -91,7 +91,7 @@ public class SwipeRecyclerViewAdapter extends RecyclerSwipeAdapter<SwipeRecycler
                             if (clickTask.getDateStart() == null) {
                                 clickTask.setDateStart(new Date());
                                 mMainActivity.sortTasks();
-                                mMainActivity.setTimer();
+                               //mMainActivity.setTimer();
                             }
                             break;
                         case R.id.btnFinish:
@@ -100,6 +100,7 @@ public class SwipeRecyclerViewAdapter extends RecyclerSwipeAdapter<SwipeRecycler
                                 clickTask.calcTimeSpent();
                                 notifyItemChanged(position);
                                 //Збереження змін в списку завдань
+                                mMainActivity.setTimer();
                                 mMainActivity.getTasksSaver().execute();
                             }
                             break;
