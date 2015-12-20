@@ -1,7 +1,6 @@
 package utils;
 
 
-import android.annotation.SuppressLint;
 import android.app.AlarmManager;
 import android.app.Notification;
 import android.app.PendingIntent;
@@ -9,17 +8,14 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationManagerCompat;
-import android.util.Log;
 
 import com.example.scheduler.R;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import com.y_taras.scheduler.activity.MainActivity;
 
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -33,60 +29,65 @@ public class AlarmManagerBroadcastReceiver extends BroadcastReceiver {
     private static final int NOTIFY_ID = 101;
 
 
-    @SuppressLint("LongLogTag")
     @Override
     public void onReceive(Context context, Intent intent) {
-        Gson GSON = new Gson();
-        SharedPreferences jSonSharedPreferences = context.getSharedPreferences(
-                StringKeys.JSON_PREFERENCES_FOR_TASKS, Context.MODE_PRIVATE);
+        SharedPreferences appSettings = context.getSharedPreferences(
+                StringKeys.APP_SETTINGS, Context.MODE_PRIVATE);
 
         Bundle extras = intent.getExtras();
-        Log.d(LOG_ON_RECEIVE, extras.getInt(StringKeys.MAX_RUNTIME_FOR_TASK) + "");
-
         ArrayList<Task> tasks = extras.getParcelableArrayList(StringKeys.ARRAY_OF_TASKS);
         int maxRuntime = extras.getInt(StringKeys.MAX_RUNTIME_FOR_TASK);
 
+        //у випадку, якщо отримано пустий інтент(при перезавантаженні телефона)
         if (tasks == null) {
-            Log.d(LOG_ON_RECEIVE, "task==null");
-            Type collectionType = new TypeToken<ArrayList<Task>>() {
-            }.getType();
+            maxRuntime = appSettings.getInt(StringKeys.MAX_RUNTIME_FOR_TASK, 60);
+            tasks = new ArrayList<>();
 
-            tasks = GSON.fromJson(jSonSharedPreferences.getString(StringKeys.JSON_PREFERENCES_FOR_TASKS, null), collectionType);
-            maxRuntime = jSonSharedPreferences.getInt(StringKeys.MAX_RUNTIME_FOR_TASK, 0);
+            DatabaseConnector databaseConnector = new DatabaseConnector(context);
+            databaseConnector.open();
+            Cursor cursor = databaseConnector.getCursorWithAllTasks();
+            if (cursor.moveToFirst()) {
+                int idColIndex = cursor.getColumnIndex(DatabaseConnector.TABLE_ID);
+                int titleColIndex = cursor.getColumnIndex(DatabaseConnector.COLUMN_TITLE);
+                int commentColIndex = cursor.getColumnIndex(DatabaseConnector.COLUMN_COMMENT);
+                int dateStartColIndex = cursor.getColumnIndex(DatabaseConnector.COLUMN_DATA_START);
+                int dateStopColIndex = cursor.getColumnIndex(DatabaseConnector.COLUMN_DATA_STOP);
+                int dateEndColIndex = cursor.getColumnIndex(DatabaseConnector.COLUMN_DATA_END);
+                do {
+                    long id = cursor.getLong(idColIndex);
+                    String title = cursor.getString(titleColIndex);
+                    String comment = cursor.getString(commentColIndex);
+                    long dateStart = cursor.getLong(dateStartColIndex);
+                    long dateStop = cursor.getLong(dateStopColIndex);
+                    long dateEnd = cursor.getLong(dateEndColIndex);
+                    tasks.add(new Task(id, title, comment, dateStart, dateStop, dateEnd));
+                } while (cursor.moveToNext());
+            }
+            cursor.close();
+            databaseConnector.close();
         }
-
-        Log.d(LOG_ON_RECEIVE, "maxRuntime =" + maxRuntime);
-        Log.d(LOG_ON_RECEIVE, "tasks.size()=" + tasks.size());
 
         Date currentDate = new Date();
         boolean ifWasChanged = false;
         for (int i = 0; i < tasks.size(); i++) {
             Task task = tasks.get(i);
-            if (task.getDateStart() != null)
-                Log.d(LOG_ON_RECEIVE, "task[" + i + "].getDateStart()!=null " + (currentDate.getTime() - task.getDateStart().getTime()));
-            if (task.getDateEnd() == null && task.getDateStart() != null &&
-                    (currentDate.getTime() - task.getDateStart().getTime()) >= maxRuntime * 60000 && task.getDateStop() == null) {
-                Log.d(LOG_ON_RECEIVE, (
-                        "rizn [" + i + "]= " + (maxRuntime * 60000 - (currentDate.getTime() - task.getDateStart().getTime()))));
-                task.setDateEnd(currentDate);
-                task.calcTimeSpent();
-                ifWasChanged = true;
-                showNotification(context, task);
-            } else if (task.getDateStop() != null && task.getDateStart() != null && task.getDateEnd() == null &&
-                    (currentDate.getTime() - task.getDateStop().getTime()) >= maxRuntime * 60000) {
-                Log.d(LOG_ON_RECEIVE, (
-                        "dataStop[" + i + "]= " + (maxRuntime * 60000 - (currentDate.getTime() - task.getDateStop().getTime()))));
-                task.setDateEnd(currentDate);
-                task.calcTimeSpent();
-                ifWasChanged = true;
-                showNotification(context, task);
+
+            if (task.getDateEnd() == null && task.getDateStart() != null) {
+                if (task.getDateStop() == null && (currentDate.getTime() - task.getDateStart().getTime()) >= maxRuntime * 60000) {
+                    task.setDateEnd(currentDate);
+                    DatabaseConnector.updateTask(task, context);
+                    ifWasChanged = true;
+                    showNotification(context, task);
+                } else if (task.getDateStop() != null &&
+                        (currentDate.getTime() - task.getDateStop().getTime()) >= maxRuntime * 60000) {
+                    task.setDateEnd(currentDate);
+                    DatabaseConnector.updateTask(task, context);
+                    ifWasChanged = true;
+                    showNotification(context, task);
+                }
             }
         }
         if (ifWasChanged) {
-            SharedPreferences.Editor editor = jSonSharedPreferences.edit();
-            editor.putString(StringKeys.JSON_PREFERENCES_FOR_TASKS, GSON.toJson(tasks));
-            editor.apply();
-
             Intent i = new Intent("broadCastName");
             Bundle bundle = new Bundle();
             bundle.putParcelableArrayList(StringKeys.ARRAY_OF_TASKS, tasks);
@@ -97,35 +98,24 @@ public class AlarmManagerBroadcastReceiver extends BroadcastReceiver {
     }
 
 
-    @SuppressLint("LongLogTag")
     public void setTimer(Context context, int maxRuntime, ArrayList<Task> tasks) {
         AlarmManager am = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
         Intent intent = new Intent(context, AlarmManagerBroadcastReceiver.class);
 
-        long currentDate = new Date().getTime();
-        long minStartDate = currentDate;
+        long minStartDate = new Date().getTime();
 
         boolean ifHaveNotCompletedTask = false;
-        int i = 0;
         for (Task task : tasks) {
-            i++;
             if (task.getDateEnd() == null && task.getDateStart() != null &&
                     minStartDate >= task.getDateStart().getTime()) {
                 ifHaveNotCompletedTask = true;
-                if (task.getDateStop() != null && minStartDate >= task.getDateStop().getTime()) {
+                if (task.getDateStop() != null && minStartDate >= task.getDateStop().getTime())
                     minStartDate = task.getDateStop().getTime();
-                    Log.d(LOG_ON_SET_TIMER, "minStartDate=dateStop[" + i + "]");
-                } else {
+                else
                     minStartDate = task.getDateStart().getTime();
-                    Log.d(LOG_ON_SET_TIMER, (
-                            "rizn [" + i + "]= " + (maxRuntime * 60000 - (currentDate - task.getDateStart().getTime()))));
-                }
             }
         }
-        Log.d(LOG_ON_SET_TIMER, "tasks.size()=" + tasks.size());
-        Log.d(LOG_ON_SET_TIMER, "maxRuntime= " + maxRuntime);
-        Log.d(LOG_ON_SET_TIMER, "minStartDate= " + minStartDate);
-        Log.d(LOG_ON_SET_TIMER, "currentDate= " + currentDate);
+
         if (ifHaveNotCompletedTask) {
             Bundle bundle = new Bundle();
             bundle.putParcelableArrayList(StringKeys.ARRAY_OF_TASKS, tasks);
@@ -133,9 +123,10 @@ public class AlarmManagerBroadcastReceiver extends BroadcastReceiver {
             intent.putExtra(StringKeys.MAX_RUNTIME_FOR_TASK, maxRuntime);
 
             PendingIntent pi = PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-            am.set(AlarmManager.RTC, (maxRuntime * 60000 + minStartDate) + 1, pi);
+            am.set(AlarmManager.RTC, (maxRuntime * 60000 + minStartDate), pi);
         } else {
-            Log.d(LOG_ON_SET_TIMER, "=======cancelTimer=====");
+            //якщо немає незавершених завдань відміняєм alarm,
+            // який міг бути раніше запущений з уже неактуальними даними
             PendingIntent pi = PendingIntent.getBroadcast(context, 0, intent, 0);
             am.cancel(pi);
         }
@@ -155,13 +146,12 @@ public class AlarmManagerBroadcastReceiver extends BroadcastReceiver {
                 .setSmallIcon(R.drawable.finish_task_icon)
                 .setContentTitle(context.getString(R.string.app_name))
                 .setAutoCancel(true)
-                .setContentText("Завдання " + task.getTitle() + " автоматично завершилось");
+                .setContentText(String.format(context.getString(R.string.notificationContentText), task.getTitle()));
 
         Notification notification = builder.build();
         //notification.defaults |= Notification.DEFAULT_SOUND;
         //notification.defaults |= Notification.DEFAULT_VIBRATE;
         NotificationManagerCompat notificationManager = NotificationManagerCompat.from(context);
         notificationManager.notify(NOTIFY_ID, notification);
-
     }
 }

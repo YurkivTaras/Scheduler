@@ -8,7 +8,7 @@
     <dimen name="comment_of_task_left_padding">10dp</dimen>
     <dimen name="listTitle_txtSize">20sp</dimen>
     <dimen name="listComment_txtSize">16sp</dimen>
-    <dimen name="listDate_txtSize">16sp</dimen>
+    <dimen name="listDate_txtSize">14sp</dimen>
     <dimen name="emptyListTitle">25sp</dimen>
     <dimen name="settingsActivityTxtWidth">200dp</dimen>
     <dimen name="settingsActivityTxtSize">20sp</dimen>

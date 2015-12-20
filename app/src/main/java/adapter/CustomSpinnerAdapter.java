@@ -36,7 +36,7 @@ public class CustomSpinnerAdapter extends ArrayAdapter<String> {
     public View getCustomView(int position, View convertView, ViewGroup parent) {
         View row = mInflater.inflate(R.layout.spinner_row, parent, false);
         TextView tvCategory = (TextView) row.findViewById(R.id.tvCategory);
-        tvCategory.setText(mMenuItems[position].toString());
+        tvCategory.setText(mMenuItems[position]);
         return row;
     }
 }

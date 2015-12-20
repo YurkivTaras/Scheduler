@@ -6,11 +6,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.database.Cursor;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -26,6 +29,7 @@ import com.melnykov.fab.FloatingActionButton;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.Random;
 
 import adapter.CustomSpinnerAdapter;
@@ -34,7 +38,7 @@ import me.drakeet.materialdialog.MaterialDialog;
 import other.StringKeys;
 import other.Task;
 import utils.AlarmManagerBroadcastReceiver;
-import utils.TasksLoader;
+import utils.DatabaseConnector;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -52,9 +56,6 @@ public class MainActivity extends AppCompatActivity {
     private int mCompletedTaskColor;
     private int mStartedTaskColor;
     private int mNotStartedTaskColor;
-
-    private TasksLoader mTasksReader;
-    private TasksLoader mTasksSaver;
 
     private FloatingActionButton floatBtn;
     private Spinner mSpinnerSort;
@@ -83,25 +84,27 @@ public class MainActivity extends AppCompatActivity {
             public void onReceive(Context context, Intent intent) {
                 Bundle b = intent.getExtras();
                 ArrayList<Task> tasks = b.getParcelableArrayList(StringKeys.ARRAY_OF_TASKS);
-                if (tasks == null || tasks.size() != mTasks.size()) {
-                    sortTasks();
+                if (tasks == null)
                     return;
-                }
-                //Log.d("======", "MainActivity tasks.size()=" + tasks.size());
-                for (int i = 0; i < mTasks.size(); i++) {
-                    Task taskOriginal = mTasks.get(i);
+
+                for (int i = 0; i < tasks.size(); i++) {
                     Task taskFromIntent = tasks.get(i);
-                    if (taskFromIntent.getDateEnd() != null && taskOriginal.getDateEnd() == null/* &&
-                            taskFromIntent.getDateStart().equals(taskOriginal.getDateStart()) &&
-                            taskFromIntent.getTitle().equals(taskOriginal.getTitle()) &&
-                            taskFromIntent.getComment().equals(taskOriginal.getComment())*/) {
-                        taskOriginal.setDateEnd(taskFromIntent.getDateEnd());
-                        taskOriginal.calcTimeSpent();
-                        mSwipeListAdapter.notifyItemChanged(i);
-                        //   Log.d("======", "MainActivity tasks[" + i + "] is modified");
+                    Date dateEndForTaskFormIntent = taskFromIntent.getDateEnd();
+                    if (dateEndForTaskFormIntent != null) {
+                        long id_taskFromIntent = taskFromIntent.getDatabase_ID();
+                        for (int j = 0; j < mTasks.size(); j++) {
+                            Task originalTask = mTasks.get(j);
+                            if (originalTask.getDatabase_ID() == id_taskFromIntent) {
+                                if (originalTask.getDateEnd() == null) {
+                                    originalTask.setDateEnd(dateEndForTaskFormIntent);
+                                    mSwipeListAdapter.notifyItemChanged(j);
+                                    //Log.d("======", "MainActivity tasks[" + i + "] is modified");
+                                }
+                                break;
+                            }
+                        }
                     }
                 }
-
             }
         };
         registerReceiver(broadcastReceiver, new IntentFilter("broadCastName"));
@@ -126,7 +129,7 @@ public class MainActivity extends AppCompatActivity {
         mToolbar.setTitle(R.string.mainToolbarTitle);
         setSupportActionBar(mToolbar);
         if (savedInstanceState == null)
-            mTasks = new ArrayList<Task>();
+            mTasks = new ArrayList<>();
         else {
             if (savedInstanceState.containsKey(StringKeys.ARRAY_OF_TASKS))
                 mTasks = savedInstanceState.getParcelableArrayList(StringKeys.ARRAY_OF_TASKS);
@@ -195,14 +198,13 @@ public class MainActivity extends AppCompatActivity {
                 mSwipeListAdapter.closeAllItems();
             }
         });
-        //ініціалізація класу для запису і читання збережених завдань
-        mTasksReader = TasksLoader.createReader(mTasks, this, mSwipeListAdapter);
-        mTasksSaver = TasksLoader.createSaver(mTasks, this);
 
-        //спроба загрузити таски збережені в SharedPreference
+        //ініціалізація класу для роботи з базою даних
+        //mDatabaseConnector = new DatabaseConnector(this);
         if (savedInstanceState == null)
-            mTasksReader.execute();
+            downloadTask();
         alarm = new AlarmManagerBroadcastReceiver();
+
         //ініціалізація плаваючої кнопки
         floatBtn = (FloatingActionButton) findViewById(R.id.fab);
         floatBtn.attachToRecyclerView(recyclerView);
@@ -218,7 +220,7 @@ public class MainActivity extends AppCompatActivity {
 
     //отримання збережених налаштувань
     private void getSettingsFromSharedPref() {
-        mAppSettings = getPreferences(MODE_PRIVATE);
+        mAppSettings = getSharedPreferences(StringKeys.APP_SETTINGS, MODE_PRIVATE);
         mNotStartedTaskColor = mAppSettings.getInt(
                 StringKeys.NOT_STARTED_TASK, getResources().getColor(R.color.not_started_task));
         mStartedTaskColor = mAppSettings.getInt(
@@ -226,9 +228,7 @@ public class MainActivity extends AppCompatActivity {
         mCompletedTaskColor = mAppSettings.getInt(
                 StringKeys.COMPLETED_TASK, getResources().getColor(R.color.completed_task));
         mSpinnerPos = mAppSettings.getInt(StringKeys.SPINNER_POS, 0);
-
-        SharedPreferences sharedPrefForTasks = getSharedPreferences(StringKeys.JSON_PREFERENCES_FOR_TASKS, MODE_PRIVATE);
-        mMaxRuntimeForTask = sharedPrefForTasks.getInt(StringKeys.MAX_RUNTIME_FOR_TASK, 60);
+        mMaxRuntimeForTask = mAppSettings.getInt(StringKeys.MAX_RUNTIME_FOR_TASK, 60);
         //отримання збереженого типу сортування
         String compId = mAppSettings.getString(StringKeys.COMPARATOR_TYPE, StringKeys.COMPARATOR_A_Z);
         switch (compId) {
@@ -250,19 +250,21 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode == Activity.RESULT_OK) {
-            String name = data.getStringExtra(StringKeys.TASK_TITLE);
+            String title = data.getStringExtra(StringKeys.TASK_TITLE);
             String comment = data.getStringExtra(StringKeys.TASK_COMMENT);
-            boolean ifWasChanges = false;
+
             switch (requestCode) {
                 case RequestCodeAddTask:
-                    mTasks.add(new Task(name, comment));
+                    Task newTask = new Task(title, comment);
+                    DatabaseConnector.addTask(newTask, this);
+                    mTasks.add(newTask);
                     sortTasks();
-                    ifWasChanges = true;
                     break;
                 case REQUEST_CODE_EDIT_TASK:
                     Task editTask = mTasks.get(data.getIntExtra(StringKeys.TASK_POSITION, -1));
-                    editTask.setTitle(name);
+                    editTask.setTitle(title);
                     editTask.setComment(comment);
+                    DatabaseConnector.updateTask(editTask, this);
                     sortTasks();
                     break;
                 case RequestCodeSettings:
@@ -271,46 +273,41 @@ public class MainActivity extends AppCompatActivity {
                     int completedTaskColor = data.getIntExtra(StringKeys.COMPLETED_TASK, -1);
                     int maxRuntimeForTask = data.getIntExtra(StringKeys.MAX_RUNTIME_FOR_TASK, -1);
                     SharedPreferences.Editor editor = mAppSettings.edit();
-                    boolean ifWasColorChanges = false;
+                    boolean ifWasChanges = false;
                     if (mNotStartedTaskColor != notStartedTaskColor) {
-                        ifWasColorChanges = true;
+                        ifWasChanges = true;
                         mNotStartedTaskColor = notStartedTaskColor;
                         editor.putInt(StringKeys.NOT_STARTED_TASK, mNotStartedTaskColor);
                         mSwipeListAdapter.setNotStartedTaskColor(mNotStartedTaskColor);
                     }
                     if (mStartedTaskColor != startedTaskColor) {
-                        ifWasColorChanges = true;
+                        ifWasChanges = true;
                         mStartedTaskColor = startedTaskColor;
                         editor.putInt(StringKeys.STARTED_TASK, mStartedTaskColor);
                         mSwipeListAdapter.setStartedTaskColor(mStartedTaskColor);
                     }
                     if (mCompletedTaskColor != completedTaskColor) {
-                        ifWasColorChanges = true;
+                        ifWasChanges = true;
                         mCompletedTaskColor = completedTaskColor;
                         editor.putInt(StringKeys.COMPLETED_TASK, mCompletedTaskColor);
                         mSwipeListAdapter.setCompletedTaskColor(mCompletedTaskColor);
                     }
+                    //оновлюєм список, якщо було змінено кольори
+                    if (ifWasChanges)
+                        mSwipeListAdapter.notifyDataSetChanged();
                     //якщо було змінено максимальний час виконання завдання
                     if (mMaxRuntimeForTask != maxRuntimeForTask) {
+                        ifWasChanges = true;
                         mMaxRuntimeForTask = maxRuntimeForTask;
-                        SharedPreferences jSonSharedPreferences = getSharedPreferences(
-                                StringKeys.JSON_PREFERENCES_FOR_TASKS, Context.MODE_PRIVATE);
-                        SharedPreferences.Editor editorForMaxRuntime = jSonSharedPreferences.edit();
-                        editorForMaxRuntime.putInt(StringKeys.MAX_RUNTIME_FOR_TASK, mMaxRuntimeForTask);
-                        editorForMaxRuntime.apply();
+                        editor.putInt(StringKeys.MAX_RUNTIME_FOR_TASK, mMaxRuntimeForTask);
                         //перезапускаєм таймер
                         setTimer();
                     }
-                    if (ifWasColorChanges) {
-                        ifWasChanges = true;
+                    //зберігаєм зміни в SharedPreferences, якщо такі були
+                    if (ifWasChanges)
                         editor.apply();
-                        mSwipeListAdapter.notifyDataSetChanged();
-                    }
                     break;
             }
-            //Збереження змін в списку завдань
-            if (ifWasChanges)
-                mTasksSaver.execute();
         }
     }
 
@@ -336,12 +333,17 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case R.id.action_generate:
                 Random random = new Random();
+                ArrayList<Task> tasks = new ArrayList<>();
                 for (int i = 0; i < 30; i++) {
-                    int randomNumb = random.nextInt(30);
-                    mTasks.add(new Task("Title" + randomNumb, "Comment" + randomNumb));
+                    int randomForTitle = random.nextInt(30);
+                    int randomForComment = random.nextInt(30);
+                    Task newTask = new Task("Title" + randomForTitle, "Comment" + randomForComment);
+                    tasks.add(newTask);
+                    mTasks.add(newTask);
                 }
+                DatabaseConnector.addAllTasks(tasks, this);
                 sortTasks();
-                mTasksSaver.execute();
+                setTimer();
                 mSwipeListAdapter.notifyDataSetChanged();
                 break;
             case R.id.action_exit:
@@ -371,10 +373,12 @@ public class MainActivity extends AppCompatActivity {
                     public void onClick(View v) {
                         mIfAlertDWasShown = false;
                         mTasks.clear();
+                        DatabaseConnector.deleteAllTasks(getApplicationContext());
                         mSwipeListAdapter.notifyDataSetChanged();
-                        mTasksSaver.execute();
                         floatBtn.show();
                         mAlertForClear.dismiss();
+                        //відміняєм запущений раніше запит(якщо такий був)
+                        setTimer();
                     }
                 })
                 .setNegativeButton(R.string.no, new View.OnClickListener() {
@@ -406,21 +410,48 @@ public class MainActivity extends AppCompatActivity {
     public void sortTasks() {
         Collections.sort(mTasks, mTaskComparator);
         mSwipeListAdapter.notifyDataSetChanged();
-        setTimer();
-        mTasksSaver.execute();
     }
 
+    //виставлення таймера на автоматичне завершення завдань
     public void setTimer() {
-        int i = 0;
-        /*for (Task t : mTasks) {
-            if (t.getDateStart() != null && t.getDateEnd() == null)
-                Log.d("SET_TIMER", "t[" + i + "] can be change");
-            i++;
-        }*/
         alarm.setTimer(this.getApplicationContext(), mMaxRuntimeForTask, mTasks);
     }
 
-    public TasksLoader getTasksSaver() {
-        return mTasksSaver;
+    //завантаження завдань з бази даних
+    private void downloadTask() {
+        final DatabaseConnector databaseConnector = new DatabaseConnector(this);
+        databaseConnector.open();
+        new AsyncTask<Void, Void, Cursor>() {
+            @Override
+            protected Cursor doInBackground(Void... params) {
+                return databaseConnector.getCursorWithAllTasks();
+            }
+
+            @Override
+            protected void onPostExecute(Cursor cursor) {
+                if (cursor.moveToFirst()) {
+                    int idColIndex = cursor.getColumnIndex(DatabaseConnector.TABLE_ID);
+                    int titleColIndex = cursor.getColumnIndex(DatabaseConnector.COLUMN_TITLE);
+                    int commentColIndex = cursor.getColumnIndex(DatabaseConnector.COLUMN_COMMENT);
+                    int dateStartColIndex = cursor.getColumnIndex(DatabaseConnector.COLUMN_DATA_START);
+                    int dateStopColIndex = cursor.getColumnIndex(DatabaseConnector.COLUMN_DATA_STOP);
+                    int dateEndColIndex = cursor.getColumnIndex(DatabaseConnector.COLUMN_DATA_END);
+                    do {
+                        long id = cursor.getLong(idColIndex);
+                        String title = cursor.getString(titleColIndex);
+                        String comment = cursor.getString(commentColIndex);
+                        long dateStart = cursor.getLong(dateStartColIndex);
+                        long dateStop = cursor.getLong(dateStopColIndex);
+                        long dateEnd = cursor.getLong(dateEndColIndex);
+                        mTasks.add(new Task(id, title, comment, dateStart, dateStop, dateEnd));
+                    } while (cursor.moveToNext());
+                }
+                cursor.close();
+                databaseConnector.close();
+                sortTasks();
+                mSwipeListAdapter.notifyDataSetChanged();
+                setTimer();
+            }
+        }.execute();
     }
 }

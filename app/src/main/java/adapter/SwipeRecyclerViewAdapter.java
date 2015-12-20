@@ -19,9 +19,11 @@ import com.y_taras.scheduler.activity.MainActivity;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Locale;
 
 import other.StringKeys;
 import other.Task;
+import utils.DatabaseConnector;
 
 public class SwipeRecyclerViewAdapter extends RecyclerSwipeAdapter<SwipeRecyclerViewAdapter.ViewHolder> {
     private final SimpleDateFormat mDateFormat;
@@ -37,7 +39,7 @@ public class SwipeRecyclerViewAdapter extends RecyclerSwipeAdapter<SwipeRecycler
         mMainActivity = mainActivity;
 
         mTasks = tasks;
-        mDateFormat = new SimpleDateFormat("dd.MM.yyyy HH:mm");
+        mDateFormat = new SimpleDateFormat("dd.MM.yyyy HH:mm", Locale.getDefault());
         mNotStartedTaskColor = notStartedTaskColor;
         mStartedTaskColor = startedTaskColor;
         mCompletedTaskColor = completedTaskColor;
@@ -60,12 +62,16 @@ public class SwipeRecyclerViewAdapter extends RecyclerSwipeAdapter<SwipeRecycler
         String sTaskDate = "";
         if (task.getDateEnd() != null) {
             holder.mViewItem.setBackgroundColor(mCompletedTaskColor);
-            sTaskDate = mDateFormat.format(task.getDateStart()) + " - " +
-                    mDateFormat.format(task.getDateEnd()) +
-                    " " + String.format("%02d", task.getSpentHours()) + ":" +
-                    String.format("%02d", task.getSpentMinutes());
             holder.mBtnStart.setVisibility(View.INVISIBLE);
             holder.mBtnFinish.setVisibility(View.GONE);
+
+            long spentTime = task.getDateEnd().getTime() - task.getDateStart().getTime();
+            long spentHours = (int) (spentTime / (1000 * 60 * 60));
+            long spentMinute = (int) (spentTime - spentHours * 1000 * 60 * 60) / 60000;
+            sTaskDate = mDateFormat.format(task.getDateStart()) + " - " +
+                    mDateFormat.format(task.getDateEnd()) +
+                    " " + String.format("%02d", spentHours) + ":" +
+                    String.format("%02d", spentMinute);
         } else if (task.getDateStart() != null) {
             holder.mViewItem.setBackgroundColor(mStartedTaskColor);
             sTaskDate = mDateFormat.format(task.getDateStart());
@@ -90,18 +96,18 @@ public class SwipeRecyclerViewAdapter extends RecyclerSwipeAdapter<SwipeRecycler
                         case R.id.btnStart:
                             if (clickTask.getDateStart() == null) {
                                 clickTask.setDateStart(new Date());
+                                DatabaseConnector.updateTask(clickTask, mMainActivity);
                                 mMainActivity.sortTasks();
-                               //mMainActivity.setTimer();
+                                mMainActivity.setTimer();
                             }
                             break;
                         case R.id.btnFinish:
                             if (clickTask.getDateEnd() == null) {
                                 clickTask.setDateEnd(new Date());
-                                clickTask.calcTimeSpent();
                                 notifyItemChanged(position);
-                                //Збереження змін в списку завдань
+                                DatabaseConnector.updateTask(clickTask, mMainActivity);
+                                //запускаєм новий таймер,щоби двічі на закривався clickTask
                                 mMainActivity.setTimer();
-                                mMainActivity.getTasksSaver().execute();
                             }
                             break;
                     }
@@ -115,37 +121,41 @@ public class SwipeRecyclerViewAdapter extends RecyclerSwipeAdapter<SwipeRecycler
             @Override
             public void onClick(View v) {
                 Task clickTask = mTasks.get(position);
+                mItemManger.closeAllItems();
                 switch (v.getId()) {
                     case R.id.btnDelete:
                         mItemManger.removeShownLayouts(holder.swipeLayout);
                         mTasks.remove(position);
                         notifyItemRemoved(position);
                         notifyItemRangeChanged(position, mTasks.size());
-                        mItemManger.closeAllItems();
+                        //запускаєм новий таймер,щоби на закривався таск, який уже був видалений
                         mMainActivity.setTimer();
-                        mMainActivity.getTasksSaver().execute();
+                        DatabaseConnector.deleteTask(clickTask.getDatabase_ID(), mMainActivity);
                         break;
                     case R.id.tvResetStart:
                         if (clickTask.getDateStart() != null) {
                             clickTask.setDateStart(null);
                             clickTask.setDateStop(null);
                             clickTask.setDateEnd(null);
+                            DatabaseConnector.updateTask(clickTask, mMainActivity);
                             mMainActivity.sortTasks();
+                            //запускаєм новий таймер,щоби на закривався таск,
+                            //який уже перейшов в стан нерозпочатого
+                            mMainActivity.setTimer();
                         }
-                        mItemManger.closeAllItems();
                         break;
                     case R.id.tvResetEnd:
                         if (clickTask.getDateEnd() != null) {
                             clickTask.setDateEnd(null);
                             clickTask.setDateStop(new Date());
                             notifyItemChanged(position);
+                            DatabaseConnector.updateTask(clickTask, mMainActivity);
+                            //запускаєм новий таймер, щоби зареєструвати таск,
+                            //завершення якого було відхилено
                             mMainActivity.setTimer();
-                            mMainActivity.getTasksSaver().execute();
                         }
-                        mItemManger.closeAllItems();
                         break;
                     case R.id.tvEdit:
-                        mItemManger.closeAllItems();
                         Intent intent = new Intent(mMainActivity, AddScheduleActivity.class);
                         intent.setAction(StringKeys.EDIT_TASK);
                         intent.putExtra(StringKeys.TASK_POSITION, position);

@@ -39,6 +39,7 @@
     <string name="start">Start</string>
     <string name="max_time_for_task">Максимальний час виконання завдання</string>
     <string name="error_edit_txt_for_maxRuntime">Будь ласка, вкажіть максимальний час виконання</string>
+    <string name="notificationContentText">Завдання %s автоматично завершилось</string>
 
     <string-array name="spinner_items">
         <item>A-Z</item>

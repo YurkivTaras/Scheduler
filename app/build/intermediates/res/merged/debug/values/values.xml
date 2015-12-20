@@ -244,7 +244,7 @@
     <dimen name="item_touch_helper_max_drag_scroll_per_frame">20dp</dimen>
     <dimen name="left_swipe_layout_width">80dp</dimen>
     <dimen name="listComment_txtSize">16sp</dimen>
-    <dimen name="listDate_txtSize">16sp</dimen>
+    <dimen name="listDate_txtSize">14sp</dimen>
     <dimen name="listTitle_txtSize">20sp</dimen>
     <dimen name="marginBottomForFloatBtn">40dp</dimen>
     <dimen name="marginRightForFloatBtn">25dp</dimen>
@@ -353,6 +353,7 @@
     <string name="max_time_for_task">Максимальний час виконання завдання</string>
     <string name="nameEditText">Назва</string>
     <string name="no">НІ</string>
+    <string name="notificationContentText">Завдання %s автоматично завершилось</string>
     <string name="resetColors">Відновити стандартні кольори</string>
     <string name="reset_task">Reset task</string>
     <string name="restore_complete">Restore complete task</string>

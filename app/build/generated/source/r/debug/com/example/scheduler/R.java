@@ -2575,19 +2575,20 @@ containing a value of this type.
         public static final int max_time_for_task=0x7f050032;
         public static final int nameEditText=0x7f050033;
         public static final int no=0x7f050034;
-        public static final int resetColors=0x7f050035;
-        public static final int reset_task=0x7f050036;
-        public static final int restore_complete=0x7f050037;
-        public static final int saveButton=0x7f050038;
-        public static final int settingsToolbarTitle=0x7f050039;
-        public static final int sort_a_z=0x7f05003a;
-        public static final int sort_date_down=0x7f05003b;
-        public static final int sort_date_up=0x7f05003c;
-        public static final int sort_z_a=0x7f05003d;
-        public static final int start=0x7f05003e;
-        public static final int status_bar_notification_info_overflow=0x7f05003f;
-        public static final int toastMessageIfBackPressed=0x7f050040;
-        public static final int yes=0x7f050041;
+        public static final int notificationContentText=0x7f050035;
+        public static final int resetColors=0x7f050036;
+        public static final int reset_task=0x7f050037;
+        public static final int restore_complete=0x7f050038;
+        public static final int saveButton=0x7f050039;
+        public static final int settingsToolbarTitle=0x7f05003a;
+        public static final int sort_a_z=0x7f05003b;
+        public static final int sort_date_down=0x7f05003c;
+        public static final int sort_date_up=0x7f05003d;
+        public static final int sort_z_a=0x7f05003e;
+        public static final int start=0x7f05003f;
+        public static final int status_bar_notification_info_overflow=0x7f050040;
+        public static final int toastMessageIfBackPressed=0x7f050041;
+        public static final int yes=0x7f050042;
     }
     public static final class style {
         public static final int AlertDialog_AppCompat=0x7f070075;

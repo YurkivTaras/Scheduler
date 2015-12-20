@@ -7,25 +7,42 @@ import java.util.Comparator;
 import java.util.Date;
 
 public class Task implements Parcelable {
+    private long mDatabase_ID;
+
     private String mTitle;
     private String mComment;
+
     private Date mDateStart;
     private Date mDateEnd;
     private Date mDateStop;
-
-    private int mSpentHours;
-    private int mSpentMinute;
 
     public Task(String title, String comment) {
         mTitle = title;
         mComment = comment;
     }
 
+    public Task(long id, String title, String comment, long dateStart, long dateStop, long dateEnd) {
+        mDatabase_ID = id;
+        mTitle = title;
+        mComment = comment;
+        mDateStart = dateStart != -1 ? new Date(dateStart) : null;
+        mDateStop = dateStop != -1 ? new Date(dateStop) : null;
+        mDateEnd = dateEnd != -1 ? new Date(dateEnd) : null;
+    }
+
+    public Task(Task task) {
+        mDatabase_ID = task.mDatabase_ID;
+        mTitle = task.mTitle;
+        mComment = task.mComment;
+        mDateStart = task.mDateStart != null ? new Date(task.mDateStart.getTime()) : null;
+        mDateStop = task.mDateStop != null ? new Date(task.mDateStop.getTime()) : null;
+        mDateEnd = task.mDateEnd != null ? new Date(task.mDateEnd.getTime()) : null;
+    }
+
     public Task(Parcel source) {
         mTitle = source.readString();
         mComment = source.readString();
-        mSpentHours = source.readInt();
-        mSpentMinute = source.readInt();
+        mDatabase_ID = source.readLong();
 
         //відновлення Date об`єктів з використанням конструктора з long параметром
         long dataStart = source.readLong();
@@ -38,13 +55,6 @@ public class Task implements Parcelable {
             if (dataStop != -1)
                 mDateStop = new Date(dataStop);
         }
-    }
-
-    //обрахунок кількості годин і хвилин потрачених на виконання завдання
-    public void calcTimeSpent() {
-        long spentTime = mDateEnd.getTime() - mDateStart.getTime();
-        mSpentHours = (int) (spentTime / (1000 * 60 * 60));
-        mSpentMinute = (int) (spentTime - mSpentHours * 1000 * 60 * 60) / 60000;
     }
 
     public static Comparator<Task> NameUPComparator = new Comparator<Task>() {
@@ -78,6 +88,14 @@ public class Task implements Parcelable {
             return DateUPComparator.compare(t2, t1);
         }
     };
+
+    public long getDatabase_ID() {
+        return mDatabase_ID;
+    }
+
+    public void setDatabase_ID(long database_ID) {
+        mDatabase_ID = database_ID;
+    }
 
     public void setTitle(String title) {
         mTitle = title;
@@ -119,15 +137,6 @@ public class Task implements Parcelable {
         mDateStop = dateStop;
     }
 
-
-    public int getSpentHours() {
-        return mSpentHours;
-    }
-
-    public int getSpentMinutes() {
-        return mSpentMinute;
-    }
-
     @Override
     public int describeContents() {
         return 0;
@@ -137,8 +146,7 @@ public class Task implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(mTitle);
         dest.writeString(mComment);
-        dest.writeInt(mSpentHours);
-        dest.writeInt(mSpentMinute);
+        dest.writeLong(mDatabase_ID);
 
         //запис в parcel long представлення об`єкту Date
         dest.writeLong(mDateStart != null ? mDateStart.getTime() : -1);
