@@ -46,7 +46,6 @@ public class ImageLoader {
         }
         return BitmapFactory.decodeStream(fis);
     }
-
     public static boolean delete(String uri) {
         File file = new File(uri);
         boolean deleteSuccess = false;
@@ -54,7 +53,6 @@ public class ImageLoader {
             deleteSuccess = file.delete();
         return deleteSuccess;
     }
-
     public static void deleteAll(Context context) {
         String cachePath;
         if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED))

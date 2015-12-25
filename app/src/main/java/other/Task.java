@@ -15,7 +15,6 @@ public class Task implements Parcelable {
     private String mAvatarUri;
 
     private int mMaxRuntime;
-
     private Date mDateStart;
     private Date mDateEnd;
     private Date mDateStop;
