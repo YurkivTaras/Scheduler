@@ -26,7 +26,9 @@
     <dimen name="right_swipe_layout_width">240dp</dimen>
     <dimen name="left_swipe_layout_width">80dp</dimen>
     <dimen name="margin_date_btn">5dp</dimen>
-    <dimen name="marginTop_for_layout_with_maxRuntime">50dp</dimen>
+    <dimen name="marginTop_for_layout_with_maxRuntime">30dp</dimen>
     <dimen name="maxRuntimeEditTxt_width">75dp</dimen>
-    <!--<dimen name="addTask_contentTopPadding">20dp</dimen>-->
+    <dimen name="avatarSize">100dp</dimen>
+    <dimen name="avatarMargin">5dp</dimen>
+    <dimen name="list_icon_size">75dp</dimen>
 </resources>

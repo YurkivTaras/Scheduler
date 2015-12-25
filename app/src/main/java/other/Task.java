@@ -7,53 +7,81 @@ import java.util.Comparator;
 import java.util.Date;
 
 public class Task implements Parcelable {
+    public static final String DEFAULT_AVATAR_URI = "default";
     private long mDatabase_ID;
 
     private String mTitle;
     private String mComment;
+    private String mAvatarUri;
+
+    private int mMaxRuntime;
 
     private Date mDateStart;
     private Date mDateEnd;
     private Date mDateStop;
+    private Date mDatePause;
 
-    public Task(String title, String comment) {
+    private long mPauseLengthBeforeStop;
+    private long mPauseLengthAfterStop;
+
+    public Task(String title, String comment, int maxRuntime) {
         mTitle = title;
         mComment = comment;
+        mMaxRuntime = maxRuntime;
+        mAvatarUri = DEFAULT_AVATAR_URI;
     }
 
-    public Task(long id, String title, String comment, long dateStart, long dateStop, long dateEnd) {
+    public Task(long id, String title, String comment, String avatarUri, int maxRuntime, long dateStart, long dateStop,
+                long dateEnd, long datePause, long pauseLengthBeforeStop, long pauseLengthAfterStop) {
         mDatabase_ID = id;
         mTitle = title;
         mComment = comment;
+        mAvatarUri = avatarUri;
+        mMaxRuntime = maxRuntime;
         mDateStart = dateStart != -1 ? new Date(dateStart) : null;
         mDateStop = dateStop != -1 ? new Date(dateStop) : null;
         mDateEnd = dateEnd != -1 ? new Date(dateEnd) : null;
+        mDatePause = datePause != -1 ? new Date(datePause) : null;
+        mPauseLengthBeforeStop = pauseLengthBeforeStop;
+        mPauseLengthAfterStop = pauseLengthAfterStop;
     }
 
     public Task(Task task) {
         mDatabase_ID = task.mDatabase_ID;
         mTitle = task.mTitle;
         mComment = task.mComment;
+        mAvatarUri = task.mAvatarUri;
+        mMaxRuntime = task.mMaxRuntime;
         mDateStart = task.mDateStart != null ? new Date(task.mDateStart.getTime()) : null;
         mDateStop = task.mDateStop != null ? new Date(task.mDateStop.getTime()) : null;
         mDateEnd = task.mDateEnd != null ? new Date(task.mDateEnd.getTime()) : null;
+        mDatePause = task.mDatePause != null ? new Date(task.mDatePause.getTime()) : null;
+        mPauseLengthBeforeStop = task.mPauseLengthBeforeStop;
+        mPauseLengthAfterStop = task.mPauseLengthAfterStop;
     }
 
     public Task(Parcel source) {
+        mDatabase_ID = source.readLong();
         mTitle = source.readString();
         mComment = source.readString();
-        mDatabase_ID = source.readLong();
+        mAvatarUri = source.readString();
+        mMaxRuntime = source.readInt();
+        mPauseLengthBeforeStop = source.readLong();
+        mPauseLengthAfterStop = source.readLong();
 
         //відновлення Date об`єктів з використанням конструктора з long параметром
         long dataStart = source.readLong();
         long dataEnd = source.readLong();
         long dataStop = source.readLong();
+        long dataPause = source.readLong();
         if (dataStart != -1) {
             mDateStart = new Date(dataStart);
             if (dataEnd != -1)
                 mDateEnd = new Date(dataEnd);
             if (dataStop != -1)
                 mDateStop = new Date(dataStop);
+            if (dataPause != -1)
+                mDatePause = new Date(dataPause);
         }
     }
 
@@ -113,6 +141,14 @@ public class Task implements Parcelable {
         return mTitle;
     }
 
+    public int getMaxRuntime() {
+        return mMaxRuntime;
+    }
+
+    public void setMaxRuntime(int maxRuntime) {
+        mMaxRuntime = maxRuntime;
+    }
+
     public Date getDateStart() {
         return mDateStart;
     }
@@ -137,6 +173,38 @@ public class Task implements Parcelable {
         mDateStop = dateStop;
     }
 
+    public long getPauseLengthBeforeStop() {
+        return mPauseLengthBeforeStop;
+    }
+
+    public void setPauseLengthBeforeStop(long pauseLength) {
+        mPauseLengthBeforeStop = pauseLength;
+    }
+
+    public long getPauseLengthAfterStop() {
+        return mPauseLengthAfterStop;
+    }
+
+    public void setPauseLengthAfterStop(long pauseLength) {
+        mPauseLengthAfterStop = pauseLength;
+    }
+
+    public Date getDatePause() {
+        return mDatePause;
+    }
+
+    public void setDatePause(Date datePause) {
+        mDatePause = datePause;
+    }
+
+    public String getAvatarUri() {
+        return mAvatarUri;
+    }
+
+    public void setAvatarUri(String avatarUri) {
+        mAvatarUri = avatarUri;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -144,16 +212,20 @@ public class Task implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+        dest.writeLong(mDatabase_ID);
         dest.writeString(mTitle);
         dest.writeString(mComment);
-        dest.writeLong(mDatabase_ID);
+        dest.writeString(mAvatarUri);
+        dest.writeInt(mMaxRuntime);
+        dest.writeLong(mPauseLengthBeforeStop);
+        dest.writeLong(mPauseLengthAfterStop);
 
         //запис в parcel long представлення об`єкту Date
         dest.writeLong(mDateStart != null ? mDateStart.getTime() : -1);
         dest.writeLong(mDateEnd != null ? mDateEnd.getTime() : -1);
         dest.writeLong(mDateStop != null ? mDateStop.getTime() : -1);
+        dest.writeLong(mDatePause != null ? mDatePause.getTime() : -1);
     }
-
 
     public static final Parcelable.Creator<Task> CREATOR = new Parcelable.Creator<Task>() {
         @Override

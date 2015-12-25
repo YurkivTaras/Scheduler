@@ -19,15 +19,15 @@ public final class R {
 		public static final int material_blue_500 = 0x7f0b0035;
 	}
 	public static final class dimen {
-		public static final int fab_elevation_lollipop = 0x7f06005b;
-		public static final int fab_scroll_threshold = 0x7f06005c;
-		public static final int fab_shadow_size = 0x7f06005d;
-		public static final int fab_size_mini = 0x7f06005e;
-		public static final int fab_size_normal = 0x7f06005f;
+		public static final int fab_elevation_lollipop = 0x7f06005d;
+		public static final int fab_scroll_threshold = 0x7f06005e;
+		public static final int fab_shadow_size = 0x7f06005f;
+		public static final int fab_size_mini = 0x7f060060;
+		public static final int fab_size_normal = 0x7f060061;
 	}
 	public static final class drawable {
-		public static final int fab_shadow = 0x7f020046;
-		public static final int fab_shadow_mini = 0x7f020047;
+		public static final int fab_shadow = 0x7f020049;
+		public static final int fab_shadow_mini = 0x7f02004a;
 	}
 	public static final class id {
 		public static final int mini = 0x7f0c0029;
