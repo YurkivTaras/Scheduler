@@ -46,10 +46,7 @@ public class ImageLoader {
         }
         return BitmapFactory.decodeStream(fis);
     }
-<<<<<<< HEAD
-=======
 
->>>>>>> 4550f20ca069544e408329688933840dad5ee6d5
     public static boolean delete(String uri) {
         File file = new File(uri);
         boolean deleteSuccess = false;
@@ -57,10 +54,7 @@ public class ImageLoader {
             deleteSuccess = file.delete();
         return deleteSuccess;
     }
-<<<<<<< HEAD
-=======
 
->>>>>>> 4550f20ca069544e408329688933840dad5ee6d5
     public static void deleteAll(Context context) {
         String cachePath;
         if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED))

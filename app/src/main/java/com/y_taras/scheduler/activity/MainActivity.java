@@ -161,10 +161,7 @@ public class MainActivity extends AppCompatActivity {
                 mSwipeListAdapter.closeAllItems();
             }
         });
-<<<<<<< HEAD
-=======
 
->>>>>>> 4550f20ca069544e408329688933840dad5ee6d5
         alarm = new AlarmManagerBroadcastReceiver();
         if (savedInstanceState == null)
             downloadTask();

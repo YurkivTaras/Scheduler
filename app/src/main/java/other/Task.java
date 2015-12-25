@@ -13,28 +13,18 @@ public class Task implements Parcelable {
     private String mTitle;
     private String mComment;
     private String mAvatarUri;
-<<<<<<< HEAD
-=======
-
-    private int mMaxRuntime;
->>>>>>> 4550f20ca069544e408329688933840dad5ee6d5
 
     private int mMaxRuntime;
     private Date mDateStart;
     private Date mDateEnd;
     private Date mDateStop;
     private Date mDatePause;
-<<<<<<< HEAD
+
+
 
     private long mPauseLengthBeforeStop;
     private long mPauseLengthAfterStop;
 
-=======
-
-    private long mPauseLengthBeforeStop;
-    private long mPauseLengthAfterStop;
-
->>>>>>> 4550f20ca069544e408329688933840dad5ee6d5
     public Task(String title, String comment, int maxRuntime) {
         mTitle = title;
         mComment = comment;
