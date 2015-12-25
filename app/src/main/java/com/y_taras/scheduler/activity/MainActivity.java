@@ -39,6 +39,7 @@ import other.StringKeys;
 import other.Task;
 import utils.AlarmManagerBroadcastReceiver;
 import utils.DatabaseConnector;
+import utils.ImageLoader;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -71,46 +72,6 @@ public class MainActivity extends AppCompatActivity {
     private int mMaxRuntimeForTask;
 
     @Override
-    protected void onPause() {
-        super.onPause();
-        unregisterReceiver(broadcastReceiver);
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        broadcastReceiver = new BroadcastReceiver() {
-            @Override
-            public void onReceive(Context context, Intent intent) {
-                Bundle b = intent.getExtras();
-                ArrayList<Task> tasks = b.getParcelableArrayList(StringKeys.ARRAY_OF_TASKS);
-                if (tasks == null)
-                    return;
-
-                for (int i = 0; i < tasks.size(); i++) {
-                    Task taskFromIntent = tasks.get(i);
-                    Date dateEndForTaskFormIntent = taskFromIntent.getDateEnd();
-                    if (dateEndForTaskFormIntent != null) {
-                        long id_taskFromIntent = taskFromIntent.getDatabase_ID();
-                        for (int j = 0; j < mTasks.size(); j++) {
-                            Task originalTask = mTasks.get(j);
-                            if (originalTask.getDatabase_ID() == id_taskFromIntent) {
-                                if (originalTask.getDateEnd() == null) {
-                                    originalTask.setDateEnd(dateEndForTaskFormIntent);
-                                    mSwipeListAdapter.notifyItemChanged(j);
-                                    //Log.d("======", "MainActivity tasks[" + i + "] is modified");
-                                }
-                                break;
-                            }
-                        }
-                    }
-                }
-            }
-        };
-        registerReceiver(broadcastReceiver, new IntentFilter("broadCastName"));
-    }
-
-    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -120,6 +81,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        unregisterReceiver(broadcastReceiver);
         if (mAlertForClear != null)
             mAlertForClear.dismiss();
     }
@@ -142,30 +104,31 @@ public class MainActivity extends AppCompatActivity {
 
         //ініціалізація спінера для вибору режиму сортування
         mSpinnerSort = (Spinner) findViewById(R.id.spinner_nav);
-        CustomSpinnerAdapter spinnerAdapter = new CustomSpinnerAdapter(getApplicationContext(), getResources().getStringArray(R.array.spinner_items));
+        CustomSpinnerAdapter spinnerAdapter = new CustomSpinnerAdapter(getApplicationContext(),
+                getResources().getStringArray(R.array.spinner_items));
         mSpinnerSort.setAdapter(spinnerAdapter);
         mSpinnerSort.setOnItemSelectedListener(new OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapter, View v,
                                        int position, long id) {
-                switch (position) {
-                    case 0: //A-Z
-                        mTaskComparator = Task.NameUPComparator;
-                        break;
-                    case 1: //Z-A
-                        mTaskComparator = Task.NameDownComparator;
-                        break;
-                    case 2: //Data_up
-                        mTaskComparator = Task.DateUPComparator;
-                        break;
-                    case 3://Data_down
-                        mTaskComparator = Task.DateDownComparator;
-                        break;
-                }
                 SharedPreferences.Editor edit = mAppSettings.edit();
                 mSpinnerPos = position;
                 edit.putInt(StringKeys.SPINNER_POS, mSpinnerPos);
                 edit.apply();
+                switch (position) {
+                    case 0:     //A-Z
+                        mTaskComparator = Task.NameUPComparator;
+                        break;
+                    case 1:     //Z-A
+                        mTaskComparator = Task.NameDownComparator;
+                        break;
+                    case 2:     //Data_up
+                        mTaskComparator = Task.DateUPComparator;
+                        break;
+                    case 3:     //Data_down
+                        mTaskComparator = Task.DateDownComparator;
+                        break;
+                }
                 sortTasks();
             }
 
@@ -181,7 +144,8 @@ public class MainActivity extends AppCompatActivity {
         LinearLayoutManager llm = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(llm);
 
-        mSwipeListAdapter = new SwipeRecyclerViewAdapter(this, mTasks, mNotStartedTaskColor, mStartedTaskColor, mCompletedTaskColor);
+        mSwipeListAdapter = new SwipeRecyclerViewAdapter(this, mTasks,
+                mNotStartedTaskColor, mStartedTaskColor, mCompletedTaskColor);
         mSwipeListAdapter.setMode(Attributes.Mode.Single);
 
         recyclerView.setAdapter(mSwipeListAdapter);
@@ -199,11 +163,38 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        //ініціалізація класу для роботи з базою даних
-        //mDatabaseConnector = new DatabaseConnector(this);
+        alarm = new AlarmManagerBroadcastReceiver();
         if (savedInstanceState == null)
             downloadTask();
-        alarm = new AlarmManagerBroadcastReceiver();
+        //ініціалізуєм та регіструєм ресівер, що відловлює повідомлення(broadcast)
+        //із автоматично завершеними завданнями
+        broadcastReceiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                Bundle b = intent.getExtras();
+                ArrayList<Task> tasks = b.getParcelableArrayList(StringKeys.ARRAY_OF_TASKS);
+                if (tasks == null)
+                    return;
+                for (int i = 0; i < tasks.size(); i++) {
+                    Task taskFromIntent = tasks.get(i);
+                    Date dateEndForTaskFormIntent = taskFromIntent.getDateEnd();
+                    if (dateEndForTaskFormIntent != null) {
+                        long id_taskFromIntent = taskFromIntent.getDatabase_ID();
+                        for (int j = 0; j < mTasks.size(); j++) {
+                            Task originalTask = mTasks.get(j);
+                            if (originalTask.getDatabase_ID() == id_taskFromIntent) {
+                                if (originalTask.getDateEnd() == null) {
+                                    originalTask.setDateEnd(dateEndForTaskFormIntent);
+                                    mSwipeListAdapter.notifyItemChanged(j);
+                                }
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+        };
+        registerReceiver(broadcastReceiver, new IntentFilter("broadCastName"));
 
         //ініціалізація плаваючої кнопки
         floatBtn = (FloatingActionButton) findViewById(R.id.fab);
@@ -213,6 +204,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, AddScheduleActivity.class);
                 intent.setAction(StringKeys.ADD_TASK);
+                intent.putExtra(StringKeys.MAX_RUNTIME_FOR_TASK, mMaxRuntimeForTask);
                 startActivityForResult(intent, RequestCodeAddTask);
             }
         });
@@ -227,21 +219,21 @@ public class MainActivity extends AppCompatActivity {
                 StringKeys.STARTED_TASK, getResources().getColor(R.color.started_task));
         mCompletedTaskColor = mAppSettings.getInt(
                 StringKeys.COMPLETED_TASK, getResources().getColor(R.color.completed_task));
-        mSpinnerPos = mAppSettings.getInt(StringKeys.SPINNER_POS, 0);
         mMaxRuntimeForTask = mAppSettings.getInt(StringKeys.MAX_RUNTIME_FOR_TASK, 60);
+
         //отримання збереженого типу сортування
-        String compId = mAppSettings.getString(StringKeys.COMPARATOR_TYPE, StringKeys.COMPARATOR_A_Z);
-        switch (compId) {
-            case StringKeys.COMPARATOR_A_Z:
+        mSpinnerPos = mAppSettings.getInt(StringKeys.SPINNER_POS, 0);
+        switch (mSpinnerPos) {
+            case 0:     //A-Z
                 mTaskComparator = Task.NameUPComparator;
                 break;
-            case StringKeys.COMPARATOR_Z_A:
+            case 1:     //Z-A
                 mTaskComparator = Task.NameDownComparator;
                 break;
-            case StringKeys.COMPARATOR_DATE_UP:
+            case 2:     //DATE_UP
                 mTaskComparator = Task.DateUPComparator;
                 break;
-            case StringKeys.COMPARATOR_DATE_DOWN:
+            case 3:     //DATE_DOWN
                 mTaskComparator = Task.DateDownComparator;
                 break;
         }
@@ -252,20 +244,43 @@ public class MainActivity extends AppCompatActivity {
         if (resultCode == Activity.RESULT_OK) {
             String title = data.getStringExtra(StringKeys.TASK_TITLE);
             String comment = data.getStringExtra(StringKeys.TASK_COMMENT);
-
+            int maxRuntime = data.getIntExtra(StringKeys.MAX_RUNTIME_FOR_TASK, mMaxRuntimeForTask);
+            String avatarUri = null;
+            if (data.hasExtra(StringKeys.BITMAP_AVATAR))
+                avatarUri = data.getStringExtra(StringKeys.BITMAP_AVATAR);
             switch (requestCode) {
                 case RequestCodeAddTask:
-                    Task newTask = new Task(title, comment);
+                    Task newTask = new Task(title, comment, maxRuntime);
+                    if (avatarUri != null)
+                        newTask.setAvatarUri(avatarUri);
                     DatabaseConnector.addTask(newTask, this);
                     mTasks.add(newTask);
                     sortTasks();
                     break;
                 case REQUEST_CODE_EDIT_TASK:
-                    Task editTask = mTasks.get(data.getIntExtra(StringKeys.TASK_POSITION, -1));
-                    editTask.setTitle(title);
-                    editTask.setComment(comment);
-                    DatabaseConnector.updateTask(editTask, this);
-                    sortTasks();
+                    int position = data.getIntExtra(StringKeys.TASK_POSITION, -1);
+                    Task editTask = mTasks.get(position);
+                    boolean ifWasChange = false;
+                    if (!editTask.getTitle().equals(title) || !editTask.getComment().equals(comment)) {
+                        editTask.setTitle(title);
+                        editTask.setComment(comment);
+                        //пересортовуєм масив завдань, якщо було змінено title або comment
+                        sortTasks();
+                        ifWasChange = true;
+                    }
+                    if (avatarUri != null) {
+                        editTask.setAvatarUri(avatarUri);
+                        ifWasChange = true;
+                        mSwipeListAdapter.notifyItemChanged(position);
+                    }
+                    if (editTask.getMaxRuntime() != maxRuntime) {
+                        editTask.setMaxRuntime(maxRuntime);
+                        //перезапускаєм таймер якщо було змінено максимальний час виконання для завдання
+                        setTimer();
+                        ifWasChange = true;
+                    }
+                    if (ifWasChange)
+                        DatabaseConnector.updateTask(editTask, this);
                     break;
                 case RequestCodeSettings:
                     int notStartedTaskColor = data.getIntExtra(StringKeys.NOT_STARTED_TASK, -1);
@@ -337,14 +352,13 @@ public class MainActivity extends AppCompatActivity {
                 for (int i = 0; i < 30; i++) {
                     int randomForTitle = random.nextInt(30);
                     int randomForComment = random.nextInt(30);
-                    Task newTask = new Task("Title" + randomForTitle, "Comment" + randomForComment);
+                    Task newTask = new Task("Title" + randomForTitle, "Comment" + randomForComment, mMaxRuntimeForTask);
                     tasks.add(newTask);
                     mTasks.add(newTask);
                 }
                 DatabaseConnector.addAllTasks(tasks, this);
                 sortTasks();
                 setTimer();
-                mSwipeListAdapter.notifyDataSetChanged();
                 break;
             case R.id.action_exit:
                 finish();
@@ -379,6 +393,8 @@ public class MainActivity extends AppCompatActivity {
                         mAlertForClear.dismiss();
                         //відміняєм запущений раніше запит(якщо такий був)
                         setTimer();
+                        //видаляєм з памяті зображення усіх іконок для завдань
+                        ImageLoader.deleteAll(getBaseContext());
                     }
                 })
                 .setNegativeButton(R.string.no, new View.OnClickListener() {
@@ -414,7 +430,7 @@ public class MainActivity extends AppCompatActivity {
 
     //виставлення таймера на автоматичне завершення завдань
     public void setTimer() {
-        alarm.setTimer(this.getApplicationContext(), mMaxRuntimeForTask, mTasks);
+        alarm.setTimer(this.getApplicationContext(), mTasks);
     }
 
     //завантаження завдань з бази даних
@@ -430,12 +446,17 @@ public class MainActivity extends AppCompatActivity {
             @Override
             protected void onPostExecute(Cursor cursor) {
                 if (cursor.moveToFirst()) {
-                    int idColIndex = cursor.getColumnIndex(DatabaseConnector.TABLE_ID);
+                    int idColIndex = cursor.getColumnIndex(DatabaseConnector.COLUMN_ID);
                     int titleColIndex = cursor.getColumnIndex(DatabaseConnector.COLUMN_TITLE);
                     int commentColIndex = cursor.getColumnIndex(DatabaseConnector.COLUMN_COMMENT);
                     int dateStartColIndex = cursor.getColumnIndex(DatabaseConnector.COLUMN_DATA_START);
                     int dateStopColIndex = cursor.getColumnIndex(DatabaseConnector.COLUMN_DATA_STOP);
                     int dateEndColIndex = cursor.getColumnIndex(DatabaseConnector.COLUMN_DATA_END);
+                    int datePauseColIndex = cursor.getColumnIndex(DatabaseConnector.COLUMN_DATA_PAUSE);
+                    int maxRuntimeColIndex = cursor.getColumnIndex(DatabaseConnector.COLUMN_MAX_RUNTIME);
+                    int pauseLengthBeforeStopColIndex = cursor.getColumnIndex(DatabaseConnector.COLUMN_PAUSE_LENGTH_BEFORE_STOP);
+                    int pauseLengthAfterStopColIndex = cursor.getColumnIndex(DatabaseConnector.COLUMN_PAUSE_LENGTH_AFTER_STOP);
+                    int avatarUriColIndex = cursor.getColumnIndex(DatabaseConnector.COLUMN_AVATAR_URI);
                     do {
                         long id = cursor.getLong(idColIndex);
                         String title = cursor.getString(titleColIndex);
@@ -443,13 +464,18 @@ public class MainActivity extends AppCompatActivity {
                         long dateStart = cursor.getLong(dateStartColIndex);
                         long dateStop = cursor.getLong(dateStopColIndex);
                         long dateEnd = cursor.getLong(dateEndColIndex);
-                        mTasks.add(new Task(id, title, comment, dateStart, dateStop, dateEnd));
+                        long datePause = cursor.getLong(datePauseColIndex);
+                        int maxRuntime = cursor.getInt(maxRuntimeColIndex);
+                        long pauseLengthBeforeStop = cursor.getLong(pauseLengthBeforeStopColIndex);
+                        long pauseLengthAfterStop = cursor.getLong(pauseLengthAfterStopColIndex);
+                        String avatarUri = cursor.getString(avatarUriColIndex);
+                        mTasks.add(new Task(id, title, comment, avatarUri, maxRuntime,
+                                dateStart, dateStop, dateEnd, datePause, pauseLengthBeforeStop, pauseLengthAfterStop));
                     } while (cursor.moveToNext());
                 }
                 cursor.close();
                 databaseConnector.close();
                 sortTasks();
-                mSwipeListAdapter.notifyDataSetChanged();
                 setTimer();
             }
         }.execute();

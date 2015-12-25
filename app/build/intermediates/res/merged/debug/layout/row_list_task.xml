@@ -61,61 +61,97 @@
             android:src="@drawable/ic_delete_black_24dp" />
     </LinearLayout>
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <LinearLayout
         android:id="@+id/taskBackground"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="vertical">
 
-        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical">
+            android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/txtListTitle"
-                android:layout_width="match_parent"
+            <ImageView
+                android:id="@+id/listAvatar"
+                android:layout_width="@dimen/list_icon_size"
+                android:layout_height="@dimen/list_icon_size"
+                android:layout_gravity="center_vertical"
+                android:layout_margin="@dimen/avatarMargin"
+                android:src="@drawable/default_avatar" />
+
+            <LinearLayout
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:paddingLeft="@dimen/title_of_task_left_padding"
-                android:textColor="@color/task_title"
-                android:textSize="@dimen/listTitle_txtSize"
-                android:textStyle="bold" />
+                android:layout_weight="1"
+                android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/txtListComment"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingLeft="@dimen/comment_of_task_left_padding"
-                android:textSize="@dimen/listComment_txtSize"
-                android:textStyle="italic" />
+                <TextView
+                    android:id="@+id/txtListTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/task_title"
+                    android:textSize="@dimen/listTitle_txtSize"
+                    android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/txtListDate"
+                <TextView
+                    android:id="@+id/txtListComment"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/listComment_txtSize"
+                    android:textStyle="italic" />
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:textSize="@dimen/listDate_txtSize"
-                android:textStyle="bold" />
+                android:layout_gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:id="@+id/btnPause"
+                    android:layout_width="@dimen/btn_start_end_width_height"
+                    android:layout_height="@dimen/btn_start_end_width_height"
+                    android:layout_gravity="center"
+                    android:background="@drawable/btn_pause_selector"
+                    android:visibility="gone" />
+
+                <ImageButton
+                    android:id="@+id/btnResume"
+                    android:layout_width="@dimen/btn_start_end_width_height"
+                    android:layout_height="@dimen/btn_start_end_width_height"
+                    android:layout_gravity="center"
+                    android:background="@drawable/btn_resume_selector"
+                    android:visibility="gone" />
+
+                <Button
+                    android:id="@+id/btnStart"
+                    android:layout_width="@dimen/btn_start_end_width_height"
+                    android:layout_height="@dimen/btn_start_end_width_height"
+                    android:layout_gravity="center"
+                    android:layout_margin="@dimen/margin_date_btn"
+                    android:background="@drawable/btn_start_selector"
+                    android:text="@string/start" />
+
+                <Button
+                    android:id="@+id/btnFinish"
+                    android:layout_width="@dimen/btn_start_end_width_height"
+                    android:layout_height="@dimen/btn_start_end_width_height"
+                    android:layout_gravity="center"
+                    android:layout_margin="@dimen/margin_date_btn"
+                    android:background="@drawable/btn_finish_selector"
+                    android:text="@string/finish"
+                    android:visibility="gone" />
+            </LinearLayout>
+
         </LinearLayout>
 
-        <Button
-            android:id="@+id/btnStart"
-            android:layout_width="@dimen/btn_start_end_width_height"
-            android:layout_height="@dimen/btn_start_end_width_height"
-            android:layout_gravity="center"
-            android:layout_margin="@dimen/margin_date_btn"
-            android:background="@drawable/btn_start_selector"
-            android:text="@string/start" />
-
-        <Button
-            android:id="@+id/btnFinish"
-            android:layout_width="@dimen/btn_start_end_width_height"
-            android:layout_height="@dimen/btn_start_end_width_height"
-            android:layout_gravity="center"
-            android:layout_margin="@dimen/margin_date_btn"
-            android:background="@drawable/btn_finish_selector"
-            android:text="@string/finish"
-            android:visibility="gone" />
+        <TextView
+            android:id="@+id/txtListDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:textSize="@dimen/listDate_txtSize"
+            android:textStyle="bold" />
     </LinearLayout>
 </com.daimajia.swipe.SwipeLayout>

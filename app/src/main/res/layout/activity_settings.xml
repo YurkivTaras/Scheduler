@@ -10,93 +10,98 @@
         android:layout_height="wrap_content"
         android:background="@color/colorPrimary" />
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <TextView
-            android:id="@+id/txtSettings1"
-            android:layout_width="@dimen/settingsActivityTxtWidth"
-            android:layout_height="wrap_content"
-            android:paddingLeft="@dimen/settingsActivityTxtLeftPadding"
-            android:text="@string/backgroundForNotStartedTask"
-            android:textSize="@dimen/settingsActivityTxtSize" />
-
-        <Button
-            android:id="@+id/btnNotStartedTask"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/settingsActivityBtnMargin" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <TextView
-            android:id="@+id/txtSettings2"
-            android:layout_width="@dimen/settingsActivityTxtWidth"
-            android:layout_height="wrap_content"
-
-            android:paddingLeft="@dimen/settingsActivityTxtLeftPadding"
-            android:text="@string/backgroundForStartedTask"
-            android:textSize="@dimen/settingsActivityTxtSize" />
-
-        <Button
-            android:id="@+id/btnStartedTask"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/settingsActivityBtnMargin" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <TextView
-            android:id="@+id/txtSettings3"
-            android:layout_width="@dimen/settingsActivityTxtWidth"
-            android:layout_height="wrap_content"
-            android:paddingLeft="@dimen/settingsActivityTxtLeftPadding"
-            android:text="@string/backgroundForNotCompletedTask"
-            android:textSize="@dimen/settingsActivityTxtSize" />
-
-        <Button
-            android:id="@+id/btnCompletedTask"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/settingsActivityBtnMargin" />
-    </LinearLayout>
-
-    <View
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:layout_marginLeft="@dimen/settingsActivityTxtLeftPadding"
-        android:layout_marginRight="@dimen/settingsActivityTxtLeftPadding"
-        android:background="@color/background_material_dark" />
+        android:layout_height="match_parent">
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <TextView
-            android:id="@+id/txtSettings4"
-            android:layout_width="@dimen/settingsActivityTxtWidth"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingLeft="@dimen/settingsActivityTxtLeftPadding"
-            android:text="@string/max_time_for_task"
-            android:textSize="@dimen/settingsActivityTxtSize" />
+            android:orientation="vertical">
 
-        <EditText
-            android:id="@+id/editTxtMaxRuntime"
-            android:layout_width="@dimen/maxRuntimeEditTxt_width"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/settingsActivityBtnMargin"
-            android:inputType="number"
-            android:maxLength="3" />
-    </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/txtSettings1"
+                    android:layout_width="@dimen/settingsActivityTxtWidth"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="@dimen/settingsActivityTxtLeftPadding"
+                    android:text="@string/backgroundForNotStartedTask"
+                    android:textSize="@dimen/settingsActivityTxtSize" />
+
+                <Button
+                    android:id="@+id/btnNotStartedTask"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/settingsActivityBtnMargin" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/txtSettings2"
+                    android:layout_width="@dimen/settingsActivityTxtWidth"
+                    android:layout_height="wrap_content"
+
+                    android:paddingLeft="@dimen/settingsActivityTxtLeftPadding"
+                    android:text="@string/backgroundForStartedTask"
+                    android:textSize="@dimen/settingsActivityTxtSize" />
+
+                <Button
+                    android:id="@+id/btnStartedTask"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/settingsActivityBtnMargin" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/txtSettings3"
+                    android:layout_width="@dimen/settingsActivityTxtWidth"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="@dimen/settingsActivityTxtLeftPadding"
+                    android:text="@string/backgroundForNotCompletedTask"
+                    android:textSize="@dimen/settingsActivityTxtSize" />
+
+                <Button
+                    android:id="@+id/btnCompletedTask"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/settingsActivityBtnMargin" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/marginTop_for_layout_with_maxRuntime"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/txtSettings4"
+                    android:layout_width="@dimen/settingsActivityTxtWidth"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="@dimen/settingsActivityTxtLeftPadding"
+                    android:text="@string/max_time_for_task"
+                    android:textSize="@dimen/settingsActivityTxtSize" />
+
+                <EditText
+                    android:id="@+id/editTxtMaxRuntime"
+                    android:layout_width="@dimen/maxRuntimeEditTxt_width"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/settingsActivityBtnMargin"
+                    android:inputType="number"
+                    android:maxLength="3" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>

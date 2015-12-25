@@ -24,35 +24,33 @@ import other.Task;
 
 public class AlarmManagerBroadcastReceiver extends BroadcastReceiver {
 
-    private static final String LOG_ON_RECEIVE = "BroadcastReceiver onReceive()";
-    private static final String LOG_ON_SET_TIMER = "BroadcastReceiver setTimer()";
     private static final int NOTIFY_ID = 101;
 
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        SharedPreferences appSettings = context.getSharedPreferences(
-                StringKeys.APP_SETTINGS, Context.MODE_PRIVATE);
 
         Bundle extras = intent.getExtras();
         ArrayList<Task> tasks = extras.getParcelableArrayList(StringKeys.ARRAY_OF_TASKS);
-        int maxRuntime = extras.getInt(StringKeys.MAX_RUNTIME_FOR_TASK);
 
         //у випадку, якщо отримано пустий інтент(при перезавантаженні телефона)
         if (tasks == null) {
-            maxRuntime = appSettings.getInt(StringKeys.MAX_RUNTIME_FOR_TASK, 60);
             tasks = new ArrayList<>();
-
             DatabaseConnector databaseConnector = new DatabaseConnector(context);
             databaseConnector.open();
             Cursor cursor = databaseConnector.getCursorWithAllTasks();
             if (cursor.moveToFirst()) {
-                int idColIndex = cursor.getColumnIndex(DatabaseConnector.TABLE_ID);
+                int idColIndex = cursor.getColumnIndex(DatabaseConnector.COLUMN_ID);
                 int titleColIndex = cursor.getColumnIndex(DatabaseConnector.COLUMN_TITLE);
                 int commentColIndex = cursor.getColumnIndex(DatabaseConnector.COLUMN_COMMENT);
                 int dateStartColIndex = cursor.getColumnIndex(DatabaseConnector.COLUMN_DATA_START);
                 int dateStopColIndex = cursor.getColumnIndex(DatabaseConnector.COLUMN_DATA_STOP);
                 int dateEndColIndex = cursor.getColumnIndex(DatabaseConnector.COLUMN_DATA_END);
+                int datePauseColIndex = cursor.getColumnIndex(DatabaseConnector.COLUMN_DATA_PAUSE);
+                int maxRuntimeColIndex = cursor.getColumnIndex(DatabaseConnector.COLUMN_MAX_RUNTIME);
+                int pauseLengthBeforeStopColIndex = cursor.getColumnIndex(DatabaseConnector.COLUMN_PAUSE_LENGTH_BEFORE_STOP);
+                int pauseLengthAfterStopColIndex = cursor.getColumnIndex(DatabaseConnector.COLUMN_PAUSE_LENGTH_AFTER_STOP);
+                int avatarUriColIndex = cursor.getColumnIndex(DatabaseConnector.COLUMN_AVATAR_URI);
                 do {
                     long id = cursor.getLong(idColIndex);
                     String title = cursor.getString(titleColIndex);
@@ -60,26 +58,30 @@ public class AlarmManagerBroadcastReceiver extends BroadcastReceiver {
                     long dateStart = cursor.getLong(dateStartColIndex);
                     long dateStop = cursor.getLong(dateStopColIndex);
                     long dateEnd = cursor.getLong(dateEndColIndex);
-                    tasks.add(new Task(id, title, comment, dateStart, dateStop, dateEnd));
+                    long datePause = cursor.getLong(datePauseColIndex);
+                    int maxRuntime = cursor.getInt(maxRuntimeColIndex);
+                    long pauseLengthBeforeStop = cursor.getLong(pauseLengthBeforeStopColIndex);
+                    long pauseLengthAfterStop = cursor.getLong(pauseLengthAfterStopColIndex);
+                    String avatarUri = cursor.getString(avatarUriColIndex);
+                    tasks.add(new Task(id, title, comment, avatarUri, maxRuntime,
+                            dateStart, dateStop, dateEnd, datePause, pauseLengthBeforeStop, pauseLengthAfterStop));
                 } while (cursor.moveToNext());
             }
             cursor.close();
             databaseConnector.close();
         }
-
-        Date currentDate = new Date();
         boolean ifWasChanged = false;
+        Date currentDate = new Date();
         for (int i = 0; i < tasks.size(); i++) {
             Task task = tasks.get(i);
-
-            if (task.getDateEnd() == null && task.getDateStart() != null) {
-                if (task.getDateStop() == null && (currentDate.getTime() - task.getDateStart().getTime()) >= maxRuntime * 60000) {
-                    task.setDateEnd(currentDate);
-                    DatabaseConnector.updateTask(task, context);
-                    ifWasChanged = true;
-                    showNotification(context, task);
-                } else if (task.getDateStop() != null &&
-                        (currentDate.getTime() - task.getDateStop().getTime()) >= maxRuntime * 60000) {
+            if (task.getDateEnd() == null && task.getDateStart() != null && task.getDatePause() == null) {
+                int maxRuntime = task.getMaxRuntime() * 60000;
+                long runtime;
+                if (task.getDateStop() == null)
+                    runtime = currentDate.getTime() - task.getDateStart().getTime() - task.getPauseLengthAfterStop();
+                else
+                    runtime = currentDate.getTime() - task.getDateStop().getTime() - task.getPauseLengthAfterStop();
+                if (maxRuntime <= runtime) {
                     task.setDateEnd(currentDate);
                     DatabaseConnector.updateTask(task, context);
                     ifWasChanged = true;
@@ -87,6 +89,7 @@ public class AlarmManagerBroadcastReceiver extends BroadcastReceiver {
                 }
             }
         }
+
         if (ifWasChanged) {
             Intent i = new Intent("broadCastName");
             Bundle bundle = new Bundle();
@@ -94,36 +97,38 @@ public class AlarmManagerBroadcastReceiver extends BroadcastReceiver {
             i.putExtras(bundle);
             context.sendBroadcast(i);
         }
-        setTimer(context, maxRuntime, tasks);
+        setTimer(context, tasks);
     }
 
 
-    public void setTimer(Context context, int maxRuntime, ArrayList<Task> tasks) {
+    public void setTimer(Context context, ArrayList<Task> tasks) {
         AlarmManager am = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
         Intent intent = new Intent(context, AlarmManagerBroadcastReceiver.class);
 
-        long minStartDate = new Date().getTime();
-
+        long triggerForAlarm = Long.MAX_VALUE;
+        long currentTime = new Date().getTime();
         boolean ifHaveNotCompletedTask = false;
         for (Task task : tasks) {
-            if (task.getDateEnd() == null && task.getDateStart() != null &&
-                    minStartDate >= task.getDateStart().getTime()) {
-                ifHaveNotCompletedTask = true;
-                if (task.getDateStop() != null && minStartDate >= task.getDateStop().getTime())
-                    minStartDate = task.getDateStop().getTime();
+            if (task.getDateEnd() == null && task.getDateStart() != null && task.getDatePause() == null) {
+                int maxRuntime = task.getMaxRuntime() * 60000;
+                long runtime;
+                if (task.getDateStop() == null)
+                    runtime = currentTime - task.getDateStart().getTime() - task.getPauseLengthAfterStop();
                 else
-                    minStartDate = task.getDateStart().getTime();
+                    runtime = currentTime - task.getDateStop().getTime() - task.getPauseLengthAfterStop();
+                if (maxRuntime - runtime < triggerForAlarm) {
+                    triggerForAlarm = maxRuntime - runtime;
+                    ifHaveNotCompletedTask = true;
+                }
             }
         }
-
         if (ifHaveNotCompletedTask) {
             Bundle bundle = new Bundle();
             bundle.putParcelableArrayList(StringKeys.ARRAY_OF_TASKS, tasks);
             intent.putExtras(bundle);
-            intent.putExtra(StringKeys.MAX_RUNTIME_FOR_TASK, maxRuntime);
 
             PendingIntent pi = PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-            am.set(AlarmManager.RTC, (maxRuntime * 60000 + minStartDate), pi);
+            am.set(AlarmManager.RTC, currentTime + triggerForAlarm, pi);
         } else {
             //якщо немає незавершених завдань відміняєм alarm,
             // який міг бути раніше запущений з уже неактуальними даними

@@ -1,15 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:state_pressed="false">
+    <item android:state_enabled="true" android:state_pressed="false">
         <shape android:shape="oval">
             <solid android:color="@color/btn_finish_normal" />
             <stroke android:width="@dimen/btn_stroke_width" android:color="@color/btn_finish_stroke" />
         </shape>
     </item>
-    <item android:state_pressed="true">
+    <item android:state_enabled="true" android:state_pressed="true">
         <shape android:shape="oval">
             <solid android:color="@color/btn_finish_pressed" />
             <stroke android:width="@dimen/btn_stroke_width" android:color="@color/btn_finish_stroke" />
         </shape>
     </item>
+   <!-- <item android:state_enabled="false">
+        <shape android:shape="oval">
+            <solid android:color="#797777" />
+            <stroke android:width="@dimen/btn_stroke_width" android:color="#2a2929" />
+
+        </shape>
+    </item>-->
 </selector>
