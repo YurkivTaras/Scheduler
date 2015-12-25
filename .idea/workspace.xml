@@ -36,11 +36,19 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
+<<<<<<< HEAD
       <file leaf-file-name="ImageLoader.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/utils/ImageLoader.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.21717791">
               <caret line="47" column="5" selection-start-line="47" selection-start-column="5" selection-end-line="47" selection-end-column="5" />
+=======
+      <file leaf-file-name="ImageLoader.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/utils/ImageLoader.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="13" column="19" selection-start-line="13" selection-start-column="19" selection-end-line="13" selection-end-column="19" />
+>>>>>>> 4550f20ca069544e408329688933840dad5ee6d5
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -52,7 +60,11 @@
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/y_taras/scheduler/activity/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
+<<<<<<< HEAD
               <caret line="163" column="0" selection-start-line="163" selection-start-column="0" selection-end-line="163" selection-end-column="0" />
+=======
+              <caret line="359" column="21" selection-start-line="359" selection-start-column="21" selection-end-line="359" selection-end-column="21" />
+>>>>>>> 4550f20ca069544e408329688933840dad5ee6d5
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -64,6 +76,7 @@
         <entry file="file://$PROJECT_DIR$/app/src/main/java/other/Task.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
+<<<<<<< HEAD
               <caret line="17" column="0" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
               <folding />
             </state>
@@ -76,6 +89,51 @@
             <state vertical-scroll-proportion="0.0">
               <caret line="44" column="0" selection-start-line="44" selection-start-column="0" selection-end-line="44" selection-end-column="0" />
               <folding />
+=======
+              <caret line="48" column="11" selection-start-line="48" selection-start-column="11" selection-end-line="48" selection-end-column="11" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DatabaseConnector.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/utils/DatabaseConnector.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="2.1337423">
+              <caret line="103" column="28" selection-start-line="103" selection-start-column="28" selection-end-line="103" selection-end-column="28" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SwipeRecyclerViewAdapter.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/adapter/SwipeRecyclerViewAdapter.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="18" column="12" selection-start-line="18" selection-start-column="12" selection-end-line="18" selection-end-column="12" />
+              <folding>
+                <element signature="e#2529#2530#0" expanded="true" />
+                <element signature="e#2607#2608#0" expanded="true" />
+                <element signature="e#5080#7909#0" expanded="true" />
+                <element signature="e#7908#7909#0" expanded="true" />
+                <element signature="e#8230#11863#0" expanded="true" />
+                <element signature="e#11862#11863#0" expanded="true" />
+                <element signature="e#12243#12244#0" expanded="true" />
+                <element signature="e#12279#12280#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AddScheduleActivity.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/y_taras/scheduler/activity/AddScheduleActivity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="177" column="104" selection-start-line="177" selection-start-column="104" selection-end-line="177" selection-end-column="104" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+>>>>>>> 4550f20ca069544e408329688933840dad5ee6d5
             </state>
           </provider>
         </entry>
@@ -1631,21 +1689,37 @@
         <option value="$PROJECT_DIR$/app/src/main/res/drawable/btn_resume_selector.xml" />
         <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/utils/FileCache.java" />
+<<<<<<< HEAD
         <option value="$PROJECT_DIR$/app/src/main/java/other/StringKeys.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/utils/AlarmManagerBroadcastReceiver.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_add_schedule.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/test.xml" />
+=======
+        <option value="$PROJECT_DIR$/app/src/main/java/other/Task.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/other/StringKeys.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/utils/AlarmManagerBroadcastReceiver.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_add_schedule.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/y_taras/scheduler/activity/MainActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/test.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/utils/DatabaseConnector.java" />
+>>>>>>> 4550f20ca069544e408329688933840dad5ee6d5
         <option value="$PROJECT_DIR$/app/src/main/java/utils/ImageLoader2.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/utils/ImageDownloaderTask.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/utils/TAER.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/row_list_task.xml" />
         <option value="$PROJECT_DIR$/app/build.gradle" />
+<<<<<<< HEAD
         <option value="$PROJECT_DIR$/app/src/main/java/utils/DatabaseConnector.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/other/Task.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/adapter/SwipeRecyclerViewAdapter.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/y_taras/scheduler/activity/AddScheduleActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/y_taras/scheduler/activity/MainActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/utils/ImageLoader.java" />
+=======
+        <option value="$PROJECT_DIR$/app/src/main/java/adapter/SwipeRecyclerViewAdapter.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/utils/ImageLoader.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/y_taras/scheduler/activity/AddScheduleActivity.java" />
+>>>>>>> 4550f20ca069544e408329688933840dad5ee6d5
       </list>
     </option>
   </component>
@@ -1766,6 +1840,7 @@
               <option name="myItemId" value="java" />
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
             </PATH_ELEMENT>
+<<<<<<< HEAD
             <PATH_ELEMENT>
               <option name="myItemId" value="other" />
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
@@ -1806,6 +1881,8 @@
               <option name="myItemId" value="adapter" />
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
             </PATH_ELEMENT>
+=======
+>>>>>>> 4550f20ca069544e408329688933840dad5ee6d5
           </PATH>
         </subPane>
       </pane>
@@ -2011,7 +2088,11 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
+<<<<<<< HEAD
     <frame x="-8" y="0" width="1932" height="1038" extended-state="0" />
+=======
+    <frame x="-8" y="0" width="1932" height="1038" extended-state="1" />
+>>>>>>> 4550f20ca069544e408329688933840dad5ee6d5
     <editor active="true" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -2073,6 +2154,7 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/btn_start_selector.xml">
+<<<<<<< HEAD
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
@@ -2085,6 +2167,20 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/spinner_selector.xml">
       <provider selected="true" editor-type-id="text-editor">
+=======
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#267#292#0" expanded="false" />
+            <element signature="e#515#540#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/spinner_selector.xml">
+      <provider selected="true" editor-type-id="text-editor">
+>>>>>>> 4550f20ca069544e408329688933840dad5ee6d5
         <state vertical-scroll-proportion="0.08118081">
           <caret line="2" column="43" selection-start-line="2" selection-start-column="43" selection-end-line="2" selection-end-column="43" />
           <folding />
@@ -2118,6 +2214,7 @@
           <caret line="76" column="28" selection-start-line="76" selection-start-column="28" selection-end-line="76" selection-end-column="28" />
           <folding />
         </state>
+<<<<<<< HEAD
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/btn_finish_selector.xml">
@@ -2131,6 +2228,21 @@
     <entry file="file://$PROJECT_DIR$/../../sdk/sources/android-22/android/view/GLES20Canvas.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
+=======
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/btn_finish_selector.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="13" column="11" selection-start-line="13" selection-start-column="11" selection-end-line="13" selection-end-column="11" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../sdk/sources/android-22/android/view/GLES20Canvas.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+>>>>>>> 4550f20ca069544e408329688933840dad5ee6d5
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
@@ -2142,6 +2254,7 @@
           <caret line="279" column="16" selection-start-line="279" selection-start-column="16" selection-end-line="279" selection-end-column="16" />
           <folding />
         </state>
+<<<<<<< HEAD
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/btn_resume_selector.xml">
@@ -2219,6 +2332,8 @@
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_add_schedule.xml">
       <provider editor-type-id="android-designer">
         <state />
+=======
+>>>>>>> 4550f20ca069544e408329688933840dad5ee6d5
       </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.28169015">
@@ -2229,18 +2344,80 @@
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="jar://$PROJECT_DIR$/../../sdk/platforms/android-22/android.jar!/java/util/concurrent/TimeUnit.class">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+=======
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/btn_resume_selector.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.10797546">
+          <caret line="4" column="9" selection-start-line="4" selection-start-column="9" selection-end-line="4" selection-end-column="9" />
+>>>>>>> 4550f20ca069544e408329688933840dad5ee6d5
           <folding />
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/app/build.gradle">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.3239264">
           <caret line="12" column="16" selection-start-line="12" selection-start-column="16" selection-end-line="12" selection-end-column="16" />
+=======
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/btn_pause_selector.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0809816">
+          <caret line="3" column="85" selection-start-line="3" selection-start-column="85" selection-end-line="3" selection-end-column="85" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../sdk/sources/android-22/java/lang/Long.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.008588957">
+          <caret line="44" column="29" selection-start-line="44" selection-start-column="29" selection-end-line="44" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../sdk/sources/android-22/android/provider/MediaStore.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33251533">
+          <caret line="990" column="36" selection-start-line="990" selection-start-column="36" selection-end-line="990" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../sdk/sources/android-22/android/net/Uri.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33251533">
+          <caret line="52" column="22" selection-start-line="52" selection-start-column="22" selection-end-line="52" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../sdk/sources/android-22/android/graphics/Bitmap.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.1619632">
+          <caret line="31" column="19" selection-start-line="31" selection-start-column="19" selection-end-line="31" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/other/StringKeys.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.43190184">
+          <caret line="16" column="35" selection-start-line="16" selection-start-column="35" selection-end-line="16" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.24417178">
+          <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
+>>>>>>> 4550f20ca069544e408329688933840dad5ee6d5
           <folding />
         </state>
       </provider>
@@ -2250,6 +2427,7 @@
         <state />
       </provider>
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state vertical-scroll-proportion="0.53521127">
           <caret line="84" column="52" selection-start-line="84" selection-start-column="52" selection-end-line="84" selection-end-column="52" />
           <folding>
@@ -2304,36 +2482,141 @@
             <element signature="e#11861#11862#0" expanded="true" />
             <element signature="e#12242#12243#0" expanded="true" />
             <element signature="e#12278#12279#0" expanded="true" />
+=======
+        <state vertical-scroll-proportion="0.6920245">
+          <caret line="65" column="69" selection-start-line="65" selection-start-column="69" selection-end-line="65" selection-end-column="69" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_add_schedule.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.28169015">
+          <caret line="29" column="57" selection-start-line="24" selection-start-column="12" selection-end-line="29" selection-end-column="57" />
+          <folding>
+            <element signature="e#1139#1160#0" expanded="true" />
+>>>>>>> 4550f20ca069544e408329688933840dad5ee6d5
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/utils/DatabaseConnector.java">
+    <entry file="jar://$PROJECT_DIR$/../../sdk/platforms/android-22/android.jar!/java/util/concurrent/TimeUnit.class">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
+<<<<<<< HEAD
           <caret line="44" column="0" selection-start-line="44" selection-start-column="0" selection-end-line="44" selection-end-column="0" />
+=======
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+>>>>>>> 4550f20ca069544e408329688933840dad5ee6d5
           <folding />
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/app/src/main/java/other/Task.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="17" column="0" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
+=======
+    <entry file="file://$PROJECT_DIR$/app/build.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.3239264">
+          <caret line="12" column="16" selection-start-line="12" selection-start-column="16" selection-end-line="12" selection-end-column="16" />
+>>>>>>> 4550f20ca069544e408329688933840dad5ee6d5
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/y_taras/scheduler/activity/MainActivity.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/row_list_task.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.53521127">
+          <caret line="84" column="52" selection-start-line="84" selection-start-column="52" selection-end-line="84" selection-end-column="52" />
+          <folding>
+            <element signature="e#463#496#0" expanded="true" />
+            <element signature="e#881#895#0" expanded="true" />
+            <element signature="e#1274#1294#0" expanded="true" />
+            <element signature="e#1671#1697#0" expanded="true" />
+            <element signature="e#1873#1905#0" expanded="true" />
+            <element signature="e#2787#2810#0" expanded="true" />
+            <element signature="e#2849#2872#0" expanded="true" />
+            <element signature="e#2968#2989#0" expanded="true" />
+            <element signature="e#3547#3573#0" expanded="true" />
+            <element signature="e#3852#3880#0" expanded="true" />
+            <element signature="e#4316#4351#0" expanded="true" />
+            <element signature="e#4394#4429#0" expanded="true" />
+            <element signature="e#4720#4755#0" expanded="true" />
+            <element signature="e#4798#4833#0" expanded="true" />
+            <element signature="e#5119#5154#0" expanded="true" />
+            <element signature="e#5197#5232#0" expanded="true" />
+            <element signature="e#5327#5351#0" expanded="true" />
+            <element signature="e#5455#5470#0" expanded="true" />
+            <element signature="e#5588#5623#0" expanded="true" />
+            <element signature="e#5666#5701#0" expanded="true" />
+            <element signature="e#5796#5820#0" expanded="true" />
+            <element signature="e#5925#5941#0" expanded="true" />
+            <element signature="e#6286#6311#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/adapter/SwipeRecyclerViewAdapter.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="163" column="0" selection-start-line="163" selection-start-column="0" selection-end-line="163" selection-end-column="0" />
+          <caret line="18" column="12" selection-start-line="18" selection-start-column="12" selection-end-line="18" selection-end-column="12" />
+          <folding>
+            <element signature="e#2529#2530#0" expanded="true" />
+            <element signature="e#2607#2608#0" expanded="true" />
+            <element signature="e#5080#7909#0" expanded="true" />
+            <element signature="e#7908#7909#0" expanded="true" />
+            <element signature="e#8230#11863#0" expanded="true" />
+            <element signature="e#11862#11863#0" expanded="true" />
+            <element signature="e#12243#12244#0" expanded="true" />
+            <element signature="e#12279#12280#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/y_taras/scheduler/activity/AddScheduleActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="177" column="104" selection-start-line="177" selection-start-column="104" selection-end-line="177" selection-end-column="104" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/utils/ImageLoader.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="13" column="19" selection-start-line="13" selection-start-column="19" selection-end-line="13" selection-end-column="19" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/y_taras/scheduler/activity/MainActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+<<<<<<< HEAD
+          <caret line="163" column="0" selection-start-line="163" selection-start-column="0" selection-end-line="163" selection-end-column="0" />
+=======
+          <caret line="359" column="21" selection-start-line="359" selection-start-column="21" selection-end-line="359" selection-end-column="21" />
+>>>>>>> 4550f20ca069544e408329688933840dad5ee6d5
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/app/src/main/java/utils/ImageLoader.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.21717791">
@@ -2343,6 +2626,23 @@
           </folding>
         </state>
       </provider>
+=======
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/other/Task.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="48" column="11" selection-start-line="48" selection-start-column="11" selection-end-line="48" selection-end-column="11" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/utils/DatabaseConnector.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="2.1337423">
+          <caret line="103" column="28" selection-start-line="103" selection-start-column="28" selection-end-line="103" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+>>>>>>> 4550f20ca069544e408329688933840dad5ee6d5
     </entry>
   </component>
 </project>
