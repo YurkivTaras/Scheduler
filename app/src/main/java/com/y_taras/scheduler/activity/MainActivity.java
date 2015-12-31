@@ -13,13 +13,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
+import android.widget.ExpandableListView;
 import android.widget.Spinner;
+import android.widget.TabHost;
 import android.widget.Toast;
 
 import com.daimajia.swipe.util.Attributes;
@@ -27,14 +29,22 @@ import com.example.scheduler.R;
 import com.melnykov.fab.FloatingActionButton;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
+import java.util.concurrent.TimeUnit;
 
+import adapter.CustomExpandableListAdapter;
 import adapter.CustomSpinnerAdapter;
+import adapter.DividerItemDecoration;
 import adapter.SwipeRecyclerViewAdapter;
 import me.drakeet.materialdialog.MaterialDialog;
+import other.Statistic;
 import other.StringKeys;
 import other.Task;
 import utils.AlarmManagerBroadcastReceiver;
@@ -52,6 +62,9 @@ public class MainActivity extends AppCompatActivity {
     private ArrayList<Task> mTasks;
 
     private SwipeRecyclerViewAdapter mSwipeListAdapter;
+    private CustomExpandableListAdapter mExpListAdapter;
+    private ArrayList<ArrayList<Task>> mGroups;
+    private ArrayList<String> mGroupsName;
     private Comparator<Task> mTaskComparator;
 
     private int mCompletedTaskColor;
@@ -60,7 +73,11 @@ public class MainActivity extends AppCompatActivity {
 
     private FloatingActionButton floatBtn;
     private Spinner mSpinnerSort;
+    private TabHost mTabHost;
     private int mSpinnerPos;
+    private String mTabHostPos;
+
+    private Menu mOptionsMenu;
 
     private MaterialDialog mAlertForClear;
     private boolean mIfAlertDWasShown;
@@ -90,11 +107,20 @@ public class MainActivity extends AppCompatActivity {
         Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbarForMainActivity);
         mToolbar.setTitle(R.string.mainToolbarTitle);
         setSupportActionBar(mToolbar);
-        if (savedInstanceState == null)
+        if (savedInstanceState == null) {
             mTasks = new ArrayList<>();
-        else {
+            mGroups = new ArrayList<>();
+            mGroupsName = new ArrayList<>();
+        } else {
             if (savedInstanceState.containsKey(StringKeys.ARRAY_OF_TASKS))
                 mTasks = savedInstanceState.getParcelableArrayList(StringKeys.ARRAY_OF_TASKS);
+            if (savedInstanceState.containsKey(StringKeys.ARRAY_OF_STATISTICS))
+                //noinspection unchecked
+                mGroups = (ArrayList<ArrayList<Task>>) savedInstanceState.getSerializable(StringKeys.ARRAY_OF_STATISTICS);
+            if (savedInstanceState.containsKey(StringKeys.ARRAY_OF_NAMES_FOR_STATISTICS))
+                mGroupsName = savedInstanceState.getStringArrayList(StringKeys.ARRAY_OF_NAMES_FOR_STATISTICS);
+            if (savedInstanceState.containsKey(StringKeys.TAB_HOST_POS))
+                mTabHostPos = savedInstanceState.getString(StringKeys.TAB_HOST_POS);
             if (savedInstanceState.containsKey(AlertBool) && savedInstanceState.getBoolean(AlertBool))
                 showAlertDialogForDelete();
         }
@@ -139,11 +165,27 @@ public class MainActivity extends AppCompatActivity {
         //переключення на попередньо вибраний режим сортування
         mSpinnerSort.setSelection(mSpinnerPos);
 
+        //ініціалізація вкладок (TabHost)
+        mTabHost = (TabHost) findViewById(android.R.id.tabhost);
+        mTabHost.setup();
+        TabHost.TabSpec tabSpec;
+        tabSpec = mTabHost.newTabSpec("tag1");
+        tabSpec.setIndicator("Завдання");
+        tabSpec.setContent(R.id.tab1);
+        mTabHost.addTab(tabSpec);
+        tabSpec = mTabHost.newTabSpec("tag2");
+        tabSpec.setIndicator("Статистика");
+        tabSpec.setContent(R.id.tab2);
+        mTabHost.addTab(tabSpec);
+        //встановлення попередньо вибраної вкладки(при повороті екрану)
+        if (mTabHostPos != null)
+            mTabHost.setCurrentTabByTag(mTabHostPos);
+
         //ініціалізація списку із завданнями
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         LinearLayoutManager llm = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(llm);
-
+        recyclerView.addItemDecoration(new DividerItemDecoration(this, null, true, true));
         mSwipeListAdapter = new SwipeRecyclerViewAdapter(this, mTasks,
                 mNotStartedTaskColor, mStartedTaskColor, mCompletedTaskColor);
         mSwipeListAdapter.setMode(Attributes.Mode.Single);
@@ -155,6 +197,7 @@ public class MainActivity extends AppCompatActivity {
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
             }
+
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
@@ -162,9 +205,16 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        // ініціалізуєм список із статистикою
+        ExpandableListView listView = (ExpandableListView) findViewById(R.id.tab2);
+        mExpListAdapter = new CustomExpandableListAdapter(getApplicationContext(), mGroups, mGroupsName);
+        listView.setAdapter(mExpListAdapter);
+
         alarm = new AlarmManagerBroadcastReceiver();
-        if (savedInstanceState == null)
+        if (savedInstanceState == null) {
             downloadTask();
+            downloadStatistic(false);
+        }
         //ініціалізуєм та регіструєм ресівер, що відловлює повідомлення(broadcast)
         //із автоматично завершеними завданнями
         broadcastReceiver = new BroadcastReceiver() {
@@ -205,6 +255,7 @@ public class MainActivity extends AppCompatActivity {
                 intent.setAction(StringKeys.ADD_TASK);
                 intent.putExtra(StringKeys.MAX_RUNTIME_FOR_TASK, mMaxRuntimeForTask);
                 startActivityForResult(intent, RequestCodeAddTask);
+
             }
         });
     }
@@ -243,13 +294,14 @@ public class MainActivity extends AppCompatActivity {
         if (resultCode == Activity.RESULT_OK) {
             String title = data.getStringExtra(StringKeys.TASK_TITLE);
             String comment = data.getStringExtra(StringKeys.TASK_COMMENT);
+            boolean typeOfTask = data.getBooleanExtra(StringKeys.TYPE_OF_TASK, false);
             int maxRuntime = data.getIntExtra(StringKeys.MAX_RUNTIME_FOR_TASK, mMaxRuntimeForTask);
             String avatarUri = null;
             if (data.hasExtra(StringKeys.BITMAP_AVATAR))
                 avatarUri = data.getStringExtra(StringKeys.BITMAP_AVATAR);
             switch (requestCode) {
                 case RequestCodeAddTask:
-                    Task newTask = new Task(title, comment, maxRuntime);
+                    Task newTask = new Task(title, comment, typeOfTask, maxRuntime);
                     if (avatarUri != null)
                         newTask.setAvatarUri(avatarUri);
                     DatabaseConnector.addTask(newTask, this);
@@ -328,13 +380,18 @@ public class MainActivity extends AppCompatActivity {
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putParcelableArrayList(StringKeys.ARRAY_OF_TASKS, mTasks);
+        outState.putSerializable(StringKeys.ARRAY_OF_STATISTICS, mGroups);
+        outState.putStringArrayList(StringKeys.ARRAY_OF_NAMES_FOR_STATISTICS, mGroupsName);
+        outState.putString(StringKeys.TAB_HOST_POS, mTabHost.getCurrentTabTag());
         outState.putBoolean(AlertBool, mIfAlertDWasShown);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
+        mOptionsMenu = menu;
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_main, menu);
+        return super.onCreateOptionsMenu(menu);
     }
 
     //обробка натисків на елементи toolbar
@@ -342,6 +399,9 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         switch (id) {
+            case R.id.action_refresh:
+                downloadStatistic(true);
+                break;
             case R.id.action_clear:
                 showAlertDialogForDelete();
                 break;
@@ -351,7 +411,8 @@ public class MainActivity extends AppCompatActivity {
                 for (int i = 0; i < 30; i++) {
                     int randomForTitle = random.nextInt(30);
                     int randomForComment = random.nextInt(30);
-                    Task newTask = new Task("Title" + randomForTitle, "Comment" + randomForComment, mMaxRuntimeForTask);
+                    Task newTask = new Task("Title" + randomForTitle, "Comment" + randomForComment,
+                            randomForComment % 2 == 0, mMaxRuntimeForTask);
                     tasks.add(newTask);
                     mTasks.add(newTask);
                 }
@@ -386,7 +447,9 @@ public class MainActivity extends AppCompatActivity {
                     public void onClick(View v) {
                         mIfAlertDWasShown = false;
                         mTasks.clear();
+                        //очищаєм таблиці завдань та статистики
                         DatabaseConnector.deleteAllTasks(getApplicationContext());
+                        DatabaseConnector.deleteAllStatistics(getApplicationContext());
                         mSwipeListAdapter.notifyDataSetChanged();
                         floatBtn.show();
                         mAlertForClear.dismiss();
@@ -448,6 +511,7 @@ public class MainActivity extends AppCompatActivity {
                     int idColIndex = cursor.getColumnIndex(DatabaseConnector.COLUMN_ID);
                     int titleColIndex = cursor.getColumnIndex(DatabaseConnector.COLUMN_TITLE);
                     int commentColIndex = cursor.getColumnIndex(DatabaseConnector.COLUMN_COMMENT);
+                    int typeOfTaskColIndex = cursor.getColumnIndex(DatabaseConnector.COLUMN_TYPE_OF_TASK);
                     int dateStartColIndex = cursor.getColumnIndex(DatabaseConnector.COLUMN_DATA_START);
                     int dateStopColIndex = cursor.getColumnIndex(DatabaseConnector.COLUMN_DATA_STOP);
                     int dateEndColIndex = cursor.getColumnIndex(DatabaseConnector.COLUMN_DATA_END);
@@ -460,6 +524,7 @@ public class MainActivity extends AppCompatActivity {
                         long id = cursor.getLong(idColIndex);
                         String title = cursor.getString(titleColIndex);
                         String comment = cursor.getString(commentColIndex);
+                        boolean typeOfTask = cursor.getInt(typeOfTaskColIndex) == 1;
                         long dateStart = cursor.getLong(dateStartColIndex);
                         long dateStop = cursor.getLong(dateStopColIndex);
                         long dateEnd = cursor.getLong(dateEndColIndex);
@@ -468,7 +533,7 @@ public class MainActivity extends AppCompatActivity {
                         long pauseLengthBeforeStop = cursor.getLong(pauseLengthBeforeStopColIndex);
                         long pauseLengthAfterStop = cursor.getLong(pauseLengthAfterStopColIndex);
                         String avatarUri = cursor.getString(avatarUriColIndex);
-                        mTasks.add(new Task(id, title, comment, avatarUri, maxRuntime,
+                        mTasks.add(new Task(id, title, comment, typeOfTask, avatarUri, maxRuntime,
                                 dateStart, dateStop, dateEnd, datePause, pauseLengthBeforeStop, pauseLengthAfterStop));
                     } while (cursor.moveToNext());
                 }
@@ -478,5 +543,131 @@ public class MainActivity extends AppCompatActivity {
                 setTimer();
             }
         }.execute();
+    }
+
+    //завантаження з бази даних статистики по завданнях
+    private void downloadStatistic(final boolean showProgress) {
+        if (showProgress)
+            setRefreshActionButtonState(true);
+        final DatabaseConnector databaseConnector = new DatabaseConnector(this);
+        databaseConnector.open();
+        final ArrayList<Statistic> statistics = new ArrayList<>();
+        final ArrayList<HashMap<Long, Task>> result = new ArrayList<>();
+        final ArrayList<String> groupsName = new ArrayList<>();
+        new AsyncTask<Void, Void, Void>() {
+            @Override
+            protected Void doInBackground(Void... params) {
+                //перевірка роботи прогресбару
+                try {
+                    TimeUnit.SECONDS.sleep(2);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                Cursor cursor = databaseConnector.getCursorWithAllStatistics();
+                if (cursor.moveToFirst()) {
+                    int idColIndex = cursor.getColumnIndex(DatabaseConnector.COLUMN_TASK_ID);
+                    int dateStartColIndex = cursor.getColumnIndex(DatabaseConnector.COLUMN_DATA_START);
+                    int dateEndColIndex = cursor.getColumnIndex(DatabaseConnector.COLUMN_DATA_END);
+                    int sumPauseLengthColIndex = cursor.getColumnIndex(DatabaseConnector.COLUMN_SUM_PAUSE_LENGTH);
+                    do {
+                        long id = cursor.getLong(idColIndex);
+                        long dateStart = cursor.getLong(dateStartColIndex);
+                        long dateEnd = cursor.getLong(dateEndColIndex);
+                        long sumPauseLength = cursor.getLong(sumPauseLengthColIndex);
+                        statistics.add(new Statistic(id, new Date(dateStart), new Date(dateEnd), sumPauseLength));
+                    } while (cursor.moveToNext());
+                }
+                cursor.close();
+                HashMap<Long, Task> tasks = new HashMap<>();
+                cursor = databaseConnector.getCursorWithPeriodicalTasks();
+
+                if (cursor.moveToFirst()) {
+                    int idColIndex = cursor.getColumnIndex(DatabaseConnector.COLUMN_ID);
+                    int titleColIndex = cursor.getColumnIndex(DatabaseConnector.COLUMN_TITLE);
+                    int commentColIndex = cursor.getColumnIndex(DatabaseConnector.COLUMN_COMMENT);
+                    int avatarUriColIndex = cursor.getColumnIndex(DatabaseConnector.COLUMN_AVATAR_URI);
+                    do {
+                        long id = cursor.getLong(idColIndex);
+                        String title = cursor.getString(titleColIndex);
+                        String comment = cursor.getString(commentColIndex);
+                        String avatarUri = cursor.getString(avatarUriColIndex);
+                        tasks.put(id, new Task(id, title, comment, avatarUri, 0));
+                    } while (cursor.moveToNext());
+                }
+                cursor.close();
+                databaseConnector.close();
+
+                //знаходимо найпізнішу дату
+                Date currentDate = new Date();
+                long lastD = currentDate.getTime();
+                for (Statistic statistic : statistics) {
+                    long date = statistic.getDateStart().getTime();
+                    if (date < lastD)
+                        lastD = date;
+                }
+                Calendar lastDate = new GregorianCalendar();
+                lastDate.setTime(new Date(lastD));
+                Calendar statisticDate = new GregorianCalendar();
+                do {
+                    HashMap<Long, Task> group = new HashMap<>();
+                    for (int i = 0; i < statistics.size(); i++) {
+                        Statistic statistic = statistics.get(i);
+                        if (!statistic.isUsed()) {
+                            statisticDate.setTime(statistic.getDateStart());
+                            if (lastDate.get(Calendar.MONTH) == statisticDate.get(Calendar.MONTH) &&
+                                    lastDate.get(Calendar.YEAR) == statisticDate.get(Calendar.YEAR)) {
+                                statistic.setUsed(true);
+                                long task_id = statistic.getTask_ID();
+                                long runtime = statistic.getDateEnd().getTime() - statistic.getDateStart().getTime() - statistic.getPauseLength();
+                                if (!group.containsKey(task_id)) {
+                                    Task task = tasks.get(task_id);
+                                    group.put(task_id, new Task(task_id, task.getTitle(), task.getComment(), task.getAvatarUri(), runtime));
+                                } else {
+                                    Task task = group.get(task_id);
+                                    task.setRuntime(task.getRuntime() + runtime);
+                                }
+                            }
+                        }
+                    }
+                    if (group.size() != 0) {
+                        result.add(group);
+                        groupsName.add(String.format("%d.%d", lastDate.get(Calendar.MONTH) + 1, lastDate.get(Calendar.YEAR)));
+                    }
+                    lastDate.add(Calendar.MONTH, 1);
+                } while (lastDate.getTime().getTime() <= currentDate.getTime());
+                return null;
+            }
+
+            @Override
+            protected void onPostExecute(Void res) {
+                //заповнюєм масив із назвами для груп
+                mGroupsName.clear();
+                for (String title : groupsName)
+                    mGroupsName.add(title);
+                //заповнюєм масив із даними для статистики
+                mGroups.clear();
+                for (int i = 0; i < result.size(); i++) {
+                    HashMap<Long, Task> map = result.get(i);
+                    ArrayList<Task> group = new ArrayList<>();
+                    for (Map.Entry<Long, Task> me : map.entrySet())
+                        group.add(me.getValue());
+                    mGroups.add(group);
+                }
+                mExpListAdapter.notifyDataSetChanged();
+                if (showProgress)
+                    setRefreshActionButtonState(false);
+            }
+        }.execute();
+    }
+
+    public void setRefreshActionButtonState(final boolean refreshing) {
+        if (mOptionsMenu != null) {
+            final MenuItem refreshItem = mOptionsMenu.findItem(R.id.action_refresh);
+            if (refreshItem != null)
+                if (refreshing)
+                    refreshItem.setActionView(R.layout.refresh_progress);
+                else
+                    refreshItem.setActionView(null);
+        }
     }
 }

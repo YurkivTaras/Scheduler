@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <ImageView
+        android:id="@+id/expListAvatar"
+        android:layout_width="@dimen/list_icon_size"
+        android:layout_height="@dimen/list_icon_size"
+        android:layout_gravity="center_vertical"
+        android:layout_margin="@dimen/avatarMargin" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/expTxtTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black_de"
+            android:textSize="@dimen/listTitle_txtSize"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/expTxtComment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black_de"
+            android:textSize="@dimen/listComment_txtSize"
+            android:textStyle="italic" />
+
+        <TextView
+            android:id="@+id/expTxtRuntime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black_de"
+            android:textSize="@dimen/listDate_txtSize"
+            android:textStyle="bold" />
+    </LinearLayout>
+</LinearLayout>

@@ -41,6 +41,11 @@
     <string name="time_for_task">Час на виконання</string>
     <string name="error_edit_txt_for_maxRuntime">Будь ласка, вкажіть максимальний час виконання</string>
     <string name="notificationContentText">Завдання %s автоматично завершилось</string>
+    <string name="checkBoxText">Періодичне завдання</string>
+    <string name="chooseFromGallery">Обрати з галареї</string>
+    <string name="chooseFromCamera">Загрузити з камери</string>
+    <string name="cancle">Відмінити</string>
+    <string name="actionRefresh">Перерахувати статистику</string>
 
     <string-array name="spinner_items">
         <item>A-Z</item>

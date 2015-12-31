@@ -3,10 +3,11 @@ package other;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.io.Serializable;
 import java.util.Comparator;
 import java.util.Date;
 
-public class Task implements Parcelable {
+public class Task implements Parcelable, Serializable {
     public static final String DEFAULT_AVATAR_URI = "default";
     private long mDatabase_ID;
 
@@ -14,29 +15,36 @@ public class Task implements Parcelable {
     private String mComment;
     private String mAvatarUri;
 
+    private boolean mIfPeriodic;
+
     private int mMaxRuntime;
-    private Date mDateStart;
-    private Date mDateEnd;
-    private Date mDateStop;
-    private Date mDatePause;
+    private Date mDateStart, mDateEnd, mDateStop, mDatePause;
+    //змінна для підрахування статистики
+    private long mRuntime;
+    private long mPauseLengthBeforeStop, mPauseLengthAfterStop;
 
-
-
-    private long mPauseLengthBeforeStop;
-    private long mPauseLengthAfterStop;
-
-    public Task(String title, String comment, int maxRuntime) {
+    public Task(String title, String comment, boolean ifPeriodic, int maxRuntime) {
         mTitle = title;
         mComment = comment;
+        mIfPeriodic = ifPeriodic;
         mMaxRuntime = maxRuntime;
         mAvatarUri = DEFAULT_AVATAR_URI;
     }
 
-    public Task(long id, String title, String comment, String avatarUri, int maxRuntime, long dateStart, long dateStop,
+    public Task(long id, String title, String comment, String avatarUri, long runtime) {
+        mDatabase_ID = id;
+        mTitle = title;
+        mComment = comment;
+        mAvatarUri = avatarUri;
+        mRuntime = runtime;
+    }
+
+    public Task(long id, String title, String comment, boolean ifPeriodic, String avatarUri, int maxRuntime, long dateStart, long dateStop,
                 long dateEnd, long datePause, long pauseLengthBeforeStop, long pauseLengthAfterStop) {
         mDatabase_ID = id;
         mTitle = title;
         mComment = comment;
+        mIfPeriodic = ifPeriodic;
         mAvatarUri = avatarUri;
         mMaxRuntime = maxRuntime;
         mDateStart = dateStart != -1 ? new Date(dateStart) : null;
@@ -51,8 +59,10 @@ public class Task implements Parcelable {
         mDatabase_ID = task.mDatabase_ID;
         mTitle = task.mTitle;
         mComment = task.mComment;
+        mIfPeriodic = task.mIfPeriodic;
         mAvatarUri = task.mAvatarUri;
         mMaxRuntime = task.mMaxRuntime;
+        mRuntime = task.mRuntime;
         mDateStart = task.mDateStart != null ? new Date(task.mDateStart.getTime()) : null;
         mDateStop = task.mDateStop != null ? new Date(task.mDateStop.getTime()) : null;
         mDateEnd = task.mDateEnd != null ? new Date(task.mDateEnd.getTime()) : null;
@@ -65,8 +75,10 @@ public class Task implements Parcelable {
         mDatabase_ID = source.readLong();
         mTitle = source.readString();
         mComment = source.readString();
+        mIfPeriodic = source.readInt() == 1;
         mAvatarUri = source.readString();
         mMaxRuntime = source.readInt();
+        mRuntime = source.readLong();
         mPauseLengthBeforeStop = source.readLong();
         mPauseLengthAfterStop = source.readLong();
 
@@ -206,18 +218,33 @@ public class Task implements Parcelable {
         mAvatarUri = avatarUri;
     }
 
+    public long getRuntime() {
+        return mRuntime;
+    }
+
+    public void setRuntime(long runtime) {
+        this.mRuntime = runtime;
+    }
+
     @Override
     public int describeContents() {
         return 0;
     }
 
+    public boolean isPeriodic() {
+        return mIfPeriodic;
+    }
+
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeLong(mDatabase_ID);
+
         dest.writeString(mTitle);
         dest.writeString(mComment);
+        dest.writeInt(mIfPeriodic ? 1 : 0);
         dest.writeString(mAvatarUri);
         dest.writeInt(mMaxRuntime);
+        dest.writeLong(mRuntime);
         dest.writeLong(mPauseLengthBeforeStop);
         dest.writeLong(mPauseLengthAfterStop);
 

@@ -31,4 +31,11 @@
     <dimen name="avatarSize">100dp</dimen>
     <dimen name="avatarMargin">5dp</dimen>
     <dimen name="list_icon_size">75dp</dimen>
+    <dimen name="editTXTMaxRuntimeWidth">150dp</dimen>
+    <dimen name="checkBoxTopMargin">30dp</dimen>
+    <dimen name="repeatImageViewSize">20dp</dimen>
+    <dimen name="expListGroupHeight">50dp</dimen>
+    <dimen name="expListGroupTxtSize">20sp</dimen>
+    <dimen name="progressRefreshSize">23dp</dimen>
+    <dimen name="menuItemWidth">48dp</dimen>
 </resources>

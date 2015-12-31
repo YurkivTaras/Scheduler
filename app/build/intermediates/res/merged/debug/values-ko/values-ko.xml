@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:ns1="http://schemas.android.com/tools">
     <string msgid="4600421777120114993" name="abc_action_bar_home_description">"홈 탐색"</string>
     <string msgid="1594238315039666878" name="abc_action_bar_up_description">"위로 탐색"</string>
     <string msgid="3588849162933574182" name="abc_action_menu_overflow_description">"옵션 더보기"</string>
@@ -13,4 +13,9 @@
     <string msgid="893419373245838918" name="abc_searchview_description_voice">"음성 검색"</string>
     <string msgid="3421042268587513524" name="abc_shareactionprovider_share_with">"공유 대상"</string>
     <string msgid="7165123711973476752" name="abc_shareactionprovider_share_with_application">"%s와(과) 공유"</string>
+    <string name="crop__cancel" ns1:ignore="ButtonCase">취소</string>
+    <string name="crop__done">확인</string>
+    <string name="crop__pick_error">이미지가 존재하지 않습니다.</string>
+    <string name="crop__saving">사진을 저장중입니다…</string>
+    <string name="crop__wait">잠시만 기다려주세요…</string>
 </resources>

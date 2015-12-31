@@ -5,8 +5,10 @@ import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
+import android.graphics.Matrix;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.provider.MediaStore.Images.Media;
 import android.speech.RecognizerIntent;
 import android.support.design.widget.TextInputLayout;
@@ -18,18 +20,26 @@ import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.scheduler.R;
+import com.soundcloud.android.crop.Crop;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import me.drakeet.materialdialog.MaterialDialog;
 import other.StringKeys;
 import other.Task;
 import utils.ImageLoader;
@@ -39,17 +49,20 @@ public class AddScheduleActivity extends AppCompatActivity {
     private TextInputLayout mInputLayoutTitle, mInputLayoutComment;
     private EditText mTitle, mComment, mMaxRuntime;
     private ImageView mAvatar;
+    private CheckBox mTypeOfTask;
     private Bitmap mBtmAvatar;
     private Bitmap mEditBtmAvatar;
     private String mAction;
     private int mPosTask;
     private String mEditAvatarUri;
-
+    private Uri cropImgUri;
+    private MaterialDialog mAlertForImgPick;
     private ImageButton mBtn_titleVoiceInput, mBtn_CommentVoiceInput;
     private boolean mIfNotAvailableVoiceInput;
     private static final int requestCodeForTitle = 1;
     private static final int requestCodeForComment = 2;
     private static final int requestCodeForGallery = 3;
+    private static final int requestCodeForCamera = 4;
     private Toast mToast;
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,13 +79,14 @@ public class AddScheduleActivity extends AppCompatActivity {
         mComment = (EditText) findViewById(R.id.editTxtComment);
         mMaxRuntime = (EditText) findViewById(R.id.editTxtMaxRuntime);
         mAvatar = (ImageView) findViewById(R.id.imageViewAvatar);
+        mTypeOfTask = (CheckBox) findViewById(R.id.typeOfTaskCheckBox);
 
         mAvatar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
-                photoPickerIntent.setType("image/*");
-                startActivityForResult(photoPickerIntent, requestCodeForGallery);
+
+                showAlertDialogForPickAvatar();
+
             }
         });
         if (savedInstanceState != null) {
@@ -120,6 +134,8 @@ public class AddScheduleActivity extends AppCompatActivity {
             mTitle.setText(intent.getStringExtra(StringKeys.TASK_TITLE));
             mComment.setText(intent.getStringExtra(StringKeys.TASK_COMMENT));
             mEditAvatarUri = intent.getStringExtra(StringKeys.BITMAP_AVATAR);
+            mTypeOfTask.setChecked(intent.getBooleanExtra(StringKeys.TYPE_OF_TASK, false));
+            mTypeOfTask.setEnabled(false);
             if (savedInstanceState == null && !mEditAvatarUri.equals(Task.DEFAULT_AVATAR_URI)) {
                 mEditBtmAvatar = ImageLoader.loadImage(mEditAvatarUri);
                 mAvatar.setImageBitmap(mEditBtmAvatar);
@@ -165,11 +181,17 @@ public class AddScheduleActivity extends AppCompatActivity {
                         mComment.setText(Query);
                     }
                     break;
+                case requestCodeForCamera:
                 case requestCodeForGallery:
                     Uri selectedImage = data.getData();
+                    cropImgUri = Uri.fromFile(new File(getCacheDir(), "cropped"));
+                    Crop.of(selectedImage, cropImgUri).asSquare().start(this);
+                    break;
+                case Crop.REQUEST_CROP:
                     mBtmAvatar = null;
                     try {
-                        mBtmAvatar = Media.getBitmap(getContentResolver(), selectedImage);
+                        cropImgUri = Uri.fromFile(new File(getCacheDir(), "cropped"));
+                        mBtmAvatar = Media.getBitmap(getContentResolver(), cropImgUri);
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
@@ -177,8 +199,11 @@ public class AddScheduleActivity extends AppCompatActivity {
                     //конвертуєм 100dp в px
                     int px = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 100, resources.getDisplayMetrics());
                     mBtmAvatar = Bitmap.createScaledBitmap(mBtmAvatar, px, px, true);
+                    //повернення іконки
+                   /* Matrix matrix = new Matrix();
+                    matrix.postRotate(270);
+                    mBtmAvatar = Bitmap.createBitmap(mBtmAvatar, 0, 0, mBtmAvatar.getWidth(), mBtmAvatar.getHeight(), matrix, true);*/
                     mAvatar.setImageBitmap(mBtmAvatar);
-                    break;
             }
         } else if (resultCode == RecognizerIntent.RESULT_NETWORK_ERROR) {
             if (mToast != null)
@@ -229,6 +254,7 @@ public class AddScheduleActivity extends AppCompatActivity {
                     intent.putExtra(StringKeys.MAX_RUNTIME_FOR_TASK, maxRuntime.length() == 0 ? 0 : Integer.parseInt(maxRuntime));
                     intent.putExtra(StringKeys.TASK_TITLE, mTitle.getText().toString());
                     intent.putExtra(StringKeys.TASK_COMMENT, mComment.getText().toString());
+                    intent.putExtra(StringKeys.TYPE_OF_TASK, mTypeOfTask.isChecked());
                     setResult(RESULT_OK, intent);
                     finish();
                 }
@@ -237,6 +263,44 @@ public class AddScheduleActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    //показ діалога для встановлення способу завантаження іконки для завдання
+    private void showAlertDialogForPickAvatar() {
+        final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1);
+        arrayAdapter.add(getString(R.string.chooseFromGallery));
+        arrayAdapter.add(getString(R.string.chooseFromCamera));
+        ListView listView = new ListView(this);
+        listView.setLayoutParams(new ViewGroup.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.MATCH_PARENT));
+
+        listView.setDividerHeight(1);
+        listView.setAdapter(arrayAdapter);
+
+        final MaterialDialog alert = new MaterialDialog(this).
+                setContentView(listView);
+        alert.setNegativeButton(getString(R.string.cancle), new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alert.dismiss();
+            }
+        });
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapter, View v, int position,
+                                    long arg3) {
+                alert.dismiss();
+                if (position == 0) {
+                    Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
+                    photoPickerIntent.setType("image/*");
+                    startActivityForResult(photoPickerIntent, requestCodeForGallery);
+                } else {
+                    Intent takePicture = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                    startActivityForResult(takePicture, requestCodeForCamera);
+                }
+            }
+        });
+        alert.show();
+    }
 
     private boolean validateTitle() {
         int length = mTitle.getText().toString().trim().length();

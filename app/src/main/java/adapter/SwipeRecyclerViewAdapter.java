@@ -24,6 +24,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 
+import other.Statistic;
 import other.StringKeys;
 import other.Task;
 import utils.DatabaseConnector;
@@ -58,10 +59,14 @@ public class SwipeRecyclerViewAdapter extends RecyclerSwipeAdapter<SwipeRecycler
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
-
         final Task task = mTasks.get(position);
         holder.mTaskTitle.setText(task.getTitle());
         holder.mTaskComment.setText(task.getComment());
+        if (task.isPeriodic())
+            holder.mIfRepeat.setImageResource(R.drawable.repeat_icon);
+        else
+            holder.mIfRepeat.setImageDrawable(null);
+        //загрузка іконки для завдання
         if (!task.getAvatarUri().equals(Task.DEFAULT_AVATAR_URI)) {
             new AsyncTask<String, Void, Bitmap>() {
                 @Override
@@ -78,19 +83,27 @@ public class SwipeRecyclerViewAdapter extends RecyclerSwipeAdapter<SwipeRecycler
             holder.mTaskAvatar.setImageResource(R.drawable.default_avatar);
         String sTaskDate = "";
         if (task.getDateEnd() != null) {
-            holder.mViewItem.setBackgroundColor(mCompletedTaskColor);
-            holder.mBtnStart.setVisibility(View.INVISIBLE);
-            holder.mBtnFinish.setVisibility(View.GONE);
-            holder.mBtnPause.setVisibility(View.GONE);
-            holder.mBtnResume.setVisibility(View.GONE);
+            if (task.isPeriodic()) {
+                holder.mViewItem.setBackgroundColor(mNotStartedTaskColor);
+                holder.mBtnPause.setVisibility(View.GONE);
+                holder.mBtnResume.setVisibility(View.GONE);
+                holder.mBtnStart.setVisibility(View.VISIBLE);
+                holder.mBtnFinish.setVisibility(View.GONE);
+            } else {
+                holder.mViewItem.setBackgroundColor(mCompletedTaskColor);
+                holder.mBtnStart.setVisibility(View.INVISIBLE);
+                holder.mBtnFinish.setVisibility(View.GONE);
+                holder.mBtnPause.setVisibility(View.GONE);
+                holder.mBtnResume.setVisibility(View.GONE);
 
-            long spentTime = task.getDateEnd().getTime() - task.getDateStart().getTime() -
-                    task.getPauseLengthAfterStop() - task.getPauseLengthBeforeStop();
-            long spentHours = (int) (spentTime / (1000 * 60 * 60));
-            long spentMinute = (int) (spentTime - spentHours * 1000 * 60 * 60) / 60000;
-            sTaskDate = mDateFormat.format(task.getDateStart()) + " - " +
-                    mDateFormat.format(task.getDateEnd()) +
-                    " " + String.format("%02d:%02d", spentHours, spentMinute);
+                long spentTime = task.getDateEnd().getTime() - task.getDateStart().getTime() -
+                        task.getPauseLengthAfterStop() - task.getPauseLengthBeforeStop();
+                int spentHours = (int) (spentTime / (1000 * 60 * 60));
+                int spentMinute = (int) (spentTime - spentHours * 1000 * 60 * 60) / 60000;
+                sTaskDate = mDateFormat.format(task.getDateStart()) + " - " +
+                        mDateFormat.format(task.getDateEnd()) +
+                        " " + String.format("%02d:%02d", spentHours, spentMinute);
+            }
         } else if (task.getDateStart() != null) {
             holder.mViewItem.setBackgroundColor(mStartedTaskColor);
             sTaskDate = mDateFormat.format(task.getDateStart());
@@ -120,10 +133,17 @@ public class SwipeRecyclerViewAdapter extends RecyclerSwipeAdapter<SwipeRecycler
             public void onClick(View v) {
                 if (holder.swipeLayout.getOpenStatus() == SwipeLayout.Status.Close) {
                     Task clickTask = mTasks.get(position);
+                    closeAllItems();
                     switch (v.getId()) {
                         case R.id.btnStart:
-                            if (clickTask.getDateStart() == null) {
+                            if (clickTask.getDateStart() == null || clickTask.isPeriodic()) {
                                 clickTask.setDateStart(new Date());
+                                clickTask.setDateStop(null);
+                                clickTask.setDateEnd(null);
+                                clickTask.setDatePause(null);
+                                clickTask.setPauseLengthBeforeStop(0);
+                                clickTask.setPauseLengthAfterStop(0);
+
                                 DatabaseConnector.updateTask(clickTask, mMainActivity);
                                 mMainActivity.sortTasks();
                                 mMainActivity.setTimer();
@@ -134,12 +154,17 @@ public class SwipeRecyclerViewAdapter extends RecyclerSwipeAdapter<SwipeRecycler
                                 clickTask.setDateEnd(new Date());
                                 notifyItemChanged(position);
                                 DatabaseConnector.updateTask(clickTask, mMainActivity);
+                                //якщо завдання періодичне - добавляєм до таблці статистики нові дані
+                                if (clickTask.isPeriodic())
+                                    DatabaseConnector.addStatistic(clickTask.getDatabase_ID(),
+                                            clickTask.getDateStart().getTime(), clickTask.getDateEnd().getTime(),
+                                            clickTask.getPauseLengthAfterStop() + clickTask.getPauseLengthBeforeStop(), mMainActivity);
                                 //запускаєм новий таймер,щоби двічі на закривався clickTask
                                 mMainActivity.setTimer();
                             }
                             break;
                         case R.id.btnPause:
-                            if (task.getDateEnd() == null) {
+                            if (clickTask.getDateEnd() == null) {
                                 clickTask.setDatePause(new Date());
                                 notifyItemChanged(position);
                                 DatabaseConnector.updateTask(clickTask, mMainActivity);
@@ -184,11 +209,17 @@ public class SwipeRecyclerViewAdapter extends RecyclerSwipeAdapter<SwipeRecycler
                         //запускаєм новий таймер,щоби на закривався таск, який уже був видалений
                         mMainActivity.setTimer();
                         //видаляєм файл з уже непотрібною іконкою
-                        ImageLoader.delete(task.getAvatarUri());
+                        ImageLoader.delete(clickTask.getAvatarUri());
                         DatabaseConnector.deleteTask(clickTask.getDatabase_ID(), mMainActivity);
+                        //видаляєм з таблиці статистики дані по видаленому завданню
+                        DatabaseConnector.deleteStatistic(clickTask.getDatabase_ID(), mMainActivity);
                         break;
                     case R.id.tvResetStart:
                         if (clickTask.getDateStart() != null) {
+                            //видаляєм останні дані статистики якщо завдання періодичне і
+                            // було завершеним(тобто було збережено статистику)
+                            if (clickTask.isPeriodic() && clickTask.getDateEnd() != null)
+                                DatabaseConnector.deleteLastStatistic(clickTask.getDatabase_ID(), mMainActivity);
                             clickTask.setDateStart(null);
                             clickTask.setDateStop(null);
                             clickTask.setDateEnd(null);
@@ -196,6 +227,7 @@ public class SwipeRecyclerViewAdapter extends RecyclerSwipeAdapter<SwipeRecycler
                             clickTask.setPauseLengthBeforeStop(0);
                             clickTask.setPauseLengthAfterStop(0);
                             DatabaseConnector.updateTask(clickTask, mMainActivity);
+
                             mMainActivity.sortTasks();
                             //запускаєм новий таймер,щоби на закривався таск,
                             //який уже перейшов в стан нерозпочатого
@@ -214,6 +246,9 @@ public class SwipeRecyclerViewAdapter extends RecyclerSwipeAdapter<SwipeRecycler
                             clickTask.setDateStop(currentDate);
                             notifyItemChanged(position);
                             DatabaseConnector.updateTask(clickTask, mMainActivity);
+                            //видаляєм останні дані статистики якщо завдання періодичне
+                            if (clickTask.isPeriodic())
+                                DatabaseConnector.deleteLastStatistic(clickTask.getDatabase_ID(), mMainActivity);
                             //запускаєм новий таймер, щоби зареєструвати таск,
                             //завершення якого було відхилено
                             mMainActivity.setTimer();
@@ -225,6 +260,7 @@ public class SwipeRecyclerViewAdapter extends RecyclerSwipeAdapter<SwipeRecycler
                         intent.putExtra(StringKeys.TASK_POSITION, position);
                         intent.putExtra(StringKeys.TASK_TITLE, clickTask.getTitle());
                         intent.putExtra(StringKeys.TASK_COMMENT, clickTask.getComment());
+                        intent.putExtra(StringKeys.TYPE_OF_TASK, clickTask.isPeriodic());
                         intent.putExtra(StringKeys.MAX_RUNTIME_FOR_TASK, clickTask.getMaxRuntime());
                         intent.putExtra(StringKeys.BITMAP_AVATAR, clickTask.getAvatarUri());
                         mMainActivity.startActivityForResult(intent, MainActivity.REQUEST_CODE_EDIT_TASK);
@@ -253,6 +289,7 @@ public class SwipeRecyclerViewAdapter extends RecyclerSwipeAdapter<SwipeRecycler
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView mTaskTitle;
         TextView mTaskComment;
+        ImageView mIfRepeat;
         ImageView mTaskAvatar;
         TextView mTaskDate;
         View mViewItem;
@@ -274,6 +311,7 @@ public class SwipeRecyclerViewAdapter extends RecyclerSwipeAdapter<SwipeRecycler
             mViewItem = itemView;
             mTaskTitle = (TextView) itemView.findViewById(R.id.txtListTitle);
             mTaskComment = (TextView) itemView.findViewById(R.id.txtListComment);
+            mIfRepeat = (ImageView) itemView.findViewById(R.id.ifRepeatImageView);
             mTaskAvatar = (ImageView) itemView.findViewById(R.id.listAvatar);
             mTaskDate = (TextView) itemView.findViewById(R.id.txtListDate);
             mBtnStart = (Button) itemView.findViewById(R.id.btnStart);

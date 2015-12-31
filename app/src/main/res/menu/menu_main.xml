@@ -23,7 +23,12 @@
         android:orderInCategory="300"
         android:title="@string/action_generate"
         app:showAsAction="never" />
-
+    <item
+        android:id="@+id/action_refresh"
+        android:icon="@drawable/refresh"
+        android:orderInCategory="200"
+        android:title="@string/actionRefresh"
+        app:showAsAction="always" />
     <item
         android:id="@+id/action_sort"
         android:icon="@drawable/ic_swap_vert_black"

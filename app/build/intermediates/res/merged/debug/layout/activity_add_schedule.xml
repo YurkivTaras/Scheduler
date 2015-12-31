@@ -89,7 +89,7 @@
 
             <android.support.design.widget.TextInputLayout
                 android:id="@+id/inputLayoutMaxRuntime"
-                android:layout_width="100dp"
+                android:layout_width="@dimen/editTXTMaxRuntimeWidth"
                 android:layout_height="wrap_content">
 
                 <EditText
@@ -100,6 +100,14 @@
                     android:inputType="number"
                     android:maxLength="3" />
             </android.support.design.widget.TextInputLayout>
+
+            <CheckBox
+                android:id="@+id/typeOfTaskCheckBox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/checkBoxTopMargin"
+                android:text="@string/checkBoxText" />
+
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

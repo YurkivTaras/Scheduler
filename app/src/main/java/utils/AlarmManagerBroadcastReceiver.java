@@ -43,6 +43,7 @@ public class AlarmManagerBroadcastReceiver extends BroadcastReceiver {
                 int idColIndex = cursor.getColumnIndex(DatabaseConnector.COLUMN_ID);
                 int titleColIndex = cursor.getColumnIndex(DatabaseConnector.COLUMN_TITLE);
                 int commentColIndex = cursor.getColumnIndex(DatabaseConnector.COLUMN_COMMENT);
+                int typeOfTaskColIndex = cursor.getColumnIndex(DatabaseConnector.COLUMN_TYPE_OF_TASK);
                 int dateStartColIndex = cursor.getColumnIndex(DatabaseConnector.COLUMN_DATA_START);
                 int dateStopColIndex = cursor.getColumnIndex(DatabaseConnector.COLUMN_DATA_STOP);
                 int dateEndColIndex = cursor.getColumnIndex(DatabaseConnector.COLUMN_DATA_END);
@@ -55,6 +56,7 @@ public class AlarmManagerBroadcastReceiver extends BroadcastReceiver {
                     long id = cursor.getLong(idColIndex);
                     String title = cursor.getString(titleColIndex);
                     String comment = cursor.getString(commentColIndex);
+                    boolean typeOfTask = cursor.getInt(typeOfTaskColIndex) == 1;
                     long dateStart = cursor.getLong(dateStartColIndex);
                     long dateStop = cursor.getLong(dateStopColIndex);
                     long dateEnd = cursor.getLong(dateEndColIndex);
@@ -63,7 +65,7 @@ public class AlarmManagerBroadcastReceiver extends BroadcastReceiver {
                     long pauseLengthBeforeStop = cursor.getLong(pauseLengthBeforeStopColIndex);
                     long pauseLengthAfterStop = cursor.getLong(pauseLengthAfterStopColIndex);
                     String avatarUri = cursor.getString(avatarUriColIndex);
-                    tasks.add(new Task(id, title, comment, avatarUri, maxRuntime,
+                    tasks.add(new Task(id, title, comment, typeOfTask, avatarUri, maxRuntime,
                             dateStart, dateStop, dateEnd, datePause, pauseLengthBeforeStop, pauseLengthAfterStop));
                 } while (cursor.moveToNext());
             }
@@ -84,6 +86,12 @@ public class AlarmManagerBroadcastReceiver extends BroadcastReceiver {
                 if (maxRuntime <= runtime) {
                     task.setDateEnd(currentDate);
                     DatabaseConnector.updateTask(task, context);
+                    //якщо завдання періодичне - добавляєм до таблці статистики нові дані
+                    if (task.isPeriodic())
+                        DatabaseConnector.addStatistic(task.getDatabase_ID(),
+                                task.getDateStart().getTime(), task.getDateEnd().getTime(),
+                                task.getPauseLengthAfterStop() + task.getPauseLengthBeforeStop(),
+                                context);
                     ifWasChanged = true;
                     showNotification(context, task);
                 }

@@ -8,40 +8,40 @@ package me.drakeet.materialdialog;
 
 public final class R {
 	public static final class color {
-		public static final int black_de = 0x7f0b000a;
-		public static final int card_background = 0x7f0b0019;
-		public static final int card_shadow = 0x7f0b001a;
-		public static final int lite_blue = 0x7f0b0034;
-		public static final int window_background = 0x7f0b005d;
+		public static final int black_de = 0x7f0a000b;
+		public static final int card_background = 0x7f0a001a;
+		public static final int card_shadow = 0x7f0a001b;
+		public static final int lite_blue = 0x7f0a0038;
+		public static final int window_background = 0x7f0a0061;
 	}
 	public static final class dimen {
-		public static final int activity_horizontal_margin = 0x7f06001a;
-		public static final int activity_vertical_margin = 0x7f06004b;
+		public static final int activity_horizontal_margin = 0x7f06001b;
+		public static final int activity_vertical_margin = 0x7f06004c;
 	}
 	public static final class drawable {
 		public static final int button = 0x7f020046;
-		public static final int material_card = 0x7f020059;
-		public static final int material_card_nos = 0x7f02005a;
-		public static final int material_card_nos_pressed = 0x7f02005b;
-		public static final int material_dialog_window = 0x7f02005c;
+		public static final int material_card = 0x7f02005f;
+		public static final int material_card_nos = 0x7f020060;
+		public static final int material_card_nos_pressed = 0x7f020061;
+		public static final int material_dialog_window = 0x7f020062;
 	}
 	public static final class id {
-		public static final int btn_n = 0x7f0c0094;
-		public static final int btn_p = 0x7f0c0095;
-		public static final int buttonLayout = 0x7f0c0093;
-		public static final int contentView = 0x7f0c008f;
-		public static final int material_background = 0x7f0c008e;
-		public static final int message = 0x7f0c0092;
-		public static final int message_content_root = 0x7f0c0090;
-		public static final int message_content_view = 0x7f0c0091;
-		public static final int title = 0x7f0c0046;
+		public static final int btn_n = 0x7f0c00a1;
+		public static final int btn_p = 0x7f0c00a2;
+		public static final int buttonLayout = 0x7f0c00a0;
+		public static final int contentView = 0x7f0c009c;
+		public static final int material_background = 0x7f0c009b;
+		public static final int message = 0x7f0c009f;
+		public static final int message_content_root = 0x7f0c009d;
+		public static final int message_content_view = 0x7f0c009e;
+		public static final int title = 0x7f0c0047;
 	}
 	public static final class layout {
-		public static final int layout_materialdialog = 0x7f030024;
+		public static final int layout_materialdialog = 0x7f030028;
 	}
 	public static final class string {
-		public static final int action_settings = 0x7f050013;
-		public static final int app_name = 0x7f050017;
-		public static final int hello_world = 0x7f050027;
+		public static final int action_settings = 0x7f050019;
+		public static final int app_name = 0x7f05001d;
+		public static final int hello_world = 0x7f050031;
 	}
 }
