@@ -1,8 +1,6 @@
 package adapter;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.os.AsyncTask;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +11,7 @@ import android.widget.TextView;
 import com.example.scheduler.R;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import other.Task;
 import utils.ImageLoader;
@@ -66,17 +65,17 @@ public class CustomExpandableListAdapter extends BaseExpandableListAdapter {
 
     @Override
     public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
-
         if (convertView == null) {
             LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = inflater.inflate(R.layout.group_view_exp_list, parent, false);
+            ViewHolder holder = new ViewHolder();
+            holder.addView(convertView.findViewById(R.id.textGroup));
+            convertView.setTag(holder);
         }
-
-        TextView textGroup = (TextView) convertView.findViewById(R.id.textGroup);
+        ViewHolder holder = (ViewHolder) convertView.getTag();
+        TextView textGroup = (TextView) holder.getView(R.id.textGroup);
         textGroup.setText(mGroupsName.get(groupPosition));
-
         return convertView;
-
     }
 
     @Override
@@ -85,13 +84,20 @@ public class CustomExpandableListAdapter extends BaseExpandableListAdapter {
         if (convertView == null) {
             LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = inflater.inflate(R.layout.child_view_exp_list, parent, false);
+            ViewHolder holder = new ViewHolder();
+            holder.addView(convertView.findViewById(R.id.expTxtTitle));
+            holder.addView(convertView.findViewById(R.id.expTxtComment));
+            holder.addView(convertView.findViewById(R.id.expTxtRuntime));
+            holder.addView(convertView.findViewById(R.id.expListAvatar));
+            convertView.setTag(holder);
         }
         Task task = mGroups.get(groupPosition).get(childPosition);
 
-        TextView title = (TextView) convertView.findViewById(R.id.expTxtTitle);
-        TextView comment = (TextView) convertView.findViewById(R.id.expTxtComment);
-        TextView runtime = (TextView) convertView.findViewById(R.id.expTxtRuntime);
-        final ImageView avatar = (ImageView) convertView.findViewById(R.id.expListAvatar);
+        ViewHolder holder = (ViewHolder) convertView.getTag();
+        TextView title = (TextView) holder.getView(R.id.expTxtTitle);
+        TextView comment = (TextView) holder.getView(R.id.expTxtComment);
+        TextView runtime = (TextView) holder.getView(R.id.expTxtRuntime);
+        final ImageView avatar = (ImageView) holder.getView(R.id.expListAvatar);
         if (!task.getAvatarUri().equals(Task.DEFAULT_AVATAR_URI)) {
             avatar.setImageBitmap(ImageLoader.loadImage(task.getAvatarUri()));
         } else
@@ -109,5 +115,23 @@ public class CustomExpandableListAdapter extends BaseExpandableListAdapter {
     @Override
     public boolean isChildSelectable(int groupPosition, int childPosition) {
         return true;
+    }
+
+    public class ViewHolder {
+        private HashMap<Integer, View> mStoredViews;
+
+        public ViewHolder() {
+            mStoredViews = new HashMap<>();
+        }
+
+        public ViewHolder addView(View view) {
+            int id = view.getId();
+            mStoredViews.put(id, view);
+            return this;
+        }
+
+        public View getView(int id) {
+            return mStoredViews.get(id);
+        }
     }
 }
