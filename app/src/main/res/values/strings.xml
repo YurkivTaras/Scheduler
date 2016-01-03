@@ -44,7 +44,7 @@
     <string name="checkBoxText">Періодичне завдання</string>
     <string name="chooseFromGallery">Обрати з галареї</string>
     <string name="chooseFromCamera">Загрузити з камери</string>
-    <string name="cancle">Відмінити</string>
+    <string name="cancel">Відмінити</string>
     <string name="actionRefresh">Перерахувати статистику</string>
 
     <string-array name="spinner_items">
@@ -53,5 +53,18 @@
         <item>Date up</item>
         <item>Date down</item>
     </string-array>
-
+    <string-array name="names_of_months">
+        <item>Січень</item>
+        <item>Лютий</item>
+        <item>Березень</item>
+        <item>Квітень</item>
+        <item>Травень</item>
+        <item>Червень</item>
+        <item>Липень</item>
+        <item>Серпень</item>
+        <item>Вересень</item>
+        <item>Жовтень</item>
+        <item>Листопад</item>
+        <item>Грудень</item>
+    </string-array>
 </resources>

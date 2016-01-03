@@ -13,6 +13,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -447,6 +448,7 @@ public class MainActivity extends AppCompatActivity {
                     public void onClick(View v) {
                         mIfAlertDWasShown = false;
                         mTasks.clear();
+
                         //очищаєм таблиці завдань та статистики
                         DatabaseConnector.deleteAllTasks(getApplicationContext());
                         DatabaseConnector.deleteAllStatistics(getApplicationContext());
@@ -554,12 +556,13 @@ public class MainActivity extends AppCompatActivity {
         final ArrayList<Statistic> statistics = new ArrayList<>();
         final ArrayList<HashMap<Long, Task>> result = new ArrayList<>();
         final ArrayList<String> groupsName = new ArrayList<>();
+        final String[] months = getResources().getStringArray(R.array.names_of_months);
         new AsyncTask<Void, Void, Void>() {
             @Override
             protected Void doInBackground(Void... params) {
                 //перевірка роботи прогресбару
                 try {
-                    TimeUnit.SECONDS.sleep(2);
+                    TimeUnit.SECONDS.sleep(1);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -574,13 +577,14 @@ public class MainActivity extends AppCompatActivity {
                         long dateStart = cursor.getLong(dateStartColIndex);
                         long dateEnd = cursor.getLong(dateEndColIndex);
                         long sumPauseLength = cursor.getLong(sumPauseLengthColIndex);
+                        // Log.d("=============", "id=" + id + "start=" + new Date(dateStart) + "end=" + new Date(dateEnd) + "pause=" + sumPauseLength);
                         statistics.add(new Statistic(id, new Date(dateStart), new Date(dateEnd), sumPauseLength));
                     } while (cursor.moveToNext());
                 }
                 cursor.close();
+                //заповнюєм масив з усіма періодичними тасками
                 HashMap<Long, Task> tasks = new HashMap<>();
                 cursor = databaseConnector.getCursorWithPeriodicalTasks();
-
                 if (cursor.moveToFirst()) {
                     int idColIndex = cursor.getColumnIndex(DatabaseConnector.COLUMN_ID);
                     int titleColIndex = cursor.getColumnIndex(DatabaseConnector.COLUMN_TITLE);
@@ -598,16 +602,17 @@ public class MainActivity extends AppCompatActivity {
                 databaseConnector.close();
 
                 //знаходимо найпізнішу дату
-                Date currentDate = new Date();
-                long lastD = currentDate.getTime();
+                long lastD = new Date().getTime();
                 for (Statistic statistic : statistics) {
                     long date = statistic.getDateStart().getTime();
                     if (date < lastD)
                         lastD = date;
                 }
-                Calendar lastDate = new GregorianCalendar();
+
+                Calendar lastDate = Calendar.getInstance();
                 lastDate.setTime(new Date(lastD));
-                Calendar statisticDate = new GregorianCalendar();
+                Calendar statisticDate = Calendar.getInstance();
+                Calendar currentDate = Calendar.getInstance();
                 do {
                     HashMap<Long, Task> group = new HashMap<>();
                     for (int i = 0; i < statistics.size(); i++) {
@@ -631,10 +636,13 @@ public class MainActivity extends AppCompatActivity {
                     }
                     if (group.size() != 0) {
                         result.add(group);
-                        groupsName.add(String.format("%d.%d", lastDate.get(Calendar.MONTH) + 1, lastDate.get(Calendar.YEAR)));
+                        groupsName.add(String.format("%s %d", months[lastDate.get(Calendar.MONTH)], lastDate.get(Calendar.YEAR)));
                     }
                     lastDate.add(Calendar.MONTH, 1);
-                } while (lastDate.getTime().getTime() <= currentDate.getTime());
+                }
+                while ((lastDate.get(Calendar.MONTH) <= currentDate.get(Calendar.MONTH) &&
+                        lastDate.get(Calendar.YEAR) <= currentDate.get(Calendar.YEAR)) ||
+                        lastDate.get(Calendar.YEAR) < currentDate.get(Calendar.YEAR));
                 return null;
             }
 
@@ -651,6 +659,7 @@ public class MainActivity extends AppCompatActivity {
                     ArrayList<Task> group = new ArrayList<>();
                     for (Map.Entry<Long, Task> me : map.entrySet())
                         group.add(me.getValue());
+                    Collections.sort(group, mTaskComparator);
                     mGroups.add(group);
                 }
                 mExpListAdapter.notifyDataSetChanged();

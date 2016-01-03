@@ -16,7 +16,8 @@ int anim right_out 0x7f04000e
 int anim snackbar_in 0x7f04000f
 int anim snackbar_out 0x7f040010
 int anim translate 0x7f040011
-int array spinner_items 0x7f0b0000
+int array names_of_months 0x7f0b0000
+int array spinner_items 0x7f0b0001
 int attr actionBarDivider 0x7f0100ae
 int attr actionBarItemBackground 0x7f0100af
 int attr actionBarPopupTheme 0x7f0100a8
@@ -959,7 +960,7 @@ int string appbar_scrolling_view_behavior 0x7f05001e
 int string backgroundForNotCompletedTask 0x7f05001f
 int string backgroundForNotStartedTask 0x7f050020
 int string backgroundForStartedTask 0x7f050021
-int string cancle 0x7f050022
+int string cancel 0x7f050022
 int string checkBoxText 0x7f050023
 int string chooseFromCamera 0x7f050024
 int string chooseFromGallery 0x7f050025

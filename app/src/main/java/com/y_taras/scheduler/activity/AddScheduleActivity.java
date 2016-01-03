@@ -278,7 +278,7 @@ public class AddScheduleActivity extends AppCompatActivity {
 
         final MaterialDialog alert = new MaterialDialog(this).
                 setContentView(listView);
-        alert.setNegativeButton(getString(R.string.cancle), new View.OnClickListener() {
+        alert.setNegativeButton(getString(R.string.cancel), new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 alert.dismiss();

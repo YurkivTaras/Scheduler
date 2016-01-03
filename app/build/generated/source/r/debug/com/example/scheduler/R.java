@@ -29,7 +29,8 @@ public final class R {
         public static final int translate=0x7f040011;
     }
     public static final class array {
-        public static final int spinner_items=0x7f0b0000;
+        public static final int names_of_months=0x7f0b0000;
+        public static final int spinner_items=0x7f0b0001;
     }
     public static final class attr {
         /** <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
@@ -2644,7 +2645,7 @@ containing a value of this type.
         public static final int backgroundForNotCompletedTask=0x7f05001f;
         public static final int backgroundForNotStartedTask=0x7f050020;
         public static final int backgroundForStartedTask=0x7f050021;
-        public static final int cancle=0x7f050022;
+        public static final int cancel=0x7f050022;
         public static final int checkBoxText=0x7f050023;
         public static final int chooseFromCamera=0x7f050024;
         public static final int chooseFromGallery=0x7f050025;
