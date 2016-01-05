@@ -2324,17 +2324,18 @@ containing a value of this type.
         public static final int material_card_nos=0x7f020060;
         public static final int material_card_nos_pressed=0x7f020061;
         public static final int material_dialog_window=0x7f020062;
-        public static final int notification_template_icon_bg=0x7f02006d;
+        public static final int notification_template_icon_bg=0x7f02006e;
         public static final int pause_btn_normal=0x7f020063;
         public static final int pause_btn_pressed=0x7f020064;
-        public static final int refresh=0x7f020065;
-        public static final int repeat_icon=0x7f020066;
-        public static final int resume_btn_normal=0x7f020067;
-        public static final int resume_btn_pressed=0x7f020068;
-        public static final int snackbar_background=0x7f020069;
-        public static final int spinner_selector=0x7f02006a;
-        public static final int splash=0x7f02006b;
-        public static final int voice_input=0x7f02006c;
+        public static final int placeholder=0x7f020065;
+        public static final int refresh=0x7f020066;
+        public static final int repeat_icon=0x7f020067;
+        public static final int resume_btn_normal=0x7f020068;
+        public static final int resume_btn_pressed=0x7f020069;
+        public static final int snackbar_background=0x7f02006a;
+        public static final int spinner_selector=0x7f02006b;
+        public static final int splash=0x7f02006c;
+        public static final int voice_input=0x7f02006d;
     }
     public static final class id {
         public static final int action0=0x7f0c00a5;

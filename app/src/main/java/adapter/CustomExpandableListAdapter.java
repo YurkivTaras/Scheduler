@@ -8,6 +8,7 @@ import android.widget.BaseExpandableListAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.scheduler.R;
 
 import java.util.ArrayList;
@@ -97,9 +98,14 @@ public class CustomExpandableListAdapter extends BaseExpandableListAdapter {
         TextView title = (TextView) holder.getView(R.id.expTxtTitle);
         TextView comment = (TextView) holder.getView(R.id.expTxtComment);
         TextView runtime = (TextView) holder.getView(R.id.expTxtRuntime);
-        final ImageView avatar = (ImageView) holder.getView(R.id.expListAvatar);
+        ImageView avatar = (ImageView) holder.getView(R.id.expListAvatar);
+        //загрузка іконки для завдання
         if (!task.getAvatarUri().equals(Task.DEFAULT_AVATAR_URI)) {
-            avatar.setImageBitmap(ImageLoader.loadImage(task.getAvatarUri()));
+            Glide.with(mContext)
+                    .load(task.getAvatarUri())
+                    .placeholder(R.drawable.pause_btn_normal)
+                    .crossFade()
+                    .into(avatar);
         } else
             avatar.setImageResource(R.drawable.default_avatar);
         title.setText(task.getTitle());

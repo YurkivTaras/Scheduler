@@ -172,6 +172,10 @@
         "source": "D:\\Android\\AndroidStudioWorkspace\\Scheduler\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\22.2.0\\res\\drawable\\abc_switch_thumb_material.xml"
     },
     {
+        "merged": "D:\\Android\\AndroidStudioWorkspace\\Scheduler\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\placeholder.png",
+        "source": "D:\\Android\\AndroidStudioWorkspace\\Scheduler\\app\\src\\main\\res\\drawable\\placeholder.png"
+    },
+    {
         "merged": "D:\\Android\\AndroidStudioWorkspace\\Scheduler\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\material_dialog_window.xml",
         "source": "D:\\Android\\AndroidStudioWorkspace\\Scheduler\\app\\build\\intermediates\\exploded-aar\\me.drakeet.materialdialog\\library\\1.2.8\\res\\drawable\\material_dialog_window.xml"
     },

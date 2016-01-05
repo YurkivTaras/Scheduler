@@ -1,10 +1,13 @@
 package com.y_taras.scheduler.activity;
 
 import android.app.Activity;
+import android.app.LoaderManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.CursorLoader;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.Loader;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.AsyncTask;
@@ -13,7 +16,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -34,7 +36,6 @@ import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
@@ -49,16 +50,18 @@ import other.Statistic;
 import other.StringKeys;
 import other.Task;
 import utils.AlarmManagerBroadcastReceiver;
+import utils.AnimatedTabHostListener;
 import utils.DatabaseConnector;
 import utils.ImageLoader;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
 
     private static final String AlertBool = "alertBool";
     private static final int TimeForExit = 3500;
     private static final int RequestCodeAddTask = 1;
     public static final int REQUEST_CODE_EDIT_TASK = 2;
     private static final int RequestCodeSettings = 3;
+    private static final int AllTasksLoaderID = 1;
     private static long timeBackPressed;
     private ArrayList<Task> mTasks;
 
@@ -89,6 +92,8 @@ public class MainActivity extends AppCompatActivity {
     private BroadcastReceiver broadcastReceiver;
     private int mMaxRuntimeForTask;
 
+    private DatabaseConnector mDatabaseConnector;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -102,9 +107,12 @@ public class MainActivity extends AppCompatActivity {
         unregisterReceiver(broadcastReceiver);
         if (mAlertForClear != null)
             mAlertForClear.dismiss();
+        mDatabaseConnector.close();
     }
 
     private void initUI(Bundle savedInstanceState) {
+        mDatabaseConnector = new DatabaseConnector(this);
+        mDatabaseConnector.open();
         Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbarForMainActivity);
         mToolbar.setTitle(R.string.mainToolbarTitle);
         setSupportActionBar(mToolbar);
@@ -178,6 +186,8 @@ public class MainActivity extends AppCompatActivity {
         tabSpec.setIndicator("Статистика");
         tabSpec.setContent(R.id.tab2);
         mTabHost.addTab(tabSpec);
+        //встановлення анімації при зміні вкладки
+        mTabHost.setOnTabChangedListener(new AnimatedTabHostListener(getApplicationContext(), mTabHost));
         //встановлення попередньо вибраної вкладки(при повороті екрану)
         if (mTabHostPos != null)
             mTabHost.setCurrentTabByTag(mTabHostPos);
@@ -212,10 +222,15 @@ public class MainActivity extends AppCompatActivity {
         listView.setAdapter(mExpListAdapter);
 
         alarm = new AlarmManagerBroadcastReceiver();
+
         if (savedInstanceState == null) {
-            downloadTask();
+            //downloadTask();
+            // створюєм лоадер для читання даних
+            getLoaderManager().initLoader(AllTasksLoaderID, null, this);
+            getLoaderManager().getLoader(AllTasksLoaderID).forceLoad();
             downloadStatistic(false);
         }
+
         //ініціалізуєм та регіструєм ресівер, що відловлює повідомлення(broadcast)
         //із автоматично завершеними завданнями
         broadcastReceiver = new BroadcastReceiver() {
@@ -497,56 +512,6 @@ public class MainActivity extends AppCompatActivity {
         alarm.setTimer(this.getApplicationContext(), mTasks);
     }
 
-    //завантаження завдань з бази даних
-    private void downloadTask() {
-        final DatabaseConnector databaseConnector = new DatabaseConnector(this);
-        databaseConnector.open();
-        new AsyncTask<Void, Void, Cursor>() {
-            @Override
-            protected Cursor doInBackground(Void... params) {
-                return databaseConnector.getCursorWithAllTasks();
-            }
-
-            @Override
-            protected void onPostExecute(Cursor cursor) {
-                if (cursor.moveToFirst()) {
-                    int idColIndex = cursor.getColumnIndex(DatabaseConnector.COLUMN_ID);
-                    int titleColIndex = cursor.getColumnIndex(DatabaseConnector.COLUMN_TITLE);
-                    int commentColIndex = cursor.getColumnIndex(DatabaseConnector.COLUMN_COMMENT);
-                    int typeOfTaskColIndex = cursor.getColumnIndex(DatabaseConnector.COLUMN_TYPE_OF_TASK);
-                    int dateStartColIndex = cursor.getColumnIndex(DatabaseConnector.COLUMN_DATA_START);
-                    int dateStopColIndex = cursor.getColumnIndex(DatabaseConnector.COLUMN_DATA_STOP);
-                    int dateEndColIndex = cursor.getColumnIndex(DatabaseConnector.COLUMN_DATA_END);
-                    int datePauseColIndex = cursor.getColumnIndex(DatabaseConnector.COLUMN_DATA_PAUSE);
-                    int maxRuntimeColIndex = cursor.getColumnIndex(DatabaseConnector.COLUMN_MAX_RUNTIME);
-                    int pauseLengthBeforeStopColIndex = cursor.getColumnIndex(DatabaseConnector.COLUMN_PAUSE_LENGTH_BEFORE_STOP);
-                    int pauseLengthAfterStopColIndex = cursor.getColumnIndex(DatabaseConnector.COLUMN_PAUSE_LENGTH_AFTER_STOP);
-                    int avatarUriColIndex = cursor.getColumnIndex(DatabaseConnector.COLUMN_AVATAR_URI);
-                    do {
-                        long id = cursor.getLong(idColIndex);
-                        String title = cursor.getString(titleColIndex);
-                        String comment = cursor.getString(commentColIndex);
-                        boolean typeOfTask = cursor.getInt(typeOfTaskColIndex) == 1;
-                        long dateStart = cursor.getLong(dateStartColIndex);
-                        long dateStop = cursor.getLong(dateStopColIndex);
-                        long dateEnd = cursor.getLong(dateEndColIndex);
-                        long datePause = cursor.getLong(datePauseColIndex);
-                        int maxRuntime = cursor.getInt(maxRuntimeColIndex);
-                        long pauseLengthBeforeStop = cursor.getLong(pauseLengthBeforeStopColIndex);
-                        long pauseLengthAfterStop = cursor.getLong(pauseLengthAfterStopColIndex);
-                        String avatarUri = cursor.getString(avatarUriColIndex);
-                        mTasks.add(new Task(id, title, comment, typeOfTask, avatarUri, maxRuntime,
-                                dateStart, dateStop, dateEnd, datePause, pauseLengthBeforeStop, pauseLengthAfterStop));
-                    } while (cursor.moveToNext());
-                }
-                cursor.close();
-                databaseConnector.close();
-                sortTasks();
-                setTimer();
-            }
-        }.execute();
-    }
-
     //завантаження з бази даних статистики по завданнях
     private void downloadStatistic(final boolean showProgress) {
         if (showProgress)
@@ -677,6 +642,69 @@ public class MainActivity extends AppCompatActivity {
                     refreshItem.setActionView(R.layout.refresh_progress);
                 else
                     refreshItem.setActionView(null);
+        }
+    }
+
+    @Override
+    public Loader<Cursor> onCreateLoader(int id, Bundle args) {
+        if (id == AllTasksLoaderID)
+            return new TasksCursorLoader(this, mDatabaseConnector);
+        else return null;
+    }
+
+    @Override
+    public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
+        if (loader.getId() == AllTasksLoaderID) {
+            if (data.moveToFirst()) {
+                int idColIndex = data.getColumnIndex(DatabaseConnector.COLUMN_ID);
+                int titleColIndex = data.getColumnIndex(DatabaseConnector.COLUMN_TITLE);
+                int commentColIndex = data.getColumnIndex(DatabaseConnector.COLUMN_COMMENT);
+                int typeOfTaskColIndex = data.getColumnIndex(DatabaseConnector.COLUMN_TYPE_OF_TASK);
+                int dateStartColIndex = data.getColumnIndex(DatabaseConnector.COLUMN_DATA_START);
+                int dateStopColIndex = data.getColumnIndex(DatabaseConnector.COLUMN_DATA_STOP);
+                int dateEndColIndex = data.getColumnIndex(DatabaseConnector.COLUMN_DATA_END);
+                int datePauseColIndex = data.getColumnIndex(DatabaseConnector.COLUMN_DATA_PAUSE);
+                int maxRuntimeColIndex = data.getColumnIndex(DatabaseConnector.COLUMN_MAX_RUNTIME);
+                int pauseLengthBeforeStopColIndex = data.getColumnIndex(DatabaseConnector.COLUMN_PAUSE_LENGTH_BEFORE_STOP);
+                int pauseLengthAfterStopColIndex = data.getColumnIndex(DatabaseConnector.COLUMN_PAUSE_LENGTH_AFTER_STOP);
+                int avatarUriColIndex = data.getColumnIndex(DatabaseConnector.COLUMN_AVATAR_URI);
+                do {
+                    long id = data.getLong(idColIndex);
+                    String title = data.getString(titleColIndex);
+                    String comment = data.getString(commentColIndex);
+                    boolean typeOfTask = data.getInt(typeOfTaskColIndex) == 1;
+                    long dateStart = data.getLong(dateStartColIndex);
+                    long dateStop = data.getLong(dateStopColIndex);
+                    long dateEnd = data.getLong(dateEndColIndex);
+                    long datePause = data.getLong(datePauseColIndex);
+                    int maxRuntime = data.getInt(maxRuntimeColIndex);
+                    long pauseLengthBeforeStop = data.getLong(pauseLengthBeforeStopColIndex);
+                    long pauseLengthAfterStop = data.getLong(pauseLengthAfterStopColIndex);
+                    String avatarUri = data.getString(avatarUriColIndex);
+                    mTasks.add(new Task(id, title, comment, typeOfTask, avatarUri, maxRuntime,
+                            dateStart, dateStop, dateEnd, datePause, pauseLengthBeforeStop, pauseLengthAfterStop));
+                } while (data.moveToNext());
+            }
+            sortTasks();
+            setTimer();
+        }
+    }
+
+    @Override
+    public void onLoaderReset(Loader<Cursor> loader) {
+    }
+
+    static class TasksCursorLoader extends CursorLoader {
+        DatabaseConnector db;
+
+        public TasksCursorLoader(Context context, DatabaseConnector db) {
+            super(context);
+            this.db = db;
+        }
+
+        @Override
+        public Cursor loadInBackground() {
+            return db.getCursorWithAllTasks();
         }
     }
 }

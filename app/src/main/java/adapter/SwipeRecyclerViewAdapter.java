@@ -13,6 +13,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.daimajia.swipe.SwipeLayout;
 import com.daimajia.swipe.adapters.RecyclerSwipeAdapter;
 import com.example.scheduler.R;
@@ -68,17 +69,11 @@ public class SwipeRecyclerViewAdapter extends RecyclerSwipeAdapter<SwipeRecycler
             holder.mIfRepeat.setImageDrawable(null);
         //загрузка іконки для завдання
         if (!task.getAvatarUri().equals(Task.DEFAULT_AVATAR_URI)) {
-            new AsyncTask<String, Void, Bitmap>() {
-                @Override
-                protected Bitmap doInBackground(String... params) {
-                    return ImageLoader.loadImage(params[0]);
-                }
-
-                @Override
-                protected void onPostExecute(Bitmap img) {
-                    holder.mTaskAvatar.setImageBitmap(img);
-                }
-            }.execute(task.getAvatarUri());
+            Glide.with(mMainActivity)
+                    .load(task.getAvatarUri())
+                    .placeholder(R.drawable.placeholder)
+                    .crossFade()
+                    .into(holder.mTaskAvatar);
         } else
             holder.mTaskAvatar.setImageResource(R.drawable.default_avatar);
         String sTaskDate = "";
