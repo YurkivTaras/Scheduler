@@ -2,8 +2,6 @@ package adapter;
 
 
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.os.AsyncTask;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,7 +15,7 @@ import com.bumptech.glide.Glide;
 import com.daimajia.swipe.SwipeLayout;
 import com.daimajia.swipe.adapters.RecyclerSwipeAdapter;
 import com.example.scheduler.R;
-import com.y_taras.scheduler.activity.AddScheduleActivity;
+import com.y_taras.scheduler.activity.AddTaskActivity;
 import com.y_taras.scheduler.activity.MainActivity;
 
 import java.text.SimpleDateFormat;
@@ -25,7 +23,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 
-import other.Statistic;
 import other.StringKeys;
 import other.Task;
 import utils.DatabaseConnector;
@@ -67,6 +64,10 @@ public class SwipeRecyclerViewAdapter extends RecyclerSwipeAdapter<SwipeRecycler
             holder.mIfRepeat.setImageResource(R.drawable.repeat_icon);
         else
             holder.mIfRepeat.setImageDrawable(null);
+        if (task.hasMapPoint())
+            holder.mTaskAvatarMapPin.setImageResource(R.drawable.map_pin);
+        else
+            holder.mTaskAvatarMapPin.setImageDrawable(null);
         //загрузка іконки для завдання
         if (!task.getAvatarUri().equals(Task.DEFAULT_AVATAR_URI)) {
             Glide.with(mMainActivity)
@@ -250,7 +251,7 @@ public class SwipeRecyclerViewAdapter extends RecyclerSwipeAdapter<SwipeRecycler
                         }
                         break;
                     case R.id.tvEdit:
-                        Intent intent = new Intent(mMainActivity, AddScheduleActivity.class);
+                        Intent intent = new Intent(mMainActivity, AddTaskActivity.class);
                         intent.setAction(StringKeys.EDIT_TASK);
                         intent.putExtra(StringKeys.TASK_POSITION, position);
                         intent.putExtra(StringKeys.TASK_TITLE, clickTask.getTitle());
@@ -258,6 +259,11 @@ public class SwipeRecyclerViewAdapter extends RecyclerSwipeAdapter<SwipeRecycler
                         intent.putExtra(StringKeys.TYPE_OF_TASK, clickTask.isPeriodic());
                         intent.putExtra(StringKeys.MAX_RUNTIME_FOR_TASK, clickTask.getMaxRuntime());
                         intent.putExtra(StringKeys.BITMAP_AVATAR, clickTask.getAvatarUri());
+                        intent.putExtra(StringKeys.MAP_POINT, clickTask.hasMapPoint());
+                        if (clickTask.hasMapPoint()) {
+                            intent.putExtra(StringKeys.LATITUDE, task.getLatitude());
+                            intent.putExtra(StringKeys.LONGITUDE, task.getLongitude());
+                        }
                         mMainActivity.startActivityForResult(intent, MainActivity.REQUEST_CODE_EDIT_TASK);
                         break;
                 }
@@ -286,6 +292,7 @@ public class SwipeRecyclerViewAdapter extends RecyclerSwipeAdapter<SwipeRecycler
         TextView mTaskComment;
         ImageView mIfRepeat;
         ImageView mTaskAvatar;
+        ImageView mTaskAvatarMapPin;
         TextView mTaskDate;
         View mViewItem;
         Button mBtnStart;
@@ -308,6 +315,7 @@ public class SwipeRecyclerViewAdapter extends RecyclerSwipeAdapter<SwipeRecycler
             mTaskComment = (TextView) itemView.findViewById(R.id.txtListComment);
             mIfRepeat = (ImageView) itemView.findViewById(R.id.ifRepeatImageView);
             mTaskAvatar = (ImageView) itemView.findViewById(R.id.listAvatar);
+            mTaskAvatarMapPin = (ImageView) itemView.findViewById(R.id.listAvatarMapPin);
             mTaskDate = (TextView) itemView.findViewById(R.id.txtListDate);
             mBtnStart = (Button) itemView.findViewById(R.id.btnStart);
             mBtnFinish = (Button) itemView.findViewById(R.id.btnFinish);

@@ -1,7 +1,39 @@
 [
     {
+        "merged": "D:\\Android\\AndroidStudioWorkspace\\Scheduler\\app\\build\\intermediates\\res\\merged\\debug\\anim\\left_out_map_activity.xml",
+        "source": "D:\\Android\\AndroidStudioWorkspace\\Scheduler\\app\\src\\main\\res\\anim\\left_out_map_activity.xml"
+    },
+    {
+        "merged": "D:\\Android\\AndroidStudioWorkspace\\Scheduler\\app\\build\\intermediates\\res\\merged\\debug\\anim\\abc_slide_in_top.xml",
+        "source": "D:\\Android\\AndroidStudioWorkspace\\Scheduler\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\anim\\abc_slide_in_top.xml"
+    },
+    {
+        "merged": "D:\\Android\\AndroidStudioWorkspace\\Scheduler\\app\\build\\intermediates\\res\\merged\\debug\\anim\\left_in_map_activity.xml",
+        "source": "D:\\Android\\AndroidStudioWorkspace\\Scheduler\\app\\src\\main\\res\\anim\\left_in_map_activity.xml"
+    },
+    {
+        "merged": "D:\\Android\\AndroidStudioWorkspace\\Scheduler\\app\\build\\intermediates\\res\\merged\\debug\\anim\\snackbar_out.xml",
+        "source": "D:\\Android\\AndroidStudioWorkspace\\Scheduler\\app\\build\\intermediates\\exploded-aar\\com.android.support\\design\\22.2.1\\res\\anim\\snackbar_out.xml"
+    },
+    {
+        "merged": "D:\\Android\\AndroidStudioWorkspace\\Scheduler\\app\\build\\intermediates\\res\\merged\\debug\\anim\\abc_fade_in.xml",
+        "source": "D:\\Android\\AndroidStudioWorkspace\\Scheduler\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\anim\\abc_fade_in.xml"
+    },
+    {
+        "merged": "D:\\Android\\AndroidStudioWorkspace\\Scheduler\\app\\build\\intermediates\\res\\merged\\debug\\anim\\design_snackbar_in.xml",
+        "source": "D:\\Android\\AndroidStudioWorkspace\\Scheduler\\app\\build\\intermediates\\exploded-aar\\com.android.support\\design\\23.1.1\\res\\anim\\design_snackbar_in.xml"
+    },
+    {
+        "merged": "D:\\Android\\AndroidStudioWorkspace\\Scheduler\\app\\build\\intermediates\\res\\merged\\debug\\anim\\abc_grow_fade_in_from_bottom.xml",
+        "source": "D:\\Android\\AndroidStudioWorkspace\\Scheduler\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\anim\\abc_grow_fade_in_from_bottom.xml"
+    },
+    {
+        "merged": "D:\\Android\\AndroidStudioWorkspace\\Scheduler\\app\\build\\intermediates\\res\\merged\\debug\\anim\\abc_slide_out_bottom.xml",
+        "source": "D:\\Android\\AndroidStudioWorkspace\\Scheduler\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\anim\\abc_slide_out_bottom.xml"
+    },
+    {
         "merged": "D:\\Android\\AndroidStudioWorkspace\\Scheduler\\app\\build\\intermediates\\res\\merged\\debug\\anim\\abc_popup_exit.xml",
-        "source": "D:\\Android\\AndroidStudioWorkspace\\Scheduler\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\22.2.0\\res\\anim\\abc_popup_exit.xml"
+        "source": "D:\\Android\\AndroidStudioWorkspace\\Scheduler\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\anim\\abc_popup_exit.xml"
     },
     {
         "merged": "D:\\Android\\AndroidStudioWorkspace\\Scheduler\\app\\build\\intermediates\\res\\merged\\debug\\anim\\translate.xml",
@@ -9,31 +41,27 @@
     },
     {
         "merged": "D:\\Android\\AndroidStudioWorkspace\\Scheduler\\app\\build\\intermediates\\res\\merged\\debug\\anim\\abc_slide_in_bottom.xml",
-        "source": "D:\\Android\\AndroidStudioWorkspace\\Scheduler\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\22.2.0\\res\\anim\\abc_slide_in_bottom.xml"
+        "source": "D:\\Android\\AndroidStudioWorkspace\\Scheduler\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\anim\\abc_slide_in_bottom.xml"
     },
     {
         "merged": "D:\\Android\\AndroidStudioWorkspace\\Scheduler\\app\\build\\intermediates\\res\\merged\\debug\\anim\\fab_in.xml",
-        "source": "D:\\Android\\AndroidStudioWorkspace\\Scheduler\\app\\build\\intermediates\\exploded-aar\\com.android.support\\design\\22.2.0\\res\\anim\\fab_in.xml"
+        "source": "D:\\Android\\AndroidStudioWorkspace\\Scheduler\\app\\build\\intermediates\\exploded-aar\\com.android.support\\design\\22.2.1\\res\\anim\\fab_in.xml"
     },
     {
         "merged": "D:\\Android\\AndroidStudioWorkspace\\Scheduler\\app\\build\\intermediates\\res\\merged\\debug\\anim\\abc_fade_out.xml",
-        "source": "D:\\Android\\AndroidStudioWorkspace\\Scheduler\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\22.2.0\\res\\anim\\abc_fade_out.xml"
-    },
-    {
-        "merged": "D:\\Android\\AndroidStudioWorkspace\\Scheduler\\app\\build\\intermediates\\res\\merged\\debug\\anim\\abc_slide_in_top.xml",
-        "source": "D:\\Android\\AndroidStudioWorkspace\\Scheduler\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\22.2.0\\res\\anim\\abc_slide_in_top.xml"
+        "source": "D:\\Android\\AndroidStudioWorkspace\\Scheduler\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\anim\\abc_fade_out.xml"
     },
     {
         "merged": "D:\\Android\\AndroidStudioWorkspace\\Scheduler\\app\\build\\intermediates\\res\\merged\\debug\\anim\\right_in.xml",
         "source": "D:\\Android\\AndroidStudioWorkspace\\Scheduler\\app\\src\\main\\res\\anim\\right_in.xml"
     },
     {
-        "merged": "D:\\Android\\AndroidStudioWorkspace\\Scheduler\\app\\build\\intermediates\\res\\merged\\debug\\anim\\abc_shrink_fade_out_from_bottom.xml",
-        "source": "D:\\Android\\AndroidStudioWorkspace\\Scheduler\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\22.2.0\\res\\anim\\abc_shrink_fade_out_from_bottom.xml"
-    },
-    {
         "merged": "D:\\Android\\AndroidStudioWorkspace\\Scheduler\\app\\build\\intermediates\\res\\merged\\debug\\anim\\right_out.xml",
         "source": "D:\\Android\\AndroidStudioWorkspace\\Scheduler\\app\\src\\main\\res\\anim\\right_out.xml"
+    },
+    {
+        "merged": "D:\\Android\\AndroidStudioWorkspace\\Scheduler\\app\\build\\intermediates\\res\\merged\\debug\\anim\\abc_shrink_fade_out_from_bottom.xml",
+        "source": "D:\\Android\\AndroidStudioWorkspace\\Scheduler\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\anim\\abc_shrink_fade_out_from_bottom.xml"
     },
     {
         "merged": "D:\\Android\\AndroidStudioWorkspace\\Scheduler\\app\\build\\intermediates\\res\\merged\\debug\\anim\\design_snackbar_out.xml",
@@ -44,8 +72,12 @@
         "source": "D:\\Android\\AndroidStudioWorkspace\\Scheduler\\app\\src\\main\\res\\anim\\alpha.xml"
     },
     {
+        "merged": "D:\\Android\\AndroidStudioWorkspace\\Scheduler\\app\\build\\intermediates\\res\\merged\\debug\\anim\\right_in_add_task_activity.xml",
+        "source": "D:\\Android\\AndroidStudioWorkspace\\Scheduler\\app\\src\\main\\res\\anim\\right_in_add_task_activity.xml"
+    },
+    {
         "merged": "D:\\Android\\AndroidStudioWorkspace\\Scheduler\\app\\build\\intermediates\\res\\merged\\debug\\anim\\abc_popup_enter.xml",
-        "source": "D:\\Android\\AndroidStudioWorkspace\\Scheduler\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\22.2.0\\res\\anim\\abc_popup_enter.xml"
+        "source": "D:\\Android\\AndroidStudioWorkspace\\Scheduler\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\anim\\abc_popup_enter.xml"
     },
     {
         "merged": "D:\\Android\\AndroidStudioWorkspace\\Scheduler\\app\\build\\intermediates\\res\\merged\\debug\\anim\\design_fab_out.xml",
@@ -56,35 +88,19 @@
         "source": "D:\\Android\\AndroidStudioWorkspace\\Scheduler\\app\\build\\intermediates\\exploded-aar\\com.android.support\\design\\23.1.1\\res\\anim\\design_fab_in.xml"
     },
     {
-        "merged": "D:\\Android\\AndroidStudioWorkspace\\Scheduler\\app\\build\\intermediates\\res\\merged\\debug\\anim\\snackbar_out.xml",
-        "source": "D:\\Android\\AndroidStudioWorkspace\\Scheduler\\app\\build\\intermediates\\exploded-aar\\com.android.support\\design\\22.2.0\\res\\anim\\snackbar_out.xml"
-    },
-    {
         "merged": "D:\\Android\\AndroidStudioWorkspace\\Scheduler\\app\\build\\intermediates\\res\\merged\\debug\\anim\\abc_slide_out_top.xml",
-        "source": "D:\\Android\\AndroidStudioWorkspace\\Scheduler\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\22.2.0\\res\\anim\\abc_slide_out_top.xml"
-    },
-    {
-        "merged": "D:\\Android\\AndroidStudioWorkspace\\Scheduler\\app\\build\\intermediates\\res\\merged\\debug\\anim\\abc_fade_in.xml",
-        "source": "D:\\Android\\AndroidStudioWorkspace\\Scheduler\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\22.2.0\\res\\anim\\abc_fade_in.xml"
-    },
-    {
-        "merged": "D:\\Android\\AndroidStudioWorkspace\\Scheduler\\app\\build\\intermediates\\res\\merged\\debug\\anim\\design_snackbar_in.xml",
-        "source": "D:\\Android\\AndroidStudioWorkspace\\Scheduler\\app\\build\\intermediates\\exploded-aar\\com.android.support\\design\\23.1.1\\res\\anim\\design_snackbar_in.xml"
-    },
-    {
-        "merged": "D:\\Android\\AndroidStudioWorkspace\\Scheduler\\app\\build\\intermediates\\res\\merged\\debug\\anim\\abc_grow_fade_in_from_bottom.xml",
-        "source": "D:\\Android\\AndroidStudioWorkspace\\Scheduler\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\22.2.0\\res\\anim\\abc_grow_fade_in_from_bottom.xml"
+        "source": "D:\\Android\\AndroidStudioWorkspace\\Scheduler\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\anim\\abc_slide_out_top.xml"
     },
     {
         "merged": "D:\\Android\\AndroidStudioWorkspace\\Scheduler\\app\\build\\intermediates\\res\\merged\\debug\\anim\\snackbar_in.xml",
-        "source": "D:\\Android\\AndroidStudioWorkspace\\Scheduler\\app\\build\\intermediates\\exploded-aar\\com.android.support\\design\\22.2.0\\res\\anim\\snackbar_in.xml"
+        "source": "D:\\Android\\AndroidStudioWorkspace\\Scheduler\\app\\build\\intermediates\\exploded-aar\\com.android.support\\design\\22.2.1\\res\\anim\\snackbar_in.xml"
     },
     {
         "merged": "D:\\Android\\AndroidStudioWorkspace\\Scheduler\\app\\build\\intermediates\\res\\merged\\debug\\anim\\fab_out.xml",
-        "source": "D:\\Android\\AndroidStudioWorkspace\\Scheduler\\app\\build\\intermediates\\exploded-aar\\com.android.support\\design\\22.2.0\\res\\anim\\fab_out.xml"
+        "source": "D:\\Android\\AndroidStudioWorkspace\\Scheduler\\app\\build\\intermediates\\exploded-aar\\com.android.support\\design\\22.2.1\\res\\anim\\fab_out.xml"
     },
     {
-        "merged": "D:\\Android\\AndroidStudioWorkspace\\Scheduler\\app\\build\\intermediates\\res\\merged\\debug\\anim\\abc_slide_out_bottom.xml",
-        "source": "D:\\Android\\AndroidStudioWorkspace\\Scheduler\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\22.2.0\\res\\anim\\abc_slide_out_bottom.xml"
+        "merged": "D:\\Android\\AndroidStudioWorkspace\\Scheduler\\app\\build\\intermediates\\res\\merged\\debug\\anim\\right_out_add_task_activity.xml",
+        "source": "D:\\Android\\AndroidStudioWorkspace\\Scheduler\\app\\src\\main\\res\\anim\\right_out_add_task_activity.xml"
     }
 ]

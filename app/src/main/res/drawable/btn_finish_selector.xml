@@ -12,11 +12,4 @@
             <stroke android:width="@dimen/btn_stroke_width" android:color="@color/btn_finish_stroke" />
         </shape>
     </item>
-   <!-- <item android:state_enabled="false">
-        <shape android:shape="oval">
-            <solid android:color="#797777" />
-            <stroke android:width="@dimen/btn_stroke_width" android:color="#2a2929" />
-
-        </shape>
-    </item>-->
 </selector>

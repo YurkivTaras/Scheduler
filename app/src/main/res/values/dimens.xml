@@ -38,4 +38,5 @@
     <dimen name="expListGroupTxtSize">20sp</dimen>
     <dimen name="progressRefreshSize">23dp</dimen>
     <dimen name="menuItemWidth">48dp</dimen>
+    <dimen name="map_pin_in_avatar_size">30dp</dimen>
 </resources>

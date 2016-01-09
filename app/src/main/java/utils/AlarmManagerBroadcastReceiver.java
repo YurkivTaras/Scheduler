@@ -21,6 +21,7 @@ import java.util.Date;
 
 import other.StringKeys;
 import other.Task;
+import service.LocationService;
 
 public class AlarmManagerBroadcastReceiver extends BroadcastReceiver {
 
@@ -29,12 +30,14 @@ public class AlarmManagerBroadcastReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-
         Bundle extras = intent.getExtras();
-        ArrayList<Task> tasks = extras.getParcelableArrayList(StringKeys.ARRAY_OF_TASKS);
-
+        ArrayList<Task> tasks = null;
+        if (extras != null)
+            tasks = extras.getParcelableArrayList(StringKeys.ARRAY_OF_TASKS);
         //у випадку, якщо отримано пустий інтент(при перезавантаженні телефона)
         if (tasks == null) {
+            //запускаєм сервіс при включенні телефона
+            context.startService(new Intent(context, LocationService.class));
             tasks = new ArrayList<>();
             DatabaseConnector databaseConnector = new DatabaseConnector(context);
             databaseConnector.open();
@@ -52,6 +55,9 @@ public class AlarmManagerBroadcastReceiver extends BroadcastReceiver {
                 int pauseLengthBeforeStopColIndex = cursor.getColumnIndex(DatabaseConnector.COLUMN_PAUSE_LENGTH_BEFORE_STOP);
                 int pauseLengthAfterStopColIndex = cursor.getColumnIndex(DatabaseConnector.COLUMN_PAUSE_LENGTH_AFTER_STOP);
                 int avatarUriColIndex = cursor.getColumnIndex(DatabaseConnector.COLUMN_AVATAR_URI);
+                int hasMapPointColIndex = cursor.getColumnIndex(DatabaseConnector.COLUMN_HAS_MAP_POINT);
+                int latitudeColIndex = cursor.getColumnIndex(DatabaseConnector.COLUMN_LATITUDE);
+                int longitudeColIndex = cursor.getColumnIndex(DatabaseConnector.COLUMN_LONGITUDE);
                 do {
                     long id = cursor.getLong(idColIndex);
                     String title = cursor.getString(titleColIndex);
@@ -65,8 +71,11 @@ public class AlarmManagerBroadcastReceiver extends BroadcastReceiver {
                     long pauseLengthBeforeStop = cursor.getLong(pauseLengthBeforeStopColIndex);
                     long pauseLengthAfterStop = cursor.getLong(pauseLengthAfterStopColIndex);
                     String avatarUri = cursor.getString(avatarUriColIndex);
+                    boolean hasMapPoint = cursor.getInt(hasMapPointColIndex) == 1;
+                    double latitude = cursor.getDouble(latitudeColIndex);
+                    double longitude = cursor.getDouble(longitudeColIndex);
                     tasks.add(new Task(id, title, comment, typeOfTask, avatarUri, maxRuntime,
-                            dateStart, dateStop, dateEnd, datePause, pauseLengthBeforeStop, pauseLengthAfterStop));
+                            dateStart, dateStop, dateEnd, datePause, pauseLengthBeforeStop, pauseLengthAfterStop, hasMapPoint, latitude, longitude));
                 } while (cursor.moveToNext());
             }
             cursor.close();
@@ -100,8 +109,10 @@ public class AlarmManagerBroadcastReceiver extends BroadcastReceiver {
 
         if (ifWasChanged) {
             Intent i = new Intent("broadCastName");
+
             Bundle bundle = new Bundle();
             bundle.putParcelableArrayList(StringKeys.ARRAY_OF_TASKS, tasks);
+            bundle.putString(StringKeys.ACTION, StringKeys.ClOSE_TASK_ACTION);
             i.putExtras(bundle);
             context.sendBroadcast(i);
         }

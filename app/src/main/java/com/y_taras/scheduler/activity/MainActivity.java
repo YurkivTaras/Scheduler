@@ -12,10 +12,12 @@ import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -49,6 +51,7 @@ import me.drakeet.materialdialog.MaterialDialog;
 import other.Statistic;
 import other.StringKeys;
 import other.Task;
+import service.LocationService;
 import utils.AlarmManagerBroadcastReceiver;
 import utils.AnimatedTabHostListener;
 import utils.DatabaseConnector;
@@ -236,25 +239,48 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         broadcastReceiver = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
+
                 Bundle b = intent.getExtras();
+                String action = b.getString(StringKeys.ACTION);
                 ArrayList<Task> tasks = b.getParcelableArrayList(StringKeys.ARRAY_OF_TASKS);
                 if (tasks == null)
                     return;
-                for (int i = 0; i < tasks.size(); i++) {
-                    Task taskFromIntent = tasks.get(i);
-                    Date dateEndForTaskFormIntent = taskFromIntent.getDateEnd();
-                    if (dateEndForTaskFormIntent != null) {
-                        long id_taskFromIntent = taskFromIntent.getDatabase_ID();
-                        for (int j = 0; j < mTasks.size(); j++) {
-                            Task originalTask = mTasks.get(j);
-                            if (originalTask.getDatabase_ID() == id_taskFromIntent) {
-                                if (originalTask.getDateEnd() == null) {
-                                    originalTask.setDateEnd(dateEndForTaskFormIntent);
-                                    mSwipeListAdapter.notifyItemChanged(j);
+                if (action != null && action.equals(StringKeys.ClOSE_TASK_ACTION))
+                    for (int i = 0; i < tasks.size(); i++) {
+                        Task taskFromIntent = tasks.get(i);
+                        Date dateEndForTaskFormIntent = taskFromIntent.getDateEnd();
+                        if (dateEndForTaskFormIntent != null) {
+                            long taskFromIntentID = taskFromIntent.getDatabase_ID();
+                            for (int j = 0; j < mTasks.size(); j++) {
+                                Task originalTask = mTasks.get(j);
+                                if (originalTask.getDatabase_ID() == taskFromIntentID) {
+                                    if (originalTask.getDateEnd() == null) {
+                                        originalTask.setDateEnd(dateEndForTaskFormIntent);
+                                        mSwipeListAdapter.notifyItemChanged(j);
+                                    }
+                                    break;
                                 }
-                                break;
                             }
                         }
+                    }
+                else if (action != null && action.equals(StringKeys.START_OR_PAUSE_TASK_ACTION)) {
+                    Log.d("=================", "START_OR_PAUSE_TASK_ACTION");
+                    for (int i = 0; i < tasks.size(); i++) {
+                        Task taskFromIntent = tasks.get(i);
+                        long taskFromIntentID = taskFromIntent.getDatabase_ID();
+                        for (int j = 0; j < mTasks.size(); j++)
+                            if (taskFromIntentID == mTasks.get(j).getDatabase_ID()) {
+                                Log.d("=================", "poz=" + j);
+                                Task task = mTasks.get(j);
+                                task.setDateStart(taskFromIntent.getDateStart());
+                                task.setDateStop(taskFromIntent.getDateStop());
+                                task.setDateEnd(taskFromIntent.getDateEnd());
+                                task.setDatePause(taskFromIntent.getDatePause());
+                                task.setPauseLengthAfterStop(taskFromIntent.getPauseLengthAfterStop());
+                                task.setPauseLengthBeforeStop(taskFromIntent.getPauseLengthBeforeStop());
+                                mSwipeListAdapter.notifyItemChanged(j);
+                                break;
+                            }
                     }
                 }
             }
@@ -267,24 +293,25 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         floatBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, AddScheduleActivity.class);
+                Intent intent = new Intent(MainActivity.this, AddTaskActivity.class);
                 intent.setAction(StringKeys.ADD_TASK);
                 intent.putExtra(StringKeys.MAX_RUNTIME_FOR_TASK, mMaxRuntimeForTask);
                 startActivityForResult(intent, RequestCodeAddTask);
-
             }
         });
+        //запускаєм сервіс, що слідкує за місцезнаходженням
+        startService(new Intent(this, LocationService.class));
     }
 
     //отримання збережених налаштувань
     private void getSettingsFromSharedPref() {
         mAppSettings = getSharedPreferences(StringKeys.APP_SETTINGS, MODE_PRIVATE);
         mNotStartedTaskColor = mAppSettings.getInt(
-                StringKeys.NOT_STARTED_TASK, getResources().getColor(R.color.not_started_task));
+                StringKeys.NOT_STARTED_TASK, ContextCompat.getColor(this, R.color.not_started_task));
         mStartedTaskColor = mAppSettings.getInt(
-                StringKeys.STARTED_TASK, getResources().getColor(R.color.started_task));
+                StringKeys.STARTED_TASK, ContextCompat.getColor(this, R.color.started_task));
         mCompletedTaskColor = mAppSettings.getInt(
-                StringKeys.COMPLETED_TASK, getResources().getColor(R.color.completed_task));
+                StringKeys.COMPLETED_TASK, ContextCompat.getColor(this, R.color.completed_task));
         mMaxRuntimeForTask = mAppSettings.getInt(StringKeys.MAX_RUNTIME_FOR_TASK, 60);
 
         //отримання збереженого типу сортування
@@ -308,6 +335,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode == Activity.RESULT_OK) {
+
             String title = data.getStringExtra(StringKeys.TASK_TITLE);
             String comment = data.getStringExtra(StringKeys.TASK_COMMENT);
             boolean typeOfTask = data.getBooleanExtra(StringKeys.TYPE_OF_TASK, false);
@@ -315,11 +343,20 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
             String avatarUri = null;
             if (data.hasExtra(StringKeys.BITMAP_AVATAR))
                 avatarUri = data.getStringExtra(StringKeys.BITMAP_AVATAR);
+            boolean hasMapPoint = data.getBooleanExtra(StringKeys.MAP_POINT, false);
+            double latitude = data.getDoubleExtra(StringKeys.LATITUDE, 0);
+            double longitude = data.getDoubleExtra(StringKeys.LONGITUDE, 0);
+
             switch (requestCode) {
                 case RequestCodeAddTask:
                     Task newTask = new Task(title, comment, typeOfTask, maxRuntime);
                     if (avatarUri != null)
                         newTask.setAvatarUri(avatarUri);
+                    if (hasMapPoint) {
+                        newTask.setMapPoint(true);
+                        newTask.setLatitude(latitude);
+                        newTask.setLongitude(longitude);
+                    }
                     DatabaseConnector.addTask(newTask, this);
                     mTasks.add(newTask);
                     sortTasks();
@@ -344,6 +381,18 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
                         editTask.setMaxRuntime(maxRuntime);
                         //перезапускаєм таймер якщо було змінено максимальний час виконання для завдання
                         setTimer();
+                        ifWasChange = true;
+                    }
+                    //якщо було включено або виключено привязку до місця
+                    if (editTask.hasMapPoint() != hasMapPoint) {
+                        editTask.setMapPoint(hasMapPoint);
+                        mSwipeListAdapter.notifyItemChanged(position);
+                        ifWasChange = true;
+                    }
+                    //якщо було змінено координати
+                    if (hasMapPoint && (editTask.getLatitude() != latitude || editTask.getLongitude() != longitude)) {
+                        editTask.setLatitude(latitude);
+                        editTask.setLongitude(longitude);
                         ifWasChange = true;
                     }
                     if (ifWasChange)
@@ -668,6 +717,9 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
                 int pauseLengthBeforeStopColIndex = data.getColumnIndex(DatabaseConnector.COLUMN_PAUSE_LENGTH_BEFORE_STOP);
                 int pauseLengthAfterStopColIndex = data.getColumnIndex(DatabaseConnector.COLUMN_PAUSE_LENGTH_AFTER_STOP);
                 int avatarUriColIndex = data.getColumnIndex(DatabaseConnector.COLUMN_AVATAR_URI);
+                int hasMapPointColIndex = data.getColumnIndex(DatabaseConnector.COLUMN_HAS_MAP_POINT);
+                int latitudeColIndex = data.getColumnIndex(DatabaseConnector.COLUMN_LATITUDE);
+                int longitudeColIndex = data.getColumnIndex(DatabaseConnector.COLUMN_LONGITUDE);
                 do {
                     long id = data.getLong(idColIndex);
                     String title = data.getString(titleColIndex);
@@ -681,8 +733,11 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
                     long pauseLengthBeforeStop = data.getLong(pauseLengthBeforeStopColIndex);
                     long pauseLengthAfterStop = data.getLong(pauseLengthAfterStopColIndex);
                     String avatarUri = data.getString(avatarUriColIndex);
+                    boolean hasMapPoint = data.getInt(hasMapPointColIndex) == 1;
+                    double latitude = data.getDouble(latitudeColIndex);
+                    double longitude = data.getDouble(longitudeColIndex);
                     mTasks.add(new Task(id, title, comment, typeOfTask, avatarUri, maxRuntime,
-                            dateStart, dateStop, dateEnd, datePause, pauseLengthBeforeStop, pauseLengthAfterStop));
+                            dateStart, dateStop, dateEnd, datePause, pauseLengthBeforeStop, pauseLengthAfterStop, hasMapPoint, latitude, longitude));
                 } while (data.moveToNext());
             }
             sortTasks();

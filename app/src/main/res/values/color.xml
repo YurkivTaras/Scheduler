@@ -37,5 +37,7 @@
     <color name="right_swipe_background1">#424242</color>
     <color name="right_swipe_background2">#2a2a2a</color>
 
-
+    <color name="spinner_state_normal_color">#616161</color>
+    <color name="spinner_state_activated_color">#424242</color>
+    <color name="spinner_state_pressed_color">#5D4037</color>
 </resources>

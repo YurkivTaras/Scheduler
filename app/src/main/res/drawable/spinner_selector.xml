@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:drawable="@color/background_material_dark" android:state_activated="true" />
-    <item android:drawable="@color/link_text_material_light" android:state_pressed="true" />
-    <item android:drawable="@color/button_material_dark" />
+    <item android:drawable="@color/spinner_state_activated_color" android:state_activated="true" />
+    <item android:drawable="@color/spinner_state_pressed_color" android:state_pressed="true" />
+    <item android:drawable="@color/spinner_state_normal_color" />
 </selector>

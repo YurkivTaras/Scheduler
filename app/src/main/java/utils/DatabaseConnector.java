@@ -35,8 +35,12 @@ public class DatabaseConnector {
     public static final String COLUMN_TASK_ID = "TASK_ID";
     public static final String COLUMN_SUM_PAUSE_LENGTH = "SUM_PAUSE_LENGTH";
 
+    public static final String COLUMN_HAS_MAP_POINT = "HAS_MAP_POINT";
+    public static final String COLUMN_LATITUDE = "LATITUDE";
+    public static final String COLUMN_LONGITUDE = "LONGITUDE";
 
-    private static final int DATABASE_VERSION = 3;
+
+    private static final int DATABASE_VERSION = 4;
 
     private SQLiteDatabase database;
     private DatabaseOpenHelper databaseOpenHelper;
@@ -75,6 +79,15 @@ public class DatabaseConnector {
         return database.query(TABLE_TASKS, columns, selection, selectionArgs, null, null, null);
     }
 
+    public Cursor getCursorWithMapPointTasks() {
+        String selection = COLUMN_HAS_MAP_POINT + " = ?";
+        String[] selectionArgs = new String[]{"1"};
+        String[] columns = new String[]{COLUMN_ID, COLUMN_TYPE_OF_TASK, COLUMN_DATA_START, COLUMN_DATA_PAUSE, COLUMN_DATA_STOP,
+                COLUMN_DATA_END, COLUMN_PAUSE_LENGTH_AFTER_STOP, COLUMN_PAUSE_LENGTH_BEFORE_STOP,
+                COLUMN_LATITUDE, COLUMN_LONGITUDE};
+        return database.query(TABLE_TASKS, columns, selection, selectionArgs, null, null, null);
+    }
+
     public static void updateTask(final Task task, Context context) {
         final ContentValues editTask = new ContentValues();
         editTask.put(COLUMN_TITLE, task.getTitle());
@@ -96,6 +109,40 @@ public class DatabaseConnector {
         editTask.put(COLUMN_PAUSE_LENGTH_BEFORE_STOP, task.getPauseLengthBeforeStop());
         editTask.put(COLUMN_PAUSE_LENGTH_AFTER_STOP, task.getPauseLengthAfterStop());
         editTask.put(COLUMN_AVATAR_URI, task.getAvatarUri());
+
+        editTask.put(COLUMN_HAS_MAP_POINT, task.hasMapPoint() ? 1 : 0);
+        editTask.put(COLUMN_LATITUDE, task.getLatitude());
+        editTask.put(COLUMN_LONGITUDE, task.getLongitude());
+        final DatabaseConnector databaseConnector = new DatabaseConnector(context);
+        databaseConnector.open();
+        new AsyncTask<Void, Void, Void>() {
+            @Override
+            protected Void doInBackground(Void... params) {
+                databaseConnector.database.update(TABLE_TASKS, editTask, COLUMN_ID + "=" + task.getDatabase_ID(), null);
+                return null;
+            }
+
+            @Override
+            protected void onPostExecute(Void result) {
+                databaseConnector.close();
+            }
+        }.execute();
+    }
+
+    public static void saveServiceUpdate(final Task task, Context context) {
+        final ContentValues editTask = new ContentValues();
+        Date dateStart = task.getDateStart();
+        editTask.put(COLUMN_DATA_START, dateStart == null ? -1 : dateStart.getTime());
+        Date datePause = task.getDatePause();
+        editTask.put(COLUMN_DATA_PAUSE, datePause == null ? -1 : datePause.getTime());
+        Date dateStop = task.getDateStop();
+        editTask.put(COLUMN_DATA_STOP, dateStop == null ? -1 : dateStop.getTime());
+        Date dateEnd = task.getDateEnd();
+        editTask.put(COLUMN_DATA_END, dateEnd == null ? -1 : dateEnd.getTime());
+        editTask.put(COLUMN_PAUSE_LENGTH_AFTER_STOP, task.getPauseLengthAfterStop());
+        editTask.put(COLUMN_PAUSE_LENGTH_BEFORE_STOP, task.getPauseLengthBeforeStop());
+        editTask.put(COLUMN_LATITUDE, task.getLatitude());
+        editTask.put(COLUMN_LONGITUDE, task.getLongitude());
         final DatabaseConnector databaseConnector = new DatabaseConnector(context);
         databaseConnector.open();
         new AsyncTask<Void, Void, Void>() {
@@ -177,6 +224,10 @@ public class DatabaseConnector {
                 newTask.put(COLUMN_PAUSE_LENGTH_BEFORE_STOP, copyOfTask.getPauseLengthBeforeStop());
                 newTask.put(COLUMN_PAUSE_LENGTH_AFTER_STOP, copyOfTask.getPauseLengthAfterStop());
                 newTask.put(COLUMN_AVATAR_URI, copyOfTask.getAvatarUri());
+
+                newTask.put(COLUMN_HAS_MAP_POINT, copyOfTask.hasMapPoint() ? 1 : 0);
+                newTask.put(COLUMN_LATITUDE, copyOfTask.getLatitude());
+                newTask.put(COLUMN_LONGITUDE, copyOfTask.getLongitude());
                 return databaseConnector.database.insert(TABLE_TASKS, null, newTask);
             }
 
@@ -224,6 +275,10 @@ public class DatabaseConnector {
                     newTask.put(COLUMN_PAUSE_LENGTH_AFTER_STOP, copyOfTask.getPauseLengthAfterStop());
 
                     newTask.put(COLUMN_AVATAR_URI, copyOfTask.getAvatarUri());
+
+                    newTask.put(COLUMN_HAS_MAP_POINT, copyOfTask.hasMapPoint() ? 1 : 0);
+                    newTask.put(COLUMN_LATITUDE, copyOfTask.getLatitude());
+                    newTask.put(COLUMN_LONGITUDE, copyOfTask.getLongitude());
                     id_for_tasks.add(databaseConnector.database.insert(TABLE_TASKS, null, newTask));
                 }
                 return id_for_tasks;
@@ -351,7 +406,10 @@ public class DatabaseConnector {
                     COLUMN_AVATAR_URI + " TEXT, " +
                     COLUMN_MAX_RUNTIME + " INTEGER, " +
                     COLUMN_PAUSE_LENGTH_BEFORE_STOP + " LONG, " +
-                    COLUMN_PAUSE_LENGTH_AFTER_STOP + " LONG);";
+                    COLUMN_PAUSE_LENGTH_AFTER_STOP + " LONG, " +
+                    COLUMN_HAS_MAP_POINT + " INTEGER, " +
+                    COLUMN_LATITUDE + " REAL, " +
+                    COLUMN_LONGITUDE + " REAL);";
             db.execSQL(createQuery);
 
             createQuery = "CREATE TABLE " + TABLE_STATISTIC +

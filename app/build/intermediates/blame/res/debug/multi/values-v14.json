@@ -33,14 +33,14 @@
                     "endOffset": 477
                 },
                 "from": {
-                    "file": "D:\\Android\\AndroidStudioWorkspace\\Scheduler\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\22.2.0\\res\\values-v14\\values-v14.xml",
+                    "file": "D:\\Android\\AndroidStudioWorkspace\\Scheduler\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\values-v14\\values-v14.xml",
                     "position": {
                         "startLine": 4,
                         "startColumn": 4,
-                        "startOffset": 301,
+                        "startOffset": 239,
                         "endLine": 8,
                         "endColumn": 12,
-                        "endOffset": 572
+                        "endOffset": 510
                     }
                 }
             },
@@ -53,13 +53,13 @@
                     "endOffset": 548
                 },
                 "from": {
-                    "file": "D:\\Android\\AndroidStudioWorkspace\\Scheduler\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\22.2.0\\res\\values-v14\\values-v14.xml",
+                    "file": "D:\\Android\\AndroidStudioWorkspace\\Scheduler\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\values-v14\\values-v14.xml",
                     "position": {
                         "startLine": 11,
                         "startColumn": 4,
-                        "startOffset": 818,
+                        "startOffset": 694,
                         "endColumn": 70,
-                        "endOffset": 884
+                        "endOffset": 760
                     }
                 }
             },
@@ -72,13 +72,13 @@
                     "endOffset": 631
                 },
                 "from": {
-                    "file": "D:\\Android\\AndroidStudioWorkspace\\Scheduler\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\22.2.0\\res\\values-v14\\values-v14.xml",
+                    "file": "D:\\Android\\AndroidStudioWorkspace\\Scheduler\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\values-v14\\values-v14.xml",
                     "position": {
                         "startLine": 12,
                         "startColumn": 4,
-                        "startOffset": 889,
+                        "startOffset": 765,
                         "endColumn": 82,
-                        "endOffset": 967
+                        "endOffset": 843
                     }
                 }
             },
@@ -92,14 +92,14 @@
                     "endOffset": 1041
                 },
                 "from": {
-                    "file": "D:\\Android\\AndroidStudioWorkspace\\Scheduler\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\22.2.0\\res\\values-v14\\values-v14.xml",
+                    "file": "D:\\Android\\AndroidStudioWorkspace\\Scheduler\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\values-v14\\values-v14.xml",
                     "position": {
                         "startLine": 13,
                         "startColumn": 4,
-                        "startOffset": 972,
+                        "startOffset": 848,
                         "endLine": 18,
                         "endColumn": 12,
-                        "endOffset": 1377
+                        "endOffset": 1253
                     }
                 }
             },
@@ -113,14 +113,14 @@
                     "endOffset": 1463
                 },
                 "from": {
-                    "file": "D:\\Android\\AndroidStudioWorkspace\\Scheduler\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\22.2.0\\res\\values-v14\\values-v14.xml",
+                    "file": "D:\\Android\\AndroidStudioWorkspace\\Scheduler\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\values-v14\\values-v14.xml",
                     "position": {
                         "startLine": 19,
                         "startColumn": 4,
-                        "startOffset": 1382,
+                        "startOffset": 1258,
                         "endLine": 24,
                         "endColumn": 12,
-                        "endOffset": 1799
+                        "endOffset": 1675
                     }
                 }
             },
@@ -133,13 +133,13 @@
                     "endOffset": 1583
                 },
                 "from": {
-                    "file": "D:\\Android\\AndroidStudioWorkspace\\Scheduler\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\22.2.0\\res\\values-v14\\values-v14.xml",
+                    "file": "D:\\Android\\AndroidStudioWorkspace\\Scheduler\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\values-v14\\values-v14.xml",
                     "position": {
                         "startLine": 27,
                         "startColumn": 4,
-                        "startOffset": 2040,
+                        "startOffset": 1854,
                         "endColumn": 119,
-                        "endOffset": 2155
+                        "endOffset": 1969
                     }
                 }
             },
@@ -152,13 +152,13 @@
                     "endOffset": 1646
                 },
                 "from": {
-                    "file": "D:\\Android\\AndroidStudioWorkspace\\Scheduler\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\22.2.0\\res\\values-v14\\values-v14.xml",
+                    "file": "D:\\Android\\AndroidStudioWorkspace\\Scheduler\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\values-v14\\values-v14.xml",
                     "position": {
                         "startLine": 28,
                         "startColumn": 4,
-                        "startOffset": 2160,
+                        "startOffset": 1974,
                         "endColumn": 62,
-                        "endOffset": 2218
+                        "endOffset": 2032
                     }
                 }
             },
@@ -172,14 +172,14 @@
                     "endOffset": 1800
                 },
                 "from": {
-                    "file": "D:\\Android\\AndroidStudioWorkspace\\Scheduler\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\22.2.0\\res\\values-v14\\values-v14.xml",
+                    "file": "D:\\Android\\AndroidStudioWorkspace\\Scheduler\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\values-v14\\values-v14.xml",
                     "position": {
                         "startLine": 29,
                         "startColumn": 4,
-                        "startOffset": 2223,
+                        "startOffset": 2037,
                         "endLine": 31,
                         "endColumn": 12,
-                        "endOffset": 2372
+                        "endOffset": 2186
                     }
                 }
             },
@@ -192,13 +192,13 @@
                     "endOffset": 1863
                 },
                 "from": {
-                    "file": "D:\\Android\\AndroidStudioWorkspace\\Scheduler\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\22.2.0\\res\\values-v14\\values-v14.xml",
+                    "file": "D:\\Android\\AndroidStudioWorkspace\\Scheduler\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\values-v14\\values-v14.xml",
                     "position": {
                         "startLine": 32,
                         "startColumn": 4,
-                        "startOffset": 2377,
+                        "startOffset": 2191,
                         "endColumn": 62,
-                        "endOffset": 2435
+                        "endOffset": 2249
                     }
                 }
             },
@@ -211,13 +211,13 @@
                     "endOffset": 1995
                 },
                 "from": {
-                    "file": "D:\\Android\\AndroidStudioWorkspace\\Scheduler\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\22.2.0\\res\\values-v14\\values-v14.xml",
+                    "file": "D:\\Android\\AndroidStudioWorkspace\\Scheduler\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\values-v14\\values-v14.xml",
                     "position": {
                         "startLine": 33,
                         "startColumn": 4,
-                        "startOffset": 2440,
+                        "startOffset": 2254,
                         "endColumn": 131,
-                        "endOffset": 2567
+                        "endOffset": 2381
                     }
                 }
             }

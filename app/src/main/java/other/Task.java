@@ -9,19 +9,32 @@ import java.util.Date;
 
 public class Task implements Parcelable, Serializable {
     public static final String DEFAULT_AVATAR_URI = "default";
-    private long mDatabase_ID;
 
+    private long mDatabase_ID;
+    //заголовок
     private String mTitle;
+    //коментар
     private String mComment;
+    //посилання на іконку для завдання
     private String mAvatarUri;
 
+    //періодичне завдання чи ні
     private boolean mIfPeriodic;
-
-    private int mMaxRuntime;
-    private Date mDateStart, mDateEnd, mDateStop, mDatePause;
     //змінна для підрахування статистики
     private long mRuntime;
+
+    //максимальний час виконання для завдання
+    private int mMaxRuntime;
+    private Date mDateStart, mDateEnd, mDateStop, mDatePause;
+
+    //довжина паузи до моменту, останньго відновлення і після нього
     private long mPauseLengthBeforeStop, mPauseLengthAfterStop;
+
+    //встановлено місце виконання чи ні
+    private boolean mMapPoint;
+    //координати завдання на карті
+    private double mLatitude;
+    private double mLongitude;
 
     public Task(String title, String comment, boolean ifPeriodic, int maxRuntime) {
         mTitle = title;
@@ -29,6 +42,10 @@ public class Task implements Parcelable, Serializable {
         mIfPeriodic = ifPeriodic;
         mMaxRuntime = maxRuntime;
         mAvatarUri = DEFAULT_AVATAR_URI;
+    }
+
+    public Task(long id) {
+        mDatabase_ID = id;
     }
 
     public Task(long id, String title, String comment, String avatarUri, long runtime) {
@@ -40,7 +57,7 @@ public class Task implements Parcelable, Serializable {
     }
 
     public Task(long id, String title, String comment, boolean ifPeriodic, String avatarUri, int maxRuntime, long dateStart, long dateStop,
-                long dateEnd, long datePause, long pauseLengthBeforeStop, long pauseLengthAfterStop) {
+                long dateEnd, long datePause, long pauseLengthBeforeStop, long pauseLengthAfterStop, boolean hasMapPoint, double latitude, double longitude) {
         mDatabase_ID = id;
         mTitle = title;
         mComment = comment;
@@ -53,6 +70,9 @@ public class Task implements Parcelable, Serializable {
         mDatePause = datePause != -1 ? new Date(datePause) : null;
         mPauseLengthBeforeStop = pauseLengthBeforeStop;
         mPauseLengthAfterStop = pauseLengthAfterStop;
+        mMapPoint = hasMapPoint;
+        mLatitude = latitude;
+        mLongitude = longitude;
     }
 
     public Task(Task task) {
@@ -69,6 +89,9 @@ public class Task implements Parcelable, Serializable {
         mDatePause = task.mDatePause != null ? new Date(task.mDatePause.getTime()) : null;
         mPauseLengthBeforeStop = task.mPauseLengthBeforeStop;
         mPauseLengthAfterStop = task.mPauseLengthAfterStop;
+        mMapPoint = task.mMapPoint;
+        mLatitude = task.mLatitude;
+        mLongitude = task.mLongitude;
     }
 
     public Task(Parcel source) {
@@ -96,6 +119,9 @@ public class Task implements Parcelable, Serializable {
             if (dataPause != -1)
                 mDatePause = new Date(dataPause);
         }
+        mMapPoint = source.readInt() == 1;
+        mLatitude = source.readDouble();
+        mLongitude = source.readDouble();
     }
 
     public static Comparator<Task> NameUPComparator = new Comparator<Task>() {
@@ -226,13 +252,41 @@ public class Task implements Parcelable, Serializable {
         this.mRuntime = runtime;
     }
 
-    @Override
-    public int describeContents() {
-        return 0;
+    public boolean hasMapPoint() {
+        return mMapPoint;
+    }
+
+    public void setMapPoint(boolean mapPoint) {
+        mMapPoint = mapPoint;
+    }
+
+    public double getLatitude() {
+        return mLatitude;
+    }
+
+    public void setLatitude(double latitude) {
+        mLatitude = latitude;
+    }
+
+    public double getLongitude() {
+        return mLongitude;
+    }
+
+    public void setLongitude(double longitude) {
+        mLongitude = longitude;
     }
 
     public boolean isPeriodic() {
         return mIfPeriodic;
+    }
+
+    public void setPeriodic(boolean periodic) {
+        mIfPeriodic = periodic;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
     }
 
     @Override
@@ -253,6 +307,10 @@ public class Task implements Parcelable, Serializable {
         dest.writeLong(mDateEnd != null ? mDateEnd.getTime() : -1);
         dest.writeLong(mDateStop != null ? mDateStop.getTime() : -1);
         dest.writeLong(mDatePause != null ? mDatePause.getTime() : -1);
+
+        dest.writeInt(mMapPoint ? 1 : 0);
+        dest.writeDouble(mLatitude);
+        dest.writeDouble(mLongitude);
     }
 
     public static final Parcelable.Creator<Task> CREATOR = new Parcelable.Creator<Task>() {

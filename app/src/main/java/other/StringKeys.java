@@ -20,4 +20,12 @@ public class StringKeys {
     public static final String BITMAP_AVATAR = "bitmapAvatar";
     public static final String EDIT_BITMAP_AVATAR = "editBitmapAvatar";
     public static final String TYPE_OF_TASK = "typeOfTask";
+    public static final String MAP_POINT = "mapPoint";
+    public static final String LATITUDE = "latitude";
+    public static final String LONGITUDE = "longitude";
+    public static final String EDIT_POINT = "editPoint";
+    public static final String ADD_POINT = "addPoint";
+    public static final String ACTION = "action";
+    public static final String ClOSE_TASK_ACTION = "closeTask";
+    public static final String START_OR_PAUSE_TASK_ACTION = "startOrPauseTask";
 }
