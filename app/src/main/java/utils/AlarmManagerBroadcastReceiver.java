@@ -27,7 +27,6 @@ public class AlarmManagerBroadcastReceiver extends BroadcastReceiver {
 
     private static final int NOTIFY_ID = 101;
 
-
     @Override
     public void onReceive(Context context, Intent intent) {
         Bundle extras = intent.getExtras();
@@ -108,7 +107,7 @@ public class AlarmManagerBroadcastReceiver extends BroadcastReceiver {
         }
 
         if (ifWasChanged) {
-            Intent i = new Intent("broadCastName");
+            Intent i = new Intent(StringKeys.MAIN_ACTIVITY_BROADCAST);
 
             Bundle bundle = new Bundle();
             bundle.putParcelableArrayList(StringKeys.ARRAY_OF_TASKS, tasks);

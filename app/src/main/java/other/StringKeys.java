@@ -28,4 +28,7 @@ public class StringKeys {
     public static final String ACTION = "action";
     public static final String ClOSE_TASK_ACTION = "closeTask";
     public static final String START_OR_PAUSE_TASK_ACTION = "startOrPauseTask";
+    public static final String MAIN_ACTIVITY_BROADCAST = "mainActivityBroadcast";
+    public static final String FIRST_START = "firstStart";
+    public static final String TUTORIAL = "tutorial";
 }

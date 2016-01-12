@@ -22,15 +22,20 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ExpandableListView;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TabHost;
 import android.widget.Toast;
 
 import com.daimajia.swipe.util.Attributes;
 import com.example.scheduler.R;
+import com.github.amlcurran.showcaseview.ShowcaseView;
+import com.github.amlcurran.showcaseview.targets.Target;
+import com.github.amlcurran.showcaseview.targets.ViewTarget;
 import com.melnykov.fab.FloatingActionButton;
 
 import java.util.ArrayList;
@@ -47,6 +52,7 @@ import adapter.CustomExpandableListAdapter;
 import adapter.CustomSpinnerAdapter;
 import adapter.DividerItemDecoration;
 import adapter.SwipeRecyclerViewAdapter;
+import fr.castorflex.android.circularprogressbar.CircularProgressBar;
 import me.drakeet.materialdialog.MaterialDialog;
 import other.Statistic;
 import other.StringKeys;
@@ -66,33 +72,40 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     private static final int RequestCodeSettings = 3;
     private static final int AllTasksLoaderID = 1;
     private static long timeBackPressed;
+    private static boolean mFirstStart;
+
+    private ShowcaseView mShowcaseView;
+    private int mTargetPos;
+
     private ArrayList<Task> mTasks;
+    private ArrayList<ArrayList<Task>> mGroups;
+    private ArrayList<String> mGroupsName;
 
     private SwipeRecyclerViewAdapter mSwipeListAdapter;
     private CustomExpandableListAdapter mExpListAdapter;
-    private ArrayList<ArrayList<Task>> mGroups;
-    private ArrayList<String> mGroupsName;
+
+    private CircularProgressBar mLoadListProgress;
+    private Toolbar mToolbar;
+    private FloatingActionButton mFloatBtn;
+    private Spinner mSpinnerSort;
+    private TabHost mTabHost;
+    private int mSpinnerPos;
+    private String mTabHostPos;
+    private Menu mOptionsMenu;
+    private MaterialDialog mAlertForClear;
+    private boolean mIfAlertDWasShown;
+    private Toast mToast;
+
     private Comparator<Task> mTaskComparator;
 
     private int mCompletedTaskColor;
     private int mStartedTaskColor;
     private int mNotStartedTaskColor;
 
-    private FloatingActionButton floatBtn;
-    private Spinner mSpinnerSort;
-    private TabHost mTabHost;
-    private int mSpinnerPos;
-    private String mTabHostPos;
-
-    private Menu mOptionsMenu;
-
-    private MaterialDialog mAlertForClear;
-    private boolean mIfAlertDWasShown;
-    private Toast mToast;
     private SharedPreferences mAppSettings;
 
     private AlarmManagerBroadcastReceiver alarm;
-    private BroadcastReceiver broadcastReceiver;
+    private BroadcastReceiver mBroadcastReceiver;
     private int mMaxRuntimeForTask;
 
     private DatabaseConnector mDatabaseConnector;
@@ -107,7 +120,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        unregisterReceiver(broadcastReceiver);
+        unregisterReceiver(mBroadcastReceiver);
         if (mAlertForClear != null)
             mAlertForClear.dismiss();
         mDatabaseConnector.close();
@@ -116,13 +129,20 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     private void initUI(Bundle savedInstanceState) {
         mDatabaseConnector = new DatabaseConnector(this);
         mDatabaseConnector.open();
-        Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbarForMainActivity);
+        mToolbar = (Toolbar) findViewById(R.id.toolbarForMainActivity);
         mToolbar.setTitle(R.string.mainToolbarTitle);
+        mToolbar.inflateMenu(R.menu.menu_main);
         setSupportActionBar(mToolbar);
+        //ініціалізація SharedPreferences, що містить збережені настройки програми
+        mAppSettings = getSharedPreferences(StringKeys.APP_SETTINGS, MODE_PRIVATE);
+        mLoadListProgress = (CircularProgressBar) findViewById(R.id.load_list_progress_bar);
         if (savedInstanceState == null) {
             mTasks = new ArrayList<>();
             mGroups = new ArrayList<>();
             mGroupsName = new ArrayList<>();
+            mFirstStart = mAppSettings.getBoolean(StringKeys.FIRST_START, true);
+            if (mFirstStart)
+                showTutorial(0);
         } else {
             if (savedInstanceState.containsKey(StringKeys.ARRAY_OF_TASKS))
                 mTasks = savedInstanceState.getParcelableArrayList(StringKeys.ARRAY_OF_TASKS);
@@ -135,6 +155,9 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
                 mTabHostPos = savedInstanceState.getString(StringKeys.TAB_HOST_POS);
             if (savedInstanceState.containsKey(AlertBool) && savedInstanceState.getBoolean(AlertBool))
                 showAlertDialogForDelete();
+            //відновлення незавершеного туторіала, якщо такий був
+            if (savedInstanceState.containsKey(StringKeys.TUTORIAL))
+                showTutorial(savedInstanceState.getInt(StringKeys.TUTORIAL));
         }
 
         //отримання попередніх користувацьких налаштувань
@@ -182,6 +205,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         mTabHost.setup();
         TabHost.TabSpec tabSpec;
         tabSpec = mTabHost.newTabSpec("tag1");
+
         tabSpec.setIndicator("Завдання");
         tabSpec.setContent(R.id.tab1);
         mTabHost.addTab(tabSpec);
@@ -226,8 +250,9 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
         alarm = new AlarmManagerBroadcastReceiver();
 
-        if (savedInstanceState == null) {
-            //downloadTask();
+        if (savedInstanceState == null && !mFirstStart) {
+            getWindow().addFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+            mLoadListProgress.setVisibility(View.VISIBLE);
             // створюєм лоадер для читання даних
             getLoaderManager().initLoader(AllTasksLoaderID, null, this);
             getLoaderManager().getLoader(AllTasksLoaderID).forceLoad();
@@ -236,7 +261,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
         //ініціалізуєм та регіструєм ресівер, що відловлює повідомлення(broadcast)
         //із автоматично завершеними завданнями
-        broadcastReceiver = new BroadcastReceiver() {
+        mBroadcastReceiver = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
 
@@ -264,13 +289,11 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
                         }
                     }
                 else if (action != null && action.equals(StringKeys.START_OR_PAUSE_TASK_ACTION)) {
-                    Log.d("=================", "START_OR_PAUSE_TASK_ACTION");
                     for (int i = 0; i < tasks.size(); i++) {
                         Task taskFromIntent = tasks.get(i);
                         long taskFromIntentID = taskFromIntent.getDatabase_ID();
                         for (int j = 0; j < mTasks.size(); j++)
                             if (taskFromIntentID == mTasks.get(j).getDatabase_ID()) {
-                                Log.d("=================", "poz=" + j);
                                 Task task = mTasks.get(j);
                                 task.setDateStart(taskFromIntent.getDateStart());
                                 task.setDateStop(taskFromIntent.getDateStop());
@@ -285,12 +308,12 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
                 }
             }
         };
-        registerReceiver(broadcastReceiver, new IntentFilter("broadCastName"));
+        registerReceiver(mBroadcastReceiver, new IntentFilter(StringKeys.MAIN_ACTIVITY_BROADCAST));
 
         //ініціалізація плаваючої кнопки
-        floatBtn = (FloatingActionButton) findViewById(R.id.fab);
-        floatBtn.attachToRecyclerView(recyclerView);
-        floatBtn.setOnClickListener(new View.OnClickListener() {
+        mFloatBtn = (FloatingActionButton) findViewById(R.id.fab);
+        mFloatBtn.attachToRecyclerView(recyclerView);
+        mFloatBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, AddTaskActivity.class);
@@ -305,7 +328,6 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
     //отримання збережених налаштувань
     private void getSettingsFromSharedPref() {
-        mAppSettings = getSharedPreferences(StringKeys.APP_SETTINGS, MODE_PRIVATE);
         mNotStartedTaskColor = mAppSettings.getInt(
                 StringKeys.NOT_STARTED_TASK, ContextCompat.getColor(this, R.color.not_started_task));
         mStartedTaskColor = mAppSettings.getInt(
@@ -449,6 +471,8 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         outState.putStringArrayList(StringKeys.ARRAY_OF_NAMES_FOR_STATISTICS, mGroupsName);
         outState.putString(StringKeys.TAB_HOST_POS, mTabHost.getCurrentTabTag());
         outState.putBoolean(AlertBool, mIfAlertDWasShown);
+        if (mShowcaseView != null && mShowcaseView.isShowing())
+            outState.putInt(StringKeys.TUTORIAL, mTargetPos);
     }
 
     @Override
@@ -464,6 +488,10 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         switch (id) {
+            case R.id.action_show_tutorial:
+                //mShowcaseView.hide();
+                showTutorial(0);
+                break;
             case R.id.action_refresh:
                 downloadStatistic(true);
                 break;
@@ -512,12 +540,11 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
                     public void onClick(View v) {
                         mIfAlertDWasShown = false;
                         mTasks.clear();
-
                         //очищаєм таблиці завдань та статистики
                         DatabaseConnector.deleteAllTasks(getApplicationContext());
                         DatabaseConnector.deleteAllStatistics(getApplicationContext());
                         mSwipeListAdapter.notifyDataSetChanged();
-                        floatBtn.show();
+                        mFloatBtn.show();
                         mAlertForClear.dismiss();
                         //відміняєм запущений раніше запит(якщо такий був)
                         setTimer();
@@ -538,6 +565,10 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
     @Override
     public void onBackPressed() {
+        if (mShowcaseView != null && mShowcaseView.isShowing()) {
+            mShowcaseView.hide();
+            return;
+        }
         if (timeBackPressed + TimeForExit > System.currentTimeMillis())
             super.onBackPressed();
         else {
@@ -740,14 +771,111 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
                             dateStart, dateStop, dateEnd, datePause, pauseLengthBeforeStop, pauseLengthAfterStop, hasMapPoint, latitude, longitude));
                 } while (data.moveToNext());
             }
+            mLoadListProgress.setVisibility(View.INVISIBLE);
+            getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
             sortTasks();
             setTimer();
         }
     }
 
+    private void showTutorial(int pos) {
+        final Target viewTarget1, viewTarget2_4, viewTarget3, viewTarget5;
+        viewTarget1 = new ViewTarget(R.id.fab, this);
+        viewTarget2_4 = Target.NONE;
+        viewTarget3 = new ViewTarget(mToolbar.findViewById(R.id.action_sort));
+        viewTarget5 = new ViewTarget(mToolbar.findViewById(R.id.action_refresh));
+        if (mFloatBtn != null)
+            mFloatBtn.show();
+        mTargetPos = pos;
+        String title = null;
+        String contentText = null;
+        Target target = null;
+        switch (mTargetPos) {
+            case 0:
+                target = Target.NONE;
+                contentText = getString(R.string.text_for_target_0);
+                break;
+            case 1:
+                target = viewTarget1;
+                title = getString(R.string.title_for_target_1);
+                contentText = getString(R.string.text_for_target_1);
+                break;
+            case 2:
+                target = viewTarget2_4;
+                title = getString(R.string.title_for_target_2_4);
+                contentText = getString(R.string.text_for_target_2);
+                break;
+            case 3:
+                target = viewTarget3;
+                title = getString(R.string.title_for_target_3);
+                contentText = getString(R.string.text_for_target_3);
+                break;
+            case 4:
+                target = viewTarget2_4;
+                title = getString(R.string.title_for_target_2_4);
+                contentText = getString(R.string.text_for_target_4);
+                break;
+            case 5:
+                target = viewTarget5;
+                title = getString(R.string.title_for_target_5);
+                contentText = getString(R.string.text_for_target_5);
+                break;
+        }
+        mShowcaseView = new ShowcaseView.Builder(this)
+                .setTarget(target)
+                .setContentTitle(title)
+                .setContentText(contentText)
+                .setStyle(R.style.tutorialStyle)
+                .setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Log.d("===========", "tutorial onClick " + mTargetPos);
+                        switch (mTargetPos) {
+                            case 0:
+                                mTabHost.setCurrentTabByTag("tag1");
+                                mShowcaseView.setShowcase(viewTarget1, false);
+                                mShowcaseView.setContentTitle(getString(R.string.title_for_target_1));
+                                mShowcaseView.setContentText(getString(R.string.text_for_target_1));
+                                break;
+                            case 1:
+                                mShowcaseView.setShowcase(viewTarget2_4, false);
+                                mShowcaseView.setContentTitle(getString(R.string.title_for_target_2_4));
+                                mShowcaseView.setContentText(getString(R.string.text_for_target_2));
+                                break;
+                            case 2:
+                                mShowcaseView.setShowcase(viewTarget3, false);
+                                mShowcaseView.setContentTitle(getString(R.string.title_for_target_3));
+                                mShowcaseView.setContentText(getString(R.string.text_for_target_3));
+                                break;
+                            case 3:
+                                mShowcaseView.setShowcase(viewTarget2_4, false);
+                                mShowcaseView.setContentTitle(getString(R.string.title_for_target_2_4));
+                                mShowcaseView.setContentText(getString(R.string.text_for_target_4));
+                                break;
+                            case 4:
+                                mShowcaseView.setShowcase(viewTarget5, false);
+                                mShowcaseView.setContentTitle(getString(R.string.title_for_target_5));
+                                mShowcaseView.setContentText(getString(R.string.text_for_target_5));
+                                break;
+                            case 5:
+                                mShowcaseView.hide();
+                                SharedPreferences.Editor edit = mAppSettings.edit();
+                                edit.putBoolean(StringKeys.FIRST_START, false);
+                                edit.apply();
+                                break;
+                        }
+                        mTargetPos++;
+                    }
+                })
+                .blockAllTouches()
+                .build();
+        mShowcaseView.setButtonText(getString(R.string.understand));
+    }
+
     @Override
     public void onLoaderReset(Loader<Cursor> loader) {
     }
+
 
     static class TasksCursorLoader extends CursorLoader {
         DatabaseConnector db;
@@ -759,6 +887,12 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
         @Override
         public Cursor loadInBackground() {
+            //пауза, щоби було видно роботу прогрес бару
+            try {
+                TimeUnit.SECONDS.sleep(2);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
             return db.getCursorWithAllTasks();
         }
     }

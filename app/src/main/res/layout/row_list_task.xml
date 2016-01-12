@@ -88,7 +88,7 @@
                     android:layout_width="@dimen/map_pin_in_avatar_size"
                     android:layout_height="@dimen/map_pin_in_avatar_size"
                     android:layout_gravity="right|end"
-                    android:layout_marginTop="5dp" />
+                    android:layout_marginTop="@dimen/map_pin_top_margin" />
             </FrameLayout>
 
             <LinearLayout
@@ -107,23 +107,20 @@
                         android:layout_width="@dimen/repeatImageViewSize"
                         android:layout_height="@dimen/repeatImageViewSize"
                         android:layout_gravity="center_vertical"
-                        android:layout_marginRight="10dp" />
+                        android:layout_marginRight="@dimen/repeat_icon_right_margin" />
 
                     <TextView
                         android:id="@+id/txtListTitle"
+                        style="@style/listTitleStyle"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/task_title"
-                        android:textSize="@dimen/listTitle_txtSize"
-                        android:textStyle="bold" />
+                        android:layout_height="wrap_content" />
                 </LinearLayout>
 
                 <TextView
                     android:id="@+id/txtListComment"
+                    style="@style/listCommentStyle"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="@dimen/listComment_txtSize"
-                    android:textStyle="italic" />
+                    android:layout_height="wrap_content" />
             </LinearLayout>
 
             <LinearLayout
@@ -134,35 +131,25 @@
 
                 <ImageButton
                     android:id="@+id/btnPause"
-                    android:layout_width="@dimen/btn_start_end_width_height"
-                    android:layout_height="@dimen/btn_start_end_width_height"
-                    android:layout_gravity="center"
+                    style="@style/listBtnStyle"
                     android:background="@drawable/btn_pause_selector"
                     android:visibility="gone" />
 
                 <ImageButton
                     android:id="@+id/btnResume"
-                    android:layout_width="@dimen/btn_start_end_width_height"
-                    android:layout_height="@dimen/btn_start_end_width_height"
-                    android:layout_gravity="center"
+                    style="@style/listBtnStyle"
                     android:background="@drawable/btn_resume_selector"
                     android:visibility="gone" />
 
                 <Button
                     android:id="@+id/btnStart"
-                    android:layout_width="@dimen/btn_start_end_width_height"
-                    android:layout_height="@dimen/btn_start_end_width_height"
-                    android:layout_gravity="center"
-                    android:layout_margin="@dimen/margin_date_btn"
+                    style="@style/listBtnStyle"
                     android:background="@drawable/btn_start_selector"
                     android:text="@string/start" />
 
                 <Button
                     android:id="@+id/btnFinish"
-                    android:layout_width="@dimen/btn_start_end_width_height"
-                    android:layout_height="@dimen/btn_start_end_width_height"
-                    android:layout_gravity="center"
-                    android:layout_margin="@dimen/margin_date_btn"
+                    style="@style/listBtnStyle"
                     android:background="@drawable/btn_finish_selector"
                     android:text="@string/finish"
                     android:visibility="gone" />

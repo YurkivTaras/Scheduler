@@ -1639,9 +1639,30 @@
                     "startLine": 214,
                     "startColumn": 4,
                     "startOffset": 16109,
-                    "endLine": 220,
+                    "endLine": 215,
                     "endColumn": 12,
-                    "endOffset": 16457
+                    "endOffset": 16185
+                },
+                "from": {
+                    "file": "D:\\Android\\AndroidStudioWorkspace\\Scheduler\\app\\build\\intermediates\\exploded-aar\\com.github.castorflex.smoothprogressbar\\library-circular\\1.2.0\\res\\values-v21\\values-v21.xml",
+                    "position": {
+                        "startLine": 4,
+                        "startColumn": 4,
+                        "startOffset": 191,
+                        "endLine": 5,
+                        "endColumn": 12,
+                        "endOffset": 267
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 216,
+                    "startColumn": 4,
+                    "startOffset": 16190,
+                    "endLine": 222,
+                    "endColumn": 12,
+                    "endOffset": 16538
                 },
                 "from": {
                     "file": "D:\\Android\\AndroidStudioWorkspace\\Scheduler\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\values-v21\\values-v21.xml",
@@ -1657,12 +1678,12 @@
             },
             {
                 "to": {
-                    "startLine": 221,
+                    "startLine": 223,
                     "startColumn": 4,
-                    "startOffset": 16462,
-                    "endLine": 227,
+                    "startOffset": 16543,
+                    "endLine": 229,
                     "endColumn": 12,
-                    "endOffset": 16822
+                    "endOffset": 16903
                 },
                 "from": {
                     "file": "D:\\Android\\AndroidStudioWorkspace\\Scheduler\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\values-v21\\values-v21.xml",
@@ -1678,12 +1699,12 @@
             },
             {
                 "to": {
-                    "startLine": 228,
+                    "startLine": 230,
                     "startColumn": 4,
-                    "startOffset": 16827,
-                    "endLine": 237,
+                    "startOffset": 16908,
+                    "endLine": 239,
                     "endColumn": 12,
-                    "endOffset": 17502
+                    "endOffset": 17583
                 },
                 "from": {
                     "file": "D:\\Android\\AndroidStudioWorkspace\\Scheduler\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\values-v21\\values-v21.xml",
@@ -1699,11 +1720,11 @@
             },
             {
                 "to": {
-                    "startLine": 238,
+                    "startLine": 240,
                     "startColumn": 4,
-                    "startOffset": 17507,
+                    "startOffset": 17588,
                     "endColumn": 56,
-                    "endOffset": 17559
+                    "endOffset": 17640
                 },
                 "from": {
                     "file": "D:\\Android\\AndroidStudioWorkspace\\Scheduler\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\values-v21\\values-v21.xml",
@@ -1718,11 +1739,11 @@
             },
             {
                 "to": {
-                    "startLine": 239,
+                    "startLine": 241,
                     "startColumn": 4,
-                    "startOffset": 17564,
+                    "startOffset": 17645,
                     "endColumn": 57,
-                    "endOffset": 17617
+                    "endOffset": 17698
                 },
                 "from": {
                     "file": "D:\\Android\\AndroidStudioWorkspace\\Scheduler\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\values-v21\\values-v21.xml",
@@ -1737,11 +1758,11 @@
             },
             {
                 "to": {
-                    "startLine": 240,
+                    "startLine": 242,
                     "startColumn": 4,
-                    "startOffset": 17622,
+                    "startOffset": 17703,
                     "endColumn": 121,
-                    "endOffset": 17739
+                    "endOffset": 17820
                 },
                 "from": {
                     "file": "D:\\Android\\AndroidStudioWorkspace\\Scheduler\\app\\build\\intermediates\\exploded-aar\\com.google.android.gms\\play-services-appinvite\\8.4.0\\res\\values-v21\\appinvite_styles.xml",

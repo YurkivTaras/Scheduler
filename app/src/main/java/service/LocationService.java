@@ -153,7 +153,7 @@ public class LocationService extends Service {
                 if (tasks.size() != 0) {
                     Intent i = new Intent(getApplicationContext(), AlarmManagerBroadcastReceiver.class);
                     sendBroadcast(i);
-                    i = new Intent("broadCastName");
+                    i = new Intent(StringKeys.MAIN_ACTIVITY_BROADCAST);
                     Bundle bundle = new Bundle();
                     bundle.putParcelableArrayList(StringKeys.ARRAY_OF_TASKS, tasks);
                     bundle.putString(StringKeys.ACTION, StringKeys.START_OR_PAUSE_TASK_ACTION);

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#ff6d7fe2</color>
-    <color name="colorPrimaryDark">#1A237E</color>
+    <color name="colorPrimary">#6c6e78</color>
+    <color name="colorPrimaryDark">#22338c</color>
     <color name="colorAccent">#412010</color>
     <color name="task_title">#000000</color>
 
@@ -9,9 +9,9 @@
     <color name="widget_button_normal">#2196F3</color>
     <color name="widget_button_focus">#82B1FF</color>
 
-    <color name="started_task">#f5b33a</color>
-    <color name="completed_task">#5b5553</color>
-    <color name="not_started_task">#3f8c30</color>
+    <color name="started_task">#7ca5a6</color>
+    <color name="completed_task">#485f7c</color>
+    <color name="not_started_task">#d4d0ca</color>
 
     <color name="start_gradient_main_activity">#cfd2d4</color>
     <color name="end_gradient_main_activity">#949494</color>
@@ -22,14 +22,14 @@
     <color name="start_gradient_splash_activity">#7c7a7a</color>
     <color name="end_gradient_splash_activity">#4e4c4c</color>
 
-    <color name="fab_colorNormal">#ad0022</color>
-    <color name="fab_colorPressed">#620c0c</color>
+    <color name="fab_colorNormal">#315780</color>
+    <color name="fab_colorPressed">#232453</color>
     <color name="fab_colorRipple">#000000</color>
 
-    <color name="btn_start_normal">#0f872f</color>
-    <color name="btn_start_pressed">#184519</color>
+    <color name="btn_start_normal">#225430</color>
+    <color name="btn_start_pressed">#224023</color>
     <color name="btn_start_stroke">#10260b</color>
-    <color name="btn_finish_normal">#9f1510</color>
+    <color name="btn_finish_normal">#8b2521</color>
     <color name="btn_finish_pressed">#420f0d</color>
     <color name="btn_finish_stroke">#290a0a</color>
 

@@ -19,58 +19,84 @@
             android:visibility="invisible" />
     </android.support.v7.widget.Toolbar>
 
-    <TabHost
-        android:id="@android:id/tabhost"
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <LinearLayout
+        <!--<ProgressBar
+            android:id="@+id/load_list_progress_bar"
+            android:layout_width="@dimen/load_list_progress_bar_size"
+            android:layout_height="@dimen/load_list_progress_bar_size"
+            android:layout_gravity="center"
+            android:visibility="invisible" />-->
+        <fr.castorflex.android.circularprogressbar.CircularProgressBar
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/load_list_progress_bar"
+            android:layout_width="@dimen/load_list_progress_bar_size"
+            android:layout_height="@dimen/load_list_progress_bar_size"
+            android:layout_gravity="center"
+            android:indeterminate="true"
+            app:cpb_color="@color/colorPrimary"
+            app:cpb_max_sweep_angle="300"
+            app:cpb_min_sweep_angle="10"
+            app:cpb_rotation_speed="1.0"
+            app:cpb_stroke_width="10dp"
+            app:cpb_sweep_speed="1.0" />
+
+        <TabHost
+            android:id="@android:id/tabhost"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_height="match_parent">
 
-            <TabWidget
-                android:id="@android:id/tabs"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
-            <FrameLayout
-                android:id="@android:id/tabcontent"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                <TabWidget
+                    android:id="@android:id/tabs"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
 
-                <FrameLayout xmlns:fab="http://schemas.android.com/apk/res-auto"
-                    android:id="@+id/tab1"
+                <FrameLayout
+                    android:id="@android:id/tabcontent"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
-                    <android.support.v7.widget.RecyclerView
-                        android:id="@+id/recyclerView"
+                    <FrameLayout xmlns:fab="http://schemas.android.com/apk/res-auto"
+                        android:id="@+id/tab1"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:scrollbars="vertical" />
+                        android:layout_height="match_parent">
 
-                    <com.melnykov.fab.FloatingActionButton
-                        android:id="@+id/fab"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="bottom|right"
-                        android:layout_marginBottom="@dimen/marginBottomForFloatBtn"
-                        android:layout_marginRight="@dimen/marginRightForFloatBtn"
+                        <android.support.v7.widget.RecyclerView
+                            android:id="@+id/recyclerView"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:scrollbars="vertical" />
 
-                        android:src="@drawable/float_btn_add"
-                        fab:fab_colorNormal="@color/fab_colorNormal"
-                        fab:fab_colorPressed="@color/fab_colorPressed"
-                        fab:fab_colorRipple="@color/fab_colorRipple" />
+                        <com.melnykov.fab.FloatingActionButton
+                            android:id="@+id/fab"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="bottom|right"
+                            android:layout_marginBottom="@dimen/marginBottomForFloatBtn"
+                            android:layout_marginRight="@dimen/marginRightForFloatBtn"
+
+                            android:src="@drawable/float_btn_add"
+                            fab:fab_colorNormal="@color/fab_colorNormal"
+                            fab:fab_colorPressed="@color/fab_colorPressed"
+                            fab:fab_colorRipple="@color/fab_colorRipple" />
+                    </FrameLayout>
+
+                    <ExpandableListView
+                        android:id="@+id/tab2"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+                    <!--android:indicatorLeft="250dp"
+                                   android:indicatorRight="300dp"-->
                 </FrameLayout>
-
-                <ExpandableListView
-                    android:id="@+id/tab2"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
-                <!--android:indicatorLeft="250dp"
-                               android:indicatorRight="300dp"-->
-            </FrameLayout>
-        </LinearLayout>
-    </TabHost>
+            </LinearLayout>
+        </TabHost>
+    </FrameLayout>
 </LinearLayout>

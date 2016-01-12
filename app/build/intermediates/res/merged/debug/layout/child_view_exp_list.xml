@@ -19,19 +19,15 @@
 
         <TextView
             android:id="@+id/expTxtTitle"
+            style="@style/listTitleStyle"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/black_de"
-            android:textSize="@dimen/listTitle_txtSize"
-            android:textStyle="bold" />
+            android:layout_height="wrap_content" />
 
         <TextView
             android:id="@+id/expTxtComment"
+            style="@style/listCommentStyle"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/black_de"
-            android:textSize="@dimen/listComment_txtSize"
-            android:textStyle="italic" />
+            android:layout_height="wrap_content" />
 
         <TextView
             android:id="@+id/expTxtRuntime"

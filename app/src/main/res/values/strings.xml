@@ -46,6 +46,7 @@
     <string name="chooseFromCamera">Загрузити з камери</string>
     <string name="cancel">Відмінити</string>
     <string name="actionRefresh">Перерахувати статистику</string>
+    <string name="google_app_id">23423452163</string>
 
     <string-array name="spinner_items">
         <item>A-Z</item>
@@ -70,4 +71,16 @@
     <string name="title_activity_maps">Map</string>
     <string name="mapsToolbarTitle">Прив\'язка до місця</string>
     <string name="mapPlaceCheckBoxText">Прив\'язка до місця</string>
+    <string name="action_show_tutorial">Показати підказки</string>
+    <string name="understand">Зрозуміло</string>
+    <string name="title_for_target_1">Додавання завдання</string>
+    <string name="title_for_target_2_4">Зсувне меню</string>
+    <string name="title_for_target_3">Сортування</string>
+    <string name="title_for_target_5">Статистика</string>
+    <string name="text_for_target_0">Рухайтесь по вкладках \"Завдання\" та \"Статистика\" щоби переглядати усі завдання і статистику по місяцях для періодичних завдань</string>
+    <string name="text_for_target_1">Нажміть для створення нового завдання</string>
+    <string name="text_for_target_2">Зсувайте завдання вправо для його видалення</string>
+    <string name="text_for_target_4">Використовуйте ліве зсувне меню, щоби відновити закінчене завдання, або перейти до його редагування</string>
+    <string name="text_for_target_3">Нажміть для вибору режиму сортування завдань</string>
+    <string name="text_for_target_5">Нажміть для перерахування статистики(вкладка Статистика)</string>
 </resources>
