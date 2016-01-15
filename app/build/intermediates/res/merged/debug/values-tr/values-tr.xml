@@ -53,19 +53,5 @@
     <string name="crop__pick_error">Fotoğraf bulunamadı</string>
     <string name="crop__saving">Fotoğraf kaydediliyor…</string>
     <string name="crop__wait">Lütfen bekleyin…</string>
-    <string msgid="8327680881775995150" name="mr_media_route_button_content_description">"Yayınla"</string>
-    <string msgid="7553005460920830010" name="mr_media_route_chooser_searching">"Cihaz arayın…"</string>
-    <string msgid="7106830097177242655" name="mr_media_route_chooser_title">"Cihaza bağlanın"</string>
-    <string msgid="109793632378378069" name="mr_media_route_controller_disconnect">"Bağlantıyı kes"</string>
-    <string msgid="3641544772007543920" name="mr_media_route_controller_no_info_available">"Bilgi yok"</string>
-    <string msgid="8315773974194466049" name="mr_media_route_controller_pause">"Duraklat"</string>
-    <string msgid="5214423499524760404" name="mr_media_route_controller_play">"Oynat"</string>
-    <string msgid="379358765881274425" name="mr_media_route_controller_settings_description">"Rota ayarları"</string>
-    <string msgid="5398645111664294430" name="mr_media_route_controller_stop">"Yayını durdur"</string>
-    <string msgid="5441529851481176817" name="mr_system_route_name">"Sistem"</string>
-    <string msgid="7498112907524977311" name="mr_user_route_category_name">"Cihazlar"</string>
-    <string msgid="2132213647576279742" name="place_autocomplete_clear_button">"Aramayı temizle"</string>
-    <string msgid="4600782048316473865" name="place_autocomplete_search_hint">"Ara"</string>
     <string msgid="2869576371154716097" name="status_bar_notification_info_overflow">"999+"</string>
-    <string msgid="4184147110658930238" name="wallet_buy_button_place_holder">"Google ile satın al"</string>
 </resources>

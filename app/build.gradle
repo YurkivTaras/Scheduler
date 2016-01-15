@@ -1,15 +1,15 @@
 apply plugin: 'com.android.application'
 
 android {
+    signingConfigs {
+    }
     compileSdkVersion 23
     buildToolsVersion "22.0.1"
-
     defaultConfig {
         applicationId "com.y_taras.scheduler"
         minSdkVersion 14
         targetSdkVersion 21
     }
-
     buildTypes {
         release {
             minifyEnabled false
@@ -19,6 +19,10 @@ android {
 }
 
 dependencies {
+    //google Drive
+    compile 'com.google.android.gms:play-services-drive:8.4.0'
+    //google Maps
+    compile 'com.google.android.gms:play-services-maps:8.4.0'
     //custom progressBar
     compile 'com.github.castorflex.smoothprogressbar:library-circular:1.2.0'
     //tutorial for first start
@@ -40,6 +44,4 @@ dependencies {
     compile 'com.google.code.gson:gson:2.4'
     compile 'com.android.support:appcompat-v7:23.1.1'
     compile 'com.android.support:support-v4:23.1.1'
-    //googleMaps
-    compile 'com.google.android.gms:play-services:8.4.0'
 }

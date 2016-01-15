@@ -53,19 +53,5 @@
     <string name="crop__pick_error">이미지가 존재하지 않습니다.</string>
     <string name="crop__saving">사진을 저장중입니다…</string>
     <string name="crop__wait">잠시만 기다려주세요…</string>
-    <string msgid="8327680881775995150" name="mr_media_route_button_content_description">"전송"</string>
-    <string msgid="7553005460920830010" name="mr_media_route_chooser_searching">"기기 검색 중…"</string>
-    <string msgid="7106830097177242655" name="mr_media_route_chooser_title">"기기에 연결"</string>
-    <string msgid="109793632378378069" name="mr_media_route_controller_disconnect">"연결 해제"</string>
-    <string msgid="3641544772007543920" name="mr_media_route_controller_no_info_available">"정보가 없습니다."</string>
-    <string msgid="8315773974194466049" name="mr_media_route_controller_pause">"일시중지"</string>
-    <string msgid="5214423499524760404" name="mr_media_route_controller_play">"재생"</string>
-    <string msgid="379358765881274425" name="mr_media_route_controller_settings_description">"경로 설정"</string>
-    <string msgid="5398645111664294430" name="mr_media_route_controller_stop">"전송 중지"</string>
-    <string msgid="5441529851481176817" name="mr_system_route_name">"시스템"</string>
-    <string msgid="7498112907524977311" name="mr_user_route_category_name">"기기"</string>
-    <string msgid="2132213647576279742" name="place_autocomplete_clear_button">"검색어 지우기"</string>
-    <string msgid="4600782048316473865" name="place_autocomplete_search_hint">"검색"</string>
     <string msgid="2869576371154716097" name="status_bar_notification_info_overflow">"999+"</string>
-    <string msgid="4184147110658930238" name="wallet_buy_button_place_holder">"Google로 구매"</string>
 </resources>

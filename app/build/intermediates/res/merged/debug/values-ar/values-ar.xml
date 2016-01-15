@@ -53,19 +53,5 @@
     <string name="crop__pick_error">الصورة غير متاحة</string>
     <string name="crop__saving">جارى حفظ الصورة …</string>
     <string name="crop__wait">رجاء الأنتظار …</string>
-    <string msgid="8327680881775995150" name="mr_media_route_button_content_description">"إرسال"</string>
-    <string msgid="7553005460920830010" name="mr_media_route_chooser_searching">"جارٍ البحث عن الأجهزة…"</string>
-    <string msgid="7106830097177242655" name="mr_media_route_chooser_title">"الاتصال بجهاز"</string>
-    <string msgid="109793632378378069" name="mr_media_route_controller_disconnect">"قطع الاتصال"</string>
-    <string msgid="3641544772007543920" name="mr_media_route_controller_no_info_available">"لا تتوفر أية معلومات"</string>
-    <string msgid="8315773974194466049" name="mr_media_route_controller_pause">"إيقاف مؤقت"</string>
-    <string msgid="5214423499524760404" name="mr_media_route_controller_play">"تشغيل"</string>
-    <string msgid="379358765881274425" name="mr_media_route_controller_settings_description">"إعدادات المسار"</string>
-    <string msgid="5398645111664294430" name="mr_media_route_controller_stop">"إيقاف الإرسال"</string>
-    <string msgid="5441529851481176817" name="mr_system_route_name">"النظام"</string>
-    <string msgid="7498112907524977311" name="mr_user_route_category_name">"الأجهزة"</string>
-    <string msgid="2132213647576279742" name="place_autocomplete_clear_button">"مسح البحث"</string>
-    <string msgid="4600782048316473865" name="place_autocomplete_search_hint">"البحث"</string>
     <string msgid="2869576371154716097" name="status_bar_notification_info_overflow">"+999"</string>
-    <string msgid="4184147110658930238" name="wallet_buy_button_place_holder">"الشراء عبر Google"</string>
 </resources>

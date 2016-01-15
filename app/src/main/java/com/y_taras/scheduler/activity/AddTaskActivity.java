@@ -15,7 +15,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -31,7 +30,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.example.scheduler.R;
+import com.y_taras.scheduler.R;
 import com.soundcloud.android.crop.Crop;
 
 import java.io.File;
@@ -40,9 +39,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import me.drakeet.materialdialog.MaterialDialog;
-import other.StringKeys;
-import other.Task;
-import utils.ImageLoader;
+
+import com.y_taras.scheduler.other.StringKeys;
+import com.y_taras.scheduler.other.Task;
+import com.y_taras.scheduler.utils.ImageLoader;
 
 public class AddTaskActivity extends AppCompatActivity {
     private static final int requestCodeForTitle = 1;
@@ -179,7 +179,9 @@ public class AddTaskActivity extends AppCompatActivity {
                 }
                 if (!mEditAvatarUri.equals(Task.DEFAULT_AVATAR_URI)) {
                     mEditBtmAvatar = ImageLoader.loadImage(mEditAvatarUri);
-                    mAvatar.setImageBitmap(mEditBtmAvatar);
+                    //якщо файл іщ
+                    if (mEditBtmAvatar != null)
+                        mAvatar.setImageBitmap(mEditBtmAvatar);
                 }
             }
         } else

@@ -26,17 +26,29 @@ import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ExpandableListView;
-import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TabHost;
 import android.widget.Toast;
 
 import com.daimajia.swipe.util.Attributes;
-import com.example.scheduler.R;
 import com.github.amlcurran.showcaseview.ShowcaseView;
 import com.github.amlcurran.showcaseview.targets.Target;
 import com.github.amlcurran.showcaseview.targets.ViewTarget;
 import com.melnykov.fab.FloatingActionButton;
+import com.y_taras.scheduler.R;
+import com.y_taras.scheduler.adapter.CustomExpandableListAdapter;
+import com.y_taras.scheduler.adapter.CustomSpinnerAdapter;
+import com.y_taras.scheduler.adapter.DividerItemDecoration;
+import com.y_taras.scheduler.adapter.SwipeRecyclerViewAdapter;
+import com.y_taras.scheduler.other.Statistic;
+import com.y_taras.scheduler.other.StringKeys;
+import com.y_taras.scheduler.other.Task;
+import com.y_taras.scheduler.service.LocationService;
+import com.y_taras.scheduler.utils.AlarmManagerBroadcastReceiver;
+import com.y_taras.scheduler.utils.AnimatedTabHostListener;
+import com.y_taras.scheduler.utils.BackupAgent;
+import com.y_taras.scheduler.utils.DatabaseConnector;
+import com.y_taras.scheduler.utils.ImageLoader;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -48,23 +60,10 @@ import java.util.Map;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
-import adapter.CustomExpandableListAdapter;
-import adapter.CustomSpinnerAdapter;
-import adapter.DividerItemDecoration;
-import adapter.SwipeRecyclerViewAdapter;
 import fr.castorflex.android.circularprogressbar.CircularProgressBar;
 import me.drakeet.materialdialog.MaterialDialog;
-import other.Statistic;
-import other.StringKeys;
-import other.Task;
-import service.LocationService;
-import utils.AlarmManagerBroadcastReceiver;
-import utils.AnimatedTabHostListener;
-import utils.DatabaseConnector;
-import utils.ImageLoader;
 
 public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
-
     private static final String AlertBool = "alertBool";
     private static final int TimeForExit = 3500;
     private static final int RequestCodeAddTask = 1;
@@ -113,6 +112,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        BackupAgent.requestBackup(this);
         setContentView(R.layout.activity_main);
         initUI(savedInstanceState);
     }
@@ -120,6 +120,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        BackupAgent.requestBackup(this);
         unregisterReceiver(mBroadcastReceiver);
         if (mAlertForClear != null)
             mAlertForClear.dismiss();
@@ -316,6 +317,14 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         mFloatBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+               /* BackupManager bm = new BackupManager(getApplicationContext());
+                bm.requestRestore(new RestoreObserver() {
+                    @Override
+                    public void restoreFinished(int error) {
+                        super.restoreFinished(error);
+                        getLoaderManager().getLoader(AllTasksLoaderID).forceLoad();
+                    }
+                });*/
                 Intent intent = new Intent(MainActivity.this, AddTaskActivity.class);
                 intent.setAction(StringKeys.ADD_TASK);
                 intent.putExtra(StringKeys.MAX_RUNTIME_FOR_TASK, mMaxRuntimeForTask);
@@ -569,9 +578,10 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
             mShowcaseView.hide();
             return;
         }
-        if (timeBackPressed + TimeForExit > System.currentTimeMillis())
+        if (timeBackPressed + TimeForExit > System.currentTimeMillis()) {
+            if (mTasks != null) mToast.cancel();
             super.onBackPressed();
-        else {
+        } else {
             if (mToast != null)
                 mToast.cancel();
             mToast = Toast.makeText(this, R.string.toastMessageIfBackPressed,
@@ -734,6 +744,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
+        mTasks.clear();
         if (loader.getId() == AllTasksLoaderID) {
             if (data.moveToFirst()) {
                 int idColIndex = data.getColumnIndex(DatabaseConnector.COLUMN_ID);
@@ -889,7 +900,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         public Cursor loadInBackground() {
             //пауза, щоби було видно роботу прогрес бару
             try {
-                TimeUnit.SECONDS.sleep(2);
+                TimeUnit.SECONDS.sleep(1);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
