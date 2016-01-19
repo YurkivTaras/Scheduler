@@ -516,6 +516,7 @@
     <string name="sort_z_a">Z-A</string>
     <string name="start">Start</string>
     <string name="status_bar_notification_info_overflow">999+</string>
+    <string name="test">Тест</string>
     <string name="text_for_target_0">Рухайтесь по вкладках \"Завдання\" та \"Статистика\" щоби переглядати усі завдання і статистику по місяцях для періодичних завдань</string>
     <string name="text_for_target_1">Нажміть для створення нового завдання</string>
     <string name="text_for_target_2">Зсувайте завдання вправо для його видалення</string>

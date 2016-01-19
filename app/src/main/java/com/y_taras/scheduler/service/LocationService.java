@@ -13,10 +13,10 @@ import android.os.IBinder;
 import java.util.ArrayList;
 import java.util.Date;
 
-import com.y_taras.scheduler.other.StringKeys;
+import com.y_taras.scheduler.other.Constants;
 import com.y_taras.scheduler.other.Task;
 import com.y_taras.scheduler.utils.AlarmManagerBroadcastReceiver;
-import com.y_taras.scheduler.utils.DatabaseConnector;
+import com.y_taras.scheduler.helper.DatabaseConnector;
 
 public class LocationService extends Service {
     private static final int MaxDistance = 100;
@@ -154,10 +154,10 @@ public class LocationService extends Service {
                 if (tasks.size() != 0) {
                     Intent i = new Intent(getApplicationContext(), AlarmManagerBroadcastReceiver.class);
                     sendBroadcast(i);
-                    i = new Intent(StringKeys.MAIN_ACTIVITY_BROADCAST);
+                    i = new Intent(Constants.MAIN_ACTIVITY_BROADCAST);
                     Bundle bundle = new Bundle();
-                    bundle.putParcelableArrayList(StringKeys.ARRAY_OF_TASKS, tasks);
-                    bundle.putString(StringKeys.ACTION, StringKeys.START_OR_PAUSE_TASK_ACTION);
+                    bundle.putParcelableArrayList(Constants.ARRAY_OF_TASKS, tasks);
+                    bundle.putString(Constants.ACTION, Constants.START_OR_PAUSE_TASK_ACTION);
                     i.putExtras(bundle);
                     sendBroadcast(i);
                 }

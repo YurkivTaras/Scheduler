@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.CursorLoader;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.IntentSender;
 import android.content.Loader;
 import android.content.SharedPreferences;
 import android.database.Cursor;
@@ -34,23 +35,31 @@ import com.daimajia.swipe.util.Attributes;
 import com.github.amlcurran.showcaseview.ShowcaseView;
 import com.github.amlcurran.showcaseview.targets.Target;
 import com.github.amlcurran.showcaseview.targets.ViewTarget;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GooglePlayServicesUtil;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.drive.Drive;
 import com.melnykov.fab.FloatingActionButton;
 import com.y_taras.scheduler.R;
 import com.y_taras.scheduler.adapter.CustomExpandableListAdapter;
 import com.y_taras.scheduler.adapter.CustomSpinnerAdapter;
 import com.y_taras.scheduler.adapter.DividerItemDecoration;
 import com.y_taras.scheduler.adapter.SwipeRecyclerViewAdapter;
+import com.y_taras.scheduler.googleDrive.DriveManager;
+import com.y_taras.scheduler.googleDrive.OnLoadCompleteListener;
+import com.y_taras.scheduler.helper.DatabaseConnector;
+import com.y_taras.scheduler.helper.ImageLoader;
+import com.y_taras.scheduler.other.Constants;
 import com.y_taras.scheduler.other.Statistic;
-import com.y_taras.scheduler.other.StringKeys;
 import com.y_taras.scheduler.other.Task;
 import com.y_taras.scheduler.service.LocationService;
 import com.y_taras.scheduler.utils.AlarmManagerBroadcastReceiver;
 import com.y_taras.scheduler.utils.AnimatedTabHostListener;
 import com.y_taras.scheduler.utils.BackupAgent;
-import com.y_taras.scheduler.utils.DatabaseConnector;
-import com.y_taras.scheduler.utils.ImageLoader;
 
+import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
@@ -63,13 +72,17 @@ import java.util.concurrent.TimeUnit;
 import fr.castorflex.android.circularprogressbar.CircularProgressBar;
 import me.drakeet.materialdialog.MaterialDialog;
 
-public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
+public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor>,
+        GoogleApiClient.OnConnectionFailedListener, GoogleApiClient.ConnectionCallbacks {
+    public static final String TAG = "MainActivity";
     private static final String AlertBool = "alertBool";
     private static final int TimeForExit = 3500;
     private static final int RequestCodeAddTask = 1;
     public static final int REQUEST_CODE_EDIT_TASK = 2;
     private static final int RequestCodeSettings = 3;
-    private static final int AllTasksLoaderID = 1;
+    private static final int AllTasksLoaderID = 8;
+    public static final int REQUEST_CODE_GD_RESOLUTION = 101;
+
     private static long timeBackPressed;
     private static boolean mFirstStart;
 
@@ -108,6 +121,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     private int mMaxRuntimeForTask;
 
     private DatabaseConnector mDatabaseConnector;
+    private GoogleApiClient mGoogleApiClient;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -116,6 +130,19 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         setContentView(R.layout.activity_main);
         initUI(savedInstanceState);
     }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        connectToGD();
+    }
+
+    @Override
+    protected void onPause() {
+        disconnectGD();
+        super.onPause();
+    }
+
 
     @Override
     protected void onDestroy() {
@@ -135,30 +162,30 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         mToolbar.inflateMenu(R.menu.menu_main);
         setSupportActionBar(mToolbar);
         //ініціалізація SharedPreferences, що містить збережені настройки програми
-        mAppSettings = getSharedPreferences(StringKeys.APP_SETTINGS, MODE_PRIVATE);
+        mAppSettings = getSharedPreferences(Constants.APP_SETTINGS, MODE_PRIVATE);
         mLoadListProgress = (CircularProgressBar) findViewById(R.id.load_list_progress_bar);
         if (savedInstanceState == null) {
             mTasks = new ArrayList<>();
             mGroups = new ArrayList<>();
             mGroupsName = new ArrayList<>();
-            mFirstStart = mAppSettings.getBoolean(StringKeys.FIRST_START, true);
+            mFirstStart = mAppSettings.getBoolean(Constants.FIRST_START, true);
             if (mFirstStart)
                 showTutorial(0);
         } else {
-            if (savedInstanceState.containsKey(StringKeys.ARRAY_OF_TASKS))
-                mTasks = savedInstanceState.getParcelableArrayList(StringKeys.ARRAY_OF_TASKS);
-            if (savedInstanceState.containsKey(StringKeys.ARRAY_OF_STATISTICS))
+            if (savedInstanceState.containsKey(Constants.ARRAY_OF_TASKS))
+                mTasks = savedInstanceState.getParcelableArrayList(Constants.ARRAY_OF_TASKS);
+            if (savedInstanceState.containsKey(Constants.ARRAY_OF_STATISTICS))
                 //noinspection unchecked
-                mGroups = (ArrayList<ArrayList<Task>>) savedInstanceState.getSerializable(StringKeys.ARRAY_OF_STATISTICS);
-            if (savedInstanceState.containsKey(StringKeys.ARRAY_OF_NAMES_FOR_STATISTICS))
-                mGroupsName = savedInstanceState.getStringArrayList(StringKeys.ARRAY_OF_NAMES_FOR_STATISTICS);
-            if (savedInstanceState.containsKey(StringKeys.TAB_HOST_POS))
-                mTabHostPos = savedInstanceState.getString(StringKeys.TAB_HOST_POS);
+                mGroups = (ArrayList<ArrayList<Task>>) savedInstanceState.getSerializable(Constants.ARRAY_OF_STATISTICS);
+            if (savedInstanceState.containsKey(Constants.ARRAY_OF_NAMES_FOR_STATISTICS))
+                mGroupsName = savedInstanceState.getStringArrayList(Constants.ARRAY_OF_NAMES_FOR_STATISTICS);
+            if (savedInstanceState.containsKey(Constants.TAB_HOST_POS))
+                mTabHostPos = savedInstanceState.getString(Constants.TAB_HOST_POS);
             if (savedInstanceState.containsKey(AlertBool) && savedInstanceState.getBoolean(AlertBool))
                 showAlertDialogForDelete();
             //відновлення незавершеного туторіала, якщо такий був
-            if (savedInstanceState.containsKey(StringKeys.TUTORIAL))
-                showTutorial(savedInstanceState.getInt(StringKeys.TUTORIAL));
+            if (savedInstanceState.containsKey(Constants.TUTORIAL))
+                showTutorial(savedInstanceState.getInt(Constants.TUTORIAL));
         }
 
         //отримання попередніх користувацьких налаштувань
@@ -175,7 +202,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
                                        int position, long id) {
                 SharedPreferences.Editor edit = mAppSettings.edit();
                 mSpinnerPos = position;
-                edit.putInt(StringKeys.SPINNER_POS, mSpinnerPos);
+                edit.putInt(Constants.SPINNER_POS, mSpinnerPos);
                 edit.apply();
                 switch (position) {
                     case 0:     //A-Z
@@ -250,12 +277,11 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         listView.setAdapter(mExpListAdapter);
 
         alarm = new AlarmManagerBroadcastReceiver();
-
+        // створюєм лоадер для читання даних
+        getLoaderManager().initLoader(AllTasksLoaderID, null, this);
         if (savedInstanceState == null && !mFirstStart) {
-            getWindow().addFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
-            mLoadListProgress.setVisibility(View.VISIBLE);
-            // створюєм лоадер для читання даних
-            getLoaderManager().initLoader(AllTasksLoaderID, null, this);
+            showLoadProgress();
+            //запускаєм лоадер
             getLoaderManager().getLoader(AllTasksLoaderID).forceLoad();
             downloadStatistic(false);
         }
@@ -267,11 +293,11 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
             public void onReceive(Context context, Intent intent) {
 
                 Bundle b = intent.getExtras();
-                String action = b.getString(StringKeys.ACTION);
-                ArrayList<Task> tasks = b.getParcelableArrayList(StringKeys.ARRAY_OF_TASKS);
+                String action = b.getString(Constants.ACTION);
+                ArrayList<Task> tasks = b.getParcelableArrayList(Constants.ARRAY_OF_TASKS);
                 if (tasks == null)
                     return;
-                if (action != null && action.equals(StringKeys.ClOSE_TASK_ACTION))
+                if (action != null && action.equals(Constants.ClOSE_TASK_ACTION))
                     for (int i = 0; i < tasks.size(); i++) {
                         Task taskFromIntent = tasks.get(i);
                         Date dateEndForTaskFormIntent = taskFromIntent.getDateEnd();
@@ -289,7 +315,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
                             }
                         }
                     }
-                else if (action != null && action.equals(StringKeys.START_OR_PAUSE_TASK_ACTION)) {
+                else if (action != null && action.equals(Constants.START_OR_PAUSE_TASK_ACTION)) {
                     for (int i = 0; i < tasks.size(); i++) {
                         Task taskFromIntent = tasks.get(i);
                         long taskFromIntentID = taskFromIntent.getDatabase_ID();
@@ -309,7 +335,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
                 }
             }
         };
-        registerReceiver(mBroadcastReceiver, new IntentFilter(StringKeys.MAIN_ACTIVITY_BROADCAST));
+        registerReceiver(mBroadcastReceiver, new IntentFilter(Constants.MAIN_ACTIVITY_BROADCAST));
 
         //ініціалізація плаваючої кнопки
         mFloatBtn = (FloatingActionButton) findViewById(R.id.fab);
@@ -317,17 +343,9 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         mFloatBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               /* BackupManager bm = new BackupManager(getApplicationContext());
-                bm.requestRestore(new RestoreObserver() {
-                    @Override
-                    public void restoreFinished(int error) {
-                        super.restoreFinished(error);
-                        getLoaderManager().getLoader(AllTasksLoaderID).forceLoad();
-                    }
-                });*/
                 Intent intent = new Intent(MainActivity.this, AddTaskActivity.class);
-                intent.setAction(StringKeys.ADD_TASK);
-                intent.putExtra(StringKeys.MAX_RUNTIME_FOR_TASK, mMaxRuntimeForTask);
+                intent.setAction(Constants.ADD_TASK);
+                intent.putExtra(Constants.MAX_RUNTIME_FOR_TASK, mMaxRuntimeForTask);
                 startActivityForResult(intent, RequestCodeAddTask);
             }
         });
@@ -335,18 +353,19 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         startService(new Intent(this, LocationService.class));
     }
 
+
     //отримання збережених налаштувань
     private void getSettingsFromSharedPref() {
         mNotStartedTaskColor = mAppSettings.getInt(
-                StringKeys.NOT_STARTED_TASK, ContextCompat.getColor(this, R.color.not_started_task));
+                Constants.NOT_STARTED_TASK, ContextCompat.getColor(this, R.color.not_started_task));
         mStartedTaskColor = mAppSettings.getInt(
-                StringKeys.STARTED_TASK, ContextCompat.getColor(this, R.color.started_task));
+                Constants.STARTED_TASK, ContextCompat.getColor(this, R.color.started_task));
         mCompletedTaskColor = mAppSettings.getInt(
-                StringKeys.COMPLETED_TASK, ContextCompat.getColor(this, R.color.completed_task));
-        mMaxRuntimeForTask = mAppSettings.getInt(StringKeys.MAX_RUNTIME_FOR_TASK, 60);
+                Constants.COMPLETED_TASK, ContextCompat.getColor(this, R.color.completed_task));
+        mMaxRuntimeForTask = mAppSettings.getInt(Constants.MAX_RUNTIME_FOR_TASK, 60);
 
         //отримання збереженого типу сортування
-        mSpinnerPos = mAppSettings.getInt(StringKeys.SPINNER_POS, 0);
+        mSpinnerPos = mAppSettings.getInt(Constants.SPINNER_POS, 0);
         switch (mSpinnerPos) {
             case 0:     //A-Z
                 mTaskComparator = Task.NameUPComparator;
@@ -365,25 +384,33 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == REQUEST_CODE_GD_RESOLUTION) {
+            if (resultCode == RESULT_OK)
+                mGoogleApiClient.connect();
+            else
+                onConnectionFailed(null);
+        }
         if (resultCode == Activity.RESULT_OK) {
-
-            String title = data.getStringExtra(StringKeys.TASK_TITLE);
-            String comment = data.getStringExtra(StringKeys.TASK_COMMENT);
-            boolean typeOfTask = data.getBooleanExtra(StringKeys.TYPE_OF_TASK, false);
-            int maxRuntime = data.getIntExtra(StringKeys.MAX_RUNTIME_FOR_TASK, mMaxRuntimeForTask);
+            String title, comment;
             String avatarUri = null;
-            if (data.hasExtra(StringKeys.BITMAP_AVATAR))
-                avatarUri = data.getStringExtra(StringKeys.BITMAP_AVATAR);
-            boolean hasMapPoint = data.getBooleanExtra(StringKeys.MAP_POINT, false);
-            double latitude = data.getDoubleExtra(StringKeys.LATITUDE, 0);
-            double longitude = data.getDoubleExtra(StringKeys.LONGITUDE, 0);
-
+            int maxRuntime;
+            boolean hasMapPoint;
+            double latitude, longitude;
             switch (requestCode) {
                 case RequestCodeAddTask:
+                    title = data.getStringExtra(Constants.TASK_TITLE);
+                    comment = data.getStringExtra(Constants.TASK_COMMENT);
+                    boolean typeOfTask = data.getBooleanExtra(Constants.TYPE_OF_TASK, false);
+                    maxRuntime = data.getIntExtra(Constants.MAX_RUNTIME_FOR_TASK, mMaxRuntimeForTask);
                     Task newTask = new Task(title, comment, typeOfTask, maxRuntime);
+                    if (data.hasExtra(Constants.BITMAP_AVATAR))
+                        avatarUri = data.getStringExtra(Constants.BITMAP_AVATAR);
                     if (avatarUri != null)
                         newTask.setAvatarUri(avatarUri);
+                    hasMapPoint = data.getBooleanExtra(Constants.MAP_POINT, false);
                     if (hasMapPoint) {
+                        latitude = data.getDoubleExtra(Constants.LATITUDE, 0);
+                        longitude = data.getDoubleExtra(Constants.LONGITUDE, 0);
                         newTask.setMapPoint(true);
                         newTask.setLatitude(latitude);
                         newTask.setLongitude(longitude);
@@ -393,7 +420,10 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
                     sortTasks();
                     break;
                 case REQUEST_CODE_EDIT_TASK:
-                    int position = data.getIntExtra(StringKeys.TASK_POSITION, -1);
+                    title = data.getStringExtra(Constants.TASK_TITLE);
+                    comment = data.getStringExtra(Constants.TASK_COMMENT);
+                    maxRuntime = data.getIntExtra(Constants.MAX_RUNTIME_FOR_TASK, mMaxRuntimeForTask);
+                    int position = data.getIntExtra(Constants.TASK_POSITION, -1);
                     Task editTask = mTasks.get(position);
                     boolean ifWasChange = false;
                     if (!editTask.getTitle().equals(title) || !editTask.getComment().equals(comment)) {
@@ -403,6 +433,8 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
                         sortTasks();
                         ifWasChange = true;
                     }
+                    if (data.hasExtra(Constants.BITMAP_AVATAR))
+                        avatarUri = data.getStringExtra(Constants.BITMAP_AVATAR);
                     if (avatarUri != null) {
                         editTask.setAvatarUri(avatarUri);
                         ifWasChange = true;
@@ -414,6 +446,9 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
                         setTimer();
                         ifWasChange = true;
                     }
+                    hasMapPoint = data.getBooleanExtra(Constants.MAP_POINT, false);
+                    latitude = data.getDoubleExtra(Constants.LATITUDE, 0);
+                    longitude = data.getDoubleExtra(Constants.LONGITUDE, 0);
                     //якщо було включено або виключено привязку до місця
                     if (editTask.hasMapPoint() != hasMapPoint) {
                         editTask.setMapPoint(hasMapPoint);
@@ -430,28 +465,28 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
                         DatabaseConnector.updateTask(editTask, this);
                     break;
                 case RequestCodeSettings:
-                    int notStartedTaskColor = data.getIntExtra(StringKeys.NOT_STARTED_TASK, -1);
-                    int startedTaskColor = data.getIntExtra(StringKeys.STARTED_TASK, -1);
-                    int completedTaskColor = data.getIntExtra(StringKeys.COMPLETED_TASK, -1);
-                    int maxRuntimeForTask = data.getIntExtra(StringKeys.MAX_RUNTIME_FOR_TASK, -1);
+                    int notStartedTaskColor = data.getIntExtra(Constants.NOT_STARTED_TASK, -1);
+                    int startedTaskColor = data.getIntExtra(Constants.STARTED_TASK, -1);
+                    int completedTaskColor = data.getIntExtra(Constants.COMPLETED_TASK, -1);
+                    int maxRuntimeForTask = data.getIntExtra(Constants.MAX_RUNTIME_FOR_TASK, -1);
                     SharedPreferences.Editor editor = mAppSettings.edit();
                     boolean ifWasChanges = false;
                     if (mNotStartedTaskColor != notStartedTaskColor) {
                         ifWasChanges = true;
                         mNotStartedTaskColor = notStartedTaskColor;
-                        editor.putInt(StringKeys.NOT_STARTED_TASK, mNotStartedTaskColor);
+                        editor.putInt(Constants.NOT_STARTED_TASK, mNotStartedTaskColor);
                         mSwipeListAdapter.setNotStartedTaskColor(mNotStartedTaskColor);
                     }
                     if (mStartedTaskColor != startedTaskColor) {
                         ifWasChanges = true;
                         mStartedTaskColor = startedTaskColor;
-                        editor.putInt(StringKeys.STARTED_TASK, mStartedTaskColor);
+                        editor.putInt(Constants.STARTED_TASK, mStartedTaskColor);
                         mSwipeListAdapter.setStartedTaskColor(mStartedTaskColor);
                     }
                     if (mCompletedTaskColor != completedTaskColor) {
                         ifWasChanges = true;
                         mCompletedTaskColor = completedTaskColor;
-                        editor.putInt(StringKeys.COMPLETED_TASK, mCompletedTaskColor);
+                        editor.putInt(Constants.COMPLETED_TASK, mCompletedTaskColor);
                         mSwipeListAdapter.setCompletedTaskColor(mCompletedTaskColor);
                     }
                     //оновлюєм список, якщо було змінено кольори
@@ -461,7 +496,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
                     if (mMaxRuntimeForTask != maxRuntimeForTask) {
                         ifWasChanges = true;
                         mMaxRuntimeForTask = maxRuntimeForTask;
-                        editor.putInt(StringKeys.MAX_RUNTIME_FOR_TASK, mMaxRuntimeForTask);
+                        editor.putInt(Constants.MAX_RUNTIME_FOR_TASK, mMaxRuntimeForTask);
                         //перезапускаєм таймер
                         setTimer();
                     }
@@ -475,13 +510,13 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putParcelableArrayList(StringKeys.ARRAY_OF_TASKS, mTasks);
-        outState.putSerializable(StringKeys.ARRAY_OF_STATISTICS, mGroups);
-        outState.putStringArrayList(StringKeys.ARRAY_OF_NAMES_FOR_STATISTICS, mGroupsName);
-        outState.putString(StringKeys.TAB_HOST_POS, mTabHost.getCurrentTabTag());
+        outState.putParcelableArrayList(Constants.ARRAY_OF_TASKS, mTasks);
+        outState.putSerializable(Constants.ARRAY_OF_STATISTICS, mGroups);
+        outState.putStringArrayList(Constants.ARRAY_OF_NAMES_FOR_STATISTICS, mGroupsName);
+        outState.putString(Constants.TAB_HOST_POS, mTabHost.getCurrentTabTag());
         outState.putBoolean(AlertBool, mIfAlertDWasShown);
         if (mShowcaseView != null && mShowcaseView.isShowing())
-            outState.putInt(StringKeys.TUTORIAL, mTargetPos);
+            outState.putInt(Constants.TUTORIAL, mTargetPos);
     }
 
     @Override
@@ -497,8 +532,31 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         switch (id) {
+            case R.id.action_restore_data:
+                if (isGDConnected()) {
+                    doRestoreDBFromGD();
+                } else {
+                    Log.d(TAG, "NO CONNECTION");
+                }
+                break;
+            case R.id.action_backupData:
+                final DriveManager manager = new DriveManager(getGoogleApiClient(), this);
+                final File dbDir = new File(getFilesDir().getParent() + "/databases/");
+                final File spDir = new File(getFilesDir().getParent() + "/shared_prefs/");
+                final File pxDir = new File(ImageLoader.getCachePath(this) + File.separator);
+                final File[] dirsToBackup = new File[]{dbDir, spDir, pxDir};
+                if (isGDConnected()) {
+                    new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            manager.uploadFile(dirsToBackup, true);
+                        }
+                    }).start();
+                } else {
+                    Log.d(TAG, "NO CONNECTION");
+                }
+                break;
             case R.id.action_show_tutorial:
-                //mShowcaseView.hide();
                 showTutorial(0);
                 break;
             case R.id.action_refresh:
@@ -530,10 +588,10 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
                 break;
             case R.id.action_settings:
                 Intent intentForSettings = new Intent(MainActivity.this, SettingsActivity.class);
-                intentForSettings.putExtra(StringKeys.NOT_STARTED_TASK, mNotStartedTaskColor);
-                intentForSettings.putExtra(StringKeys.STARTED_TASK, mStartedTaskColor);
-                intentForSettings.putExtra(StringKeys.COMPLETED_TASK, mCompletedTaskColor);
-                intentForSettings.putExtra(StringKeys.MAX_RUNTIME_FOR_TASK, mMaxRuntimeForTask);
+                intentForSettings.putExtra(Constants.NOT_STARTED_TASK, mNotStartedTaskColor);
+                intentForSettings.putExtra(Constants.STARTED_TASK, mStartedTaskColor);
+                intentForSettings.putExtra(Constants.COMPLETED_TASK, mCompletedTaskColor);
+                intentForSettings.putExtra(Constants.MAX_RUNTIME_FOR_TASK, mMaxRuntimeForTask);
                 startActivityForResult(intentForSettings, RequestCodeSettings);
                 break;
         }
@@ -724,9 +782,9 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         }.execute();
     }
 
-    public void setRefreshActionButtonState(final boolean refreshing) {
+    public void setRefreshActionButtonState(boolean refreshing) {
         if (mOptionsMenu != null) {
-            final MenuItem refreshItem = mOptionsMenu.findItem(R.id.action_refresh);
+            MenuItem refreshItem = mOptionsMenu.findItem(R.id.action_refresh);
             if (refreshItem != null)
                 if (refreshing)
                     refreshItem.setActionView(R.layout.refresh_progress);
@@ -782,8 +840,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
                             dateStart, dateStop, dateEnd, datePause, pauseLengthBeforeStop, pauseLengthAfterStop, hasMapPoint, latitude, longitude));
                 } while (data.moveToNext());
             }
-            mLoadListProgress.setVisibility(View.INVISIBLE);
-            getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+            closeLoadProgress();
             sortTasks();
             setTimer();
         }
@@ -840,7 +897,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
                 .setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Log.d("===========", "tutorial onClick " + mTargetPos);
+                        Log.d(TAG, "tutorial onClick " + mTargetPos);
                         switch (mTargetPos) {
                             case 0:
                                 mTabHost.setCurrentTabByTag("tag1");
@@ -871,7 +928,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
                             case 5:
                                 mShowcaseView.hide();
                                 SharedPreferences.Editor edit = mAppSettings.edit();
-                                edit.putBoolean(StringKeys.FIRST_START, false);
+                                edit.putBoolean(Constants.FIRST_START, false);
                                 edit.apply();
                                 break;
                         }
@@ -883,10 +940,19 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         mShowcaseView.setButtonText(getString(R.string.understand));
     }
 
+    private void showLoadProgress() {
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+        mLoadListProgress.setVisibility(View.VISIBLE);
+    }
+
+    private void closeLoadProgress() {
+        mLoadListProgress.setVisibility(View.GONE);
+        getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+    }
+
     @Override
     public void onLoaderReset(Loader<Cursor> loader) {
     }
-
 
     static class TasksCursorLoader extends CursorLoader {
         DatabaseConnector db;
@@ -906,5 +972,175 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
             }
             return db.getCursorWithAllTasks();
         }
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+    //                                    GOOGLE DRIVE                                            //
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+    public void connectToGD() {
+        Log.i(TAG, "connectToGD()");
+        if (mGoogleApiClient == null) {
+            mGoogleApiClient = new GoogleApiClient.Builder(this)
+                    .addApi(Drive.API)
+                    .addScope(Drive.SCOPE_FILE)
+                    .addScope(Drive.SCOPE_APPFOLDER) // required for App Folder
+                    .addConnectionCallbacks(this)
+                    .addOnConnectionFailedListener(this)
+                    .build();
+        }
+        if (!mGoogleApiClient.isConnected())
+            mGoogleApiClient.connect();
+        else
+            onConnected(null);
+    }
+
+    public void disconnectGD() {
+        Log.i(TAG, "disconnectGD()");
+        if (mGoogleApiClient != null && mGoogleApiClient.isConnected())
+            mGoogleApiClient.disconnect();
+    }
+
+    @Override
+    public void onConnected(Bundle bundle) {
+       /* final DriveManager manager = new DriveManager(getGoogleApiClient(), this);
+        final File dbDir = new File(getFilesDir().getParent() + "/databases/");
+        final File spDir = new File(getFilesDir().getParent() + "/shared_prefs/");
+        final File[] dirsToBackup = new File[]{dbDir, spDir};
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                manager.uploadFileAndDisconnect(dirsToBackup, true); //new File("databases/"+DBAdapter.DATABASE_NAME));
+            }
+        }).start();*/
+    }
+
+    @Override
+    public void onConnectionSuspended(int i) {
+    }
+
+    @Override
+    public void onConnectionFailed(ConnectionResult result) {
+        if (result == null) {
+            Log.w(TAG, "GoogleApiClient connection failed: no result");
+        } else {
+            Log.w(TAG, "GoogleApiClient connection failed: " + result.toString());
+            if (!result.hasResolution()) {
+                GooglePlayServicesUtil.getErrorDialog(result.getErrorCode(), this, 0).show();
+                return;
+            }
+            try {
+                result.startResolutionForResult(this, REQUEST_CODE_GD_RESOLUTION);
+            } catch (IntentSender.SendIntentException e) {
+                Log.e(TAG, "Exception while starting resolution activity", e);
+            }
+        }
+    }
+
+    public boolean isGDConnected() {
+        return mGoogleApiClient != null && mGoogleApiClient.isConnected();
+    }
+
+    private void doRestoreDBFromGD() {
+        if (!isGDConnected()) {
+            connectToGD();
+            return;
+        }
+        showLoadProgress();
+
+        final DriveManager manager = new DriveManager(getGoogleApiClient(), this);
+        final File dbDir = new File(getFilesDir().getParent() + "/databases/");
+        final File spDir = new File(getFilesDir().getParent() + "/shared_prefs/");
+        final File[] dirsToRestore = new File[]{dbDir, spDir};
+
+        manager.setOnLoadCompleteListener(new OnLoadCompleteListener() {
+            @Override
+            public void onLoadComplete(final File file) {
+                Log.d(TAG, "doRestoreDBFromGD() onLoadComplete() file: " + file);
+            }
+
+            @Override
+            public void onLoadFailed(final File file, final String... errMSg) {
+                Log.w(TAG, "doRestoreDBFromGD() onLoadFailed() file: " + file + " errMsg: " + Arrays.toString(errMSg));
+                restoreFailed();
+            }
+
+            @Override
+            public void onAllLoadComplete() {
+                mAppSettings = getSharedPreferences(Constants.APP_SETTINGS, MODE_PRIVATE);
+                //оновлюєм користувацькі налаштування
+                getSettingsFromSharedPref();
+                //оновлюєм дані для списку завдань
+                getLoaderManager().getLoader(AllTasksLoaderID).forceLoad();
+                Log.d(TAG, "doRestoreDBFromGD() onAllLoadComplete()");
+                //DatabaseHelper.reinit(getApplicationContext());
+                DatabaseConnector databaseConnector = new DatabaseConnector(getApplicationContext());
+                databaseConnector.open();
+                databaseConnector.close();
+
+                doRestorePhotosFromGD();
+            }
+        });
+        manager.downloadFile(dirsToRestore, true);
+    }
+
+    protected void doRestorePhotosFromGD() {
+        File f = new File(ImageLoader.getCachePath(this) + File.separator);
+        if (!f.exists())
+            f.mkdirs();
+        if (!ImageLoader.SDCardIsWritable()) {
+            Toast.makeText(getBaseContext(), "sdCard not writable", Toast.LENGTH_SHORT).show();
+            restorePhotosFailed();
+            restoreCompleted();
+            return;
+        }
+
+        // makes dirs
+        DriveManager manager = new DriveManager(getGoogleApiClient(), this);
+        manager.setOnLoadCompleteListener(new OnLoadCompleteListener() {
+            @Override
+            public void onLoadComplete(final File file) {
+                Log.i(TAG, "doRestorePhotosFromGD() onLoadComplete() file: " + file);
+            }
+
+            @Override
+            public void onLoadFailed(final File file, final String... errMSg) {
+                Log.w(TAG, "doRestorePhotosFromGD() onLoadFailed() file: " + file + " errMsg: " + Arrays.toString(errMSg));
+                restorePhotosFailed();
+            }
+
+            @Override
+            public void onAllLoadComplete() {
+                Log.i(TAG, "doRestorePhotosFromGD() onAllLoadComplete()");
+                restoreCompleted();
+            }
+        });
+
+        //  final File fotozDir = SDCardHelper.getTempFile().getParentFile();
+        //  Log.d(this, "doRestorePhotosFromGD() fotozDir: "+fotozDir);
+        //  manager.downloadFile(new File[]{fotozDir}, fotozDir, false);
+
+        final File pixDir = new File(ImageLoader.getCachePath(getApplicationContext()) + File.separator);
+        //  final String targetGDPath = pixDir.getAbsolutePath().substring(pixDir.getAbsolutePath().indexOf("Android"));
+        //  manager.downloadFolder(pixDir, new File(targetGDPath), false);
+        manager.downloadFile(new File[]{pixDir}, true);
+    }
+
+    void restoreFailed() {
+        closeLoadProgress();
+        Toast.makeText(getBaseContext(), R.string.restore_failed, Toast.LENGTH_LONG).show();
+    }
+
+    void restorePhotosFailed() {
+        closeLoadProgress();
+        Toast.makeText(getBaseContext(), R.string.restore_photo_failed, Toast.LENGTH_LONG).show();
+    }
+
+    protected void restoreCompleted() {
+        closeLoadProgress();
+        Toast.makeText(getBaseContext(), R.string.restore_completed, Toast.LENGTH_LONG).show();
+    }
+
+    public GoogleApiClient getGoogleApiClient() {
+        return mGoogleApiClient;
     }
 }

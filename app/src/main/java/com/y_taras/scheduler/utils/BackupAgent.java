@@ -6,7 +6,8 @@ import android.app.backup.FileBackupHelper;
 import android.app.backup.SharedPreferencesBackupHelper;
 import android.content.Context;
 
-import com.y_taras.scheduler.other.StringKeys;
+import com.y_taras.scheduler.helper.DatabaseConnector;
+import com.y_taras.scheduler.other.Constants;
 
 public class BackupAgent extends BackupAgentHelper {
     static final String PREFS_BACKUP_KEY = "prefs";
@@ -16,7 +17,7 @@ public class BackupAgent extends BackupAgentHelper {
         FileBackupHelper fileBackupHelper = new FileBackupHelper(this, "../databases/" + DatabaseConnector.DATABASE_NAME);
         addHelper(DatabaseConnector.DATABASE_NAME, fileBackupHelper);
 
-        SharedPreferencesBackupHelper helper = new SharedPreferencesBackupHelper(this, StringKeys.APP_SETTINGS);
+        SharedPreferencesBackupHelper helper = new SharedPreferencesBackupHelper(this, Constants.APP_SETTINGS);
         addHelper(PREFS_BACKUP_KEY, helper);
     }
 

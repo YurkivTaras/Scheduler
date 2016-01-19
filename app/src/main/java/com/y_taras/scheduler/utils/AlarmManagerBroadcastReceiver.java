@@ -18,7 +18,8 @@ import com.y_taras.scheduler.activity.MainActivity;
 import java.util.ArrayList;
 import java.util.Date;
 
-import com.y_taras.scheduler.other.StringKeys;
+import com.y_taras.scheduler.helper.DatabaseConnector;
+import com.y_taras.scheduler.other.Constants;
 import com.y_taras.scheduler.other.Task;
 import com.y_taras.scheduler.service.LocationService;
 
@@ -31,7 +32,7 @@ public class AlarmManagerBroadcastReceiver extends BroadcastReceiver {
         Bundle extras = intent.getExtras();
         ArrayList<Task> tasks = null;
         if (extras != null)
-            tasks = extras.getParcelableArrayList(StringKeys.ARRAY_OF_TASKS);
+            tasks = extras.getParcelableArrayList(Constants.ARRAY_OF_TASKS);
         //у випадку, якщо отримано пустий інтент(при перезавантаженні телефона)
         if (tasks == null) {
             //запускаєм сервіс при включенні телефона
@@ -106,11 +107,11 @@ public class AlarmManagerBroadcastReceiver extends BroadcastReceiver {
         }
 
         if (ifWasChanged) {
-            Intent i = new Intent(StringKeys.MAIN_ACTIVITY_BROADCAST);
+            Intent i = new Intent(Constants.MAIN_ACTIVITY_BROADCAST);
 
             Bundle bundle = new Bundle();
-            bundle.putParcelableArrayList(StringKeys.ARRAY_OF_TASKS, tasks);
-            bundle.putString(StringKeys.ACTION, StringKeys.ClOSE_TASK_ACTION);
+            bundle.putParcelableArrayList(Constants.ARRAY_OF_TASKS, tasks);
+            bundle.putString(Constants.ACTION, Constants.ClOSE_TASK_ACTION);
             i.putExtras(bundle);
             context.sendBroadcast(i);
         }
@@ -141,7 +142,7 @@ public class AlarmManagerBroadcastReceiver extends BroadcastReceiver {
         }
         if (ifHaveNotCompletedTask) {
             Bundle bundle = new Bundle();
-            bundle.putParcelableArrayList(StringKeys.ARRAY_OF_TASKS, tasks);
+            bundle.putParcelableArrayList(Constants.ARRAY_OF_TASKS, tasks);
             intent.putExtras(bundle);
 
             PendingIntent pi = PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);

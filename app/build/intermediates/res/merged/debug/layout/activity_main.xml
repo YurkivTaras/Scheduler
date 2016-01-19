@@ -23,27 +23,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <!--<ProgressBar
-            android:id="@+id/load_list_progress_bar"
-            android:layout_width="@dimen/load_list_progress_bar_size"
-            android:layout_height="@dimen/load_list_progress_bar_size"
-            android:layout_gravity="center"
-            android:visibility="invisible" />-->
-        <fr.castorflex.android.circularprogressbar.CircularProgressBar xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/load_list_progress_bar"
-            android:layout_width="@dimen/load_list_progress_bar_size"
-            android:layout_height="@dimen/load_list_progress_bar_size"
-            android:layout_gravity="center"
-            android:indeterminate="true"
-            android:visibility="invisible"
-            app:cpb_color="@color/colorPrimary"
-            app:cpb_max_sweep_angle="300"
-            app:cpb_min_sweep_angle="10"
-            app:cpb_rotation_speed="1.0"
-            app:cpb_stroke_width="10dp"
-            app:cpb_sweep_speed="1.0" />
-
         <TabHost
             android:id="@android:id/tabhost"
             android:layout_width="match_parent"
@@ -87,6 +66,7 @@
                             fab:fab_colorNormal="@color/fab_colorNormal"
                             fab:fab_colorPressed="@color/fab_colorPressed"
                             fab:fab_colorRipple="@color/fab_colorRipple" />
+
                     </FrameLayout>
 
                     <ExpandableListView
@@ -98,5 +78,25 @@
                 </FrameLayout>
             </LinearLayout>
         </TabHost>
+        <!--<ProgressBar
+            android:id="@+id/load_list_progress_bar"
+            android:layout_width="@dimen/load_list_progress_bar_size"
+            android:layout_height="@dimen/load_list_progress_bar_size"
+            android:layout_gravity="center"
+            android:visibility="invisible" />-->
+        <fr.castorflex.android.circularprogressbar.CircularProgressBar xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/load_list_progress_bar"
+            android:layout_width="@dimen/load_list_progress_bar_size"
+            android:layout_height="@dimen/load_list_progress_bar_size"
+            android:layout_gravity="center"
+            android:indeterminate="true"
+            android:visibility="invisible"
+            app:cpb_color="@color/colorPrimary"
+            app:cpb_max_sweep_angle="300"
+            app:cpb_min_sweep_angle="10"
+            app:cpb_rotation_speed="1.0"
+            app:cpb_stroke_width="10dp"
+            app:cpb_sweep_speed="1.0" />
     </FrameLayout>
 </LinearLayout>

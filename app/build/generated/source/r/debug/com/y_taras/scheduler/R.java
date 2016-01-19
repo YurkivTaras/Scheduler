@@ -2920,6 +2920,7 @@ containing a value of this type.
     }
     public static final class id {
         public static final int action0=0x7f0c00be;
+        public static final int action_backupData=0x7f0c00e1;
         public static final int action_bar=0x7f0c006b;
         public static final int action_bar_activity_content=0x7f0c0000;
         public static final int action_bar_container=0x7f0c006a;
@@ -2927,22 +2928,23 @@ containing a value of this type.
         public static final int action_bar_spinner=0x7f0c0001;
         public static final int action_bar_subtitle=0x7f0c004c;
         public static final int action_bar_title=0x7f0c004b;
-        public static final int action_clear=0x7f0c00e2;
+        public static final int action_clear=0x7f0c00e4;
         public static final int action_context_bar=0x7f0c006c;
         public static final int action_divider=0x7f0c00c2;
         public static final int action_exit=0x7f0c00de;
-        public static final int action_generate=0x7f0c00e3;
+        public static final int action_generate=0x7f0c00e5;
         public static final int action_menu_divider=0x7f0c0002;
         public static final int action_menu_presenter=0x7f0c0003;
         public static final int action_mode_bar=0x7f0c0068;
         public static final int action_mode_bar_stub=0x7f0c0067;
         public static final int action_mode_close_button=0x7f0c004d;
-        public static final int action_refresh=0x7f0c00e4;
-        public static final int action_reset_colors=0x7f0c00e6;
+        public static final int action_refresh=0x7f0c00e6;
+        public static final int action_reset_colors=0x7f0c00e8;
+        public static final int action_restore_data=0x7f0c00e2;
         public static final int action_save=0x7f0c00df;
         public static final int action_settings=0x7f0c00e0;
-        public static final int action_show_tutorial=0x7f0c00e1;
-        public static final int action_sort=0x7f0c00e5;
+        public static final int action_show_tutorial=0x7f0c00e3;
+        public static final int action_sort=0x7f0c00e7;
         public static final int activity_chooser_view_content=0x7f0c004e;
         public static final int adjust_height=0x7f0c0038;
         public static final int adjust_width=0x7f0c0039;
@@ -3017,7 +3019,7 @@ containing a value of this type.
         public static final int expTxtTitle=0x7f0c00a7;
         public static final int expand_activities_button=0x7f0c004f;
         public static final int expanded_menu=0x7f0c0062;
-        public static final int fab=0x7f0c008b;
+        public static final int fab=0x7f0c008a;
         public static final int fill=0x7f0c0030;
         public static final int fill_horizontal=0x7f0c0031;
         public static final int fill_vertical=0x7f0c0024;
@@ -3047,7 +3049,7 @@ containing a value of this type.
         public static final int listAvatarMapPin=0x7f0c00d4;
         public static final int listMode=0x7f0c000e;
         public static final int list_item=0x7f0c0052;
-        public static final int load_list_progress_bar=0x7f0c0088;
+        public static final int load_list_progress_bar=0x7f0c008c;
         public static final int logo=0x7f0c0098;
         public static final int map=0x7f0c008e;
         public static final int mapPlaceCheckBox=0x7f0c0085;
@@ -3070,7 +3072,7 @@ containing a value of this type.
         public static final int progress_horizontal=0x7f0c0007;
         public static final int pull_out=0x7f0c0047;
         public static final int radio=0x7f0c0065;
-        public static final int recyclerView=0x7f0c008a;
+        public static final int recyclerView=0x7f0c0089;
         public static final int right=0x7f0c0026;
         public static final int right_swipe_menu=0x7f0c00cc;
         public static final int satellite=0x7f0c003b;
@@ -3112,8 +3114,8 @@ containing a value of this type.
         public static final int status_bar_latest_event_content=0x7f0c00c0;
         public static final int submit_area=0x7f0c0076;
         public static final int swipe=0x7f0c00cb;
-        public static final int tab1=0x7f0c0089;
-        public static final int tab2=0x7f0c008c;
+        public static final int tab1=0x7f0c0088;
+        public static final int tab2=0x7f0c008b;
         public static final int tabMode=0x7f0c0010;
         public static final int taskBackground=0x7f0c00d2;
         public static final int terrain=0x7f0c003c;
@@ -3351,22 +3353,23 @@ containing a value of this type.
         public static final int sort_z_a=0x7f050072;
         public static final int start=0x7f050073;
         public static final int status_bar_notification_info_overflow=0x7f050030;
-        public static final int text_for_target_0=0x7f050074;
-        public static final int text_for_target_1=0x7f050075;
-        public static final int text_for_target_2=0x7f050076;
-        public static final int text_for_target_3=0x7f050077;
-        public static final int text_for_target_4=0x7f050078;
-        public static final int text_for_target_5=0x7f050079;
-        public static final int time_for_task=0x7f05007a;
-        public static final int title_activity_maps=0x7f05007b;
-        public static final int title_for_target_1=0x7f05007c;
-        public static final int title_for_target_2_4=0x7f05007d;
-        public static final int title_for_target_3=0x7f05007e;
-        public static final int title_for_target_5=0x7f05007f;
-        public static final int toastMessageIfBackPressed=0x7f050080;
-        public static final int typeOfTaskCheckBoxText=0x7f050081;
-        public static final int understand=0x7f050082;
-        public static final int yes=0x7f050083;
+        public static final int test=0x7f050074;
+        public static final int text_for_target_0=0x7f050075;
+        public static final int text_for_target_1=0x7f050076;
+        public static final int text_for_target_2=0x7f050077;
+        public static final int text_for_target_3=0x7f050078;
+        public static final int text_for_target_4=0x7f050079;
+        public static final int text_for_target_5=0x7f05007a;
+        public static final int time_for_task=0x7f05007b;
+        public static final int title_activity_maps=0x7f05007c;
+        public static final int title_for_target_1=0x7f05007d;
+        public static final int title_for_target_2_4=0x7f05007e;
+        public static final int title_for_target_3=0x7f05007f;
+        public static final int title_for_target_5=0x7f050080;
+        public static final int toastMessageIfBackPressed=0x7f050081;
+        public static final int typeOfTaskCheckBoxText=0x7f050082;
+        public static final int understand=0x7f050083;
+        public static final int yes=0x7f050084;
     }
     public static final class style {
         public static final int AlertDialog_AppCompat=0x7f080080;

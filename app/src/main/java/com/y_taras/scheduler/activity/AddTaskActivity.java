@@ -40,9 +40,9 @@ import java.util.List;
 
 import me.drakeet.materialdialog.MaterialDialog;
 
-import com.y_taras.scheduler.other.StringKeys;
+import com.y_taras.scheduler.other.Constants;
 import com.y_taras.scheduler.other.Task;
-import com.y_taras.scheduler.utils.ImageLoader;
+import com.y_taras.scheduler.helper.ImageLoader;
 
 public class AddTaskActivity extends AppCompatActivity {
     private static final int requestCodeForTitle = 1;
@@ -94,11 +94,11 @@ public class AddTaskActivity extends AppCompatActivity {
                 if (mMapPoint.isChecked()) {
                     Intent intent = new Intent(AddTaskActivity.this, MapsActivity.class);
                     if (mHasMapPoint) {
-                        intent.setAction(StringKeys.EDIT_POINT);
-                        intent.putExtra(StringKeys.LATITUDE, mLatitude);
-                        intent.putExtra(StringKeys.LONGITUDE, mLongitude);
+                        intent.setAction(Constants.EDIT_POINT);
+                        intent.putExtra(Constants.LATITUDE, mLatitude);
+                        intent.putExtra(Constants.LONGITUDE, mLongitude);
                     } else {
-                        intent.setAction(StringKeys.ADD_POINT);
+                        intent.setAction(Constants.ADD_POINT);
                     }
                     startActivityForResult(intent, requestCodeGoogleMap);
                     overridePendingTransition(R.anim.right_in_add_task_activity, R.anim.right_out_add_task_activity);
@@ -113,18 +113,18 @@ public class AddTaskActivity extends AppCompatActivity {
             }
         });
         if (savedInstanceState != null) {
-            if (savedInstanceState.containsKey(StringKeys.MAP_POINT) &&
-                    savedInstanceState.containsKey(StringKeys.LATITUDE) &&
-                    savedInstanceState.containsKey(StringKeys.LONGITUDE)) {
-                mHasMapPoint = savedInstanceState.getBoolean(StringKeys.MAP_POINT);
-                mLatitude = savedInstanceState.getDouble(StringKeys.LATITUDE);
-                mLongitude = savedInstanceState.getDouble(StringKeys.LONGITUDE);
+            if (savedInstanceState.containsKey(Constants.MAP_POINT) &&
+                    savedInstanceState.containsKey(Constants.LATITUDE) &&
+                    savedInstanceState.containsKey(Constants.LONGITUDE)) {
+                mHasMapPoint = savedInstanceState.getBoolean(Constants.MAP_POINT);
+                mLatitude = savedInstanceState.getDouble(Constants.LATITUDE);
+                mLongitude = savedInstanceState.getDouble(Constants.LONGITUDE);
             }
-            if (savedInstanceState.containsKey(StringKeys.BITMAP_AVATAR)) {
-                mBtmAvatar = savedInstanceState.getParcelable(StringKeys.BITMAP_AVATAR);
+            if (savedInstanceState.containsKey(Constants.BITMAP_AVATAR)) {
+                mBtmAvatar = savedInstanceState.getParcelable(Constants.BITMAP_AVATAR);
                 mAvatar.setImageBitmap(mBtmAvatar);
-            } else if (savedInstanceState.containsKey(StringKeys.EDIT_BITMAP_AVATAR)) {
-                mEditBtmAvatar = savedInstanceState.getParcelable(StringKeys.EDIT_BITMAP_AVATAR);
+            } else if (savedInstanceState.containsKey(Constants.EDIT_BITMAP_AVATAR)) {
+                mEditBtmAvatar = savedInstanceState.getParcelable(Constants.EDIT_BITMAP_AVATAR);
                 mAvatar.setImageBitmap(mEditBtmAvatar);
             }
         }
@@ -156,26 +156,26 @@ public class AddTaskActivity extends AppCompatActivity {
 
         Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbarForAddScheduleActivity);
         Intent intent = getIntent();
-        mMaxRuntime.setText(String.format("%d", intent.getIntExtra(StringKeys.MAX_RUNTIME_FOR_TASK, 60)));
+        mMaxRuntime.setText(String.format("%d", intent.getIntExtra(Constants.MAX_RUNTIME_FOR_TASK, 60)));
         mAction = intent.getAction();
-        if (mAction.equals(StringKeys.EDIT_TASK)) {
+        if (mAction.equals(Constants.EDIT_TASK)) {
             mToolbar.setTitle(R.string.addScheduleToolbarTitleEditTask);
-            mPosTask = intent.getIntExtra(StringKeys.TASK_POSITION, -1);
-            mTitle.setText(intent.getStringExtra(StringKeys.TASK_TITLE));
-            mComment.setText(intent.getStringExtra(StringKeys.TASK_COMMENT));
-            mEditAvatarUri = intent.getStringExtra(StringKeys.BITMAP_AVATAR);
-            mTypeOfTask.setChecked(intent.getBooleanExtra(StringKeys.TYPE_OF_TASK, false));
+            mPosTask = intent.getIntExtra(Constants.TASK_POSITION, -1);
+            mTitle.setText(intent.getStringExtra(Constants.TASK_TITLE));
+            mComment.setText(intent.getStringExtra(Constants.TASK_COMMENT));
+            mEditAvatarUri = intent.getStringExtra(Constants.BITMAP_AVATAR);
+            mTypeOfTask.setChecked(intent.getBooleanExtra(Constants.TYPE_OF_TASK, false));
             mTypeOfTask.setEnabled(false);
-            boolean hasMapPoint = intent.getBooleanExtra(StringKeys.MAP_POINT, false);
+            boolean hasMapPoint = intent.getBooleanExtra(Constants.MAP_POINT, false);
             mMapPoint.setChecked(hasMapPoint);
             if (savedInstanceState == null) {
                 if (hasMapPoint) {
                     mHasMapPoint = true;
-                    mLatitude = intent.getDoubleExtra(StringKeys.LATITUDE, 0);
-                    mLongitude = intent.getDoubleExtra(StringKeys.LONGITUDE, 0);
-                } else if (intent.hasExtra(StringKeys.LATITUDE) && intent.hasExtra(StringKeys.LONGITUDE)) {
-                    mLatitude = intent.getDoubleExtra(StringKeys.LATITUDE, 0);
-                    mLongitude = intent.getDoubleExtra(StringKeys.LONGITUDE, 0);
+                    mLatitude = intent.getDoubleExtra(Constants.LATITUDE, 0);
+                    mLongitude = intent.getDoubleExtra(Constants.LONGITUDE, 0);
+                } else if (intent.hasExtra(Constants.LATITUDE) && intent.hasExtra(Constants.LONGITUDE)) {
+                    mLatitude = intent.getDoubleExtra(Constants.LATITUDE, 0);
+                    mLongitude = intent.getDoubleExtra(Constants.LONGITUDE, 0);
                 }
                 if (!mEditAvatarUri.equals(Task.DEFAULT_AVATAR_URI)) {
                     mEditBtmAvatar = ImageLoader.loadImage(mEditAvatarUri);
@@ -191,13 +191,13 @@ public class AddTaskActivity extends AppCompatActivity {
 
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putBoolean(StringKeys.MAP_POINT, mHasMapPoint);
-        outState.putDouble(StringKeys.LATITUDE, mLatitude);
-        outState.putDouble(StringKeys.LONGITUDE, mLongitude);
+        outState.putBoolean(Constants.MAP_POINT, mHasMapPoint);
+        outState.putDouble(Constants.LATITUDE, mLatitude);
+        outState.putDouble(Constants.LONGITUDE, mLongitude);
         if (mBtmAvatar != null)
-            outState.putParcelable(StringKeys.BITMAP_AVATAR, mBtmAvatar);
+            outState.putParcelable(Constants.BITMAP_AVATAR, mBtmAvatar);
         else if (mEditBtmAvatar != null)
-            outState.putParcelable(StringKeys.EDIT_BITMAP_AVATAR, mEditBtmAvatar);
+            outState.putParcelable(Constants.EDIT_BITMAP_AVATAR, mEditBtmAvatar);
 
     }
 
@@ -217,8 +217,8 @@ public class AddTaskActivity extends AppCompatActivity {
                 switch (requestCode) {
                     case requestCodeGoogleMap:
                         mHasMapPoint = true;
-                        mLatitude = data.getDoubleExtra(StringKeys.LATITUDE, 0);
-                        mLongitude = data.getDoubleExtra(StringKeys.LONGITUDE, 0);
+                        mLatitude = data.getDoubleExtra(Constants.LATITUDE, 0);
+                        mLongitude = data.getDoubleExtra(Constants.LONGITUDE, 0);
                         break;
                     case requestCodeForTitle:
                         textMatchList = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
@@ -301,27 +301,27 @@ public class AddTaskActivity extends AppCompatActivity {
             case R.id.action_save:
                 if (validateTitle() && validateComment()) {
                     Intent intent = new Intent();
-                    if (mAction.equals(StringKeys.EDIT_TASK))
-                        intent.putExtra(StringKeys.TASK_POSITION, mPosTask);
+                    if (mAction.equals(Constants.EDIT_TASK))
+                        intent.putExtra(Constants.TASK_POSITION, mPosTask);
                     if (mBtmAvatar != null) {
                         //якщо було змінено іконку завдання - видаляєм попередню з памяті
                         if (mEditAvatarUri != null && !mEditAvatarUri.equals(Task.DEFAULT_AVATAR_URI))
                             ImageLoader.delete(mEditAvatarUri);
                         //зберігаєм нову іконку
                         String avatarUri = ImageLoader.saveImageFile(mBtmAvatar, this);
-                        intent.putExtra(StringKeys.BITMAP_AVATAR, avatarUri);
+                        intent.putExtra(Constants.BITMAP_AVATAR, avatarUri);
                     }
                     String maxRuntime = mMaxRuntime.getText().toString().trim();
-                    intent.putExtra(StringKeys.MAX_RUNTIME_FOR_TASK, maxRuntime.length() == 0 ? 0 : Integer.parseInt(maxRuntime));
-                    intent.putExtra(StringKeys.TASK_TITLE, mTitle.getText().toString());
-                    intent.putExtra(StringKeys.TASK_COMMENT, mComment.getText().toString());
-                    intent.putExtra(StringKeys.TYPE_OF_TASK, mTypeOfTask.isChecked());
+                    intent.putExtra(Constants.MAX_RUNTIME_FOR_TASK, maxRuntime.length() == 0 ? 0 : Integer.parseInt(maxRuntime));
+                    intent.putExtra(Constants.TASK_TITLE, mTitle.getText().toString());
+                    intent.putExtra(Constants.TASK_COMMENT, mComment.getText().toString());
+                    intent.putExtra(Constants.TYPE_OF_TASK, mTypeOfTask.isChecked());
                     if (mMapPoint.isChecked()) {
-                        intent.putExtra(StringKeys.MAP_POINT, true);
-                        intent.putExtra(StringKeys.LATITUDE, mLatitude);
-                        intent.putExtra(StringKeys.LONGITUDE, mLongitude);
+                        intent.putExtra(Constants.MAP_POINT, true);
+                        intent.putExtra(Constants.LATITUDE, mLatitude);
+                        intent.putExtra(Constants.LONGITUDE, mLongitude);
                     } else {
-                        intent.putExtra(StringKeys.MAP_POINT, false);
+                        intent.putExtra(Constants.MAP_POINT, false);
                     }
                     setResult(RESULT_OK, intent);
                     finish();

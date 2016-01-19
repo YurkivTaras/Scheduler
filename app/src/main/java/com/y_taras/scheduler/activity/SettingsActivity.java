@@ -13,7 +13,8 @@ import android.widget.Toast;
 
 import com.y_taras.scheduler.R;
 
-import com.y_taras.scheduler.other.StringKeys;
+import com.y_taras.scheduler.other.Constants;
+
 import yuku.ambilwarna.AmbilWarnaDialog;
 
 public class SettingsActivity extends AppCompatActivity {
@@ -57,15 +58,15 @@ public class SettingsActivity extends AppCompatActivity {
 
         if (savedInstanceState == null) {
             Intent intent = getIntent();
-            mNotStartedTaskColor = intent.getIntExtra(StringKeys.NOT_STARTED_TASK, defaultNotStartedTaskColor);
-            mStartedTaskColor = intent.getIntExtra(StringKeys.STARTED_TASK, defaultStartedTaskColor);
-            mCompletedTaskColor = intent.getIntExtra(StringKeys.COMPLETED_TASK, defaultCompletedTaskColor);
-            mMaxRuntimeForTask = intent.getIntExtra(StringKeys.MAX_RUNTIME_FOR_TASK, 60);
+            mNotStartedTaskColor = intent.getIntExtra(Constants.NOT_STARTED_TASK, defaultNotStartedTaskColor);
+            mStartedTaskColor = intent.getIntExtra(Constants.STARTED_TASK, defaultStartedTaskColor);
+            mCompletedTaskColor = intent.getIntExtra(Constants.COMPLETED_TASK, defaultCompletedTaskColor);
+            mMaxRuntimeForTask = intent.getIntExtra(Constants.MAX_RUNTIME_FOR_TASK, 60);
         } else {
-            mNotStartedTaskColor = savedInstanceState.getInt(StringKeys.NOT_STARTED_TASK);
-            mStartedTaskColor = savedInstanceState.getInt(StringKeys.STARTED_TASK);
-            mCompletedTaskColor = savedInstanceState.getInt(StringKeys.COMPLETED_TASK);
-            mMaxRuntimeForTask = savedInstanceState.getInt(StringKeys.MAX_RUNTIME_FOR_TASK);
+            mNotStartedTaskColor = savedInstanceState.getInt(Constants.NOT_STARTED_TASK);
+            mStartedTaskColor = savedInstanceState.getInt(Constants.STARTED_TASK);
+            mCompletedTaskColor = savedInstanceState.getInt(Constants.COMPLETED_TASK);
+            mMaxRuntimeForTask = savedInstanceState.getInt(Constants.MAX_RUNTIME_FOR_TASK);
         }
 
         mNotStartedTaskBtn = (Button) findViewById(R.id.btnNotStartedTask);
@@ -123,10 +124,10 @@ public class SettingsActivity extends AppCompatActivity {
 
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putInt(StringKeys.NOT_STARTED_TASK, mNotStartedTaskColor);
-        outState.putInt(StringKeys.STARTED_TASK, mStartedTaskColor);
-        outState.putInt(StringKeys.COMPLETED_TASK, mCompletedTaskColor);
-        outState.putInt(StringKeys.MAX_RUNTIME_FOR_TASK, Integer.parseInt(mMaxRuntimeEditTxt.getText().toString()));
+        outState.putInt(Constants.NOT_STARTED_TASK, mNotStartedTaskColor);
+        outState.putInt(Constants.STARTED_TASK, mStartedTaskColor);
+        outState.putInt(Constants.COMPLETED_TASK, mCompletedTaskColor);
+        outState.putInt(Constants.MAX_RUNTIME_FOR_TASK, Integer.parseInt(mMaxRuntimeEditTxt.getText().toString()));
     }
 
     @Override
@@ -169,10 +170,10 @@ public class SettingsActivity extends AppCompatActivity {
             return;
         }
         Intent intent = new Intent();
-        intent.putExtra(StringKeys.NOT_STARTED_TASK, mNotStartedTaskColor);
-        intent.putExtra(StringKeys.STARTED_TASK, mStartedTaskColor);
-        intent.putExtra(StringKeys.COMPLETED_TASK, mCompletedTaskColor);
-        intent.putExtra(StringKeys.MAX_RUNTIME_FOR_TASK, Integer.parseInt(maxRuntime));
+        intent.putExtra(Constants.NOT_STARTED_TASK, mNotStartedTaskColor);
+        intent.putExtra(Constants.STARTED_TASK, mStartedTaskColor);
+        intent.putExtra(Constants.COMPLETED_TASK, mCompletedTaskColor);
+        intent.putExtra(Constants.MAX_RUNTIME_FOR_TASK, Integer.parseInt(maxRuntime));
         setResult(RESULT_OK, intent);
         super.onBackPressed();
     }

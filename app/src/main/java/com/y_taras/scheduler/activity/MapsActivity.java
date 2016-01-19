@@ -17,7 +17,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-import com.y_taras.scheduler.other.StringKeys;
+import com.y_taras.scheduler.other.Constants;
 
 public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback {
 
@@ -38,11 +38,11 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     private void initUI(Bundle savedInstanceState) {
         if (savedInstanceState != null) {
-            if (savedInstanceState.containsKey(StringKeys.LATITUDE) &&
-                    savedInstanceState.containsKey(StringKeys.LONGITUDE)) {
+            if (savedInstanceState.containsKey(Constants.LATITUDE) &&
+                    savedInstanceState.containsKey(Constants.LONGITUDE)) {
                 mHasMarker = true;
-                mLatitude = savedInstanceState.getDouble(StringKeys.LATITUDE);
-                mLongitude = savedInstanceState.getDouble(StringKeys.LONGITUDE);
+                mLatitude = savedInstanceState.getDouble(Constants.LATITUDE);
+                mLongitude = savedInstanceState.getDouble(Constants.LONGITUDE);
             }
         }
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbarForMapsActivity);
@@ -51,9 +51,9 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         Intent intent = getIntent();
         mAction = intent.getAction();
-        if (mAction.equals(StringKeys.EDIT_POINT) && savedInstanceState == null) {
-            mLatitude = intent.getDoubleExtra(StringKeys.LATITUDE, 0);
-            mLongitude = intent.getDoubleExtra(StringKeys.LONGITUDE, 0);
+        if (mAction.equals(Constants.EDIT_POINT) && savedInstanceState == null) {
+            mLatitude = intent.getDoubleExtra(Constants.LATITUDE, 0);
+            mLongitude = intent.getDoubleExtra(Constants.LONGITUDE, 0);
         }
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
@@ -64,15 +64,15 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         super.onSaveInstanceState(outState);
         if (mMarker != null) {
             LatLng latLng = mMarker.getPosition();
-            outState.putDouble(StringKeys.LATITUDE, latLng.latitude);
-            outState.putDouble(StringKeys.LONGITUDE, latLng.longitude);
+            outState.putDouble(Constants.LATITUDE, latLng.latitude);
+            outState.putDouble(Constants.LONGITUDE, latLng.longitude);
         }
     }
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-        if (mAction.equals(StringKeys.EDIT_POINT) || mHasMarker) {
+        if (mAction.equals(Constants.EDIT_POINT) || mHasMarker) {
             LatLng editPoint = new LatLng(mLatitude, mLongitude);
             mMarker = mMap.addMarker(new MarkerOptions().position(editPoint));
             if (!mHasMarker) {
@@ -108,8 +108,8 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         if (mMarker != null) {
             Intent intent = new Intent();
             LatLng position = mMarker.getPosition();
-            intent.putExtra(StringKeys.LATITUDE, position.latitude);
-            intent.putExtra(StringKeys.LONGITUDE, position.longitude);
+            intent.putExtra(Constants.LATITUDE, position.latitude);
+            intent.putExtra(Constants.LONGITUDE, position.longitude);
             setResult(RESULT_OK, intent);
         } else {
             setResult(RESULT_CANCELED);

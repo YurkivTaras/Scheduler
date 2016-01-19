@@ -23,10 +23,10 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 
-import com.y_taras.scheduler.other.StringKeys;
+import com.y_taras.scheduler.other.Constants;
 import com.y_taras.scheduler.other.Task;
-import com.y_taras.scheduler.utils.DatabaseConnector;
-import com.y_taras.scheduler.utils.ImageLoader;
+import com.y_taras.scheduler.helper.DatabaseConnector;
+import com.y_taras.scheduler.helper.ImageLoader;
 
 public class SwipeRecyclerViewAdapter extends RecyclerSwipeAdapter<SwipeRecyclerViewAdapter.ViewHolder> {
     private final SimpleDateFormat mDateFormat;
@@ -252,17 +252,17 @@ public class SwipeRecyclerViewAdapter extends RecyclerSwipeAdapter<SwipeRecycler
                         break;
                     case R.id.tvEdit:
                         Intent intent = new Intent(mMainActivity, AddTaskActivity.class);
-                        intent.setAction(StringKeys.EDIT_TASK);
-                        intent.putExtra(StringKeys.TASK_POSITION, position);
-                        intent.putExtra(StringKeys.TASK_TITLE, clickTask.getTitle());
-                        intent.putExtra(StringKeys.TASK_COMMENT, clickTask.getComment());
-                        intent.putExtra(StringKeys.TYPE_OF_TASK, clickTask.isPeriodic());
-                        intent.putExtra(StringKeys.MAX_RUNTIME_FOR_TASK, clickTask.getMaxRuntime());
-                        intent.putExtra(StringKeys.BITMAP_AVATAR, clickTask.getAvatarUri());
-                        intent.putExtra(StringKeys.MAP_POINT, clickTask.hasMapPoint());
+                        intent.setAction(Constants.EDIT_TASK);
+                        intent.putExtra(Constants.TASK_POSITION, position);
+                        intent.putExtra(Constants.TASK_TITLE, clickTask.getTitle());
+                        intent.putExtra(Constants.TASK_COMMENT, clickTask.getComment());
+                        intent.putExtra(Constants.TYPE_OF_TASK, clickTask.isPeriodic());
+                        intent.putExtra(Constants.MAX_RUNTIME_FOR_TASK, clickTask.getMaxRuntime());
+                        intent.putExtra(Constants.BITMAP_AVATAR, clickTask.getAvatarUri());
+                        intent.putExtra(Constants.MAP_POINT, clickTask.hasMapPoint());
                         if (clickTask.hasMapPoint()) {
-                            intent.putExtra(StringKeys.LATITUDE, task.getLatitude());
-                            intent.putExtra(StringKeys.LONGITUDE, task.getLongitude());
+                            intent.putExtra(Constants.LATITUDE, task.getLatitude());
+                            intent.putExtra(Constants.LONGITUDE, task.getLongitude());
                         }
                         mMainActivity.startActivityForResult(intent, MainActivity.REQUEST_CODE_EDIT_TASK);
                         break;

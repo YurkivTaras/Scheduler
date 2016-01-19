@@ -83,4 +83,8 @@
     <string name="text_for_target_4">Використовуйте ліве зсувне меню, щоби відновити закінчене завдання, або перейти до його редагування</string>
     <string name="text_for_target_3">Нажміть для вибору режиму сортування завдань</string>
     <string name="text_for_target_5">Нажміть для перерахування статистики(вкладка Статистика)</string>
+    <string name="test">Тест</string>
+    <string name="restore_completed">Відновлення пройшло успішно</string>
+    <string name="restore_photo_failed">Не вдалося відновити аватарки</string>
+    <string name="restore_failed">Не вдалося відновити</string>
 </resources>

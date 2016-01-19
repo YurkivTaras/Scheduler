@@ -40,20 +40,20 @@
         "source": "D:\\Android\\AndroidStudioWorkspace\\Scheduler\\app\\build\\intermediates\\exploded-aar\\com.android.support\\design\\23.1.1\\res\\anim\\design_snackbar_out.xml"
     },
     {
-        "merged": "D:\\Android\\AndroidStudioWorkspace\\Scheduler\\app\\build\\intermediates\\res\\merged\\debug\\anim\\right_in_add_task_activity.xml",
-        "source": "D:\\Android\\AndroidStudioWorkspace\\Scheduler\\app\\src\\main\\res\\anim\\right_in_add_task_activity.xml"
-    },
-    {
         "merged": "D:\\Android\\AndroidStudioWorkspace\\Scheduler\\app\\build\\intermediates\\res\\merged\\debug\\anim\\alpha.xml",
         "source": "D:\\Android\\AndroidStudioWorkspace\\Scheduler\\app\\src\\main\\res\\anim\\alpha.xml"
     },
     {
-        "merged": "D:\\Android\\AndroidStudioWorkspace\\Scheduler\\app\\build\\intermediates\\res\\merged\\debug\\anim\\abc_popup_enter.xml",
-        "source": "D:\\Android\\AndroidStudioWorkspace\\Scheduler\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\anim\\abc_popup_enter.xml"
+        "merged": "D:\\Android\\AndroidStudioWorkspace\\Scheduler\\app\\build\\intermediates\\res\\merged\\debug\\anim\\right_in_add_task_activity.xml",
+        "source": "D:\\Android\\AndroidStudioWorkspace\\Scheduler\\app\\src\\main\\res\\anim\\right_in_add_task_activity.xml"
     },
     {
         "merged": "D:\\Android\\AndroidStudioWorkspace\\Scheduler\\app\\build\\intermediates\\res\\merged\\debug\\anim\\left_in_map_activity.xml",
         "source": "D:\\Android\\AndroidStudioWorkspace\\Scheduler\\app\\src\\main\\res\\anim\\left_in_map_activity.xml"
+    },
+    {
+        "merged": "D:\\Android\\AndroidStudioWorkspace\\Scheduler\\app\\build\\intermediates\\res\\merged\\debug\\anim\\abc_popup_enter.xml",
+        "source": "D:\\Android\\AndroidStudioWorkspace\\Scheduler\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\anim\\abc_popup_enter.xml"
     },
     {
         "merged": "D:\\Android\\AndroidStudioWorkspace\\Scheduler\\app\\build\\intermediates\\res\\merged\\debug\\anim\\design_fab_out.xml",

@@ -19,6 +19,7 @@
     //оприділення місця знаходження
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
 
     <uses-feature
         android:glEsVersion="0x00020000"
@@ -37,6 +38,9 @@
         <meta-data
             android:name="com.google.android.backup.api_key"
             android:value="AEdPqrEAAAAI2jAULDSECcbGJHN_pYDebw2xfM5y3jzThgFmxw" />
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
 
         <activity
             android:name="com.y_taras.scheduler.activity.SplashActivity"
@@ -73,10 +77,6 @@
         <activity
             android:name="com.y_taras.scheduler.activity.MapsActivity"
             android:label="@string/title_activity_maps" />
-
-        <meta-data
-            android:name="com.google.android.gms.version"
-            android:value="@integer/google_play_services_version" />
     </application>
 
 </manifest>

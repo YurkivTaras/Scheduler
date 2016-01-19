@@ -19,6 +19,19 @@ android {
 }
 
 dependencies {
+    /* compile('com.google.api-client:google-api-client-xml:1.17.0-rc') {
+        exclude group: 'com.google.android.google-play-services'
+    }
+    compile 'com.google.http-client:google-http-client-gson:1.17.0-rc'
+    compile('com.google.api-client:google-api-client-android:1.17.0-rc') {
+        exclude group: 'com.google.android.google-play-services'
+    }
+    compile 'com.google.apis:google-api-services-drive:v2-rev105-1.17.0-rc'
+
+    compile 'com.google.api-client:google-api-client:1.20.0'
+    compile 'com.google.apis:google-api-services-drive:v2-rev170-1.20.0'*/
+    //compile 'com.google.apis:google-api-services-drive:v3-rev4-1.21.0'
+
     //google Drive
     compile 'com.google.android.gms:play-services-drive:8.4.0'
     //google Maps
