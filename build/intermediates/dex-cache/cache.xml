@@ -2,32 +2,25 @@
 <items version="2" >
 
     <item
-        jar="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.1.1\jars\classes.jar"
+        jar="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.daimajia.swipelayout\library\1.2.0\jars\classes.jar"
         jumboMode="false"
         revision="22.0.1"
-        sha1="6cbc7773921fcfedbe55657578f0cbfe614778dc">
-        <dex dex="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\pre-dexed\debug\com.android.support-support-v4-23.1.1_b2d84be5d9058a6a556eb85f535cfbc060f19b4d.jar" />
+        sha1="e84b30031d4bab89a2b5c45af4eb9213828524dd">
+        <dex dex="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\pre-dexed\debug\com.daimajia.swipelayout-library-1.2.0_efcb1373fe4190213f94cc00b9f3dd2b6d47508d.jar" />
     </item>
     <item
-        jar="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\me.drakeet.materialdialog\library\1.2.8\jars\classes.jar"
+        jar="C:\Users\Taras\.gradle\caches\modules-2\files-2.1\com.google.apis\google-api-services-calendar\v3-rev125-1.20.0\fef496f895ad5be86416863153d4efbf7b601f8a\google-api-services-calendar-v3-rev125-1.20.0.jar"
         jumboMode="false"
         revision="22.0.1"
-        sha1="0573d010bcb1ee874e1c258a31e98ab920e6805f">
-        <dex dex="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\pre-dexed\debug\me.drakeet.materialdialog-library-1.2.8_072f1dc840130e2257b7c223eb734b72d26ec833.jar" />
+        sha1="fef496f895ad5be86416863153d4efbf7b601f8a">
+        <dex dex="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\pre-dexed\debug\google-api-services-calendar-v3-rev125-1.20.0_1f7d9839dd3346767236bc90ad62918cefeabb2f.jar" />
     </item>
     <item
-        jar="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.github.amlcurran.showcaseview\library\5.4.0\jars\classes.jar"
+        jar="C:\Users\Taras\.gradle\caches\modules-2\files-2.1\com.google.api-client\google-api-client-android\1.20.0\5673179575c32b69a474334255c3044adf18d40\google-api-client-android-1.20.0.jar"
         jumboMode="false"
         revision="22.0.1"
-        sha1="531fe4dfc3733418fcaa4a7608e20bfc5e64b2e7">
-        <dex dex="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\pre-dexed\debug\com.github.amlcurran.showcaseview-library-5.4.0_d23f66f64a4211614153c1c20cd78c0b6745c658.jar" />
-    </item>
-    <item
-        jar="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-base\8.4.0\jars\classes.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="fef2b3e4b6b1b0e5fe7b69fa137a5fa55a3182ab">
-        <dex dex="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\pre-dexed\debug\com.google.android.gms-play-services-base-8.4.0_1cfd505cc95f8e87ed2d35d3c1c9ce23efbdd6ca.jar" />
+        sha1="05673179575c32b69a474334255c3044adf18d40">
+        <dex dex="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\pre-dexed\debug\google-api-client-android-1.20.0_f8ab7628cd10bec1836dd7fb94b7c65e5ae47271.jar" />
     </item>
     <item
         jar="C:\Users\Taras\.gradle\caches\modules-2\files-2.1\com.google.code.gson\gson\2.4\695b63d702f505b9b916e02272e3b6381bade7f\gson-2.4.jar"
@@ -37,11 +30,25 @@
         <dex dex="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\pre-dexed\debug\gson-2.4_d08a0d299c703404b5e8fd7ebdd8e95ba896f4cb.jar" />
     </item>
     <item
-        jar="D:\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\23.1.1\support-annotations-23.1.1.jar"
+        jar="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.github.amlcurran.showcaseview\library\5.4.0\jars\classes.jar"
         jumboMode="false"
         revision="22.0.1"
-        sha1="8d680ba5a623724d1fb0e81c36a790f023a6cede">
-        <dex dex="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\pre-dexed\debug\support-annotations-23.1.1_160e21806fe4fcbe2b20c34d1bbde421f69a17ae.jar" />
+        sha1="531fe4dfc3733418fcaa4a7608e20bfc5e64b2e7">
+        <dex dex="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\pre-dexed\debug\com.github.amlcurran.showcaseview-library-5.4.0_d23f66f64a4211614153c1c20cd78c0b6745c658.jar" />
+    </item>
+    <item
+        jar="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.1.1\jars\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="6cbc7773921fcfedbe55657578f0cbfe614778dc">
+        <dex dex="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\pre-dexed\debug\com.android.support-support-v4-23.1.1_b2d84be5d9058a6a556eb85f535cfbc060f19b4d.jar" />
+    </item>
+    <item
+        jar="C:\Users\Taras\.gradle\caches\modules-2\files-2.1\com.google.http-client\google-http-client-jackson2\1.20.0\2408070b2abec043624d35b35e30450f1b663858\google-http-client-jackson2-1.20.0.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="2408070b2abec043624d35b35e30450f1b663858">
+        <dex dex="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\pre-dexed\debug\google-http-client-jackson2-1.20.0_8baa19815c03247cd51f0fb9e9f0981cbcb73402.jar" />
     </item>
     <item
         jar="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-basement\8.4.0\jars\classes.jar"
@@ -51,74 +58,25 @@
         <dex dex="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\pre-dexed\debug\com.google.android.gms-play-services-basement-8.4.0_ea637cc9137bf5512bd55ab153c675df7d073e71.jar" />
     </item>
     <item
-        jar="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-drive\8.4.0\jars\classes.jar"
+        jar="C:\Users\Taras\.gradle\caches\modules-2\files-2.1\com.google.api-client\google-api-client\1.20.0\d3e66209ae9e749b2d6833761e7885f60f285564\google-api-client-1.20.0.jar"
         jumboMode="false"
         revision="22.0.1"
-        sha1="b36f30ac5ee5d5214f4b1e2ac49f11889d58e71a">
-        <dex dex="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\pre-dexed\debug\com.google.android.gms-play-services-drive-8.4.0_4b550964b92aa2b18281260d6516a40a13cca623.jar" />
+        sha1="d3e66209ae9e749b2d6833761e7885f60f285564">
+        <dex dex="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\pre-dexed\debug\google-api-client-1.20.0_4bb535e03fb5a8fc6bdf87ebc442bcef941e179c.jar" />
     </item>
     <item
-        jar="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\23.1.1\jars\classes.jar"
+        jar="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\design\23.1.1\jars\classes.jar"
         jumboMode="false"
         revision="22.0.1"
-        sha1="5c5699834e9722f1c288fea2de82725d078ba127">
-        <dex dex="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\pre-dexed\debug\com.android.support-appcompat-v7-23.1.1_25405416d78537309ae28c0f2f194bb467724105.jar" />
+        sha1="379471b2bd17d9737c050345c08e8c7d16589784">
+        <dex dex="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\pre-dexed\debug\com.android.support-design-23.1.1_271221ceb3848c3efb432aa2c20f311b84f1a505.jar" />
     </item>
     <item
-        jar="C:\Users\Taras\.gradle\caches\modules-2\files-2.1\com.nineoldandroids\library\2.4.0\e9b63380f3a242dbdbf103a2355ad7e43bad17cb\library-2.4.0.jar"
+        jar="C:\Users\Taras\.gradle\caches\modules-2\files-2.1\com.google.guava\guava-jdk5\13.0\381ae6c8add7c98e9bcddb1e0b898400cd6fc3f7\guava-jdk5-13.0.jar"
         jumboMode="false"
         revision="22.0.1"
-        sha1="e9b63380f3a242dbdbf103a2355ad7e43bad17cb">
-        <dex dex="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\pre-dexed\debug\library-2.4.0_46f4fac032d75750c9a9bee8b167e7205782765b.jar" />
-    </item>
-    <item
-        jar="C:\Users\Taras\.gradle\caches\modules-2\files-2.1\com.github.bumptech.glide\glide\3.6.1\86b122e640af09b0723e1fa44083c354ba6d9089\glide-3.6.1.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="86b122e640af09b0723e1fa44083c354ba6d9089">
-        <dex dex="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\pre-dexed\debug\glide-3.6.1_46aef96ffca74fd3af6d4311a0fb0c774f68b910.jar" />
-    </item>
-    <item
-        jar="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.soundcloud.android\android-crop\1.0.1\jars\classes.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="11a65cf2b30c192b38a881d626fa771a78a2293d">
-        <dex dex="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\pre-dexed\debug\com.soundcloud.android-android-crop-1.0.1_1776f639f0dadac0413189cd6d3bcc15128ed137.jar" />
-    </item>
-    <item
-        jar="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.github.yukuku\ambilwarna\2.0.1\jars\classes.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="7ed87c7f833e46dacace668e63cb8c4b67cb3172">
-        <dex dex="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\pre-dexed\debug\com.github.yukuku-ambilwarna-2.0.1_6521bb28f53d29b9d4e224d96d1ab506ef65f222.jar" />
-    </item>
-    <item
-        jar="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.1.1\jars\libs\internal_impl-23.1.1.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="a4de9c81ae239414e1ed0f86441b02abaf29bca9">
-        <dex dex="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\pre-dexed\debug\internal_impl-23.1.1_3fb6419ee25a69247ce5c4bd416dc3b7dd0eb6f7.jar" />
-    </item>
-    <item
-        jar="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.melnykov\floatingactionbutton\1.3.0\jars\classes.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="8c6ebb7d087d1a30bf84356bd2aecf85309fc024">
-        <dex dex="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\pre-dexed\debug\com.melnykov-floatingactionbutton-1.3.0_38dd2d8ef55b7fdb9b0a0e801d87b69e3dbd7271.jar" />
-    </item>
-    <item
-        jar="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.daimajia.swipelayout\library\1.2.0\jars\classes.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="e84b30031d4bab89a2b5c45af4eb9213828524dd">
-        <dex dex="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\pre-dexed\debug\com.daimajia.swipelayout-library-1.2.0_efcb1373fe4190213f94cc00b9f3dd2b6d47508d.jar" />
-    </item>
-    <item
-        jar="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-maps\8.4.0\jars\classes.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="04de44f90606c77f3b28cf44861f306290505aac">
-        <dex dex="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\pre-dexed\debug\com.google.android.gms-play-services-maps-8.4.0_1f610c8515d7b190770e73b935a92f00df753fd8.jar" />
+        sha1="381ae6c8add7c98e9bcddb1e0b898400cd6fc3f7">
+        <dex dex="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\pre-dexed\debug\guava-jdk5-13.0_8036a6da667b00bc19101c54dbd1e0915655c3cc.jar" />
     </item>
     <item
         jar="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\recyclerview-v7\23.1.1\jars\classes.jar"
@@ -128,6 +86,104 @@
         <dex dex="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\pre-dexed\debug\com.android.support-recyclerview-v7-23.1.1_585906759075dda2606d608ef3f528ce5842f37f.jar" />
     </item>
     <item
+        jar="C:\Users\Taras\.gradle\caches\modules-2\files-2.1\com.github.bumptech.glide\glide\3.6.1\86b122e640af09b0723e1fa44083c354ba6d9089\glide-3.6.1.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="86b122e640af09b0723e1fa44083c354ba6d9089">
+        <dex dex="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\pre-dexed\debug\glide-3.6.1_46aef96ffca74fd3af6d4311a0fb0c774f68b910.jar" />
+    </item>
+    <item
+        jar="C:\Users\Taras\.gradle\caches\modules-2\files-2.1\com.fasterxml.jackson.core\jackson-core\2.1.3\f6c3aed1cdfa21b5c1737c915186ea93a95a58bd\jackson-core-2.1.3.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="f6c3aed1cdfa21b5c1737c915186ea93a95a58bd">
+        <dex dex="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\pre-dexed\debug\jackson-core-2.1.3_1dd8f65b4950dd18dc6690bd1b9c4d7aaf056542.jar" />
+    </item>
+    <item
+        jar="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.soundcloud.android\android-crop\1.0.1\jars\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="11a65cf2b30c192b38a881d626fa771a78a2293d">
+        <dex dex="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\pre-dexed\debug\com.soundcloud.android-android-crop-1.0.1_1776f639f0dadac0413189cd6d3bcc15128ed137.jar" />
+    </item>
+    <item
+        jar="C:\Users\Taras\.gradle\caches\modules-2\files-2.1\com.google.http-client\google-http-client\1.20.0\93d82db2bca534960253f43424b2ba9d7638b4d2\google-http-client-1.20.0.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="93d82db2bca534960253f43424b2ba9d7638b4d2">
+        <dex dex="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\pre-dexed\debug\google-http-client-1.20.0_4ec80fb3300d8352cb21201b4dcc1ccb01a3f60a.jar" />
+    </item>
+    <item
+        jar="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-maps\8.4.0\jars\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="04de44f90606c77f3b28cf44861f306290505aac">
+        <dex dex="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\pre-dexed\debug\com.google.android.gms-play-services-maps-8.4.0_1f610c8515d7b190770e73b935a92f00df753fd8.jar" />
+    </item>
+    <item
+        jar="C:\Users\Taras\.gradle\caches\modules-2\files-2.1\com.google.code.findbugs\jsr305\1.3.9\40719ea6961c0cb6afaeb6a921eaa1f6afd4cfdf\jsr305-1.3.9.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="40719ea6961c0cb6afaeb6a921eaa1f6afd4cfdf">
+        <dex dex="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\pre-dexed\debug\jsr305-1.3.9_17b3e8b115f96f70916550c3d1348b01da5861c3.jar" />
+    </item>
+    <item
+        jar="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-base\8.4.0\jars\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="fef2b3e4b6b1b0e5fe7b69fa137a5fa55a3182ab">
+        <dex dex="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\pre-dexed\debug\com.google.android.gms-play-services-base-8.4.0_1cfd505cc95f8e87ed2d35d3c1c9ce23efbdd6ca.jar" />
+    </item>
+    <item
+        jar="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-drive\8.4.0\jars\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="b36f30ac5ee5d5214f4b1e2ac49f11889d58e71a">
+        <dex dex="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\pre-dexed\debug\com.google.android.gms-play-services-drive-8.4.0_4b550964b92aa2b18281260d6516a40a13cca623.jar" />
+    </item>
+    <item
+        jar="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.github.yukuku\ambilwarna\2.0.1\jars\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="7ed87c7f833e46dacace668e63cb8c4b67cb3172">
+        <dex dex="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\pre-dexed\debug\com.github.yukuku-ambilwarna-2.0.1_6521bb28f53d29b9d4e224d96d1ab506ef65f222.jar" />
+    </item>
+    <item
+        jar="D:\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\23.1.1\support-annotations-23.1.1.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="8d680ba5a623724d1fb0e81c36a790f023a6cede">
+        <dex dex="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\pre-dexed\debug\support-annotations-23.1.1_160e21806fe4fcbe2b20c34d1bbde421f69a17ae.jar" />
+    </item>
+    <item
+        jar="C:\Users\Taras\.gradle\caches\modules-2\files-2.1\com.nineoldandroids\library\2.4.0\e9b63380f3a242dbdbf103a2355ad7e43bad17cb\library-2.4.0.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="e9b63380f3a242dbdbf103a2355ad7e43bad17cb">
+        <dex dex="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\pre-dexed\debug\library-2.4.0_46f4fac032d75750c9a9bee8b167e7205782765b.jar" />
+    </item>
+    <item
+        jar="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-identity\8.4.0\jars\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="b82b8e847173c28efffcd291b2a0b1ae9ad17fa4">
+        <dex dex="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\pre-dexed\debug\com.google.android.gms-play-services-identity-8.4.0_90591e52c612dfd03a1610bf216779e215124153.jar" />
+    </item>
+    <item
+        jar="C:\Users\Taras\.gradle\caches\modules-2\files-2.1\com.google.http-client\google-http-client-android\1.20.0\313dc99a7963523871495897ca11aa8472b3c6fd\google-http-client-android-1.20.0.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="313dc99a7963523871495897ca11aa8472b3c6fd">
+        <dex dex="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\pre-dexed\debug\google-http-client-android-1.20.0_f70a2fb4b61e8899d05351568855703642dad16d.jar" />
+    </item>
+    <item
+        jar="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\23.1.1\jars\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="5c5699834e9722f1c288fea2de82725d078ba127">
+        <dex dex="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\pre-dexed\debug\com.android.support-appcompat-v7-23.1.1_25405416d78537309ae28c0f2f194bb467724105.jar" />
+    </item>
+    <item
         jar="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.github.castorflex.smoothprogressbar\library-circular\1.2.0\jars\classes.jar"
         jumboMode="false"
         revision="22.0.1"
@@ -135,11 +191,32 @@
         <dex dex="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\pre-dexed\debug\com.github.castorflex.smoothprogressbar-library-circular-1.2.0_1384c014c07938506420270c328b53bd6ed945cc.jar" />
     </item>
     <item
-        jar="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\design\23.1.1\jars\classes.jar"
+        jar="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.melnykov\floatingactionbutton\1.3.0\jars\classes.jar"
         jumboMode="false"
         revision="22.0.1"
-        sha1="379471b2bd17d9737c050345c08e8c7d16589784">
-        <dex dex="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\pre-dexed\debug\com.android.support-design-23.1.1_271221ceb3848c3efb432aa2c20f311b84f1a505.jar" />
+        sha1="8c6ebb7d087d1a30bf84356bd2aecf85309fc024">
+        <dex dex="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\pre-dexed\debug\com.melnykov-floatingactionbutton-1.3.0_38dd2d8ef55b7fdb9b0a0e801d87b69e3dbd7271.jar" />
+    </item>
+    <item
+        jar="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.1.1\jars\libs\internal_impl-23.1.1.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="a4de9c81ae239414e1ed0f86441b02abaf29bca9">
+        <dex dex="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\pre-dexed\debug\internal_impl-23.1.1_3fb6419ee25a69247ce5c4bd416dc3b7dd0eb6f7.jar" />
+    </item>
+    <item
+        jar="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\exploded-aar\me.drakeet.materialdialog\library\1.2.8\jars\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="0573d010bcb1ee874e1c258a31e98ab920e6805f">
+        <dex dex="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\pre-dexed\debug\me.drakeet.materialdialog-library-1.2.8_072f1dc840130e2257b7c223eb734b72d26ec833.jar" />
+    </item>
+    <item
+        jar="C:\Users\Taras\.gradle\caches\modules-2\files-2.1\com.google.oauth-client\google-oauth-client\1.20.0\1d086ac5756475ddf451af2e2df6e288d18608ca\google-oauth-client-1.20.0.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="1d086ac5756475ddf451af2e2df6e288d18608ca">
+        <dex dex="D:\Android\AndroidStudioWorkspace\Scheduler\app\build\intermediates\pre-dexed\debug\google-oauth-client-1.20.0_8a7bd9df07382ddc27cb89682f7116784add66eb.jar" />
     </item>
 
 </items>

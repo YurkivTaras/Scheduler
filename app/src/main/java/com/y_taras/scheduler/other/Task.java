@@ -11,6 +11,7 @@ public class Task implements Parcelable, Serializable {
     public static final String DEFAULT_AVATAR_URI = "default";
 
     private long mDatabase_ID;
+    private String mCalendar_ID;
     //заголовок
     private String mTitle;
     //коментар
@@ -56,9 +57,10 @@ public class Task implements Parcelable, Serializable {
         mRuntime = runtime;
     }
 
-    public Task(long id, String title, String comment, boolean ifPeriodic, String avatarUri, int maxRuntime, long dateStart, long dateStop,
+    public Task(long id, String calendar_id, String title, String comment, boolean ifPeriodic, String avatarUri, int maxRuntime, long dateStart, long dateStop,
                 long dateEnd, long datePause, long pauseLengthBeforeStop, long pauseLengthAfterStop, boolean hasMapPoint, double latitude, double longitude) {
         mDatabase_ID = id;
+        mCalendar_ID = calendar_id;
         mTitle = title;
         mComment = comment;
         mIfPeriodic = ifPeriodic;
@@ -77,6 +79,7 @@ public class Task implements Parcelable, Serializable {
 
     public Task(Task task) {
         mDatabase_ID = task.mDatabase_ID;
+        mCalendar_ID = task.getCalendar_ID();
         mTitle = task.mTitle;
         mComment = task.mComment;
         mIfPeriodic = task.mIfPeriodic;
@@ -96,6 +99,7 @@ public class Task implements Parcelable, Serializable {
 
     public Task(Parcel source) {
         mDatabase_ID = source.readLong();
+        mCalendar_ID = source.readString();
         mTitle = source.readString();
         mComment = source.readString();
         mIfPeriodic = source.readInt() == 1;
@@ -162,6 +166,14 @@ public class Task implements Parcelable, Serializable {
 
     public void setDatabase_ID(long database_ID) {
         mDatabase_ID = database_ID;
+    }
+
+    public String getCalendar_ID() {
+        return mCalendar_ID;
+    }
+
+    public void setCalendar_ID(String calendar_ID) {
+        mCalendar_ID = calendar_ID;
     }
 
     public void setTitle(String title) {
@@ -292,6 +304,7 @@ public class Task implements Parcelable, Serializable {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeLong(mDatabase_ID);
+        dest.writeString(mCalendar_ID);
 
         dest.writeString(mTitle);
         dest.writeString(mComment);

@@ -28,8 +28,8 @@ public final class R {
 		public static final int cpb_default_min_sweep_angle = 0x7f090006;
 	}
 	public static final class string {
-		public static final int cpb_default_rotation_speed = 0x7f05004b;
-		public static final int cpb_default_sweep_speed = 0x7f05004c;
+		public static final int cpb_default_rotation_speed = 0x7f05004c;
+		public static final int cpb_default_sweep_speed = 0x7f05004d;
 	}
 	public static final class style {
 		public static final int CPB = 0x7f080076;

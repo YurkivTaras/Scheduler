@@ -2,6 +2,7 @@ package com.y_taras.scheduler.other;
 
 
 public class Constants {
+    public static final String ACCOUNT_NAME = "accountName";
     public static final String TASK_TITLE = "title";
     public static final String TASK_COMMENT = "comment";
     public static final String EDIT_TASK = "editTAsk";

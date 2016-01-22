@@ -9,9 +9,18 @@
 
     <LinearLayout
         android:id="@+id/right_swipe_menu"
-        android:layout_width="@dimen/right_swipe_layout_width"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:weightSum="3">
+        android:weightSum="4">
+
+        <TextView
+            android:id="@+id/tvCalendar"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/right_swipe_background2"
+            android:gravity="center"
+            android:textColor="@color/right_swipe_txt_color" />
 
         <TextView
             android:id="@+id/tvEdit"

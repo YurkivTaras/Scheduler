@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources xmlns:ns1="http://schemas.android.com/tools">
+<resources xmlns:ns1="urn:oasis:names:tc:xliff:document:1.2">
     <string-array name="names_of_months">
         <item>Січень</item>
         <item>Лютий</item>
@@ -432,6 +432,7 @@
     <string name="backgroundForNotCompletedTask">Фон завершеного завдання</string>
     <string name="backgroundForNotStartedTask">Фон не розпочатого завдання</string>
     <string name="backgroundForStartedTask">Фон розпочатого завдання</string>
+    <string name="backup_to_GD">Backup to GDrive</string>
     <string name="cancel">Відмінити</string>
     <string name="character_counter_pattern" translatable="false">%1$d / %2$d</string>
     <string name="chooseFromCamera">Загрузити з камери</string>
@@ -481,13 +482,18 @@
     <string name="error_edit_txt_for_maxRuntime">Будь ласка, вкажіть максимальний час виконання</string>
     <string name="exit">Вийти</string>
     <string name="exitButton">Вихід</string>
+    <string name="export_task_success">Завдання %s успішно додано до GoogleCalendar</string>
+    <string name="export_to_gСalendar">Export to GCalendar</string>
     <string name="finish">Finish</string>
+    <string name="gCalendar_success_import">Імпортовано %d завдань</string>
     <string name="generateTask">Згенерувати завдання</string>
     <string name="google_app_id">23423452163</string>
     <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">
         AIzaSyA4X7eOUGi6ZRzeO3FDwlyrtM6x9mjUHBk
     </string>
     <string name="hello_world">Hello world!</string>
+    <string name="import_from_GC">Import from GCalendar</string>
+    <string name="import_task_progress_massage">Завантаження завдань з GoogleCalendar...</string>
     <string name="library_FloatingActionButton_author">Oleksandr Melnykov</string>
     <string name="library_FloatingActionButton_authorWebsite">https://github.com/makovkastar/FloatingActionButton</string>
     <string name="library_FloatingActionButton_isOpenSource">true</string>
@@ -503,12 +509,21 @@
     <string name="max_time_for_task">Максимальний час виконання завдання</string>
     <string name="nameEditText">Назва</string>
     <string name="no">НІ</string>
+    <string name="no_internet_connection">Немає доступу до Інтернету.</string>
+    <string name="no_task_find">Завдань не знайдено</string>
+    <string name="no_title">Без назви</string>
     <string name="notificationContentText">Завдання %s автоматично завершилось</string>
     <string name="ok">OK</string>
+    <string name="request_rejected">Запит відхилено</string>
     <string name="resetColors">Відновити стандартні кольори</string>
     <string name="reset_task">Reset task</string>
     <string name="restore_complete">Restore complete task</string>
+    <string name="restore_completed">Відновлення пройшло успішно</string>
+    <string name="restore_failed">Не вдалося відновити</string>
+    <string name="restore_from_GD">Restore from GDrive</string>
+    <string name="restore_photo_failed">Не вдалося відновити аватарки</string>
     <string name="saveButton">Зберегти</string>
+    <string name="sc_card_not_writable">sdCard доступна тільки для читання</string>
     <string name="settingsToolbarTitle">Налаштування</string>
     <string name="sort_a_z">A-Z</string>
     <string name="sort_date_down">Date down</string>
@@ -516,6 +531,8 @@
     <string name="sort_z_a">Z-A</string>
     <string name="start">Start</string>
     <string name="status_bar_notification_info_overflow">999+</string>
+    <string name="tab1_indicator">Завдання</string>
+    <string name="tab2_indicator">Статистика</string>
     <string name="test">Тест</string>
     <string name="text_for_target_0">Рухайтесь по вкладках \"Завдання\" та \"Статистика\" щоби переглядати усі завдання і статистику по місяцях для періодичних завдань</string>
     <string name="text_for_target_1">Нажміть для створення нового завдання</string>
@@ -531,7 +548,10 @@
     <string name="title_for_target_5">Статистика</string>
     <string name="toastMessageIfBackPressed">Натисніть ще раз аби вийти з додатку</string>
     <string name="typeOfTaskCheckBoxText">Періодичне завдання</string>
+    <string name="undefined_account">Акаунт не визначено</string>
     <string name="understand">Зрозуміло</string>
+    <string name="update_task_in_gСalendar">Update in GCalendar</string>
+    <string name="update_task_success">Завдання %s успішно оновлено</string>
     <string name="yes">ТАК</string>
     <style name="AlertDialog.AppCompat" parent="Base.AlertDialog.AppCompat"/>
     <style name="AlertDialog.AppCompat.Light" parent="Base.AlertDialog.AppCompat.Light"/>

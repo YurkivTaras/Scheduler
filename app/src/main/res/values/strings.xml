@@ -87,4 +87,21 @@
     <string name="restore_completed">Відновлення пройшло успішно</string>
     <string name="restore_photo_failed">Не вдалося відновити аватарки</string>
     <string name="restore_failed">Не вдалося відновити</string>
+    <string name="backup_to_GD">Backup to GDrive</string>
+    <string name="restore_from_GD">Restore from GDrive</string>
+    <string name="import_from_GC">Import from GCalendar</string>
+    <string name="update_task_success">Завдання %s успішно оновлено</string>
+    <string name="export_task_success">Завдання %s успішно додано до GoogleCalendar</string>
+    <string name="import_task_progress_massage">Завантаження завдань з GoogleCalendar...</string>
+    <string name="no_title">Без назви</string>
+    <string name="no_task_find">Завдань не знайдено</string>
+    <string name="no_internet_connection">Немає доступу до Інтернету.</string>
+    <string name="sc_card_not_writable">sdCard доступна тільки для читання</string>
+    <string name="undefined_account">Акаунт не визначено</string>
+    <string name="tab1_indicator">Завдання</string>
+    <string name="tab2_indicator">Статистика</string>
+    <string name="export_to_gСalendar">Export to GCalendar</string>
+    <string name="update_task_in_gСalendar">Update in GCalendar</string>
+    <string name="gCalendar_success_import">Імпортовано %d завдань</string>
+    <string name="request_rejected">Запит відхилено</string>
 </resources>

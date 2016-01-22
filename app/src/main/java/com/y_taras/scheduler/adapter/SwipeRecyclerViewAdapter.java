@@ -17,16 +17,15 @@ import com.daimajia.swipe.adapters.RecyclerSwipeAdapter;
 import com.y_taras.scheduler.R;
 import com.y_taras.scheduler.activity.AddTaskActivity;
 import com.y_taras.scheduler.activity.MainActivity;
+import com.y_taras.scheduler.helper.DatabaseConnector;
+import com.y_taras.scheduler.helper.ImageLoader;
+import com.y_taras.scheduler.other.Constants;
+import com.y_taras.scheduler.other.Task;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
-
-import com.y_taras.scheduler.other.Constants;
-import com.y_taras.scheduler.other.Task;
-import com.y_taras.scheduler.helper.DatabaseConnector;
-import com.y_taras.scheduler.helper.ImageLoader;
 
 public class SwipeRecyclerViewAdapter extends RecyclerSwipeAdapter<SwipeRecyclerViewAdapter.ViewHolder> {
     private final SimpleDateFormat mDateFormat;
@@ -58,6 +57,10 @@ public class SwipeRecyclerViewAdapter extends RecyclerSwipeAdapter<SwipeRecycler
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
         final Task task = mTasks.get(position);
+        if (task.getCalendar_ID() == null) {
+            holder.mCalendar.setText(R.string.export_to_gСalendar);
+        } else
+            holder.mCalendar.setText(R.string.update_task_in_gСalendar);
         holder.mTaskTitle.setText(task.getTitle());
         holder.mTaskComment.setText(task.getComment());
         if (task.isPeriodic())
@@ -79,6 +82,7 @@ public class SwipeRecyclerViewAdapter extends RecyclerSwipeAdapter<SwipeRecycler
             holder.mTaskAvatar.setImageResource(R.drawable.default_avatar);
         String sTaskDate = "";
         if (task.getDateEnd() != null) {
+            holder.mCalendar.setVisibility(View.VISIBLE);
             if (task.isPeriodic()) {
                 holder.mViewItem.setBackgroundColor(mNotStartedTaskColor);
                 holder.mBtnPause.setVisibility(View.GONE);
@@ -97,10 +101,10 @@ public class SwipeRecyclerViewAdapter extends RecyclerSwipeAdapter<SwipeRecycler
                 int spentHours = (int) (spentTime / (1000 * 60 * 60));
                 int spentMinute = (int) (spentTime - spentHours * 1000 * 60 * 60) / 60000;
                 sTaskDate = mDateFormat.format(task.getDateStart()) + " - " +
-                        mDateFormat.format(task.getDateEnd()) +
-                        " " + String.format("%02d:%02d", spentHours, spentMinute);
+                        mDateFormat.format(task.getDateEnd()) + String.format(" %02d:%02d", spentHours, spentMinute);
             }
         } else if (task.getDateStart() != null) {
+            holder.mCalendar.setVisibility(View.VISIBLE);
             holder.mViewItem.setBackgroundColor(mStartedTaskColor);
             sTaskDate = mDateFormat.format(task.getDateStart());
             holder.mBtnStart.setVisibility(View.GONE);
@@ -119,15 +123,16 @@ public class SwipeRecyclerViewAdapter extends RecyclerSwipeAdapter<SwipeRecycler
             holder.mBtnResume.setVisibility(View.GONE);
             holder.mBtnStart.setVisibility(View.VISIBLE);
             holder.mBtnFinish.setVisibility(View.GONE);
+            holder.mCalendar.setVisibility(View.INVISIBLE);
         }
         holder.mTaskDate.setText(sTaskDate);
-        holder.swipeLayout.setShowMode(SwipeLayout.ShowMode.PullOut);
-        holder.swipeLayout.addDrag(SwipeLayout.DragEdge.Left, holder.swipeLayout.findViewById(R.id.left_swipe_menu));
-        holder.swipeLayout.addDrag(SwipeLayout.DragEdge.Right, holder.swipeLayout.findViewById(R.id.right_swipe_menu));
+        holder.mSwipeLayout.setShowMode(SwipeLayout.ShowMode.PullOut);
+        holder.mSwipeLayout.addDrag(SwipeLayout.DragEdge.Left, holder.mSwipeLayout.findViewById(R.id.left_swipe_menu));
+        holder.mSwipeLayout.addDrag(SwipeLayout.DragEdge.Right, holder.mSwipeLayout.findViewById(R.id.right_swipe_menu));
         View.OnClickListener listenerForStateBtn = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (holder.swipeLayout.getOpenStatus() == SwipeLayout.Status.Close) {
+                if (holder.mSwipeLayout.getOpenStatus() == SwipeLayout.Status.Close) {
                     Task clickTask = mTasks.get(position);
                     closeAllItems();
                     switch (v.getId()) {
@@ -197,8 +202,11 @@ public class SwipeRecyclerViewAdapter extends RecyclerSwipeAdapter<SwipeRecycler
                 Task clickTask = mTasks.get(position);
                 mItemManger.closeAllItems();
                 switch (v.getId()) {
+                    case R.id.tvCalendar:
+                        mMainActivity.exportTask(clickTask);
+                        break;
                     case R.id.btnDelete:
-                        mItemManger.removeShownLayouts(holder.swipeLayout);
+                        mItemManger.removeShownLayouts(holder.mSwipeLayout);
                         mTasks.remove(position);
                         notifyItemRemoved(position);
                         notifyItemRangeChanged(position, mTasks.size());
@@ -269,10 +277,11 @@ public class SwipeRecyclerViewAdapter extends RecyclerSwipeAdapter<SwipeRecycler
                 }
             }
         };
-        holder.btnDelete.setOnClickListener(listenerForSwipeItem);
-        holder.tvResetStart.setOnClickListener(listenerForSwipeItem);
-        holder.tvResetEnd.setOnClickListener(listenerForSwipeItem);
-        holder.tvEdit.setOnClickListener(listenerForSwipeItem);
+        holder.mCalendar.setOnClickListener(listenerForSwipeItem);
+        holder.mBtnDelete.setOnClickListener(listenerForSwipeItem);
+        holder.mTvResetStart.setOnClickListener(listenerForSwipeItem);
+        holder.mTvResetEnd.setOnClickListener(listenerForSwipeItem);
+        holder.mTvEdit.setOnClickListener(listenerForSwipeItem);
 
         mItemManger.bindView(holder.itemView, position);
     }
@@ -300,16 +309,17 @@ public class SwipeRecyclerViewAdapter extends RecyclerSwipeAdapter<SwipeRecycler
         ImageButton mBtnPause;
         ImageButton mBtnResume;
 
-        SwipeLayout swipeLayout;
-        TextView tvResetEnd;
-        TextView tvEdit;
-        TextView tvResetStart;
-        ImageButton btnDelete;
+        SwipeLayout mSwipeLayout;
+        TextView mCalendar;
+        TextView mTvResetEnd;
+        TextView mTvEdit;
+        TextView mTvResetStart;
+        ImageButton mBtnDelete;
 
 
         public ViewHolder(View itemView) {
             super(itemView);
-            swipeLayout = (SwipeLayout) itemView.findViewById(R.id.swipe);
+            mSwipeLayout = (SwipeLayout) itemView.findViewById(R.id.swipe);
             mViewItem = itemView;
             mTaskTitle = (TextView) itemView.findViewById(R.id.txtListTitle);
             mTaskComment = (TextView) itemView.findViewById(R.id.txtListComment);
@@ -322,10 +332,11 @@ public class SwipeRecyclerViewAdapter extends RecyclerSwipeAdapter<SwipeRecycler
             mBtnPause = (ImageButton) itemView.findViewById(R.id.btnPause);
             mBtnResume = (ImageButton) itemView.findViewById(R.id.btnResume);
 
-            tvResetEnd = (TextView) itemView.findViewById(R.id.tvResetEnd);
-            tvEdit = (TextView) itemView.findViewById(R.id.tvEdit);
-            tvResetStart = (TextView) itemView.findViewById(R.id.tvResetStart);
-            btnDelete = (ImageButton) itemView.findViewById(R.id.btnDelete);
+            mCalendar = (TextView) itemView.findViewById(R.id.tvCalendar);
+            mTvResetEnd = (TextView) itemView.findViewById(R.id.tvResetEnd);
+            mTvEdit = (TextView) itemView.findViewById(R.id.tvEdit);
+            mTvResetStart = (TextView) itemView.findViewById(R.id.tvResetStart);
+            mBtnDelete = (ImageButton) itemView.findViewById(R.id.btnDelete);
 
         }
 

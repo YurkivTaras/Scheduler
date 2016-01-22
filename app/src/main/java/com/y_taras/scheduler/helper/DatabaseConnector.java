@@ -20,6 +20,7 @@ public class DatabaseConnector {
     public static final String TABLE_STATISTIC = "STATISTIC";
 
     public static final String COLUMN_ID = "_id";
+    public static final String COLUMN_CALENDAR_ID = "CALENDAR_ID";
     public static final String COLUMN_TITLE = "TITLE";
     public static final String COLUMN_COMMENT = "COMMENT";
     public static final String COLUMN_TYPE_OF_TASK = "TYPE_OF_TASK";
@@ -90,6 +91,7 @@ public class DatabaseConnector {
 
     public static void updateTask(final Task task, Context context) {
         final ContentValues editTask = new ContentValues();
+        editTask.put(COLUMN_CALENDAR_ID, task.getCalendar_ID());
         editTask.put(COLUMN_TITLE, task.getTitle());
         editTask.put(COLUMN_COMMENT, task.getComment());
 
@@ -191,6 +193,8 @@ public class DatabaseConnector {
             @Override
             protected Long doInBackground(Void... params) {
                 ContentValues newTask = new ContentValues();
+                if (copyOfTask.getCalendar_ID() != null)
+                    newTask.put(COLUMN_CALENDAR_ID, copyOfTask.getCalendar_ID());
                 newTask.put(COLUMN_TITLE, copyOfTask.getTitle());
                 newTask.put(COLUMN_COMMENT, copyOfTask.getComment());
                 newTask.put(COLUMN_TYPE_OF_TASK, copyOfTask.isPeriodic() ? 1 : 0);
@@ -383,6 +387,7 @@ public class DatabaseConnector {
         public void onCreate(SQLiteDatabase db) {
             String createQuery = "CREATE TABLE " + TABLE_TASKS +
                     "(" + COLUMN_ID + " integer primary key autoincrement," +
+                    COLUMN_CALENDAR_ID + " TEXT, " +
                     COLUMN_TITLE + " TEXT, " +
                     COLUMN_COMMENT + " TEXT, " +
                     COLUMN_TYPE_OF_TASK + " INTEGER, " +

@@ -101,6 +101,7 @@ public class LocationService extends Service {
                     } while (cursor.moveToNext());
                 }
                 cursor.close();
+
                 ArrayList<Task> result = new ArrayList<>();
                 for (int i = 0; i < tasks.size(); i++) {
                     Task task = tasks.get(i);

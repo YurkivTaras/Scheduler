@@ -1,7 +1,10 @@
 package com.y_taras.scheduler.activity;
 
+import android.accounts.AccountManager;
 import android.app.Activity;
+import android.app.Dialog;
 import android.app.LoaderManager;
+import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.CursorLoader;
@@ -10,7 +13,12 @@ import android.content.IntentFilter;
 import android.content.IntentSender;
 import android.content.Loader;
 import android.content.SharedPreferences;
+import android.content.pm.ActivityInfo;
 import android.database.Cursor;
+import android.location.Address;
+import android.location.Geocoder;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
@@ -36,9 +44,24 @@ import com.github.amlcurran.showcaseview.ShowcaseView;
 import com.github.amlcurran.showcaseview.targets.Target;
 import com.github.amlcurran.showcaseview.targets.ViewTarget;
 import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.GooglePlayServicesUtil;
+import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.drive.Drive;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.api.client.extensions.android.http.AndroidHttp;
+import com.google.api.client.googleapis.extensions.android.gms.auth.GoogleAccountCredential;
+import com.google.api.client.googleapis.extensions.android.gms.auth.GooglePlayServicesAvailabilityIOException;
+import com.google.api.client.googleapis.extensions.android.gms.auth.UserRecoverableAuthIOException;
+import com.google.api.client.http.HttpTransport;
+import com.google.api.client.json.JsonFactory;
+import com.google.api.client.json.jackson2.JacksonFactory;
+import com.google.api.client.util.DateTime;
+import com.google.api.client.util.ExponentialBackOff;
+import com.google.api.services.calendar.CalendarScopes;
+import com.google.api.services.calendar.model.Event;
+import com.google.api.services.calendar.model.EventAttendee;
+import com.google.api.services.calendar.model.EventDateTime;
+import com.google.api.services.calendar.model.Events;
 import com.melnykov.fab.FloatingActionButton;
 import com.y_taras.scheduler.R;
 import com.y_taras.scheduler.adapter.CustomExpandableListAdapter;
@@ -58,6 +81,7 @@ import com.y_taras.scheduler.utils.AnimatedTabHostListener;
 import com.y_taras.scheduler.utils.BackupAgent;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -65,6 +89,8 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
@@ -77,11 +103,14 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     public static final String TAG = "MainActivity";
     private static final String AlertBool = "alertBool";
     private static final int TimeForExit = 3500;
-    private static final int RequestCodeAddTask = 1;
-    public static final int REQUEST_CODE_EDIT_TASK = 2;
-    private static final int RequestCodeSettings = 3;
-    private static final int AllTasksLoaderID = 8;
-    public static final int REQUEST_CODE_GD_RESOLUTION = 101;
+    private static final int RequestCodeAddTask = 1001;
+    public static final int REQUEST_CODE_EDIT_TASK = 1002;
+    private static final int RequestCodeSettings = 1003;
+    private static final int AllTasksLoaderID = 1008;
+    private static final int RequestCodeGDResolution = 1004;
+    private static final int RequestAccountPicker = 1005;
+    private static final int RequestAuthorization = 1006;
+    private static final int RequestGooglePlayServices = 1007;
 
     private static long timeBackPressed;
     private static boolean mFirstStart;
@@ -123,12 +152,23 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     private DatabaseConnector mDatabaseConnector;
     private GoogleApiClient mGoogleApiClient;
 
+    GoogleAccountCredential mCredential;
+    ProgressDialog mProgress;
+
+    private static final String[] SCOPES = {CalendarScopes.CALENDAR};
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         BackupAgent.requestBackup(this);
         setContentView(R.layout.activity_main);
         initUI(savedInstanceState);
+
+        mProgress = new ProgressDialog(this);
+        mCredential = GoogleAccountCredential.usingOAuth2(
+                getApplicationContext(), Arrays.asList(SCOPES))
+                .setBackOff(new ExponentialBackOff())
+                .setSelectedAccountName(mAppSettings.getString(Constants.ACCOUNT_NAME, null));
     }
 
     @Override
@@ -234,11 +274,11 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         TabHost.TabSpec tabSpec;
         tabSpec = mTabHost.newTabSpec("tag1");
 
-        tabSpec.setIndicator("Завдання");
+        tabSpec.setIndicator(getString(R.string.tab1_indicator));
         tabSpec.setContent(R.id.tab1);
         mTabHost.addTab(tabSpec);
         tabSpec = mTabHost.newTabSpec("tag2");
-        tabSpec.setIndicator("Статистика");
+        tabSpec.setIndicator(getString(R.string.tab2_indicator));
         tabSpec.setContent(R.id.tab2);
         mTabHost.addTab(tabSpec);
         //встановлення анімації при зміні вкладки
@@ -252,11 +292,13 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         LinearLayoutManager llm = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(llm);
         recyclerView.addItemDecoration(new DividerItemDecoration(this, null, true, true));
+
         mSwipeListAdapter = new SwipeRecyclerViewAdapter(this, mTasks,
                 mNotStartedTaskColor, mStartedTaskColor, mCompletedTaskColor);
         mSwipeListAdapter.setMode(Attributes.Mode.Single);
 
         recyclerView.setAdapter(mSwipeListAdapter);
+        mSwipeListAdapter.notifyDataSetChanged();
 
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
@@ -275,11 +317,11 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         ExpandableListView listView = (ExpandableListView) findViewById(R.id.tab2);
         mExpListAdapter = new CustomExpandableListAdapter(getApplicationContext(), mGroups, mGroupsName);
         listView.setAdapter(mExpListAdapter);
-
         alarm = new AlarmManagerBroadcastReceiver();
-        // створюєм лоадер для читання даних
-        getLoaderManager().initLoader(AllTasksLoaderID, null, this);
+
         if (savedInstanceState == null && !mFirstStart) {
+            // створюєм лоадер для читання даних
+            getLoaderManager().initLoader(AllTasksLoaderID, null, this);
             showLoadProgress();
             //запускаєм лоадер
             getLoaderManager().getLoader(AllTasksLoaderID).forceLoad();
@@ -291,7 +333,6 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         mBroadcastReceiver = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
-
                 Bundle b = intent.getExtras();
                 String action = b.getString(Constants.ACTION);
                 ArrayList<Task> tasks = b.getParcelableArrayList(Constants.ARRAY_OF_TASKS);
@@ -380,131 +421,157 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
                 mTaskComparator = Task.DateDownComparator;
                 break;
         }
+
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == REQUEST_CODE_GD_RESOLUTION) {
-            if (resultCode == RESULT_OK)
-                mGoogleApiClient.connect();
-            else
-                onConnectionFailed(null);
-        }
-        if (resultCode == Activity.RESULT_OK) {
-            String title, comment;
-            String avatarUri = null;
-            int maxRuntime;
-            boolean hasMapPoint;
-            double latitude, longitude;
-            switch (requestCode) {
-                case RequestCodeAddTask:
-                    title = data.getStringExtra(Constants.TASK_TITLE);
-                    comment = data.getStringExtra(Constants.TASK_COMMENT);
-                    boolean typeOfTask = data.getBooleanExtra(Constants.TYPE_OF_TASK, false);
-                    maxRuntime = data.getIntExtra(Constants.MAX_RUNTIME_FOR_TASK, mMaxRuntimeForTask);
-                    Task newTask = new Task(title, comment, typeOfTask, maxRuntime);
-                    if (data.hasExtra(Constants.BITMAP_AVATAR))
-                        avatarUri = data.getStringExtra(Constants.BITMAP_AVATAR);
-                    if (avatarUri != null)
-                        newTask.setAvatarUri(avatarUri);
-                    hasMapPoint = data.getBooleanExtra(Constants.MAP_POINT, false);
-                    if (hasMapPoint) {
+        switch (resultCode) {
+            case Activity.RESULT_OK:
+                String title, comment;
+                String avatarUri = null;
+                int maxRuntime;
+                boolean hasMapPoint;
+                double latitude, longitude;
+                switch (requestCode) {
+                    case RequestCodeAddTask:
+                        title = data.getStringExtra(Constants.TASK_TITLE);
+                        comment = data.getStringExtra(Constants.TASK_COMMENT);
+                        boolean typeOfTask = data.getBooleanExtra(Constants.TYPE_OF_TASK, false);
+                        maxRuntime = data.getIntExtra(Constants.MAX_RUNTIME_FOR_TASK, mMaxRuntimeForTask);
+                        Task newTask = new Task(title, comment, typeOfTask, maxRuntime);
+                        if (data.hasExtra(Constants.BITMAP_AVATAR))
+                            avatarUri = data.getStringExtra(Constants.BITMAP_AVATAR);
+                        if (avatarUri != null)
+                            newTask.setAvatarUri(avatarUri);
+                        hasMapPoint = data.getBooleanExtra(Constants.MAP_POINT, false);
+                        if (hasMapPoint) {
+                            latitude = data.getDoubleExtra(Constants.LATITUDE, 0);
+                            longitude = data.getDoubleExtra(Constants.LONGITUDE, 0);
+                            newTask.setMapPoint(true);
+                            newTask.setLatitude(latitude);
+                            newTask.setLongitude(longitude);
+                        }
+                        DatabaseConnector.addTask(newTask, this);
+                        mTasks.add(newTask);
+                        sortTasks();
+                        break;
+                    case REQUEST_CODE_EDIT_TASK:
+                        title = data.getStringExtra(Constants.TASK_TITLE);
+                        comment = data.getStringExtra(Constants.TASK_COMMENT);
+                        maxRuntime = data.getIntExtra(Constants.MAX_RUNTIME_FOR_TASK, mMaxRuntimeForTask);
+                        int position = data.getIntExtra(Constants.TASK_POSITION, -1);
+                        Task editTask = mTasks.get(position);
+                        boolean ifWasChange = false;
+                        if (!editTask.getTitle().equals(title) || !editTask.getComment().equals(comment)) {
+                            editTask.setTitle(title);
+                            editTask.setComment(comment);
+                            //пересортовуєм масив завдань, якщо було змінено title або comment
+                            sortTasks();
+                            ifWasChange = true;
+                        }
+                        if (data.hasExtra(Constants.BITMAP_AVATAR))
+                            avatarUri = data.getStringExtra(Constants.BITMAP_AVATAR);
+                        if (avatarUri != null) {
+                            editTask.setAvatarUri(avatarUri);
+                            ifWasChange = true;
+                            mSwipeListAdapter.notifyItemChanged(position);
+                        }
+                        if (editTask.getMaxRuntime() != maxRuntime) {
+                            editTask.setMaxRuntime(maxRuntime);
+                            //перезапускаєм таймер якщо було змінено максимальний час виконання для завдання
+                            setTimer();
+                            ifWasChange = true;
+                        }
+                        hasMapPoint = data.getBooleanExtra(Constants.MAP_POINT, false);
                         latitude = data.getDoubleExtra(Constants.LATITUDE, 0);
                         longitude = data.getDoubleExtra(Constants.LONGITUDE, 0);
-                        newTask.setMapPoint(true);
-                        newTask.setLatitude(latitude);
-                        newTask.setLongitude(longitude);
-                    }
-                    DatabaseConnector.addTask(newTask, this);
-                    mTasks.add(newTask);
-                    sortTasks();
-                    break;
-                case REQUEST_CODE_EDIT_TASK:
-                    title = data.getStringExtra(Constants.TASK_TITLE);
-                    comment = data.getStringExtra(Constants.TASK_COMMENT);
-                    maxRuntime = data.getIntExtra(Constants.MAX_RUNTIME_FOR_TASK, mMaxRuntimeForTask);
-                    int position = data.getIntExtra(Constants.TASK_POSITION, -1);
-                    Task editTask = mTasks.get(position);
-                    boolean ifWasChange = false;
-                    if (!editTask.getTitle().equals(title) || !editTask.getComment().equals(comment)) {
-                        editTask.setTitle(title);
-                        editTask.setComment(comment);
-                        //пересортовуєм масив завдань, якщо було змінено title або comment
-                        sortTasks();
-                        ifWasChange = true;
-                    }
-                    if (data.hasExtra(Constants.BITMAP_AVATAR))
-                        avatarUri = data.getStringExtra(Constants.BITMAP_AVATAR);
-                    if (avatarUri != null) {
-                        editTask.setAvatarUri(avatarUri);
-                        ifWasChange = true;
-                        mSwipeListAdapter.notifyItemChanged(position);
-                    }
-                    if (editTask.getMaxRuntime() != maxRuntime) {
-                        editTask.setMaxRuntime(maxRuntime);
-                        //перезапускаєм таймер якщо було змінено максимальний час виконання для завдання
-                        setTimer();
-                        ifWasChange = true;
-                    }
-                    hasMapPoint = data.getBooleanExtra(Constants.MAP_POINT, false);
-                    latitude = data.getDoubleExtra(Constants.LATITUDE, 0);
-                    longitude = data.getDoubleExtra(Constants.LONGITUDE, 0);
-                    //якщо було включено або виключено привязку до місця
-                    if (editTask.hasMapPoint() != hasMapPoint) {
-                        editTask.setMapPoint(hasMapPoint);
-                        mSwipeListAdapter.notifyItemChanged(position);
-                        ifWasChange = true;
-                    }
-                    //якщо було змінено координати
-                    if (hasMapPoint && (editTask.getLatitude() != latitude || editTask.getLongitude() != longitude)) {
-                        editTask.setLatitude(latitude);
-                        editTask.setLongitude(longitude);
-                        ifWasChange = true;
-                    }
-                    if (ifWasChange)
-                        DatabaseConnector.updateTask(editTask, this);
-                    break;
-                case RequestCodeSettings:
-                    int notStartedTaskColor = data.getIntExtra(Constants.NOT_STARTED_TASK, -1);
-                    int startedTaskColor = data.getIntExtra(Constants.STARTED_TASK, -1);
-                    int completedTaskColor = data.getIntExtra(Constants.COMPLETED_TASK, -1);
-                    int maxRuntimeForTask = data.getIntExtra(Constants.MAX_RUNTIME_FOR_TASK, -1);
-                    SharedPreferences.Editor editor = mAppSettings.edit();
-                    boolean ifWasChanges = false;
-                    if (mNotStartedTaskColor != notStartedTaskColor) {
-                        ifWasChanges = true;
-                        mNotStartedTaskColor = notStartedTaskColor;
-                        editor.putInt(Constants.NOT_STARTED_TASK, mNotStartedTaskColor);
-                        mSwipeListAdapter.setNotStartedTaskColor(mNotStartedTaskColor);
-                    }
-                    if (mStartedTaskColor != startedTaskColor) {
-                        ifWasChanges = true;
-                        mStartedTaskColor = startedTaskColor;
-                        editor.putInt(Constants.STARTED_TASK, mStartedTaskColor);
-                        mSwipeListAdapter.setStartedTaskColor(mStartedTaskColor);
-                    }
-                    if (mCompletedTaskColor != completedTaskColor) {
-                        ifWasChanges = true;
-                        mCompletedTaskColor = completedTaskColor;
-                        editor.putInt(Constants.COMPLETED_TASK, mCompletedTaskColor);
-                        mSwipeListAdapter.setCompletedTaskColor(mCompletedTaskColor);
-                    }
-                    //оновлюєм список, якщо було змінено кольори
-                    if (ifWasChanges)
-                        mSwipeListAdapter.notifyDataSetChanged();
-                    //якщо було змінено максимальний час виконання завдання
-                    if (mMaxRuntimeForTask != maxRuntimeForTask) {
-                        ifWasChanges = true;
-                        mMaxRuntimeForTask = maxRuntimeForTask;
-                        editor.putInt(Constants.MAX_RUNTIME_FOR_TASK, mMaxRuntimeForTask);
-                        //перезапускаєм таймер
-                        setTimer();
-                    }
-                    //зберігаєм зміни в SharedPreferences, якщо такі були
-                    if (ifWasChanges)
-                        editor.apply();
-                    break;
-            }
+                        //якщо було включено або виключено привязку до місця
+                        if (editTask.hasMapPoint() != hasMapPoint) {
+                            editTask.setMapPoint(hasMapPoint);
+                            mSwipeListAdapter.notifyItemChanged(position);
+                            ifWasChange = true;
+                        }
+                        //якщо було змінено координати
+                        if (hasMapPoint && (editTask.getLatitude() != latitude || editTask.getLongitude() != longitude)) {
+                            editTask.setLatitude(latitude);
+                            editTask.setLongitude(longitude);
+                            ifWasChange = true;
+                        }
+                        if (ifWasChange)
+                            DatabaseConnector.updateTask(editTask, this);
+                        break;
+                    case RequestCodeSettings:
+                        int notStartedTaskColor = data.getIntExtra(Constants.NOT_STARTED_TASK, -1);
+                        int startedTaskColor = data.getIntExtra(Constants.STARTED_TASK, -1);
+                        int completedTaskColor = data.getIntExtra(Constants.COMPLETED_TASK, -1);
+                        int maxRuntimeForTask = data.getIntExtra(Constants.MAX_RUNTIME_FOR_TASK, -1);
+                        SharedPreferences.Editor editor = mAppSettings.edit();
+                        boolean ifWasChanges = false;
+                        if (mNotStartedTaskColor != notStartedTaskColor) {
+                            ifWasChanges = true;
+                            mNotStartedTaskColor = notStartedTaskColor;
+                            editor.putInt(Constants.NOT_STARTED_TASK, mNotStartedTaskColor);
+                            mSwipeListAdapter.setNotStartedTaskColor(mNotStartedTaskColor);
+                        }
+                        if (mStartedTaskColor != startedTaskColor) {
+                            ifWasChanges = true;
+                            mStartedTaskColor = startedTaskColor;
+                            editor.putInt(Constants.STARTED_TASK, mStartedTaskColor);
+                            mSwipeListAdapter.setStartedTaskColor(mStartedTaskColor);
+                        }
+                        if (mCompletedTaskColor != completedTaskColor) {
+                            ifWasChanges = true;
+                            mCompletedTaskColor = completedTaskColor;
+                            editor.putInt(Constants.COMPLETED_TASK, mCompletedTaskColor);
+                            mSwipeListAdapter.setCompletedTaskColor(mCompletedTaskColor);
+                        }
+                        //оновлюєм список, якщо було змінено кольори
+                        if (ifWasChanges)
+                            mSwipeListAdapter.notifyDataSetChanged();
+                        //якщо було змінено максимальний час виконання завдання
+                        if (mMaxRuntimeForTask != maxRuntimeForTask) {
+                            ifWasChanges = true;
+                            mMaxRuntimeForTask = maxRuntimeForTask;
+                            editor.putInt(Constants.MAX_RUNTIME_FOR_TASK, mMaxRuntimeForTask);
+                            //перезапускаєм таймер
+                            setTimer();
+                        }
+                        //зберігаєм зміни в SharedPreferences, якщо такі були
+                        if (ifWasChanges)
+                            editor.apply();
+                        break;
+                    case RequestAccountPicker:
+                        if (data != null && data.getExtras() != null) {
+                            String accountName = data.getStringExtra(AccountManager.KEY_ACCOUNT_NAME);
+                            if (accountName != null) {
+                                mCredential.setSelectedAccountName(accountName);
+                                SharedPreferences.Editor e = mAppSettings.edit();
+                                e.putString(Constants.ACCOUNT_NAME, accountName);
+                                e.apply();
+                            }
+                        }
+                        break;
+                    case RequestAuthorization:
+                        chooseAccount();
+                        break;
+                    case RequestGooglePlayServices:
+                        isGooglePlayServicesAvailable();
+                        break;
+                    case RequestCodeGDResolution:
+                        mGoogleApiClient.connect();
+                        break;
+                }
+                break;
+            case Activity.RESULT_CANCELED:
+                switch (requestCode) {
+                    case RequestAccountPicker:
+                        showToast(getString(R.string.undefined_account));
+                    case RequestCodeGDResolution:
+                        onConnectionFailed(null);
+                        break;
+                }
+                break;
         }
     }
 
@@ -532,6 +599,12 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         switch (id) {
+            case R.id.action_calendar_import:
+                if (isGooglePlayServicesAvailable())
+                    refreshResults();
+                else
+                    showToast("Google Play Services required: after installing, close and relaunch this app.");
+                break;
             case R.id.action_restore_data:
                 if (isGDConnected()) {
                     doRestoreDBFromGD();
@@ -637,7 +710,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
             return;
         }
         if (timeBackPressed + TimeForExit > System.currentTimeMillis()) {
-            if (mTasks != null) mToast.cancel();
+            if (mToast != null) mToast.cancel();
             super.onBackPressed();
         } else {
             if (mToast != null)
@@ -658,6 +731,12 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     //виставлення таймера на автоматичне завершення завдань
     public void setTimer() {
         alarm.setTimer(this.getApplicationContext(), mTasks);
+    }
+
+    private void showToast(String text) {
+        if (mToast != null) mToast.cancel();
+        mToast = Toast.makeText(this, text, Toast.LENGTH_LONG);
+        mToast.show();
     }
 
     //завантаження з бази даних статистики по завданнях
@@ -806,6 +885,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         if (loader.getId() == AllTasksLoaderID) {
             if (data.moveToFirst()) {
                 int idColIndex = data.getColumnIndex(DatabaseConnector.COLUMN_ID);
+                int calendarIdColIndex = data.getColumnIndex(DatabaseConnector.COLUMN_CALENDAR_ID);
                 int titleColIndex = data.getColumnIndex(DatabaseConnector.COLUMN_TITLE);
                 int commentColIndex = data.getColumnIndex(DatabaseConnector.COLUMN_COMMENT);
                 int typeOfTaskColIndex = data.getColumnIndex(DatabaseConnector.COLUMN_TYPE_OF_TASK);
@@ -822,6 +902,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
                 int longitudeColIndex = data.getColumnIndex(DatabaseConnector.COLUMN_LONGITUDE);
                 do {
                     long id = data.getLong(idColIndex);
+                    String calendar_id = data.getString(calendarIdColIndex);
                     String title = data.getString(titleColIndex);
                     String comment = data.getString(commentColIndex);
                     boolean typeOfTask = data.getInt(typeOfTaskColIndex) == 1;
@@ -836,7 +917,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
                     boolean hasMapPoint = data.getInt(hasMapPointColIndex) == 1;
                     double latitude = data.getDouble(latitudeColIndex);
                     double longitude = data.getDouble(longitudeColIndex);
-                    mTasks.add(new Task(id, title, comment, typeOfTask, avatarUri, maxRuntime,
+                    mTasks.add(new Task(id, calendar_id, title, comment, typeOfTask, avatarUri, maxRuntime,
                             dateStart, dateStop, dateEnd, datePause, pauseLengthBeforeStop, pauseLengthAfterStop, hasMapPoint, latitude, longitude));
                 } while (data.moveToNext());
             }
@@ -941,12 +1022,14 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     }
 
     private void showLoadProgress() {
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_NOSENSOR);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
         mLoadListProgress.setVisibility(View.VISIBLE);
     }
 
     private void closeLoadProgress() {
         mLoadListProgress.setVisibility(View.GONE);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
         getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
     }
 
@@ -965,11 +1048,11 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         @Override
         public Cursor loadInBackground() {
             //пауза, щоби було видно роботу прогрес бару
-            try {
+           /* try {
                 TimeUnit.SECONDS.sleep(1);
             } catch (InterruptedException e) {
                 e.printStackTrace();
-            }
+            }*/
             return db.getCursorWithAllTasks();
         }
     }
@@ -1002,16 +1085,6 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
     @Override
     public void onConnected(Bundle bundle) {
-       /* final DriveManager manager = new DriveManager(getGoogleApiClient(), this);
-        final File dbDir = new File(getFilesDir().getParent() + "/databases/");
-        final File spDir = new File(getFilesDir().getParent() + "/shared_prefs/");
-        final File[] dirsToBackup = new File[]{dbDir, spDir};
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                manager.uploadFileAndDisconnect(dirsToBackup, true); //new File("databases/"+DBAdapter.DATABASE_NAME));
-            }
-        }).start();*/
     }
 
     @Override
@@ -1025,11 +1098,12 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         } else {
             Log.w(TAG, "GoogleApiClient connection failed: " + result.toString());
             if (!result.hasResolution()) {
-                GooglePlayServicesUtil.getErrorDialog(result.getErrorCode(), this, 0).show();
+                GoogleApiAvailability.getInstance().getErrorDialog(
+                        MainActivity.this, result.getErrorCode(), 0).show();
                 return;
             }
             try {
-                result.startResolutionForResult(this, REQUEST_CODE_GD_RESOLUTION);
+                result.startResolutionForResult(this, RequestCodeGDResolution);
             } catch (IntentSender.SendIntentException e) {
                 Log.e(TAG, "Exception while starting resolution activity", e);
             }
@@ -1069,10 +1143,10 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
                 mAppSettings = getSharedPreferences(Constants.APP_SETTINGS, MODE_PRIVATE);
                 //оновлюєм користувацькі налаштування
                 getSettingsFromSharedPref();
+                getLoaderManager().initLoader(AllTasksLoaderID, null, MainActivity.this);
                 //оновлюєм дані для списку завдань
                 getLoaderManager().getLoader(AllTasksLoaderID).forceLoad();
                 Log.d(TAG, "doRestoreDBFromGD() onAllLoadComplete()");
-                //DatabaseHelper.reinit(getApplicationContext());
                 DatabaseConnector databaseConnector = new DatabaseConnector(getApplicationContext());
                 databaseConnector.open();
                 databaseConnector.close();
@@ -1088,7 +1162,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         if (!f.exists())
             f.mkdirs();
         if (!ImageLoader.SDCardIsWritable()) {
-            Toast.makeText(getBaseContext(), "sdCard not writable", Toast.LENGTH_SHORT).show();
+            showToast(getString(R.string.sc_card_not_writable));
             restorePhotosFailed();
             restoreCompleted();
             return;
@@ -1115,32 +1189,309 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
             }
         });
 
-        //  final File fotozDir = SDCardHelper.getTempFile().getParentFile();
-        //  Log.d(this, "doRestorePhotosFromGD() fotozDir: "+fotozDir);
-        //  manager.downloadFile(new File[]{fotozDir}, fotozDir, false);
-
         final File pixDir = new File(ImageLoader.getCachePath(getApplicationContext()) + File.separator);
-        //  final String targetGDPath = pixDir.getAbsolutePath().substring(pixDir.getAbsolutePath().indexOf("Android"));
-        //  manager.downloadFolder(pixDir, new File(targetGDPath), false);
+
         manager.downloadFile(new File[]{pixDir}, true);
     }
 
     void restoreFailed() {
         closeLoadProgress();
-        Toast.makeText(getBaseContext(), R.string.restore_failed, Toast.LENGTH_LONG).show();
+        Toast.makeText(this, R.string.restore_failed, Toast.LENGTH_LONG).show();
     }
 
     void restorePhotosFailed() {
         closeLoadProgress();
-        Toast.makeText(getBaseContext(), R.string.restore_photo_failed, Toast.LENGTH_LONG).show();
+        Toast.makeText(this, R.string.restore_photo_failed, Toast.LENGTH_LONG).show();
     }
 
     protected void restoreCompleted() {
+        Toast.makeText(this, R.string.restore_completed, Toast.LENGTH_LONG).show();
         closeLoadProgress();
-        Toast.makeText(getBaseContext(), R.string.restore_completed, Toast.LENGTH_LONG).show();
     }
 
     public GoogleApiClient getGoogleApiClient() {
         return mGoogleApiClient;
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+    //                                   GOOGLE CALENDAR                                          //
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+    private void refreshResults() {
+        if (mCredential.getSelectedAccountName() == null) {
+            chooseAccount();
+        } else {
+            if (isDeviceOnline()) {
+                new ImportTasks(mCredential).execute();
+            } else {
+                showToast(getString(R.string.no_internet_connection));
+            }
+        }
+    }
+
+    public void exportTask(Task task) {
+        if (mCredential.getSelectedAccountName() == null) {
+            chooseAccount();
+        } else {
+            if (isDeviceOnline()) {
+                if (task.getCalendar_ID() == null)
+                    new ExportTask(mCredential, task, ExportTask.INSERT).execute();
+                else
+                    new ExportTask(mCredential, task, ExportTask.UPDATE).execute();
+            } else {
+                showToast(getString(R.string.no_internet_connection));
+            }
+        }
+    }
+
+    private void chooseAccount() {
+        startActivityForResult(mCredential.newChooseAccountIntent(), RequestAccountPicker);
+    }
+
+    private boolean isDeviceOnline() {
+        ConnectivityManager connMgr = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
+        return (networkInfo != null && networkInfo.isConnected());
+    }
+
+    private boolean isGooglePlayServicesAvailable() {
+        GoogleApiAvailability api = GoogleApiAvailability.getInstance();
+        final int connectionStatusCode = api.isGooglePlayServicesAvailable(this);
+        if (api.isUserResolvableError(connectionStatusCode)) {
+            showGooglePlayServicesAvailabilityErrorDialog(connectionStatusCode);
+            return false;
+        } else if (connectionStatusCode != ConnectionResult.SUCCESS) {
+            return false;
+        }
+        return true;
+    }
+
+    private void showGooglePlayServicesAvailabilityErrorDialog(final int connectionStatusCode) {
+        GoogleApiAvailability api = GoogleApiAvailability.getInstance();
+        Dialog dialog = api.getErrorDialog(MainActivity.this, connectionStatusCode, RequestGooglePlayServices);
+        dialog.show();
+    }
+
+    public LatLng getLocationFromAddress(Context context, String strAddress) {
+        Geocoder coder = new Geocoder(context);
+        List<Address> address;
+        LatLng p1 = null;
+        try {
+            address = coder.getFromLocationName(strAddress, 1);
+            if (address == null) return null;
+            Address location = address.get(0);
+            location.getLatitude();
+            location.getLongitude();
+            p1 = new LatLng(location.getLatitude(), location.getLongitude());
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return p1;
+    }
+
+    public String getLocationFromLatLng(double latitude, double longitude) {
+        Geocoder geocoder;
+        List<Address> addresses;
+        geocoder = new Geocoder(this, Locale.getDefault());
+        try {
+            addresses = geocoder.getFromLocation(latitude, longitude, 1);
+        } catch (IOException e) {
+            return null;
+        }
+        Log.d(TAG, "ADDRESS= " + addresses.get(0).getAddressLine(0));
+        return addresses.get(0).getAddressLine(0);
+    }
+
+    private class ExportTask extends AsyncTask<Void, Void, String> {
+        public static final int UPDATE = 1;
+        public static final int INSERT = 2;
+        private com.google.api.services.calendar.Calendar mService = null;
+        private Task mOriginalTask;
+        private Task mCopyOfTask;
+        private String mEmail;
+        private int mAction;
+
+        public ExportTask(GoogleAccountCredential credential, Task task, int action) {
+            mOriginalTask = task;
+            mAction = action;
+            mCopyOfTask = new Task(task);
+            mEmail = credential.getSelectedAccount().name;
+            HttpTransport transport = AndroidHttp.newCompatibleTransport();
+            JsonFactory jsonFactory = JacksonFactory.getDefaultInstance();
+            mService = new com.google.api.services.calendar.Calendar.Builder(
+                    transport, jsonFactory, credential)
+                    .setApplicationName("Scheduler")
+                    .build();
+
+        }
+
+        @Override
+        protected String doInBackground(Void... params) {
+            Event event = new Event()
+                    .setSummary(mCopyOfTask.getTitle())
+                    .setDescription(mCopyOfTask.getComment());
+            if (mCopyOfTask.hasMapPoint()) {
+                String location = getLocationFromLatLng(mCopyOfTask.getLatitude(), mCopyOfTask.getLongitude());
+                if (location != null) event.setLocation(location);
+            }
+            DateTime startDateTime = new DateTime(mCopyOfTask.getDateStart());
+            EventDateTime start = new EventDateTime()
+                    .setDateTime(startDateTime);
+            event.setStart(start);
+
+            DateTime endDateTime = new DateTime(mCopyOfTask.getDateEnd() != null ? mCopyOfTask.getDateEnd().getTime() : (System.currentTimeMillis() + (1000 * 60 * 60)));
+            EventDateTime end = new EventDateTime()
+                    .setDateTime(endDateTime);
+            event.setEnd(end);
+
+            EventAttendee[] attendees = new EventAttendee[]{
+                    new EventAttendee().setEmail(mEmail),
+            };
+            event.setAttendees(Arrays.asList(attendees));
+
+            String calendarId = "primary";
+            try {
+                if (mAction == INSERT)
+                    event = mService.events().insert(calendarId, event).execute();
+                else if (mAction == UPDATE) {
+                    event = mService.events().update(calendarId, mCopyOfTask.getCalendar_ID(), event).execute();
+                }
+            } catch (IOException e) {
+                Log.d(TAG, "Export task exception" + e);
+                return null;
+            }
+            return event.getId();
+        }
+
+        @Override
+        protected void onPostExecute(String id) {
+            if (id != null) {
+                if (mAction == INSERT) {
+                    mOriginalTask.setCalendar_ID(id);
+                    DatabaseConnector.updateTask(mOriginalTask, getApplicationContext());
+                    mSwipeListAdapter.notifyDataSetChanged();
+                    showToast(String.format(getString(R.string.export_task_success), mCopyOfTask.getTitle()));
+                } else if (mAction == UPDATE) {
+                    showToast(String.format(getString(R.string.update_task_success), mCopyOfTask.getTitle()));
+                }
+            }
+        }
+    }
+
+    private class ImportTasks extends AsyncTask<Void, Void, List<Task>> {
+        private com.google.api.services.calendar.Calendar mService = null;
+        private Exception mLastError = null;
+        private List<Task> copyOfTasks;
+        private int mMaxRuntime;
+
+        public ImportTasks(GoogleAccountCredential credential) {
+            HttpTransport transport = AndroidHttp.newCompatibleTransport();
+            JsonFactory jsonFactory = JacksonFactory.getDefaultInstance();
+            mService = new com.google.api.services.calendar.Calendar.Builder(
+                    transport, jsonFactory, credential)
+                    .setApplicationName("Scheduler")
+                    .build();
+            mMaxRuntime = mMaxRuntimeForTask;
+            copyOfTasks = new ArrayList<>();
+            for (Task task : mTasks)
+                copyOfTasks.add(new Task(task));
+        }
+
+        @Override
+        protected void onPreExecute() {
+            mProgress.setMessage(getString(R.string.import_task_progress_massage));
+            mProgress.show();
+        }
+
+        @Override
+        protected List<Task> doInBackground(Void... params) {
+            try {
+                return getDataFromApi();
+            } catch (Exception e) {
+                mLastError = e;
+                cancel(true);
+                return null;
+            }
+        }
+
+        private List<Task> getDataFromApi() throws IOException {
+            long currentTime = System.currentTimeMillis();
+            List<Task> listTasks = new ArrayList<>();
+            Events events = mService.events().list("primary")
+                    .setSingleEvents(true)
+                    .execute();
+            List<Event> items = events.getItems();
+            Task newTask;
+            for (Event event : items) {
+                String id = event.getId();
+                if (taskAlreadyExists(id))
+                    continue;
+                DateTime start = event.getStart().getDateTime();
+                if (start == null)
+                    start = event.getStart().getDate();
+                DateTime end = event.getEnd().getDateTime();
+                if (end == null)
+                    end = event.getEnd().getDate();
+                String title = (event.getSummary() == null ? getString(R.string.no_title) : event.getSummary());
+                String comment = (event.getDescription() == null ? "" : event.getDescription());
+                newTask = new Task(title, comment, false, mMaxRuntime);
+                newTask.setCalendar_ID(id);
+                if (start.getValue() < currentTime) {
+                    newTask.setDateStart(new Date(start.getValue()));
+                    if (end.getValue() < currentTime)
+                        newTask.setDateEnd(new Date(end.getValue()));
+                }
+
+                String location = event.getLocation();
+                if (location != null) {
+                    LatLng latLng = getLocationFromAddress(getApplicationContext(), location);
+                    if (latLng != null) {
+                        newTask.setMapPoint(true);
+                        newTask.setLatitude(latLng.latitude);
+                        newTask.setLongitude(latLng.longitude);
+                    }
+                }
+                listTasks.add(newTask);
+            }
+            return listTasks;
+        }
+
+        private boolean taskAlreadyExists(String id) {
+            for (Task task : copyOfTasks)
+                if (id.equals(task.getCalendar_ID()))
+                    return true;
+            return false;
+        }
+
+        @Override
+        protected void onPostExecute(List<Task> tasks) {
+            mProgress.hide();
+            if (tasks == null || tasks.size() == 0)
+                showToast(getString(R.string.no_task_find));
+            else {
+                for (int i = 0; i < tasks.size(); i++) {
+                    DatabaseConnector.addTask(tasks.get(i), getApplicationContext());
+                    mTasks.add(tasks.get(i));
+                }
+                sortTasks();
+                showToast(String.format(getString(R.string.gCalendar_success_import), tasks.size()));
+            }
+
+        }
+
+        @Override
+        protected void onCancelled() {
+            mProgress.hide();
+            if (mLastError != null) {
+                if (mLastError instanceof GooglePlayServicesAvailabilityIOException) {
+                    showGooglePlayServicesAvailabilityErrorDialog(((GooglePlayServicesAvailabilityIOException) mLastError)
+                            .getConnectionStatusCode());
+                } else if (mLastError instanceof UserRecoverableAuthIOException) {
+                    startActivityForResult(((UserRecoverableAuthIOException) mLastError).getIntent(),
+                            MainActivity.RequestAuthorization);
+                } else
+                    showToast("The following error occurred:\n" + mLastError);
+            } else
+                showToast(getString(R.string.request_rejected));
+        }
     }
 }

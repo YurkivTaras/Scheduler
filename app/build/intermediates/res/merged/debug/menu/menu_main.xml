@@ -3,51 +3,56 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/action_exit"
-        android:orderInCategory="900"
+        android:orderInCategory="100"
         android:title="@string/exit"
         app:showAsAction="never" />
     <item
         android:id="@+id/action_settings"
         android:icon="@drawable/ic_settings_black_24dp"
-        android:orderInCategory="800"
+        android:orderInCategory="90"
         android:title="@string/action_settings"
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/action_backupData"
-        android:orderInCategory="700"
-        android:title="Backup to GD"
+        android:orderInCategory="80"
+        android:title="@string/backup_to_GD"
         app:showAsAction="never" />
     <item
         android:id="@+id/action_restore_data"
-        android:orderInCategory="600"
-        android:title="Restore from GD"
+        android:orderInCategory="70"
+        android:title="@string/restore_from_GD"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_calendar_import"
+        android:orderInCategory="60"
+        android:title="@string/import_from_GC"
         app:showAsAction="never" />
     <item
         android:id="@+id/action_show_tutorial"
-        android:orderInCategory="500"
+        android:orderInCategory="50"
         android:title="@string/action_show_tutorial"
         app:showAsAction="never" />
     <item
         android:id="@+id/action_clear"
         android:icon="@drawable/ic_delete_black_24dp"
-        android:orderInCategory="400"
+        android:orderInCategory="40"
         android:title="@string/action_clear"
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/action_generate"
-        android:orderInCategory="300"
+        android:orderInCategory="30"
         android:title="@string/action_generate"
         app:showAsAction="never" />
     <item
         android:id="@+id/action_refresh"
         android:icon="@drawable/refresh"
-        android:orderInCategory="200"
+        android:orderInCategory="20"
         android:title="@string/actionRefresh"
         app:showAsAction="always" />
     <item
         android:id="@+id/action_sort"
         android:icon="@drawable/ic_swap_vert_black"
-        android:orderInCategory="100"
+        android:orderInCategory="10"
         android:title="@string/action_sort"
         app:showAsAction="always" />
 

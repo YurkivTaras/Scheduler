@@ -43,6 +43,7 @@ public class AlarmManagerBroadcastReceiver extends BroadcastReceiver {
             Cursor cursor = databaseConnector.getCursorWithAllTasks();
             if (cursor.moveToFirst()) {
                 int idColIndex = cursor.getColumnIndex(DatabaseConnector.COLUMN_ID);
+                int calendarIdColIndex = cursor.getColumnIndex(DatabaseConnector.COLUMN_CALENDAR_ID);
                 int titleColIndex = cursor.getColumnIndex(DatabaseConnector.COLUMN_TITLE);
                 int commentColIndex = cursor.getColumnIndex(DatabaseConnector.COLUMN_COMMENT);
                 int typeOfTaskColIndex = cursor.getColumnIndex(DatabaseConnector.COLUMN_TYPE_OF_TASK);
@@ -59,6 +60,7 @@ public class AlarmManagerBroadcastReceiver extends BroadcastReceiver {
                 int longitudeColIndex = cursor.getColumnIndex(DatabaseConnector.COLUMN_LONGITUDE);
                 do {
                     long id = cursor.getLong(idColIndex);
+                    String calendar_id = cursor.getString(calendarIdColIndex);
                     String title = cursor.getString(titleColIndex);
                     String comment = cursor.getString(commentColIndex);
                     boolean typeOfTask = cursor.getInt(typeOfTaskColIndex) == 1;
@@ -73,7 +75,7 @@ public class AlarmManagerBroadcastReceiver extends BroadcastReceiver {
                     boolean hasMapPoint = cursor.getInt(hasMapPointColIndex) == 1;
                     double latitude = cursor.getDouble(latitudeColIndex);
                     double longitude = cursor.getDouble(longitudeColIndex);
-                    tasks.add(new Task(id, title, comment, typeOfTask, avatarUri, maxRuntime,
+                    tasks.add(new Task(id, calendar_id, title, comment, typeOfTask, avatarUri, maxRuntime,
                             dateStart, dateStop, dateEnd, datePause, pauseLengthBeforeStop, pauseLengthAfterStop, hasMapPoint, latitude, longitude));
                 } while (cursor.moveToNext());
             }
