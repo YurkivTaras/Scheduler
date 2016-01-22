@@ -15,8 +15,6 @@ import android.content.Loader;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.database.Cursor;
-import android.location.Address;
-import android.location.Geocoder;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
@@ -47,27 +45,17 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.drive.Drive;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.api.client.extensions.android.http.AndroidHttp;
 import com.google.api.client.googleapis.extensions.android.gms.auth.GoogleAccountCredential;
-import com.google.api.client.googleapis.extensions.android.gms.auth.GooglePlayServicesAvailabilityIOException;
-import com.google.api.client.googleapis.extensions.android.gms.auth.UserRecoverableAuthIOException;
-import com.google.api.client.http.HttpTransport;
-import com.google.api.client.json.JsonFactory;
-import com.google.api.client.json.jackson2.JacksonFactory;
-import com.google.api.client.util.DateTime;
 import com.google.api.client.util.ExponentialBackOff;
 import com.google.api.services.calendar.CalendarScopes;
-import com.google.api.services.calendar.model.Event;
-import com.google.api.services.calendar.model.EventAttendee;
-import com.google.api.services.calendar.model.EventDateTime;
-import com.google.api.services.calendar.model.Events;
 import com.melnykov.fab.FloatingActionButton;
 import com.y_taras.scheduler.R;
 import com.y_taras.scheduler.adapter.CustomExpandableListAdapter;
 import com.y_taras.scheduler.adapter.CustomSpinnerAdapter;
 import com.y_taras.scheduler.adapter.DividerItemDecoration;
 import com.y_taras.scheduler.adapter.SwipeRecyclerViewAdapter;
+import com.y_taras.scheduler.googleCalendar.ExportTask;
+import com.y_taras.scheduler.googleCalendar.ImportGCTasks;
 import com.y_taras.scheduler.googleDrive.DriveManager;
 import com.y_taras.scheduler.googleDrive.OnLoadCompleteListener;
 import com.y_taras.scheduler.helper.DatabaseConnector;
@@ -81,7 +69,6 @@ import com.y_taras.scheduler.utils.AnimatedTabHostListener;
 import com.y_taras.scheduler.utils.BackupAgent;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -90,7 +77,6 @@ import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
@@ -105,11 +91,12 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     private static final int TimeForExit = 3500;
     private static final int RequestCodeAddTask = 1001;
     public static final int REQUEST_CODE_EDIT_TASK = 1002;
+    public static final int REQUEST_AUTHORIZATION = 1006;
     private static final int RequestCodeSettings = 1003;
     private static final int AllTasksLoaderID = 1008;
     private static final int RequestCodeGDResolution = 1004;
     private static final int RequestAccountPicker = 1005;
-    private static final int RequestAuthorization = 1006;
+
     private static final int RequestGooglePlayServices = 1007;
 
     private static long timeBackPressed;
@@ -152,8 +139,9 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     private DatabaseConnector mDatabaseConnector;
     private GoogleApiClient mGoogleApiClient;
 
-    GoogleAccountCredential mCredential;
-    ProgressDialog mProgress;
+    private GoogleAccountCredential mCredential;
+    private ProgressDialog mProgress;
+    private ImportGCTasks mImportGCTasks;
 
     private static final String[] SCOPES = {CalendarScopes.CALENDAR};
 
@@ -164,11 +152,20 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         setContentView(R.layout.activity_main);
         initUI(savedInstanceState);
 
-        mProgress = new ProgressDialog(this);
-        mCredential = GoogleAccountCredential.usingOAuth2(
-                getApplicationContext(), Arrays.asList(SCOPES))
-                .setBackOff(new ExponentialBackOff())
-                .setSelectedAccountName(mAppSettings.getString(Constants.ACCOUNT_NAME, null));
+        //отримуєм силку на обєкт AsyncTask, що відповідає за імпорт завдань із GCalendar
+        mImportGCTasks = (ImportGCTasks) getLastCustomNonConfigurationInstance();
+        if (mImportGCTasks != null) {
+            List<Task> result = mImportGCTasks.getResult();
+            if (mImportGCTasks.getResult() != null) {
+                for (int i = 0; i < result.size(); i++) {
+                    DatabaseConnector.addTask(result.get(i), this);
+                    mTasks.add(result.get(i));
+                }
+                sortTasks();
+                showToast(String.format(getString(R.string.gCalendar_success_import), result.size()));
+            } else
+                mImportGCTasks.link(this);
+        }
     }
 
     @Override
@@ -195,14 +192,21 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     }
 
     private void initUI(Bundle savedInstanceState) {
+        //ініціалізація SharedPreferences, що містить збережені настройки програми
+        mAppSettings = getSharedPreferences(Constants.APP_SETTINGS, MODE_PRIVATE);
+
+        mCredential = GoogleAccountCredential.usingOAuth2(
+                getApplicationContext(), Arrays.asList(SCOPES))
+                .setBackOff(new ExponentialBackOff())
+                .setSelectedAccountName(mAppSettings.getString(Constants.ACCOUNT_NAME, null));
+
         mDatabaseConnector = new DatabaseConnector(this);
         mDatabaseConnector.open();
+
         mToolbar = (Toolbar) findViewById(R.id.toolbarForMainActivity);
         mToolbar.setTitle(R.string.mainToolbarTitle);
         mToolbar.inflateMenu(R.menu.menu_main);
         setSupportActionBar(mToolbar);
-        //ініціалізація SharedPreferences, що містить збережені настройки програми
-        mAppSettings = getSharedPreferences(Constants.APP_SETTINGS, MODE_PRIVATE);
         mLoadListProgress = (CircularProgressBar) findViewById(R.id.load_list_progress_bar);
         if (savedInstanceState == null) {
             mTasks = new ArrayList<>();
@@ -552,7 +556,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
                             }
                         }
                         break;
-                    case RequestAuthorization:
+                    case REQUEST_AUTHORIZATION:
                         chooseAccount();
                         break;
                     case RequestGooglePlayServices:
@@ -733,7 +737,11 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         alarm.setTimer(this.getApplicationContext(), mTasks);
     }
 
-    private void showToast(String text) {
+    public List<Task> getTasks() {
+        return mTasks;
+    }
+
+    public void showToast(String text) {
         if (mToast != null) mToast.cancel();
         mToast = Toast.makeText(this, text, Toast.LENGTH_LONG);
         mToast.show();
@@ -859,6 +867,13 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
                     setRefreshActionButtonState(false);
             }
         }.execute();
+    }
+
+    @Override
+    public Object onRetainCustomNonConfigurationInstance() {
+        if (mImportGCTasks != null)
+            mImportGCTasks.unLink();
+        return mImportGCTasks;
     }
 
     public void setRefreshActionButtonState(boolean refreshing) {
@@ -1031,6 +1046,18 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         mLoadListProgress.setVisibility(View.GONE);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
         getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+    }
+
+    public void showProgressDialog(String message) {
+        if (mProgress == null)
+            mProgress = new ProgressDialog(this);
+        mProgress.setMessage(message);
+        mProgress.show();
+    }
+
+    public void hideProgressDialog() {
+        if (mProgress != null)
+            mProgress.hide();
     }
 
     @Override
@@ -1221,7 +1248,8 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
             chooseAccount();
         } else {
             if (isDeviceOnline()) {
-                new ImportTasks(mCredential).execute();
+                mImportGCTasks = new ImportGCTasks(mCredential, this, mMaxRuntimeForTask);
+                mImportGCTasks.execute();
             } else {
                 showToast(getString(R.string.no_internet_connection));
             }
@@ -1234,9 +1262,9 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         } else {
             if (isDeviceOnline()) {
                 if (task.getCalendar_ID() == null)
-                    new ExportTask(mCredential, task, ExportTask.INSERT).execute();
+                    new ExportTask(mCredential, this, task, ExportTask.INSERT).execute();
                 else
-                    new ExportTask(mCredential, task, ExportTask.UPDATE).execute();
+                    new ExportTask(mCredential, this, task, ExportTask.UPDATE).execute();
             } else {
                 showToast(getString(R.string.no_internet_connection));
             }
@@ -1265,233 +1293,9 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         return true;
     }
 
-    private void showGooglePlayServicesAvailabilityErrorDialog(final int connectionStatusCode) {
+    public void showGooglePlayServicesAvailabilityErrorDialog(final int connectionStatusCode) {
         GoogleApiAvailability api = GoogleApiAvailability.getInstance();
         Dialog dialog = api.getErrorDialog(MainActivity.this, connectionStatusCode, RequestGooglePlayServices);
         dialog.show();
-    }
-
-    public LatLng getLocationFromAddress(Context context, String strAddress) {
-        Geocoder coder = new Geocoder(context);
-        List<Address> address;
-        LatLng p1 = null;
-        try {
-            address = coder.getFromLocationName(strAddress, 1);
-            if (address == null) return null;
-            Address location = address.get(0);
-            location.getLatitude();
-            location.getLongitude();
-            p1 = new LatLng(location.getLatitude(), location.getLongitude());
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-        return p1;
-    }
-
-    public String getLocationFromLatLng(double latitude, double longitude) {
-        Geocoder geocoder;
-        List<Address> addresses;
-        geocoder = new Geocoder(this, Locale.getDefault());
-        try {
-            addresses = geocoder.getFromLocation(latitude, longitude, 1);
-        } catch (IOException e) {
-            return null;
-        }
-        Log.d(TAG, "ADDRESS= " + addresses.get(0).getAddressLine(0));
-        return addresses.get(0).getAddressLine(0);
-    }
-
-    private class ExportTask extends AsyncTask<Void, Void, String> {
-        public static final int UPDATE = 1;
-        public static final int INSERT = 2;
-        private com.google.api.services.calendar.Calendar mService = null;
-        private Task mOriginalTask;
-        private Task mCopyOfTask;
-        private String mEmail;
-        private int mAction;
-
-        public ExportTask(GoogleAccountCredential credential, Task task, int action) {
-            mOriginalTask = task;
-            mAction = action;
-            mCopyOfTask = new Task(task);
-            mEmail = credential.getSelectedAccount().name;
-            HttpTransport transport = AndroidHttp.newCompatibleTransport();
-            JsonFactory jsonFactory = JacksonFactory.getDefaultInstance();
-            mService = new com.google.api.services.calendar.Calendar.Builder(
-                    transport, jsonFactory, credential)
-                    .setApplicationName("Scheduler")
-                    .build();
-
-        }
-
-        @Override
-        protected String doInBackground(Void... params) {
-            Event event = new Event()
-                    .setSummary(mCopyOfTask.getTitle())
-                    .setDescription(mCopyOfTask.getComment());
-            if (mCopyOfTask.hasMapPoint()) {
-                String location = getLocationFromLatLng(mCopyOfTask.getLatitude(), mCopyOfTask.getLongitude());
-                if (location != null) event.setLocation(location);
-            }
-            DateTime startDateTime = new DateTime(mCopyOfTask.getDateStart());
-            EventDateTime start = new EventDateTime()
-                    .setDateTime(startDateTime);
-            event.setStart(start);
-
-            DateTime endDateTime = new DateTime(mCopyOfTask.getDateEnd() != null ? mCopyOfTask.getDateEnd().getTime() : (System.currentTimeMillis() + (1000 * 60 * 60)));
-            EventDateTime end = new EventDateTime()
-                    .setDateTime(endDateTime);
-            event.setEnd(end);
-
-            EventAttendee[] attendees = new EventAttendee[]{
-                    new EventAttendee().setEmail(mEmail),
-            };
-            event.setAttendees(Arrays.asList(attendees));
-
-            String calendarId = "primary";
-            try {
-                if (mAction == INSERT)
-                    event = mService.events().insert(calendarId, event).execute();
-                else if (mAction == UPDATE) {
-                    event = mService.events().update(calendarId, mCopyOfTask.getCalendar_ID(), event).execute();
-                }
-            } catch (IOException e) {
-                Log.d(TAG, "Export task exception" + e);
-                return null;
-            }
-            return event.getId();
-        }
-
-        @Override
-        protected void onPostExecute(String id) {
-            if (id != null) {
-                if (mAction == INSERT) {
-                    mOriginalTask.setCalendar_ID(id);
-                    DatabaseConnector.updateTask(mOriginalTask, getApplicationContext());
-                    mSwipeListAdapter.notifyDataSetChanged();
-                    showToast(String.format(getString(R.string.export_task_success), mCopyOfTask.getTitle()));
-                } else if (mAction == UPDATE) {
-                    showToast(String.format(getString(R.string.update_task_success), mCopyOfTask.getTitle()));
-                }
-            }
-        }
-    }
-
-    private class ImportTasks extends AsyncTask<Void, Void, List<Task>> {
-        private com.google.api.services.calendar.Calendar mService = null;
-        private Exception mLastError = null;
-        private List<Task> copyOfTasks;
-        private int mMaxRuntime;
-
-        public ImportTasks(GoogleAccountCredential credential) {
-            HttpTransport transport = AndroidHttp.newCompatibleTransport();
-            JsonFactory jsonFactory = JacksonFactory.getDefaultInstance();
-            mService = new com.google.api.services.calendar.Calendar.Builder(
-                    transport, jsonFactory, credential)
-                    .setApplicationName("Scheduler")
-                    .build();
-            mMaxRuntime = mMaxRuntimeForTask;
-            copyOfTasks = new ArrayList<>();
-            for (Task task : mTasks)
-                copyOfTasks.add(new Task(task));
-        }
-
-        @Override
-        protected void onPreExecute() {
-            mProgress.setMessage(getString(R.string.import_task_progress_massage));
-            mProgress.show();
-        }
-
-        @Override
-        protected List<Task> doInBackground(Void... params) {
-            try {
-                return getDataFromApi();
-            } catch (Exception e) {
-                mLastError = e;
-                cancel(true);
-                return null;
-            }
-        }
-
-        private List<Task> getDataFromApi() throws IOException {
-            long currentTime = System.currentTimeMillis();
-            List<Task> listTasks = new ArrayList<>();
-            Events events = mService.events().list("primary")
-                    .setSingleEvents(true)
-                    .execute();
-            List<Event> items = events.getItems();
-            Task newTask;
-            for (Event event : items) {
-                String id = event.getId();
-                if (taskAlreadyExists(id))
-                    continue;
-                DateTime start = event.getStart().getDateTime();
-                if (start == null)
-                    start = event.getStart().getDate();
-                DateTime end = event.getEnd().getDateTime();
-                if (end == null)
-                    end = event.getEnd().getDate();
-                String title = (event.getSummary() == null ? getString(R.string.no_title) : event.getSummary());
-                String comment = (event.getDescription() == null ? "" : event.getDescription());
-                newTask = new Task(title, comment, false, mMaxRuntime);
-                newTask.setCalendar_ID(id);
-                if (start.getValue() < currentTime) {
-                    newTask.setDateStart(new Date(start.getValue()));
-                    if (end.getValue() < currentTime)
-                        newTask.setDateEnd(new Date(end.getValue()));
-                }
-
-                String location = event.getLocation();
-                if (location != null) {
-                    LatLng latLng = getLocationFromAddress(getApplicationContext(), location);
-                    if (latLng != null) {
-                        newTask.setMapPoint(true);
-                        newTask.setLatitude(latLng.latitude);
-                        newTask.setLongitude(latLng.longitude);
-                    }
-                }
-                listTasks.add(newTask);
-            }
-            return listTasks;
-        }
-
-        private boolean taskAlreadyExists(String id) {
-            for (Task task : copyOfTasks)
-                if (id.equals(task.getCalendar_ID()))
-                    return true;
-            return false;
-        }
-
-        @Override
-        protected void onPostExecute(List<Task> tasks) {
-            mProgress.hide();
-            if (tasks == null || tasks.size() == 0)
-                showToast(getString(R.string.no_task_find));
-            else {
-                for (int i = 0; i < tasks.size(); i++) {
-                    DatabaseConnector.addTask(tasks.get(i), getApplicationContext());
-                    mTasks.add(tasks.get(i));
-                }
-                sortTasks();
-                showToast(String.format(getString(R.string.gCalendar_success_import), tasks.size()));
-            }
-
-        }
-
-        @Override
-        protected void onCancelled() {
-            mProgress.hide();
-            if (mLastError != null) {
-                if (mLastError instanceof GooglePlayServicesAvailabilityIOException) {
-                    showGooglePlayServicesAvailabilityErrorDialog(((GooglePlayServicesAvailabilityIOException) mLastError)
-                            .getConnectionStatusCode());
-                } else if (mLastError instanceof UserRecoverableAuthIOException) {
-                    startActivityForResult(((UserRecoverableAuthIOException) mLastError).getIntent(),
-                            MainActivity.RequestAuthorization);
-                } else
-                    showToast("The following error occurred:\n" + mLastError);
-            } else
-                showToast(getString(R.string.request_rejected));
-        }
     }
 }

@@ -2,6 +2,8 @@ package com.y_taras.scheduler.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -26,7 +28,6 @@ public class SettingsActivity extends AppCompatActivity {
     private int mCompletedTaskColor;
     private int mStartedTaskColor;
     private int mNotStartedTaskColor;
-    private int mMaxRuntimeForTask;
 
     private static final int NotStartedTask = 1;
     private static final int StartedTask = 2;
@@ -50,12 +51,15 @@ public class SettingsActivity extends AppCompatActivity {
         toolbar.setTitle(R.string.settingsToolbarTitle);
         setSupportActionBar(toolbar);
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        ActionBar ab = getSupportActionBar();
+        if (ab != null) {
+            ab.setDisplayHomeAsUpEnabled(true);
+        }
+        defaultNotStartedTaskColor = ContextCompat.getColor(this, R.color.not_started_task);
+        defaultStartedTaskColor = ContextCompat.getColor(this, R.color.started_task);
+        defaultCompletedTaskColor = ContextCompat.getColor(this, R.color.completed_task);
 
-        defaultNotStartedTaskColor = getResources().getColor(R.color.not_started_task);
-        defaultStartedTaskColor = getResources().getColor(R.color.started_task);
-        defaultCompletedTaskColor = getResources().getColor(R.color.completed_task);
-
+        int mMaxRuntimeForTask;
         if (savedInstanceState == null) {
             Intent intent = getIntent();
             mNotStartedTaskColor = intent.getIntExtra(Constants.NOT_STARTED_TASK, defaultNotStartedTaskColor);
