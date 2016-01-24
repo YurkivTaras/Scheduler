@@ -145,7 +145,7 @@
     <color name="secondary_text_disabled_material_light">#24000000</color>
     <color name="spinner_state_activated_color">#424242</color>
     <color name="spinner_state_normal_color">#616161</color>
-    <color name="spinner_state_pressed_color">#5D4037</color>
+    <color name="spinner_state_pressed_color">#282625</color>
     <color name="start_gradient_add_task_activity">#cfd2d4</color>
     <color name="start_gradient_main_activity">#cfd2d4</color>
     <color name="start_gradient_splash_activity">#7c7a7a</color>
@@ -360,6 +360,7 @@
     <dimen name="progressRefreshSize">23dp</dimen>
     <dimen name="repeatImageViewSize">20dp</dimen>
     <dimen name="repeat_icon_right_margin">10dp</dimen>
+    <dimen name="right_margin_for_sort_spinner">160dp</dimen>
     <dimen name="right_swipe_layout_width">240dp</dimen>
     <dimen name="settingsActivityBtnMargin">5dp</dimen>
     <dimen name="settingsActivityTxtLeftPadding">10dp</dimen>

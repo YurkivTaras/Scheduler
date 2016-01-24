@@ -25,14 +25,19 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ExpandableListView;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TabHost;
 import android.widget.Toast;
@@ -760,7 +765,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         new AsyncTask<Void, Void, Void>() {
             @Override
             protected Void doInBackground(Void... params) {
-                //перевірка роботи прогресбару
+                //перевірка роботи анімації
                 try {
                     TimeUnit.SECONDS.sleep(1);
                 } catch (InterruptedException e) {
@@ -874,17 +879,6 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         if (mImportGCTasks != null)
             mImportGCTasks.unLink();
         return mImportGCTasks;
-    }
-
-    public void setRefreshActionButtonState(boolean refreshing) {
-        if (mOptionsMenu != null) {
-            MenuItem refreshItem = mOptionsMenu.findItem(R.id.action_refresh);
-            if (refreshItem != null)
-                if (refreshing)
-                    refreshItem.setActionView(R.layout.refresh_progress);
-                else
-                    refreshItem.setActionView(null);
-        }
     }
 
     @Override
@@ -1036,6 +1030,33 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         mShowcaseView.setButtonText(getString(R.string.understand));
     }
 
+    public void setRefreshActionButtonState(boolean refreshing) {
+        /*if (mOptionsMenu != null) {
+            MenuItem refreshItem = mOptionsMenu.findItem(R.id.action_refresh);
+            if (refreshItem != null)
+                if (refreshing)
+                    refreshItem.setActionView(R.layout.refresh_progress);
+                else
+                    refreshItem.setActionView(null);
+        }*/
+        if (mOptionsMenu != null) {
+            MenuItem refreshItem = mOptionsMenu.findItem(R.id.action_refresh);
+            if (refreshItem != null)
+                if (refreshing) {
+                    LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                    FrameLayout container = (FrameLayout) inflater.inflate(R.layout.refresh_progress_img_anim, null);
+                    ImageView imageView = (ImageView) container.findViewById(R.id.refreshImg);
+                    Animation rotation = AnimationUtils.loadAnimation(this, R.anim.refresh_item_rotate);
+                    rotation.setRepeatCount(Animation.INFINITE);
+                    imageView.startAnimation(rotation);
+                    refreshItem.setActionView(container);
+                } else {
+                    refreshItem.getActionView().clearAnimation();
+                    refreshItem.setActionView(null);
+                }
+        }
+    }
+
     private void showLoadProgress() {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_NOSENSOR);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
@@ -1075,13 +1096,14 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         @Override
         public Cursor loadInBackground() {
             //пауза, щоби було видно роботу прогрес бару
-           /* try {
+            try {
                 TimeUnit.SECONDS.sleep(1);
             } catch (InterruptedException e) {
                 e.printStackTrace();
-            }*/
+            }
             return db.getCursorWithAllTasks();
         }
+
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1170,9 +1192,6 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
                 mAppSettings = getSharedPreferences(Constants.APP_SETTINGS, MODE_PRIVATE);
                 //оновлюєм користувацькі налаштування
                 getSettingsFromSharedPref();
-                getLoaderManager().initLoader(AllTasksLoaderID, null, MainActivity.this);
-                //оновлюєм дані для списку завдань
-                getLoaderManager().getLoader(AllTasksLoaderID).forceLoad();
                 Log.d(TAG, "doRestoreDBFromGD() onAllLoadComplete()");
                 DatabaseConnector databaseConnector = new DatabaseConnector(getApplicationContext());
                 databaseConnector.open();
@@ -1227,13 +1246,17 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     }
 
     void restorePhotosFailed() {
-        closeLoadProgress();
+        getLoaderManager().initLoader(AllTasksLoaderID, null, MainActivity.this);
+        //оновлюєм дані для списку завдань
+        getLoaderManager().getLoader(AllTasksLoaderID).forceLoad();
         Toast.makeText(this, R.string.restore_photo_failed, Toast.LENGTH_LONG).show();
     }
 
     protected void restoreCompleted() {
+        getLoaderManager().initLoader(AllTasksLoaderID, null, MainActivity.this);
+        //оновлюєм дані для списку завдань
+        getLoaderManager().getLoader(AllTasksLoaderID).forceLoad();
         Toast.makeText(this, R.string.restore_completed, Toast.LENGTH_LONG).show();
-        closeLoadProgress();
     }
 
     public GoogleApiClient getGoogleApiClient() {

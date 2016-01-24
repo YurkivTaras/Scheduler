@@ -19,8 +19,7 @@ public class CustomSpinnerAdapter extends ArrayAdapter<String> {
         super(context, R.layout.spinner_row, objects);
         mContext = context;
         mMenuItems = objects;
-        mInflater = (LayoutInflater) mContext
-                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        mInflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
     @Override

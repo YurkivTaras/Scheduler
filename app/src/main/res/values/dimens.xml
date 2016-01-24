@@ -44,4 +44,5 @@
     <dimen name="load_list_progress_bar_size">80dp</dimen>
     <dimen name="map_pin_top_margin">5dp</dimen>
     <dimen name="repeat_icon_right_margin">10dp</dimen>
+    <dimen name="right_margin_for_sort_spinner">160dp</dimen>
 </resources>

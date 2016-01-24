@@ -49,8 +49,7 @@ public class SwipeRecyclerViewAdapter extends RecyclerSwipeAdapter<SwipeRecycler
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.row_list_task, parent, false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_list_task, parent, false);
         return new ViewHolder(v);
     }
 
@@ -337,9 +336,7 @@ public class SwipeRecyclerViewAdapter extends RecyclerSwipeAdapter<SwipeRecycler
             mTvEdit = (TextView) itemView.findViewById(R.id.tvEdit);
             mTvResetStart = (TextView) itemView.findViewById(R.id.tvResetStart);
             mBtnDelete = (ImageButton) itemView.findViewById(R.id.btnDelete);
-
         }
-
     }
 
     public void setNotStartedTaskColor(int notStartedTaskColor) {

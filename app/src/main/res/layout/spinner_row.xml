@@ -3,13 +3,13 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="@dimen/spinnerLayoutMargin"
-    android:background="@drawable/spinner_selector"
-    android:orientation="vertical">
+    android:background="@drawable/spinner_selector">
 
     <TextView
         android:id="@+id/tvCategory"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/spinnerTxtMargin"
+        android:textColor="@android:color/background_dark"
         android:textSize="@dimen/spinnerTxtSize" />
 </RelativeLayout>
