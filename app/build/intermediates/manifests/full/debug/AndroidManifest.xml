@@ -52,6 +52,7 @@
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
         <activity
@@ -68,9 +69,31 @@
         <activity
             android:name="com.y_taras.scheduler.activity.SettingsActivity"
             android:label="@string/app_name" />
+        <activity android:name="com.y_taras.scheduler.activity.ProcessPhoenix" />
+-->
         <activity
             android:name="com.y_taras.scheduler.activity.MapsActivity"
             android:label="@string/title_activity_maps" />
+        //DropBox
+        <activity android:name="com.dropbox.sync.android.DbxAuthActivity" />
+        <activity
+            android:name="com.dropbox.client2.android.AuthActivity"
+            android:launchMode="singleTask" >
+            <intent-filter>
+                <data android:scheme="db-z71er3sdgp1sxtv" />
+
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.BROWSABLE" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <service
+            android:name="com.dropbox.sync.android.DbxSyncService"
+            android:enabled="true"
+            android:exported="false"
+            android:label="Dropbox Sync" />
 
         <receiver android:name="com.y_taras.scheduler.utils.AlarmManagerBroadcastReceiver" >
             <intent-filter>

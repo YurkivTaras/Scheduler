@@ -11,15 +11,13 @@ import com.y_taras.scheduler.R;
 
 public class CustomSpinnerAdapter extends ArrayAdapter<String> {
 
-    private Context mContext;
     private String mMenuItems[];
     private LayoutInflater mInflater;
 
-    public CustomSpinnerAdapter(Context context, String[] objects) {
-        super(context, R.layout.spinner_row, objects);
-        mContext = context;
-        mMenuItems = objects;
-        mInflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+    public CustomSpinnerAdapter(Context context, String[] menuItems) {
+        super(context, R.layout.spinner_row, menuItems);
+        mMenuItems = menuItems;
+        mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
     @Override

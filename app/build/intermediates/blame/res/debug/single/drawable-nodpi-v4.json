@@ -1,0 +1,10 @@
+[
+    {
+        "merged": "D:\\Android\\AndroidStudioWorkspace\\Scheduler\\app\\build\\intermediates\\res\\merged\\debug\\drawable-nodpi-v4\\default_pallete.png",
+        "source": "D:\\Android\\AndroidStudioWorkspace\\Scheduler\\app\\build\\intermediates\\exploded-aar\\com.larswerkman\\lobsterpicker\\1.0.1\\res\\drawable-nodpi-v4\\default_pallete.png"
+    },
+    {
+        "merged": "D:\\Android\\AndroidStudioWorkspace\\Scheduler\\app\\build\\intermediates\\res\\merged\\debug\\drawable-nodpi-v4\\default_shader_pallete.png",
+        "source": "D:\\Android\\AndroidStudioWorkspace\\Scheduler\\app\\build\\intermediates\\exploded-aar\\com.larswerkman\\lobsterpicker\\1.0.1\\res\\drawable-nodpi-v4\\default_shader_pallete.png"
+    }
+]

@@ -56,6 +56,7 @@ public class SwipeRecyclerViewAdapter extends RecyclerSwipeAdapter<SwipeRecycler
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
         final Task task = mTasks.get(position);
+
         if (task.getCalendar_ID() == null) {
             holder.mCalendar.setText(R.string.export_to_gСalendar);
         } else
@@ -147,6 +148,7 @@ public class SwipeRecyclerViewAdapter extends RecyclerSwipeAdapter<SwipeRecycler
                                 DatabaseConnector.updateTask(clickTask, mMainActivity);
                                 mMainActivity.sortTasks();
                                 mMainActivity.setTimer();
+
                             }
                             break;
                         case R.id.btnFinish:
@@ -232,7 +234,7 @@ public class SwipeRecyclerViewAdapter extends RecyclerSwipeAdapter<SwipeRecycler
                             DatabaseConnector.updateTask(clickTask, mMainActivity);
 
                             mMainActivity.sortTasks();
-                            //запускаєм новий таймер,щоби на закривався таск,
+                            //запускаєм новий таймер, щоби на закривався таск,
                             //який уже перейшов в стан нерозпочатого
                             mMainActivity.setTimer();
                         }

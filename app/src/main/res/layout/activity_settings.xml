@@ -104,6 +104,34 @@
                     android:inputType="number"
                     android:maxLength="3" />
             </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_margin="15dp"
+                android:background="@color/colorPrimary" />
+
+            <TextView
+                android:layout_width="@dimen/settingsActivityTxtWidth"
+                android:layout_height="wrap_content"
+                android:paddingLeft="@dimen/settingsActivityTxtLeftPadding"
+                android:text="Настройки DropBox"
+                android:textSize="18sp" />
+
+            <Button
+                android:id="@+id/DRBRestore"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/settingsActivityTxtLeftPadding"
+                android:text="Відновити дані" />
+
+            <Button
+                android:id="@+id/DRBBackup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/settingsActivityTxtLeftPadding"
+                android:text="створти резервну копію даних" />
         </LinearLayout>
     </ScrollView>
+
 </LinearLayout>

@@ -27,7 +27,6 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
@@ -104,8 +103,8 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
     private static final int RequestGooglePlayServices = 1007;
 
-    private static long timeBackPressed;
-    private static boolean mFirstStart;
+    private static long sTimeBackPressed;
+    private static boolean sFirstStart;
 
     private ShowcaseView mShowcaseView;
     private int mTargetPos;
@@ -134,8 +133,6 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     private int mCompletedTaskColor;
     private int mStartedTaskColor;
     private int mNotStartedTaskColor;
-
-    private SharedPreferences mAppSettings;
 
     private AlarmManagerBroadcastReceiver alarm;
     private BroadcastReceiver mBroadcastReceiver;
@@ -197,13 +194,12 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     }
 
     private void initUI(Bundle savedInstanceState) {
-        //ініціалізація SharedPreferences, що містить збережені настройки програми
-        mAppSettings = getSharedPreferences(Constants.APP_SETTINGS, MODE_PRIVATE);
 
+        SharedPreferences appSettings = getSharedPreferences(Constants.APP_SETTINGS, MODE_PRIVATE);
         mCredential = GoogleAccountCredential.usingOAuth2(
                 getApplicationContext(), Arrays.asList(SCOPES))
                 .setBackOff(new ExponentialBackOff())
-                .setSelectedAccountName(mAppSettings.getString(Constants.ACCOUNT_NAME, null));
+                .setSelectedAccountName(appSettings.getString(Constants.ACCOUNT_NAME, null));
 
         mDatabaseConnector = new DatabaseConnector(this);
         mDatabaseConnector.open();
@@ -212,13 +208,14 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         mToolbar.setTitle(R.string.mainToolbarTitle);
         mToolbar.inflateMenu(R.menu.menu_main);
         setSupportActionBar(mToolbar);
+
         mLoadListProgress = (CircularProgressBar) findViewById(R.id.load_list_progress_bar);
         if (savedInstanceState == null) {
             mTasks = new ArrayList<>();
             mGroups = new ArrayList<>();
             mGroupsName = new ArrayList<>();
-            mFirstStart = mAppSettings.getBoolean(Constants.FIRST_START, true);
-            if (mFirstStart)
+            sFirstStart = appSettings.getBoolean(Constants.FIRST_START, true);
+            if (sFirstStart)
                 showTutorial(0);
         } else {
             if (savedInstanceState.containsKey(Constants.ARRAY_OF_TASKS))
@@ -238,7 +235,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         }
 
         //отримання попередніх користувацьких налаштувань
-        getSettingsFromSharedPref();
+        initSettingsFromSharedPref();
 
         //ініціалізація спінера для вибору режиму сортування
         mSpinnerSort = (Spinner) findViewById(R.id.spinner_nav);
@@ -249,7 +246,8 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
             @Override
             public void onItemSelected(AdapterView<?> adapter, View v,
                                        int position, long id) {
-                SharedPreferences.Editor edit = mAppSettings.edit();
+                SharedPreferences settings = getSharedPreferences(Constants.APP_SETTINGS, MODE_PRIVATE);
+                SharedPreferences.Editor edit = settings.edit();
                 mSpinnerPos = position;
                 edit.putInt(Constants.SPINNER_POS, mSpinnerPos);
                 edit.apply();
@@ -311,11 +309,6 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
-            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
-                super.onScrollStateChanged(recyclerView, newState);
-            }
-
-            @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
                 mSwipeListAdapter.closeAllItems();
@@ -328,7 +321,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         listView.setAdapter(mExpListAdapter);
         alarm = new AlarmManagerBroadcastReceiver();
 
-        if (savedInstanceState == null && !mFirstStart) {
+        if (savedInstanceState == null && !sFirstStart) {
             // створюєм лоадер для читання даних
             getLoaderManager().initLoader(AllTasksLoaderID, null, this);
             showLoadProgress();
@@ -405,17 +398,18 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
 
     //отримання збережених налаштувань
-    private void getSettingsFromSharedPref() {
-        mNotStartedTaskColor = mAppSettings.getInt(
+    private void initSettingsFromSharedPref() {
+        SharedPreferences settings = getSharedPreferences(Constants.APP_SETTINGS, MODE_PRIVATE);
+        mNotStartedTaskColor = settings.getInt(
                 Constants.NOT_STARTED_TASK, ContextCompat.getColor(this, R.color.not_started_task));
-        mStartedTaskColor = mAppSettings.getInt(
+        mStartedTaskColor = settings.getInt(
                 Constants.STARTED_TASK, ContextCompat.getColor(this, R.color.started_task));
-        mCompletedTaskColor = mAppSettings.getInt(
+        mCompletedTaskColor = settings.getInt(
                 Constants.COMPLETED_TASK, ContextCompat.getColor(this, R.color.completed_task));
-        mMaxRuntimeForTask = mAppSettings.getInt(Constants.MAX_RUNTIME_FOR_TASK, 60);
+        mMaxRuntimeForTask = settings.getInt(Constants.MAX_RUNTIME_FOR_TASK, 60);
 
         //отримання збереженого типу сортування
-        mSpinnerPos = mAppSettings.getInt(Constants.SPINNER_POS, 0);
+        mSpinnerPos = settings.getInt(Constants.SPINNER_POS, 0);
         switch (mSpinnerPos) {
             case 0:     //A-Z
                 mTaskComparator = Task.NameUPComparator;
@@ -430,11 +424,11 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
                 mTaskComparator = Task.DateDownComparator;
                 break;
         }
-
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
         switch (resultCode) {
             case Activity.RESULT_OK:
                 String title, comment;
@@ -511,11 +505,13 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
                             DatabaseConnector.updateTask(editTask, this);
                         break;
                     case RequestCodeSettings:
+                        SharedPreferences settings = getSharedPreferences(Constants.APP_SETTINGS, MODE_PRIVATE);
                         int notStartedTaskColor = data.getIntExtra(Constants.NOT_STARTED_TASK, -1);
                         int startedTaskColor = data.getIntExtra(Constants.STARTED_TASK, -1);
                         int completedTaskColor = data.getIntExtra(Constants.COMPLETED_TASK, -1);
                         int maxRuntimeForTask = data.getIntExtra(Constants.MAX_RUNTIME_FOR_TASK, -1);
-                        SharedPreferences.Editor editor = mAppSettings.edit();
+
+                        SharedPreferences.Editor editor = settings.edit();
                         boolean ifWasChanges = false;
                         if (mNotStartedTaskColor != notStartedTaskColor) {
                             ifWasChanges = true;
@@ -555,7 +551,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
                             String accountName = data.getStringExtra(AccountManager.KEY_ACCOUNT_NAME);
                             if (accountName != null) {
                                 mCredential.setSelectedAccountName(accountName);
-                                SharedPreferences.Editor e = mAppSettings.edit();
+                                SharedPreferences.Editor e = getSharedPreferences(Constants.APP_SETTINGS, MODE_PRIVATE).edit();
                                 e.putString(Constants.ACCOUNT_NAME, accountName);
                                 e.apply();
                             }
@@ -598,8 +594,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         mOptionsMenu = menu;
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_main, menu);
+        getMenuInflater().inflate(R.menu.menu_main, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -718,7 +713,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
             mShowcaseView.hide();
             return;
         }
-        if (timeBackPressed + TimeForExit > System.currentTimeMillis()) {
+        if (sTimeBackPressed + TimeForExit > System.currentTimeMillis()) {
             if (mToast != null) mToast.cancel();
             super.onBackPressed();
         } else {
@@ -728,7 +723,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
                     Toast.LENGTH_LONG);
             mToast.show();
         }
-        timeBackPressed = System.currentTimeMillis();
+        sTimeBackPressed = System.currentTimeMillis();
     }
 
     //сортування завдань
@@ -1017,7 +1012,8 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
                                 break;
                             case 5:
                                 mShowcaseView.hide();
-                                SharedPreferences.Editor edit = mAppSettings.edit();
+                                SharedPreferences appSettings = getSharedPreferences(Constants.APP_SETTINGS, MODE_PRIVATE);
+                                SharedPreferences.Editor edit = appSettings.edit();
                                 edit.putBoolean(Constants.FIRST_START, false);
                                 edit.apply();
                                 break;
@@ -1043,7 +1039,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
             MenuItem refreshItem = mOptionsMenu.findItem(R.id.action_refresh);
             if (refreshItem != null)
                 if (refreshing) {
-                    LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                    LayoutInflater inflater = getLayoutInflater();//(LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                     FrameLayout container = (FrameLayout) inflater.inflate(R.layout.refresh_progress_img_anim, null);
                     ImageView imageView = (ImageView) container.findViewById(R.id.refreshImg);
                     Animation rotation = AnimationUtils.loadAnimation(this, R.anim.refresh_item_rotate);
@@ -1095,12 +1091,12 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
         @Override
         public Cursor loadInBackground() {
-            //пауза, щоби було видно роботу прогрес бару
+           /* //пауза, щоби було видно роботу прогрес бару
             try {
                 TimeUnit.SECONDS.sleep(1);
             } catch (InterruptedException e) {
                 e.printStackTrace();
-            }
+            }*/
             return db.getCursorWithAllTasks();
         }
 
@@ -1189,9 +1185,8 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
             @Override
             public void onAllLoadComplete() {
-                mAppSettings = getSharedPreferences(Constants.APP_SETTINGS, MODE_PRIVATE);
                 //оновлюєм користувацькі налаштування
-                getSettingsFromSharedPref();
+                initSettingsFromSharedPref();
                 Log.d(TAG, "doRestoreDBFromGD() onAllLoadComplete()");
                 DatabaseConnector databaseConnector = new DatabaseConnector(getApplicationContext());
                 databaseConnector.open();
@@ -1310,9 +1305,8 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         if (api.isUserResolvableError(connectionStatusCode)) {
             showGooglePlayServicesAvailabilityErrorDialog(connectionStatusCode);
             return false;
-        } else if (connectionStatusCode != ConnectionResult.SUCCESS) {
+        } else if (connectionStatusCode != ConnectionResult.SUCCESS)
             return false;
-        }
         return true;
     }
 

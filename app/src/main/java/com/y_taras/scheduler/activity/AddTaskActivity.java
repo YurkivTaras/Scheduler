@@ -7,6 +7,7 @@ import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.provider.MediaStore;
 import android.provider.MediaStore.Images.Media;
 import android.speech.RecognizerIntent;
@@ -15,9 +16,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
@@ -30,19 +33,23 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.y_taras.scheduler.R;
+import com.facebook.rebound.SimpleSpringListener;
+import com.facebook.rebound.Spring;
+import com.facebook.rebound.SpringConfig;
+import com.facebook.rebound.SpringSystem;
 import com.soundcloud.android.crop.Crop;
+import com.y_taras.scheduler.R;
+import com.y_taras.scheduler.helper.ImageLoader;
+import com.y_taras.scheduler.other.Constants;
+import com.y_taras.scheduler.other.Task;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import me.drakeet.materialdialog.MaterialDialog;
-
-import com.y_taras.scheduler.other.Constants;
-import com.y_taras.scheduler.other.Task;
-import com.y_taras.scheduler.helper.ImageLoader;
 
 public class AddTaskActivity extends AppCompatActivity {
     private static final int requestCodeForTitle = 1;
@@ -54,6 +61,8 @@ public class AddTaskActivity extends AppCompatActivity {
     private TextInputLayout mInputLayoutTitle, mInputLayoutComment;
     private EditText mTitle, mComment, mMaxRuntime;
     private ImageView mAvatar;
+    private Spring mSpring;
+
     private CheckBox mTypeOfTask;
     private CheckBox mMapPoint;
     private Bitmap mBtmAvatar;
@@ -106,6 +115,37 @@ public class AddTaskActivity extends AppCompatActivity {
             }
         });
 
+        mAvatar.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                switch (event.getAction()) {
+                    case MotionEvent.ACTION_DOWN:
+                        mSpring.setEndValue(1);
+                        return true;
+                    case MotionEvent.ACTION_UP:
+                        mSpring.setEndValue(0);
+                        v.performClick();
+                        return true;
+                }
+                return false;
+            }
+        });
+
+        SpringSystem mSpringSystem = SpringSystem.create();
+
+        mSpring = mSpringSystem.createSpring();
+        SpringConfig config = new SpringConfig(300, 15);
+        mSpring.setSpringConfig(config);
+        mSpring.addListener(new SimpleSpringListener() {
+            @Override
+            public void onSpringUpdate(Spring spring) {
+                float value = (float) spring.getCurrentValue();
+                float scale = 1f - (value * 0.5f);
+                mAvatar.setScaleX(scale);
+                mAvatar.setScaleY(scale);
+            }
+        });
+
         mAvatar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -132,8 +172,8 @@ public class AddTaskActivity extends AppCompatActivity {
         mBtn_CommentVoiceInput = (ImageButton) findViewById(R.id.voice_input_comment_btn);
 
         PackageManager pm = getPackageManager();
-        List<ResolveInfo> activities = pm.queryIntentActivities(
-                new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH), 0);
+
+        List<ResolveInfo> activities = pm.queryIntentActivities(new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH), 0);
         if (activities.size() == 0) {
             mIfNotAvailableVoiceInput = true;
             mBtn_titleVoiceInput.setVisibility(View.INVISIBLE);
@@ -253,10 +293,23 @@ public class AddTaskActivity extends AppCompatActivity {
                         int px = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 100, resources.getDisplayMetrics());
                         mBtmAvatar = Bitmap.createScaledBitmap(mBtmAvatar, px, px, true);
                         //повернення іконки
-                   /* Matrix matrix = new Matrix();
-                    matrix.postRotate(270);
-                    mBtmAvatar = Bitmap.createBitmap(mBtmAvatar, 0, 0, mBtmAvatar.getWidth(), mBtmAvatar.getHeight(), matrix, true);*/
-                        mAvatar.setImageBitmap(mBtmAvatar);
+                        /* Matrix matrix = new Matrix();
+                        matrix.postRotate(270);
+                        mBtmAvatar = Bitmap.createBitmap(mBtmAvatar, 0, 0, mBtmAvatar.getWidth(), mBtmAvatar.getHeight(), matrix, true);*/
+                        final android.os.Handler handler = new android.os.Handler();
+                        handler.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                mSpring.setEndValue(1.5f);
+                                handler.postDelayed(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        mAvatar.setImageBitmap(mBtmAvatar);
+                                        mSpring.setEndValue(0);
+                                    }
+                                }, 300);
+                            }
+                        }, 250);
                 }
                 break;
             case RESULT_CANCELED:
